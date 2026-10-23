@@ -254,7 +254,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 </head>
 <body>
 <main>
-<div class="mobile-view-controls" id="mobileViewControls" aria-label="Base stat table display mode"><button type="button" id="compactMode" aria-pressed="false">Compact</button><button type="button" id="scrollMode" aria-pressed="true">Scroll</button></div>
+<div class="mobile-view-controls" id="mobileViewControls" aria-label="Base stat table display mode"><button type="button" id="compactMode" aria-pressed="true">Compact</button><button type="button" id="scrollMode" aria-pressed="false">Scroll</button></div>
 <div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
 <h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.1</button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
@@ -545,7 +545,7 @@ function setMobileTableMode(mode){
 }
 $('compactMode').addEventListener('click',()=>setMobileTableMode('compact'));
 $('scrollMode').addEventListener('click',()=>setMobileTableMode('scroll'));
-setMobileTableMode('scroll');
+setMobileTableMode('compact');
 function renderBase(){
   btns($('bm'),['Positive Ranges','Negative Ranges'],bs.m,i=>{bs.m=i;renderBase()});
   btns($('bf'),W,bs.w,i=>{bs.w=i;renderBase()});
