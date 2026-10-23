@@ -249,7 +249,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 .version-dialog h2{font-size:1.2rem;margin:0 0 12px}.version-dialog p{margin:0 0 18px}.version-dialog a{color:var(--acc);font-weight:700;text-decoration:underline}
 .version-close{display:block;margin-left:auto;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
 .patch-note+.patch-note{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.patch-note h3{font-size:1rem;margin:0 0 8px;color:var(--acc)}.patch-note p{margin:0 0 14px}
-@media(max-width:620px){.mobile-view-controls{display:flex}#bp{padding:6px 5px 12px}#bp .tw{overflow-x:hidden}#bt{min-width:0;table-layout:fixed;font-size:clamp(.54rem,1.8vw,.62rem)}#bt th,#bt td{padding:3px 1px!important;font-size:inherit!important;overflow-wrap:anywhere}#bt td.n{font-size:inherit!important}body[data-mobile-table="scroll"] #bp .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}body[data-mobile-table="scroll"] #bt{min-width:760px;table-layout:auto;font-size:.78rem}body[data-mobile-table="scroll"] #bt th,body[data-mobile-table="scroll"] #bt td{padding:5px 4px!important;font-size:inherit!important;white-space:nowrap;overflow-wrap:normal}}
+@media(max-width:620px){.mobile-view-controls{display:flex;gap:8px;margin:0 0 10px}.tm{position:relative;top:auto;right:auto;display:flex;justify-content:flex-end;margin:0 0 10px}#bp{padding:6px 5px 12px}#bp .tw{overflow-x:hidden}#bt{min-width:0;table-layout:fixed;font-size:clamp(.58rem,2vw,.68rem);line-height:1.2}#bt th,#bt td{padding:4px 2px!important;font-size:inherit!important;overflow-wrap:anywhere;word-break:normal;line-height:1.2}#bt td.n{font-size:inherit!important;white-space:normal}#bt td.s{white-space:normal;overflow-wrap:anywhere}body[data-mobile-table="compact"] #bt th:first-child,body[data-mobile-table="compact"] #bt td:first-child{width:31%}body[data-mobile-table="compact"] #bt th:nth-child(2),body[data-mobile-table="compact"] #bt td:nth-child(2){width:10%}body[data-mobile-table="compact"] #bt th:not(:first-child):not(:nth-child(2)),body[data-mobile-table="compact"] #bt td:not(:first-child):not(:nth-child(2)){width:calc(59% / 5)}body[data-mobile-table="scroll"] #bp .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}body[data-mobile-table="scroll"] #bt{min-width:760px;table-layout:auto;font-size:.78rem}body[data-mobile-table="scroll"] #bt th,body[data-mobile-table="scroll"] #bt td{padding:5px 4px!important;font-size:inherit!important;white-space:nowrap;overflow-wrap:normal}}
 </style>
 </head>
 <body>
@@ -546,7 +546,7 @@ function renderBase(){
   btns($('bm'),['Positive Ranges','Negative Ranges'],bs.m,i=>{bs.m=i;renderBase()});
   btns($('bf'),W,bs.w,i=>{bs.w=i;renderBase()});
   const w=bs.w,neg=bs.m===1,f=(x,u)=>fmt(x,u);
-  const L=C.filter(c=>neg?c.n:true),lab=c=>`${c.p} pos${c.n?', 1 neg':''}`;
+  const L=C.filter(c=>neg?c.n:true),lab=c=>`${c.p}p${c.n?'1n':''}`;
   let t='<tr><th>Stat</th><th>Base</th>'+L.map(c=>`<th>${lab(c)}</th>`).join('')+'</tr>';
   (neg?ORDN:ORD).forEach(i=>{
     const s=S[i],b=s[w+1];if(b===null)return;if(neg&&NONEG.has(s[0]))return;
