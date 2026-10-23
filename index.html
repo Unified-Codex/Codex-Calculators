@@ -16,7 +16,7 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--text);font-family:"Chakra Petch",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
 main{position:relative;max-width:860px;margin:0 auto;padding:28px 18px 48px}
 h1{padding-right:92px;font-size:1.7rem;margin:0 0 4px;font-weight:700;letter-spacing:.01em}
-.version{font-size:.55em;font-weight:500;color:var(--mute);white-space:nowrap;vertical-align:baseline;margin-left:.35em;letter-spacing:0}
+.version{font-size:.55em;font-weight:500;color:var(--mute);white-space:nowrap;vertical-align:baseline;margin-left:.35em;letter-spacing:0;background:transparent;border:1px solid var(--line);border-radius:6px;padding:3px 6px;cursor:pointer}.version:hover{color:var(--acc);border-color:var(--acc)}
 .sub{color:var(--mute);margin:0 0 22px;font-size:.95rem}
 .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px}
 .lbl{display:block;font-size:.85rem;color:var(--mute);margin-bottom:8px}
@@ -60,9 +60,12 @@ select{width:100%}
 .explain h2{font-size:1.05rem;margin:20px 0 6px}
 .explain p{margin:6px 0;color:var(--text);max-width:68ch}
 .explain .fm{background:var(--panel2);border-left:4px solid var(--acc);border-radius:8px;padding:10px 14px;margin:8px 0;font-weight:600;overflow-wrap:anywhere}
-.explain .tw{overflow-x:auto;margin:8px 0}
-.explain table{border-collapse:collapse;width:100%;min-width:480px;font-size:.88rem}
-.explain th,.explain td{border:1px solid var(--line);padding:7px 10px;text-align:left}
+.explain .tw{overflow:visible;margin:8px 0}
+.mobile-view-controls{display:none;gap:8px;margin:0 0 14px}
+.mobile-view-controls button{flex:1;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:8px 12px;font:inherit;font-size:.9rem;cursor:pointer}
+.mobile-view-controls button[aria-pressed="true"]{background:var(--acc);border-color:var(--acc);color:#14102a;font-weight:700}
+.explain table{border-collapse:collapse;width:100%;min-width:0;table-layout:fixed;font-size:clamp(.58rem,1.2vw,.78rem)}
+.explain th,.explain td{border:1px solid var(--line);padding:5px 4px;text-align:left;overflow-wrap:anywhere;word-break:normal}
 .explain th{background:var(--panel2);font-weight:600}
 .explain .m{color:var(--mute)}
 .explain .g{color:var(--pos);font-weight:600}.explain .r{color:var(--neg);font-weight:600}
@@ -204,7 +207,7 @@ select{width:100%}
 .cl li.bad{color:var(--neg);opacity:.9;cursor:not-allowed}
 .cl li.bad:hover{background:color-mix(in srgb,var(--neg) 16%,transparent);color:var(--neg)}
 .cb.splv input{color:var(--gold)}
-.sps{margin-top:5px;font-size:.78rem;font-weight:600;color:var(--gold)}
+.sps{margin-top:5px;font-size:.78rem;font-weight:600;color:var(--gold)}.sps a{color:inherit;text-decoration:underline;text-underline-offset:2px}.sps a:hover{color:var(--acc)}
 #tip{position:fixed;z-index:100;max-width:240px;padding:7px 10px;font-size:.8rem;font-weight:600;color:#fff;background:#b3263a;border:1px solid #ff8a97;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,.4);pointer-events:none}
 #tip[hidden]{display:none}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
@@ -236,13 +239,24 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 .sp-row,.spw{justify-content:stretch}
 #tip{max-width:calc(100vw - 16px)}
 }
-@media(max-width:620px){#bt td.n{white-space:normal;max-width:152px;font-size:.8rem;line-height:1.25}#bt td.n .ic{width:1.15em;height:1.15em;vertical-align:-.2em;margin-right:.3em}#bt td.s,#bt th{font-size:.8rem}}
+@media(max-width:620px){#bt td.n{white-space:normal;font-size:.72rem;line-height:1.2}#bt td.n .ic{width:1em;height:1em;vertical-align:-.2em;margin-right:.2em}#bt td.s,#bt th{font-size:.65rem;padding:4px 2px}}
+
+#bp{width:calc(100vw - 24px);max-width:1100px;position:relative;left:50%;transform:translateX(-50%);padding:6px 10px 14px}
+#bt th:first-child,#bt td:first-child{width:27%}#bt th:nth-child(2),#bt td:nth-child(2){width:9%}#bt th:not(:first-child):not(:nth-child(2)),#bt td:not(:first-child):not(:nth-child(2)){width:12.8%}
+.version-overlay{position:fixed;inset:0;z-index:200;background:rgba(8,7,16,.76);display:grid;place-items:center;padding:18px}
+.version-overlay[hidden]{display:none}
+.version-dialog{width:min(480px,100%);background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.version-dialog h2{font-size:1.2rem;margin:0 0 12px}.version-dialog p{margin:0 0 18px}.version-dialog a{color:var(--acc);font-weight:700;text-decoration:underline}
+.version-close{display:block;margin-left:auto;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
+.patch-note+.patch-note{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.patch-note h3{font-size:1rem;margin:0 0 8px;color:var(--acc)}.patch-note p{margin:0 0 14px}
+@media(max-width:620px){.mobile-view-controls{display:flex}#bp{padding:6px 5px 12px}#bp .tw{overflow-x:hidden}#bt{min-width:0;table-layout:fixed;font-size:clamp(.54rem,1.8vw,.62rem)}#bt th,#bt td{padding:3px 1px!important;font-size:inherit!important;overflow-wrap:anywhere}#bt td.n{font-size:inherit!important}body[data-mobile-table="scroll"] #bp .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}body[data-mobile-table="scroll"] #bt{min-width:760px;table-layout:auto;font-size:.78rem}body[data-mobile-table="scroll"] #bt th,body[data-mobile-table="scroll"] #bt td{padding:5px 4px!important;font-size:inherit!important;white-space:nowrap;overflow-wrap:normal}}
 </style>
 </head>
 <body>
 <main>
+<div class="mobile-view-controls" id="mobileViewControls" aria-label="Base stat table display mode"><button type="button" id="compactMode" aria-pressed="false">Compact</button><button type="button" id="scrollMode" aria-pressed="true">Scroll</button></div>
 <div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
-<h1>Riven Stat Range Calculator <span class="version">v.3.0</span></h1>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.0</button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
 <div class="lk"><a class="upd" href="./index.html" download="Riven Stat Range Calculator.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
 
@@ -274,7 +288,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <p class="m">Switch between positive and negative ranges, then pick a weapon category to see its base values and roll ranges for every riven layout.</p>
 <div class="seg" id="bm" style="margin:10px 0 8px"></div>
 <div class="seg" id="bf" style="margin:0 0 12px"></div>
-<div class="tw"><table id="bt" style="min-width:940px"></table></div>
+<div class="tw"><table id="bt"></table></div>
 <p class="m" id="bn" style="font-size:.82rem"></p>
 </section>
 <button type="button" class="xbtn" id="xb" aria-expanded="false" aria-controls="xp">How Do Rivens Work?<i>&#9662;</i></button>
@@ -311,6 +325,13 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <div class="fm">108 × -0.75 = -81% center<br>Low roll: -81 × 0.9 = -72.9%<br>High roll: -81 × 1.1 = -89.1%</div>
 <p class="m">The negative uses its own value from the layout table, which is why it has a separate multiplier from the positives.</p>
 </section>
+<div class="version-overlay" id="versionPopup" role="dialog" aria-modal="true" aria-labelledby="versionTitle" hidden>
+  <div class="version-dialog">
+    <h2 id="versionTitle">Patch Notes</h2>
+    <div id="patchNotesList"></div>
+    <button type="button" class="version-close" id="versionClose">Close</button>
+  </div>
+</div>
 </main>
 <script>
 const W=['Rifle','Shotgun','Pistol','Archgun','Melee / Zaw'];
@@ -370,6 +391,29 @@ const C=[{id:'2/0',p:2,n:0,b:.99,m:0},{id:'2/1',p:2,n:1,b:1.2375,m:-.495},{id:'3
 S.forEach(r=>{for(let j=1;j<=5;j++)if(r[j]!==null)r[j]=+(r[j]*1.2).toFixed(4)});
 const st={w:0,c:3,d:1,sel:[],bow:false};
 const $=id=>document.getElementById(id);
+const versionPopup=$('versionPopup');
+// PATCH NOTE HISTORY — IMPORTANT FOR FUTURE MAINTAINERS / AI ASSISTANTS:
+// Never delete or overwrite an existing entry when releasing a new version.
+// To publish v3.1, append a new object to PATCH_NOTES; keep v3.0 and every older
+// release unchanged so visitors can always read the complete historical notes.
+// Add newest releases at the beginning of the array. Use HTML only for trusted,
+// authored note content (for example, links); do not insert user-provided HTML.
+const PATCH_NOTES = [
+  {
+    version: '3.0',
+    content: 'Version 3.0 is live, and with it the calculator is now a fully fledged website. You no longer need to download any code - and updates automatically go live for everyone! Have any thoughts? Share them in the <a href="https://discord.com/invite/unifiedcodex" target="_blank" rel="noopener noreferrer">Discord</a>!'
+  }
+];
+function renderPatchNotes(){
+  $('patchNotesList').innerHTML = PATCH_NOTES.map(note =>
+    `<section class="patch-note"><h3>Version ${note.version}</h3><p>${note.content}</p></section>`
+  ).join('');
+}
+renderPatchNotes();
+$('versionBtn').addEventListener('click',()=>{versionPopup.hidden=false;$('versionClose').focus()});
+$('versionClose').addEventListener('click',()=>{versionPopup.hidden=true;$('versionBtn').focus()});
+versionPopup.addEventListener('click',e=>{if(e.target===versionPopup){versionPopup.hidden=true;$('versionBtn').focus()}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!versionPopup.hidden){versionPopup.hidden=true;$('versionBtn').focus()}});
 const avail=(i,w)=>S[i][w+1]!==null;
 function fix(){
   const cfg=C[st.c],need=cfg.p+cfg.n,out=[];
@@ -408,7 +452,7 @@ function render(){
     let o='';
     S.forEach((s,i)=>{if(!avail(i,st.w))return;o+=`<option value="${i}" ${i===v?'selected':''} ${!avail(i,st.w)||(st.sel.includes(i)&&i!==v)?'disabled':''}>${s[0]}</option>`});
     const heavyCritNote=st.w===4&&k<cfg.p&&v>=0&&S[v][0]==='Critical Chance';
-    d.innerHTML=`<label class="lbl tag" for="s${k}">${lab}</label><div class="cb${v>=0&&ICON[S[v][0]]?' has':''}${v>=0&&SPLD.has(S[v][0])?' splv':''}">${v>=0?ic(S[v][0]):''}<input id="s${k}" type="text" role="combobox" aria-expanded="false" autocomplete="off" value="${v<0?'':S[v][0]}" placeholder="Select a stat"><ul class="cl" role="listbox" hidden></ul></div>${v>=0&&SPLD.has(S[v][0])?'<div class="sps">Spliced Stat - Riven Splicer Required</div>':''}${heavyCritNote?'<div class="heavycrit-note">Critical Chance is doubled for heavy attacks</div>':''}`;
+    d.innerHTML=`<label class="lbl tag" for="s${k}">${lab}</label><div class="cb${v>=0&&ICON[S[v][0]]?' has':''}${v>=0&&SPLD.has(S[v][0])?' splv':''}">${v>=0?ic(S[v][0]):''}<input id="s${k}" type="text" role="combobox" aria-expanded="false" autocomplete="off" value="${v<0?'':S[v][0]}" placeholder="Select a stat"><ul class="cl" role="listbox" hidden></ul></div>${v>=0&&SPLD.has(S[v][0])?'<div class="sps">Spliced Stat - <a href="https://wiki.warframe.com/w/Riven_Splicer" target="_blank" rel="noopener noreferrer">Riven Splicer</a> Required</div>':''}${heavyCritNote?'<div class="heavycrit-note">Critical Chance is doubled for heavy attacks</div>':''}`;
     cb(d,k,v);
     slots.appendChild(d);
   });
@@ -490,6 +534,14 @@ $('wn').oninput=e=>{
   $('wc').textContent=w[0]+': '+W[w[1]]+(w[3]?' (bow, fire rate base doubled)':'');
 };
 const bs={w:0,m:0};
+function setMobileTableMode(mode){
+  document.body.dataset.mobileTable=mode;
+  $('compactMode').setAttribute('aria-pressed',String(mode==='compact'));
+  $('scrollMode').setAttribute('aria-pressed',String(mode==='scroll'));
+}
+$('compactMode').addEventListener('click',()=>setMobileTableMode('compact'));
+$('scrollMode').addEventListener('click',()=>setMobileTableMode('scroll'));
+setMobileTableMode('scroll');
 function renderBase(){
   btns($('bm'),['Positive Ranges','Negative Ranges'],bs.m,i=>{bs.m=i;renderBase()});
   btns($('bf'),W,bs.w,i=>{bs.w=i;renderBase()});
@@ -502,7 +554,7 @@ function renderBase(){
     t+=`<tr><td class="n">${ic(s[0])}${s[0]}</td><td class="s">${f(b,u)}</td>`+L.map(c=>{const e=b*(neg?c.m:c.b)*fl;return `<td class="s">${f(e*.9,u)} to ${f(e*1.1,u)}</td>`}).join('')+'</tr>';
   });
   $('bt').innerHTML=t;
-  $('bt').style.minWidth=neg?'480px':'700px';
+  $('bt').style.minWidth='0';
   $('bn').textContent=(neg?"Negative ranges use the layout's negative multiplier (base \u00d7 multiplier \u00d7 0.9 to 1.1) and are listed from the weakest roll to the strongest.":'Positive ranges are base \u00d7 layout multiplier \u00d7 0.9 to 1.1.')+(w===0?' Bows have their fire rate base doubled.':'')+' Weapon Recoil is shown the way the game displays it.';
 }
 const SR=[
