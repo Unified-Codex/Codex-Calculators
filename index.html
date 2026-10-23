@@ -245,9 +245,9 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 #bt th:first-child,#bt td:first-child{width:27%}#bt th:nth-child(2),#bt td:nth-child(2){width:9%}#bt th:not(:first-child):not(:nth-child(2)),#bt td:not(:first-child):not(:nth-child(2)){width:12.8%}
 .version-overlay{position:fixed;inset:0;z-index:200;background:rgba(8,7,16,.76);display:grid;place-items:center;padding:18px}
 .version-overlay[hidden]{display:none}
-.version-dialog{width:min(480px,100%);background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
+.version-dialog{width:min(480px,100%);max-height:min(82dvh,720px);overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:22px;box-shadow:0 18px 60px rgba(0,0,0,.45)}
 .version-dialog h2{font-size:1.2rem;margin:0 0 12px}.version-dialog p{margin:0 0 18px}.version-dialog a{color:var(--acc);font-weight:700;text-decoration:underline}
-.version-close{display:block;margin-left:auto;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}
+.version-close{display:block;margin-left:auto;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer}.older-notes-toggle{display:block;width:100%;margin:8px 0 16px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:inherit;font-weight:600;cursor:pointer}.older-notes-toggle:hover{border-color:var(--acc)}#olderPatchNotes[hidden]{display:none}#olderPatchNotes{max-height:42dvh;overflow-y:auto;overscroll-behavior:contain;padding-right:4px}
 .tool-actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}.tool-actions button{min-width:0;font:inherit;cursor:pointer}.tool-actions .ghost{padding:9px 10px;overflow-wrap:anywhere}.tool-actions button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}#toolStatus{min-height:0;margin:7px 0 0}.patch-note+.patch-note{border-top:1px solid var(--line);padding-top:14px;margin-top:14px}.patch-note h3{font-size:1rem;margin:0 0 8px;color:var(--acc)}.patch-note p{margin:0 0 14px}.setup-dialog{width:min(480px,100%);max-height:min(82dvh,720px);overflow:auto;background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 18px 60px rgba(0,0,0,.45)}.setup-dialog h2{font-size:1.2rem;margin:0 0 12px}.setup-dialog label{display:block;margin:0 0 6px;color:var(--mute);font-size:.9rem}.setup-dialog input{width:100%;min-height:44px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:10px 12px;font:inherit}.setup-dialog .dialog-actions{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:16px}.setup-dialog button{min-height:44px;background:var(--panel2);color:var(--text);border:1px solid var(--line);border-radius:9px;padding:9px 13px;font:inherit;cursor:pointer}.setup-dialog button.primary{background:var(--acc);color:#14102a;border-color:var(--acc);font-weight:700}.saved-list{display:grid;gap:8px}.saved-item{display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--line);border-radius:10px}.saved-item .saved-load{flex:1;text-align:left;overflow-wrap:anywhere}.saved-item small{display:block;color:var(--mute);font-size:.78rem}.saved-item .saved-delete{flex:0 0 auto;color:var(--neg)}#setupDialogMessage{color:var(--mute);font-size:.9rem;margin:0 0 12px;overflow-wrap:anywhere}@media(max-width:620px){.tool-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.tool-actions .ghost{min-height:44px}.setup-dialog{padding:16px}.saved-item{align-items:stretch}.saved-item .saved-load{min-width:0}}
 @media(max-width:620px){.mobile-view-controls{display:flex;gap:8px;margin:0 0 10px}.tm{position:relative;top:auto;right:auto;display:flex;justify-content:flex-end;margin:0 0 10px}#bp{padding:6px 5px 12px}#bp .tw{overflow-x:hidden}#bt{min-width:0;table-layout:fixed;font-size:clamp(.58rem,2vw,.68rem);line-height:1.2}#bt th,#bt td{padding:4px 2px!important;font-size:inherit!important;overflow-wrap:anywhere;word-break:normal;line-height:1.2}#bt td.n{font-size:inherit!important;white-space:normal}#bt td.s{white-space:normal;overflow-wrap:anywhere}body[data-mobile-table="compact"] #bt th:first-child,body[data-mobile-table="compact"] #bt td:first-child{width:31%}body[data-mobile-table="compact"] #bt th:nth-child(2),body[data-mobile-table="compact"] #bt td:nth-child(2){width:10%}body[data-mobile-table="compact"] #bt th:not(:first-child):not(:nth-child(2)),body[data-mobile-table="compact"] #bt td:not(:first-child):not(:nth-child(2)){width:calc(59% / 5)}body[data-mobile-table="scroll"] #bp .tw{overflow-x:auto;-webkit-overflow-scrolling:touch}body[data-mobile-table="scroll"] #bt{min-width:760px;table-layout:auto;font-size:.78rem}body[data-mobile-table="scroll"] #bt th,body[data-mobile-table="scroll"] #bt td{padding:5px 4px!important;font-size:inherit!important;white-space:nowrap;overflow-wrap:normal}}
 </style>
@@ -330,6 +330,8 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
   <div class="version-dialog">
     <h2 id="versionTitle">Patch Notes</h2>
     <div id="patchNotesList"></div>
+    <button type="button" class="older-notes-toggle" id="olderNotesToggle" aria-expanded="false" aria-controls="olderPatchNotes">Read Older Patchnotes</button>
+    <div id="olderPatchNotes" hidden></div>
     <button type="button" class="version-close" id="versionClose">Close</button>
   </div>
 </div>
@@ -422,11 +424,26 @@ const PATCH_NOTES = [
   }
 ];
 function renderPatchNotes(){
-  $('patchNotesList').innerHTML = PATCH_NOTES.map(note =>
-    `<section class="patch-note"><h3>Version ${note.version}</h3><p>${note.content}</p></section>`
-  ).join('');
+  const renderNote = note =>
+    `<section class="patch-note"><h3>Version ${note.version}</h3><p>${note.content}</p></section>`;
+  // Keep the newest release prominent; older entries remain available below.
+  $('patchNotesList').innerHTML = PATCH_NOTES.length ? renderNote(PATCH_NOTES[0]) : '<p>No patch notes available.</p>';
+  $('olderPatchNotes').innerHTML = PATCH_NOTES.slice(1).map(renderNote).join('');
+  const toggle = $('olderNotesToggle');
+  const hasOlderNotes = PATCH_NOTES.length > 1;
+  toggle.hidden = !hasOlderNotes;
+  $('olderPatchNotes').hidden = true;
+  toggle.setAttribute('aria-expanded', 'false');
+  toggle.textContent = 'Read Older Patchnotes';
 }
 renderPatchNotes();
+$('olderNotesToggle').addEventListener('click',()=>{
+  const older=$('olderPatchNotes'),toggle=$('olderNotesToggle');
+  const opening=older.hidden;
+  older.hidden=!opening;
+  toggle.setAttribute('aria-expanded',String(opening));
+  toggle.textContent=opening?'Hide Older Patchnotes':'Read Older Patchnotes';
+});
 $('versionBtn').addEventListener('click',()=>{versionPopup.hidden=false;$('versionClose').focus()});
 $('versionClose').addEventListener('click',()=>{versionPopup.hidden=true;$('versionBtn').focus()});
 versionPopup.addEventListener('click',e=>{if(e.target===versionPopup){versionPopup.hidden=true;$('versionBtn').focus()}});
