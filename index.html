@@ -480,7 +480,7 @@ function btns(el,items,cur,fn){
 function render(){
   fix();
   const cfg=C[st.c];
-  btns($('wt'),W,st.w,i=>{st.w=i;st.bow=false;$('wc').textContent='';render()});
+  btns($('wt'),W,st.w,i=>{st.w=i;st.bow=false;$('wn').value='';$('wc').textContent='';render()});
   btns($('cfg'),C.map(c=>`${c.p} pos, ${c.n} neg`),st.c,i=>{st.c=i;render()});
   const slots=$('slots');slots.innerHTML='';
   st.sel.forEach((v,k)=>{
