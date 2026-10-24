@@ -110,6 +110,8 @@ select{width:100%}
 :root[data-pal="infested"]{--bg:#0c130b;--panel:#131e11;--panel2:#1b2a18;--line:#2f4a2a;--text:#e6f0dc;--mute:#8aa683;--acc:#8fd14f;--pos:#c3f27a;--neg:#ff8a5c;--accfg:#0d1805;--gold:#f2c75c;color-scheme:dark}
 :root[data-pal="sentient"]{--bg:#0a0c16;--panel:#11142a;--panel2:#191e3c;--line:#2b3366;--text:#e4e8ff;--mute:#8a93c9;--acc:#7fd6ff;--pos:#9cf2c8;--neg:#ffa06b;--accfg:#06121c;--gold:#f2c75c;color-scheme:dark}
 :root[data-pal="lotus"]{--bg:#f3f1fa;--panel:#fff;--panel2:#ece9f8;--line:#d4cfea;--text:#1d1a30;--mute:#6a6588;--acc:#6b4fd8;--pos:#0b8f74;--neg:#c93a4e;--accfg:#fff;--gold:#946a00;color-scheme:light}
+/* Low-glare neutral palette: charcoal surfaces and restrained accent contrast. */
+:root[data-pal="wally"]{--bg:#090b0e;--panel:#13161b;--panel2:#1d2229;--line:#353b44;--text:#e4e7eb;--mute:#adb4bf;--acc:#bbc5d2;--pos:#8bcfb6;--neg:#e89da5;--accfg:#101318;--gold:#dbc38b;color-scheme:dark}
 .seg button[aria-pressed="true"],.cl li:hover,.cl li.act{color:var(--accfg)}
 .tm{position:absolute;top:30px;right:18px;z-index:30}
 #tb{background:none;border:1px solid transparent;color:var(--mute);font:inherit;font-size:.8rem;padding:5px 10px;border-radius:8px;cursor:pointer}
@@ -183,6 +185,7 @@ select{width:100%}
 :root[data-pal="infested"]{--hl:#e08cff}
 :root[data-pal="sentient"]{--hl:#e6a8ff}
 :root[data-pal="lotus"]{--hl:#b54708}
+:root[data-pal="wally"]{--hl:#c7cbd3}
 .lk{display:flex;flex-wrap:wrap;gap:10px;margin:-8px 0 20px}
 .lk .upd{margin:0;display:inline-flex;align-items:center}
 .upd svg{width:1.2em;height:1.2em;margin-right:.55em;fill:currentColor;flex:none}
@@ -261,7 +264,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <main>
 <div class="mobile-view-controls" id="mobileViewControls" aria-label="Base stat table display mode"><button type="button" id="compactMode" aria-pressed="true">Compact</button><button type="button" id="scrollMode" aria-pressed="false">Scroll</button></div>
 <div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
-<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.3.4</button></h1>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.3.5</button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
 <div class="lk"><a class="upd" href="./index.html" download="Riven Stat Range Calculator.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
 
@@ -416,6 +419,10 @@ const versionPopup=$('versionPopup');
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
   {
+    version: '3.3.5',
+    content: 'Strengthened shared URL and saved setup validation: share codes include weapon category names, named weapons must match their actual category and bow status, invalid names cannot be exported, and stat selections share one rule that prevents more than one Spliced stat across dropdowns, imports and automatic repairs. Added Wallys Domain, a soft-contrast, true dark theme with a gray theme dot.'
+  },
+  {
     version: '3.3.4',
     content: 'Added red doubled Critical Chance values with a Heavy Attacks explanation to copied Riven cards, and made bow Fire Rate show the normal range followed by its doubled red range in both the calculator and copied cards.'
   },
@@ -492,11 +499,11 @@ function fix(){
   for(let k=0;k<need;k++){
     let v=st.sel[k];
     if(v===-1||(v===undefined&&st.cleared)){out.push(-1);continue}
-    if(!avail(v,st.w)||out.includes(v)||(k>=cfg.p&&NONEG.has(S[v][0]))){
+    if(!isSelectableStat(v,st.w,k,cfg,out)){
       v=null;
       const pref=k<cfg.p?['Damage / Melee Damage','Critical Chance','Critical Damage','Multishot','Status Chance','Fire Rate / Attack Speed']:['Weapon Recoil','Zoom','Status Duration','Ammo Maximum','Reload Speed'];
-      for(const n of pref){const i=STAT_INDEX.get(n);if(avail(i,st.w)&&!out.includes(i)){v=i;break}}
-      if(v===null)for(let i=0;i<S.length;i++)if(avail(i,st.w)&&!out.includes(i)){v=i;break}
+      for(const n of pref){const i=STAT_INDEX.get(n);if(isSelectableStat(i,st.w,k,cfg,out)){v=i;break}}
+      if(v===null)for(let i=0;i<S.length;i++)if(isSelectableStat(i,st.w,k,cfg,out)){v=i;break}
     }
     out.push(v===null?-1:v);
   }
@@ -518,6 +525,14 @@ function setWeaponLookupSummary(name){
   return found;
 }
 function countSelectedSpliced(sel,ignoreIndex=-1){return sel.reduce((count,v,i)=>count+((i!==ignoreIndex)&&v>=0&&SPLD.has(S[v][0])?1:0),0)}
+// One source of truth for dropdown picks, URL imports and automatic state repairs.
+function isSelectableStat(v,w,k,cfg,used){
+  if(!avail(v,w)||used.includes(v))return false;
+  const name=S[v][0];
+  if(k>=cfg.p&&NONEG.has(name))return false;
+  if(SPLD.has(name)&&countSelectedSpliced(used)>0)return false;
+  return true;
+}
 function buildResultEntry(v,k,cfg){
   if(v<0)return null;
   const neg=k>=cfg.p,s=S[v],base=s[st.w+1],u=s[6],fl=s[0]==='Weapon Recoil'?-1:1;
@@ -566,7 +581,7 @@ function render(){
 }
 const ICON={'Cold Damage':'cold','Heat Damage':'heat','Electricity Damage':'electricity','Toxin Damage':'toxin','Impact Damage':'impact','Puncture Damage':'puncture','Slash Damage':'slash','Blast Damage':'blast','Corrosive Damage':'corrosive','Gas Damage':'gas','Magnetic Damage':'magnetic','Radiation Damage':'radiation','Viral Damage':'viral','Damage vs Corpus':'corpus','Damage vs Grineer':'grineer','Damage vs Infested':'infested','Damage vs Orokin':'orokin','Critical Damage':'critdmg','Additional Combo Count Chance':'addcombo','Chance to Gain Combo Count':'gaincombo','Ammo Maximum':'ammomax','Combo Duration':'duration','Critical Chance':'critchance','Critical Chance for Slide Attack':'critslide','Damage / Melee Damage':'dmgo','Finisher Damage':'finisher','Fire Rate / Attack Speed':'firerate','Projectile Speed':'projspeed','Initial Combo':'initcombo','Magazine Capacity':'mag','Heavy Attack Efficiency':'heavyeff','Multishot':'multishot','Punch Through':'punch','Reload Speed':'reload','Range':'range','Status Chance':'statuschance','Status Duration':'statusdur','Weapon Recoil':'recoil','Zoom':'zoom','Ammo Efficiency':'ammoeff','Damage vs Scaldra':'scaldra','Damage vs Techrot':'techrot','Heavy Attack Wind Up Speed':'windup','Melee Damage On Heavy Attack':'meleeheavy','Parry Angle':'parry','Reload While Holstered':'holster','Slam Attack Damage':'slam','Status Damage':'statusdmg','Weakpoint Damage':'weakdmg','Weakpoint Critical Chance':'weakcrit'};
 const COLS=new Set(["critchance", "critslide", "weakcrit", "weakdmg", "dmg", "meleedmg", "meleeheavy", "finisher", "slam", "heavyeff", "windup", "firerate", "projspeed", "reload", "holster", "mag", "ammomax", "ammoeff", "multishot", "punch", "range", "zoom", "recoil", "parry", "addcombo", "gaincombo", "initcombo", "duration", "statuschance", "statusdur", "statusdmg", "scaldra", "techrot", "critdmg", "dmgo"]);const ic=n=>ICON[n]?`<span class="ic${COLS.has(ICON[n])?' col':''} i-${ICON[n]}"></span>`:'';
-const PAL=[['','Tenno Void','#b39cff'],['gold','Orokin Gold','#e6b94a'],['red','Stalker Red','#e0364a'],['corpus','Corpus Blue','#3fb4ff'],['grineer','Grineer Rust','#d4812e'],['infested','Infested','#8fd14f'],['sentient','Sentient','#7fd6ff'],['lotus','Lotus Light','#6b4fd8']];
+const PAL=[['','Tenno Void','#b39cff'],['gold','Orokin Gold','#e6b94a'],['red','Stalker Red','#e0364a'],['corpus','Corpus Blue','#3fb4ff'],['grineer','Grineer Rust','#d4812e'],['infested','Infested','#8fd14f'],['sentient','Sentient','#7fd6ff'],['lotus','Lotus Light','#6b4fd8'],['wally','Wallys Domain','#888e98']];
 function setPal(k){
   if(!PAL.some(p=>p[0]===k))k='';
   const r=document.documentElement;k?r.setAttribute('data-pal',k):r.removeAttribute('data-pal');
@@ -591,11 +606,15 @@ function cb(d,k,v){
   const inp=d.querySelector('input'),ul=d.querySelector('ul');let act=-1;
   const en=()=>[...ul.querySelectorAll('li:not(.dis)')];
   const close=()=>{tipEl.hidden=true;ul.hidden=true;inp.setAttribute('aria-expanded','false');act=-1};
-  const pick=i=>{st.sel[k]=i;render()};
+  const pick=i=>{
+    const other=st.sel.filter((_,j)=>j!==k);
+    if(!isSelectableStat(i,st.w,k,C[st.c],other))return;
+    st.sel[k]=i;render();
+  };
   const mark=n=>{const a=en();a.forEach(x=>x.classList.remove('act'));if(a.length){act=(n+a.length)%a.length;a[act].classList.add('act');a[act].scrollIntoView({block:'nearest'})}};
   const show=q=>{
     const qt=q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    const isNeg=k>=C[st.c].p,hasS=st.sel.some((x,j)=>j!==k&&x>=0&&SPLD.has(S[x][0]));let L=(isNeg?ORDN:ORD).filter(i=>avail(i,st.w)&&(!isNeg||!NONEG.has(S[i][0])));
+    const isNeg=k>=C[st.c].p,hasS=countSelectedSpliced(st.sel,k)>0;let L=(isNeg?ORDN:ORD).filter(i=>avail(i,st.w)&&(!isNeg||!NONEG.has(S[i][0])));
     if(qt.length){
       const w=L.filter(i=>{const t=S[i][0].toLowerCase().split(/[\s\/]+/);return qt.every(x=>t.some(y=>y.startsWith(x)))});
       L=w.length?w:L.filter(i=>S[i][0].toLowerCase().includes(qt.join(' ')));
@@ -625,23 +644,31 @@ const WM={};WP.forEach(w=>{WM[w[0].toLowerCase()]=w;const o=document.createEleme
 // Personal convenience tools: saved configurations stay in this browser; share URLs
 // contain only the selected calculator setup and can be opened by anyone with the link.
 const SAVED_KEY='riven-calculator-saved-setups-v1';
-function setupSnapshot(){return {w:st.w,c:st.c,d:1,sel:[...st.sel],bow:!!st.bow,weaponName:$('wn').value||''};}
+function setupSnapshot(){return {w:st.w,weaponCategory:W[st.w],c:st.c,d:1,sel:[...st.sel],bow:!!st.bow,weaponName:$('wn').value||''};}
 function validateSnapshot(x){
   if(!x||typeof x!=='object'||!Number.isInteger(x.w)||x.w<0||x.w>=W.length||!Number.isInteger(x.c)||x.c<0||x.c>=C.length)return null;
   const cfg=C[x.c],need=cfg.p+cfg.n;
+  // Explicitly include category names in new share codes; accept older numeric-only codes.
+  if(x.weaponCategory!==undefined&&x.weaponCategory!==W[x.w])return null;
   if(x.sel!==undefined&&(!Array.isArray(x.sel)||x.sel.length>need))return null;
   if(x.d!==undefined){const d=Number(x.d);if(!Number.isFinite(d)||d!==1)return null;}
   if(x.bow!==undefined&&typeof x.bow!=='boolean')return null;
   if(x.weaponName!==undefined&&(typeof x.weaponName!=='string'||x.weaponName.length>120))return null;
-  const raw=Array.isArray(x.sel)?x.sel:[],sel=[];let splicedCount=0;
+  const weaponName=typeof x.weaponName==='string'?x.weaponName.trim():'';
+  const found=weaponName?getMatchedWeapon(weaponName):null;
+  // An empty weapon name means the user selected the weapon category manually.
+  // A populated name must be a real known weapon and must agree with the category.
+  if(weaponName&&(!found||found[1]!==x.w))return null;
+  const actualBow=found?!!found[3]:false;
+  if(x.bow!==undefined&&x.bow!==actualBow)return null;
+  const raw=Array.isArray(x.sel)?x.sel:[],sel=[];
   for(let k=0;k<need;k++){
     const v=raw[k]===undefined?-1:raw[k];
     if(v===-1){sel.push(-1);continue;}
-    if(!Number.isInteger(v)||!avail(v,x.w)||sel.includes(v)||(k>=cfg.p&&NONEG.has(S[v][0])))return null;
-    if(SPLD.has(S[v][0])&&++splicedCount>1)return null;
+    if(!isSelectableStat(v,x.w,k,cfg,sel))return null;
     sel.push(v);
   }
-  return {w:x.w,c:x.c,d:1,sel,bow:x.bow===true,weaponName:typeof x.weaponName==='string'?x.weaponName:''};
+  return {w:x.w,weaponCategory:W[x.w],c:x.c,d:1,sel,bow:actualBow,weaponName:found?found[0]:''};
 }
 function applySnapshot(x){
   const snap=validateSnapshot(x);if(!snap)return false;
@@ -672,7 +699,7 @@ function buildRivenCardSvg(weapon,layout,entries){
     return `<g><rect x="34" y="${y}" width="832" height="${rowHeight}" rx="13" fill="#201c32" stroke="${accent}" stroke-opacity=".7" stroke-width="2"/><rect x="34" y="${y}" width="6" height="${rowHeight}" rx="3" fill="${accent}"/><text x="60" y="${y+27}" fill="${accent}" font-size="15" font-weight="700" letter-spacing="2">${label}</text><text x="60" y="${y+55}" fill="#f4f0ff" font-size="23" font-weight="600">${xmlSafe(it.name)}</text><text x="838" y="${y+47}" fill="${accent}" font-size="21" font-weight="700" text-anchor="end">${xmlSafe(it.range)}</text>${doubled}</g>`;
   }).join(''):(rowOffset=92,`<text x="450" y="${top+38}" text-anchor="middle" fill="#b9b2d0" font-size="22">Select stats to populate this Riven card</text>`);
   const height=top+rowOffset+bottom;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171326"/><stop offset="1" stop-color="#302344"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0d38a"/><stop offset=".5" stop-color="#b39cff"/><stop offset="1" stop-color="#f0d38a"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="#d9c8ff"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="#29203e"/><text x="88" y="45" fill="#c6b5f7" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="#ffffff" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="#b9b2d0" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="#5a496d" stroke-width="2"/>${rows}<text x="38" y="${height-52}" fill="#aaa0c4" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="#f0d38a">UNIFIED_CODEX</tspan></text><text x="38" y="${height-28}" fill="#b9b2d0" font-size="11.5">Try it yourself at unified-codex.github.io/Riven-Calculator</text><text x="862" y="${height-52}" fill="#aaa0c4" font-size="14" text-anchor="end">v.3.3.4</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171326"/><stop offset="1" stop-color="#302344"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0d38a"/><stop offset=".5" stop-color="#b39cff"/><stop offset="1" stop-color="#f0d38a"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="#d9c8ff"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="#29203e"/><text x="88" y="45" fill="#c6b5f7" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="#ffffff" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="#b9b2d0" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="#5a496d" stroke-width="2"/>${rows}<text x="38" y="${height-52}" fill="#aaa0c4" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="#f0d38a">UNIFIED_CODEX</tspan></text><text x="38" y="${height-28}" fill="#b9b2d0" font-size="11.5">Try it yourself at unified-codex.github.io/Riven-Calculator</text><text x="862" y="${height-52}" fill="#aaa0c4" font-size="14" text-anchor="end">v.3.3.5</text></svg>`;
 }
 function svgToPngBlob(svg){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.fillStyle='#171326';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);canvas.toBlob(blob=>{URL.revokeObjectURL(url);blob?resolve(blob):reject(new Error('PNG conversion failed'))},'image/png')}catch(e){URL.revokeObjectURL(url);reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('SVG rendering failed'))};img.src=url})}
 $('copyStatsBtn').addEventListener('click',async()=>{
@@ -686,7 +713,7 @@ let setupDialogReturnFocus=null;
 function closeSetupDialog(){setupOverlay.hidden=true;setupContent.replaceChildren();setupActions.replaceChildren();if(setupDialogReturnFocus&&setupDialogReturnFocus.focus)setupDialogReturnFocus.focus();}
 function showSetupDialog(title,message){setupDialogReturnFocus=document.activeElement;setupTitle.textContent=title;setupMessage.textContent=message||'';setupContent.replaceChildren();setupActions.replaceChildren();setupOverlay.hidden=false;}
 function dialogButton(label,fn,primary=false){const b=document.createElement('button');b.type='button';b.textContent=label;if(primary)b.className='primary';b.addEventListener('click',fn);return b;}
-function saveNamedSetup(name,replace){const list=getSaved(),snap=setupSnapshot();snap.name=name.trim();snap.savedAt=Date.now();const idx=list.findIndex(x=>typeof x.name==='string'&&x.name.toLowerCase()===snap.name.toLowerCase());if(idx>=0){if(!replace){showSetupDialog('Replace saved setup?',`A setup named “${snap.name}” already exists. Replace it?`);setupActions.append(dialogButton('Cancel',()=>openSaveDialog(snap.name)),dialogButton('Replace',()=>saveNamedSetup(snap.name,true),true));return;}list.splice(idx,1)}list.unshift(snap);try{localStorage.setItem(SAVED_KEY,JSON.stringify(list));closeSetupDialog();setStatus('Saved configuration: '+snap.name)}catch(e){setupMessage.textContent='Could not save. Browser storage may be full or unavailable.';setupActions.append(dialogButton('Close',closeSetupDialog));}}
+function saveNamedSetup(name,replace){const list=getSaved(),snap=setupSnapshot();if(!validateSnapshot(snap)){setupMessage.textContent='This setup cannot be saved. Choose a listed weapon name or clear the weapon name field, and check the selected stats.';return;}snap.name=name.trim();snap.savedAt=Date.now();const idx=list.findIndex(x=>typeof x.name==='string'&&x.name.toLowerCase()===snap.name.toLowerCase());if(idx>=0){if(!replace){showSetupDialog('Replace saved setup?',`A setup named “${snap.name}” already exists. Replace it?`);setupActions.append(dialogButton('Cancel',()=>openSaveDialog(snap.name)),dialogButton('Replace',()=>saveNamedSetup(snap.name,true),true));return;}list.splice(idx,1)}list.unshift(snap);try{localStorage.setItem(SAVED_KEY,JSON.stringify(list));closeSetupDialog();setStatus('Saved configuration: '+snap.name)}catch(e){setupMessage.textContent='Could not save. Browser storage may be full or unavailable.';setupActions.append(dialogButton('Close',closeSetupDialog));}}
 function openSaveDialog(prefill=''){showSetupDialog('Save Riven Configuration','Give this setup a name so you can find it again on this device.');const label=document.createElement('label');label.htmlFor='setupNameInput';label.textContent='Configuration name';const input=document.createElement('input');input.id='setupNameInput';input.type='text';input.maxLength=80;input.autocomplete='off';input.placeholder='e.g. Torid CC / Multishot';input.value=prefill;setupContent.append(label,input);setupActions.append(dialogButton('Cancel',closeSetupDialog),dialogButton('Save Setup',()=>{const name=input.value.trim();if(!name){setupMessage.textContent='Enter a name for this configuration.';input.focus();return;}saveNamedSetup(name,false)},true));input.addEventListener('keydown',e=>{if(e.key==='Enter')setupActions.querySelector('.primary')?.click()});requestAnimationFrame(()=>input.focus());}
 $('saveSetupBtn').addEventListener('click',()=>openSaveDialog());
 $('loadSetupBtn').addEventListener('click',()=>{
@@ -736,6 +763,7 @@ $('importRivenUrlBtn').addEventListener('click',()=>{
   requestAnimationFrame(()=>field.focus());
 });
 $('shareSetupBtn').addEventListener('click',()=>{
+  if(!validateSnapshot(setupSnapshot())){setStatus('Cannot share: select a listed weapon name or clear the name field, and check the selected stats.');return;}
   const payload=encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(setupSnapshot())))));
   const url=location.href.split('#')[0]+'#setup='+payload;
   copyText(url).then(()=>setStatus('Share URL copied. Anyone with the link can open this exact setup.')).catch(()=>{showSetupDialog('Share Riven Setup','Copy this link and send it to someone. Opening it restores this configuration.');const field=document.createElement('input');field.type='text';field.readOnly=true;field.value=url;field.setAttribute('aria-label','Share URL');setupContent.appendChild(field);setupActions.append(dialogButton('Close',closeSetupDialog),dialogButton('Select Link',()=>{field.focus();field.select()},true));field.addEventListener('click',()=>field.select());field.focus();field.select();setStatus('Share URL ready to copy.');});
