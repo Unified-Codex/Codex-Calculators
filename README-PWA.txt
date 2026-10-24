@@ -1,18 +1,36 @@
-Riven Calculator v3.6 — GitHub Pages deployment
+Riven Calculator v3.6.1 — Offline mode fix
 
-Upload ALL of the following to the ROOT of your Riven-Calculator repository:
-  index.html
-  sw.js
-  manifest.json
-  icons/icon-192.png
-  icons/icon-512.png
-  icons/apple-touch-icon.png
+FIXED: Your public GitHub repository has the three icon PNGs in the repository
+root, but v3.6's service worker expected an /icons/ subfolder. That mismatch
+prevented ALL offline files from caching. v3.6.1 corrects the paths and caches
+the calculator independently of optional icons.
 
-Do not upload only index.html: offline installation needs the manifest, service worker and icons.
-Keep the icons subfolder intact. After GitHub Pages publishes, load your site online first, then use the mobile-only Download Offline Version button.
-On iPhone the button shows installation instructions; on compatible Android Chromium browsers it opens the native install prompt when available.
-The mobile toggle has been removed: the base stat table uses Compact layout on phones.
-The installed app checks for updates at startup, on reconnection and when focused, and every 30 minutes while open. When a new worker is ready it prompts to reload; users can defer to protect unsaved edits. On a fresh launch the newest version will be loaded online.
+HOW TO INSTALL:
+1. Extract this ZIP. Upload its contents together to the same ROOT of your
+   Riven-Calculator repository that already has index.html.
+2. Replace the existing index.html, sw.js, and manifest.json. The three PNG
+   files should also be in the ROOT (as they currently appear in your repo).
+3. Do not put these files inside an extra folder or upload the ZIP itself.
+4. Check that https://unified-codex.github.io/Riven-Calculator/sw.js opens
+   as readable JavaScript, rather than an error page.
+5. Wait for GitHub Pages to finish publishing. On your iPhone, reconnect to
+   internet, open your already-installed calculator, and close/reopen it once.
+   If your installation predates PWA support, adding the app again from Safari
+   may help, but try reopening it online first. IMPORTANT: before deleting an
+   old Home Screen app, back up saved Riven setups using Share Setup URLs; on
+   iPhone, deleting a web app may also remove its locally saved data.
+6. With Wi-Fi and cellular both turned OFF, open the Home Screen app again.
+   It should load and calculate normally. The first online visit is required.
 
-IMPORTANT FOR FUTURE RELEASES: Bump CACHE_VERSION in sw.js when updating the calculator. The service worker precaches all offline files for that release.
-Offline navigation is cache-backed; external Discord/YouTube links require connectivity.
+SERVICE WORKER DESIGN:
+- Essential offline HTML is precached and must succeed before installation.
+- Manifest/icons are optional; a missing icon no longer breaks offline mode.
+- Navigation fetches a fresh page online, falling back to cached HTML offline.
+- New versions are checked at startup, reconnect, focus and periodically.
+- No surprise reload: an update is offered, then applied only if accepted.
+- External links and fresh API requests still require an internet connection.
+- In iOS Settings, clearing website data or offloading storage may remove the
+  offline cache. Reconnect and open the app online to repopulate it.
+
+FUTURE RELEASES: update the version string in sw.js and upload both sw.js
+and index.html. If you change app icons or their URLs, also update the manifest.
