@@ -1,4 +1,4 @@
-Riven Calculator v3.6.1 — Offline mode fix
+Riven Calculator v3.6.2 — Mobile install button label update
 
 FIXED: Your public GitHub repository has the three icon PNGs in the repository
 root, but v3.6's service worker expected an /icons/ subfolder. That mismatch
@@ -34,3 +34,7 @@ SERVICE WORKER DESIGN:
 
 FUTURE RELEASES: update the version string in sw.js and upload both sw.js
 and index.html. If you change app icons or their URLs, also update the manifest.
+
+RELEASE 3.6.2: Renamed the mobile-only install button to "Get Mobile App Version".
+The service-worker cache was incremented for existing installed users.
+No changes were made to the calculator calculation features.
