@@ -1,0 +1,26 @@
+{
+  "name": "Riven Stat Range Calculator",
+  "short_name": "Riven Calc",
+  "description": "Warframe Riven stat range calculator with offline access and saved configurations.",
+  "id": "./index.html",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#12111c",
+  "theme_color": "#12111c",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
