@@ -261,7 +261,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <main>
 <div class="mobile-view-controls" id="mobileViewControls" aria-label="Base stat table display mode"><button type="button" id="compactMode" aria-pressed="true">Compact</button><button type="button" id="scrollMode" aria-pressed="false">Scroll</button></div>
 <div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
-<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.3.2</button></h1>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.3.4</button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
 <div class="lk"><a class="upd" href="./index.html" download="Riven Stat Range Calculator.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
 
@@ -416,6 +416,14 @@ const versionPopup=$('versionPopup');
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
   {
+    version: '3.3.4',
+    content: 'Added red doubled Critical Chance values with a Heavy Attacks explanation to copied Riven cards, and made bow Fire Rate show the normal range followed by its doubled red range in both the calculator and copied cards.'
+  },
+  {
+    version: '3.3.3',
+    content: 'Added a red Fire Rate note beneath the selected stat whenever a bow is selected, matching the existing melee Critical Chance warning.'
+  },
+  {
     version: '3.3.2',
     content: 'Fixed share/import validation so only supported setups load, enforced the one-Spliced-stat limit everywhere, corrected Mutalist Cernos bow handling, cleared stale weapon lookup state, kept Copy Stats aligned with melee heavy-attack critical chance output, improved invalid shared-link feedback, and refreshed the copied card branding.'
   },
@@ -506,24 +514,22 @@ const isHeavyCritSelection=(slotIndex,statName)=>st.w===4&&slotIndex>=0&&slotInd
 function getMatchedWeapon(name){return WM[String(name||'').trim().toLowerCase()]||null}
 function setWeaponLookupSummary(name){
   const found=getMatchedWeapon(name);
-  $('wc').textContent=found?found[0]+': '+W[found[1]]+(found[3]?' (bow, fire rate base doubled)':''):'';
+  $('wc').textContent=found?found[0]+': '+W[found[1]]+(found[3]?' (bow, fire rate doubled)':''):'';
   return found;
 }
 function countSelectedSpliced(sel,ignoreIndex=-1){return sel.reduce((count,v,i)=>count+((i!==ignoreIndex)&&v>=0&&SPLD.has(S[v][0])?1:0),0)}
 function buildResultEntry(v,k,cfg){
   if(v<0)return null;
-  const neg=k>=cfg.p,s=S[v],base=s[st.w+1]*(isBowFireRateStat(s[0])?2:1),u=s[6],fl=s[0]==='Weapon Recoil'?-1:1,e=base*(neg?st.d*cfg.m:st.d*cfg.b)*fl,lo=e*.9,hi=e*1.1,heavyCrit=isHeavyCritSelection(k,s[0]);
+  const neg=k>=cfg.p,s=S[v],base=s[st.w+1],u=s[6],fl=s[0]==='Weapon Recoil'?-1:1;
+  const e=base*(neg?st.d*cfg.m:st.d*cfg.b)*fl,lo=e*.9,hi=e*1.1;
+  const heavyCrit=isHeavyCritSelection(k,s[0]),bowRate=isBowFireRateStat(s[0]);
+  const doubledLabel=heavyCrit?'Doubled for Heavy Attacks':bowRate?'Doubled for Bows':'';
+  const doubleRange=doubledLabel?`${fmt(lo*2,u)} to ${fmt(hi*2,u)}`:null;
+  const rangeText=`${fmt(lo,u)} to ${fmt(hi,u)}`;
   return {
-    neg,
-    name:s[0],
-    base,
-    u,
-    e,
-    lo,
-    hi,
-    heavyCrit,
-    rangeText:`${fmt(lo,u)} to ${fmt(hi,u)}${heavyCrit?` (${fmt(lo*2,u)} to ${fmt(hi*2,u)})`:''}`,
-    copyRangeText:heavyCrit?`${fmt(lo,u)} to ${fmt(hi,u)} (heavy: ${fmt(lo*2,u)} to ${fmt(hi*2,u)})`:`${fmt(lo,u)} to ${fmt(hi,u)}`
+    neg,name:s[0],base,u,e,lo,hi,heavyCrit,bowRate,doubledLabel,doubleRange,
+    rangeText,
+    copyRangeText:doubleRange?`${rangeText} | ${doubleRange} (${doubledLabel})`:rangeText
   };
 }
 function btns(el,items,cur,fn){
@@ -541,7 +547,8 @@ function render(){
     const d=document.createElement('div');d.className='slot '+(isN?'n':'p');
     const lab=isN?'Negative':'Positive '+(k+1);
     const heavyCritNote=v>=0&&isHeavyCritSelection(k,S[v][0]);
-    d.innerHTML=`<label class="lbl tag" for="s${k}">${lab}</label><div class="cb${v>=0&&ICON[S[v][0]]?' has':''}${v>=0&&SPLD.has(S[v][0])?' splv':''}">${v>=0?ic(S[v][0]):''}<input id="s${k}" type="text" role="combobox" aria-expanded="false" autocomplete="off" value="${v<0?'':S[v][0]}" placeholder="Select a stat"><ul class="cl" role="listbox" hidden></ul></div>${v>=0&&SPLD.has(S[v][0])?'<div class="sps">Spliced Stat - <a href="https://wiki.warframe.com/w/Riven_Splicer" target="_blank" rel="noopener noreferrer">Riven Splicer</a> Required</div>':''}${heavyCritNote?'<div class="heavycrit-note">Critical Chance is doubled for heavy attacks</div>':''}`;
+    const bowFireRateNote=v>=0&&isBowFireRateStat(S[v][0]);
+    d.innerHTML=`<label class="lbl tag" for="s${k}">${lab}</label><div class="cb${v>=0&&ICON[S[v][0]]?' has':''}${v>=0&&SPLD.has(S[v][0])?' splv':''}">${v>=0?ic(S[v][0]):''}<input id="s${k}" type="text" role="combobox" aria-expanded="false" autocomplete="off" value="${v<0?'':S[v][0]}" placeholder="Select a stat"><ul class="cl" role="listbox" hidden></ul></div>${v>=0&&SPLD.has(S[v][0])?'<div class="sps">Spliced Stat - <a href="https://wiki.warframe.com/w/Riven_Splicer" target="_blank" rel="noopener noreferrer">Riven Splicer</a> Required</div>':''}${heavyCritNote?'<div class="heavycrit-note">Critical Chance is doubled for heavy attacks</div>':''}${bowFireRateNote?'<div class="heavycrit-note">Fire Rate is doubled for bows</div>':''}`;
     cb(d,k,v);
     slots.appendChild(d);
   });
@@ -550,8 +557,8 @@ function render(){
     const entry=buildResultEntry(v,k,cfg);
     if(!entry)return;
     const c=document.createElement('div');c.className='card'+(entry.neg?' n':'');
-    c.innerHTML=`<div class="top"><span class="name">${ic(entry.name)}${entry.name}${isBowFireRateStat(entry.name)?' <span class="bowtag">(Doubled Due to Bow Selected)</span>':''}</span><span class="meta">${entry.neg?'Negative':'Positive'} \u00b7 base ${fmt(entry.base,entry.u)}</span></div>
-    <div class="range">${fmt(entry.lo,entry.u)}<span>to</span>${fmt(entry.hi,entry.u)}${entry.heavyCrit?` <span class="heavycrit-range">(${fmt(entry.lo*2,entry.u)} to ${fmt(entry.hi*2,entry.u)})</span>`:''}</div><div class="bar"><i></i></div>
+    c.innerHTML=`<div class="top"><span class="name">${ic(entry.name)}${entry.name}</span><span class="meta">${entry.neg?'Negative':'Positive'} \u00b7 base ${fmt(entry.base,entry.u)}</span></div>
+    <div class="range">${fmt(entry.lo,entry.u)}<span>to</span>${fmt(entry.hi,entry.u)}${entry.doubleRange?` <span class="heavycrit-range">${entry.doubleRange} <span class="doubled-label">(${entry.doubledLabel})</span></span>`:''}</div><div class="bar"><i></i></div>
     <div class="mid">Center ${fmt(entry.e,entry.u)} \u00b7 ${+entry.base.toFixed(4)} \u00d7 ${entry.neg?cfg.m:cfg.b} \u00d7 (0.9 to 1.1)</div>`;
     res.appendChild(c);
   });
@@ -654,14 +661,23 @@ function setStatus(msg){$('toolStatus').textContent=msg;}
 function copyText(text){const legacyCopy=()=>{const ta=document.createElement('textarea');ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';ta.style.pointerEvents='none';document.body.appendChild(ta);ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}ta.remove();return ok?Promise.resolve():Promise.reject(new Error('Clipboard unavailable'));};if(navigator.clipboard&&window.isSecureContext)return navigator.clipboard.writeText(text).catch(()=>legacyCopy());return legacyCopy();}
 function xmlSafe(v){return String(v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;').replace(/'/g,'&apos;')}
 function buildRivenCardSvg(weapon,layout,entries){
-  const width=900,rowH=92,top=176,bottom=92,height=top+Math.max(entries.length,1)*rowH+bottom;
-  const rows=entries.length?entries.map((it,i)=>{const y=top+i*rowH,accent=it.neg?'#ff7b91':'#72e4c4',label=it.neg?'NEGATIVE':'POSITIVE';return `<g><rect x="34" y="${y}" width="832" height="76" rx="13" fill="#201c32" stroke="${accent}" stroke-opacity=".7" stroke-width="2"/><rect x="34" y="${y}" width="6" height="76" rx="3" fill="${accent}"/><text x="60" y="${y+27}" fill="${accent}" font-size="15" font-weight="700" letter-spacing="2">${label}</text><text x="60" y="${y+55}" fill="#f4f0ff" font-size="23" font-weight="600">${xmlSafe(it.name)}</text><text x="838" y="${y+47}" fill="${accent}" font-size="21" font-weight="700" text-anchor="end">${xmlSafe(it.range)}</text></g>`}).join(''):`<text x="450" y="${top+38}" text-anchor="middle" fill="#b9b2d0" font-size="22">Select stats to populate this Riven card</text>`;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171326"/><stop offset="1" stop-color="#302344"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0d38a"/><stop offset=".5" stop-color="#b39cff"/><stop offset="1" stop-color="#f0d38a"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="#d9c8ff"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="#29203e"/><text x="88" y="45" fill="#c6b5f7" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="#ffffff" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="#b9b2d0" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="#5a496d" stroke-width="2"/>${rows}<text x="38" y="${height-35}" fill="#aaa0c4" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="#f0d38a">UNIFIED_CODEX</tspan></text><text x="862" y="${height-35}" fill="#aaa0c4" font-size="14" text-anchor="end">v.3.3.2</text></svg>`;
+  const width=900,top=176,bottom=118;
+  // Doubled-value rows are taller so the red range and its explanation remain legible.
+  let rowOffset=0;
+  const rows=entries.length?entries.map(it=>{
+    const special=!!it.doubleRange, y=top+rowOffset, rowHeight=special?110:76;
+    rowOffset+=rowHeight+16;
+    const accent=it.neg?'#ff7b91':'#72e4c4',label=it.neg?'NEGATIVE':'POSITIVE';
+    const doubled=special?`<text x="60" y="${y+88}" text-anchor="start" font-size="18" font-weight="700"><tspan fill="#ff7b91">${xmlSafe(it.doubleRange)}</tspan><tspan fill="#ff9fae" font-size="14" font-weight="500"> (${xmlSafe(it.doubledLabel)})</tspan></text>`:'';
+    return `<g><rect x="34" y="${y}" width="832" height="${rowHeight}" rx="13" fill="#201c32" stroke="${accent}" stroke-opacity=".7" stroke-width="2"/><rect x="34" y="${y}" width="6" height="${rowHeight}" rx="3" fill="${accent}"/><text x="60" y="${y+27}" fill="${accent}" font-size="15" font-weight="700" letter-spacing="2">${label}</text><text x="60" y="${y+55}" fill="#f4f0ff" font-size="23" font-weight="600">${xmlSafe(it.name)}</text><text x="838" y="${y+47}" fill="${accent}" font-size="21" font-weight="700" text-anchor="end">${xmlSafe(it.range)}</text>${doubled}</g>`;
+  }).join(''):(rowOffset=92,`<text x="450" y="${top+38}" text-anchor="middle" fill="#b9b2d0" font-size="22">Select stats to populate this Riven card</text>`);
+  const height=top+rowOffset+bottom;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171326"/><stop offset="1" stop-color="#302344"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#f0d38a"/><stop offset=".5" stop-color="#b39cff"/><stop offset="1" stop-color="#f0d38a"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="#d9c8ff"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="#29203e"/><text x="88" y="45" fill="#c6b5f7" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="#ffffff" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="#b9b2d0" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="#5a496d" stroke-width="2"/>${rows}<text x="38" y="${height-52}" fill="#aaa0c4" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="#f0d38a">UNIFIED_CODEX</tspan></text><text x="38" y="${height-28}" fill="#b9b2d0" font-size="11.5">Try it yourself at unified-codex.github.io/Riven-Calculator</text><text x="862" y="${height-52}" fill="#aaa0c4" font-size="14" text-anchor="end">v.3.3.4</text></svg>`;
 }
 function svgToPngBlob(svg){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.fillStyle='#171326';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);canvas.toBlob(blob=>{URL.revokeObjectURL(url);blob?resolve(blob):reject(new Error('PNG conversion failed'))},'image/png')}catch(e){URL.revokeObjectURL(url);reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('SVG rendering failed'))};img.src=url})}
 $('copyStatsBtn').addEventListener('click',async()=>{
   fix();const cfg=C[st.c],weapon=$('wn').value.trim()||W[st.w],layout=`${cfg.p} positive, ${cfg.n} negative`,lines=['Riven Stat Range Calculator',weapon+' — '+W[st.w],`Layout: ${layout}`],entries=[];
-  st.sel.forEach((v,k)=>{const entry=buildResultEntry(v,k,cfg);if(!entry)return;lines.push(`${entry.neg?'Negative':'Positive'}: ${entry.name} — ${entry.copyRangeText}`);if(entry.heavyCrit)lines.push('Note: Critical Chance is doubled for heavy attacks.');entries.push({neg:entry.neg,name:entry.name,range:entry.rangeText})});
+  st.sel.forEach((v,k)=>{const entry=buildResultEntry(v,k,cfg);if(!entry)return;lines.push(`${entry.neg?'Negative':'Positive'}: ${entry.name} — ${entry.copyRangeText}`);entries.push({neg:entry.neg,name:entry.name,range:entry.rangeText,doubleRange:entry.doubleRange,doubledLabel:entry.doubledLabel})});
   lines.push(`Try the calculator yourself here: ${CALCULATOR_SITE_URL}`);
   try{if(navigator.clipboard&&window.isSecureContext&&window.ClipboardItem){const svg=buildRivenCardSvg(weapon,layout,entries),blob=await svgToPngBlob(svg);await navigator.clipboard.write([new ClipboardItem({'image/png':blob})]);setStatus('Riven-style stat card copied as an image.')}else{await copyText(lines.join('\n'));setStatus('Image copying is not supported here; readable stat text copied instead.')}}catch(e){try{await copyText(lines.join('\n'));setStatus('Could not copy the card image here; readable stat text copied instead.')}catch(err){setStatus('Could not access the clipboard. You can select and copy the results manually.')}}
 });
