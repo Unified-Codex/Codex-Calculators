@@ -1,4 +1,4 @@
-Riven Calculator v3.6.2 — Mobile install button label update
+Riven Calculator v3.6.3 — Theme-matched copied Riven cards
 
 FIXED: Your public GitHub repository has the three icon PNGs in the repository
 root, but v3.6's service worker expected an /icons/ subfolder. That mismatch
@@ -38,3 +38,8 @@ and index.html. If you change app icons or their URLs, also update the manifest.
 RELEASE 3.6.2: Renamed the mobile-only install button to "Get Mobile App Version".
 The service-worker cache was incremented for existing installed users.
 No changes were made to the calculator calculation features.
+
+RELEASE 3.6.3: Copy Stats card colors now match the selected site theme.
+The stat calculations, copied-card row layout, clipboard text fallback,
+installer and offline behavior remain unchanged. The service worker cache was
+updated so existing installed users can be offered the new release.
