@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en">
+<head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="4.1.1">
+<meta name="riven-version" content="4.1.2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Riven Calculator">
-
-
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <title>Riven Stat Range Calculator</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='a'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23d6c8ff'/%3E%3Cstop%20offset='.55'%20stop-color='%238b6cff'/%3E%3Cstop%20offset='1'%20stop-color='%23f2c75c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon%20points='32,2%2062,32%2032,62%202,32'%20fill='url%28%23a%29'/%3E%3Cpolygon%20points='32,11%2053,32%2032,53%2011,32'%20fill='%2317142b'/%3E%3Cpolygon%20points='32,17%2036,28%2047,32%2036,36%2032,47%2028,36%2017,32%2028,28'%20fill='%23e9defd'/%3E%3C/svg%3E">
-
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
 --bg:#12111c;--panel:#1b1a29;--panel2:#242238;--line:#34314d;--text:#ece9f7;--mute:#9a96b8;--acc:#b39cff;--pos:#5fe0c0;--neg:#ff7a8a;color-scheme:dark}
@@ -205,8 +206,8 @@ select{width:100%}
 :root[data-pal="sentient"]{--hl:#e6a8ff}
 :root[data-pal="lotus"]{--hl:#b54708}
 :root[data-pal="wally"]{--hl:#c7cbd3}
-.lk{display:flex;flex-wrap:wrap;gap:10px;margin:-8px 0 20px}
-.lk .upd{margin:0;display:inline-flex;align-items:center}
+.lk{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:-8px 0 20px}
+.lk .upd{margin:0;display:inline-flex;align-items:center;white-space:nowrap;min-width:0}
 .upd svg{width:1.2em;height:1.2em;margin-right:.55em;fill:currentColor;flex:none}
 .upd.dc{background:#5865f2;color:#fff;box-shadow:0 0 18px rgba(88,101,242,.4)}
 .upd.dc:hover{box-shadow:0 0 26px rgba(88,101,242,.65)}
@@ -471,7 +472,12 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 .vc b{color:var(--gold);font-size:.94rem;font-variant-numeric:tabular-nums}
 .vc.bump b{animation:vcbump .9s ease-out}
 @keyframes vcbump{0%{transform:scale(1.3)}100%{transform:scale(1)}}
-@media (min-width:621px) and (max-width:760px){.lk{gap:6px}.lk .upd{padding:9px 7px;font-size:.77rem}}
+@media (min-width:621px) and (max-width:790px){
+  .lk{gap:6px}
+  .lk .upd{padding:9px 7px;font-size:clamp(.71rem,1.65vw,.8rem);letter-spacing:0}
+  .lk .upd svg{margin-right:.35em}
+  .lk .vc{gap:4px;font-size:.79rem}
+}
 @media(max-width:620px){
   /* The mobile header leaves a clear left utility slot opposite Themes. */
   .tm{min-height:28px;align-items:center}
@@ -485,19 +491,21 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 #offlineUpdateBtn.new-version{background:#b71c2c!important;color:#fff!important;box-shadow:0 0 16px rgba(255,59,75,.65);animation:offlineUpdatePulse 1.4s ease-in-out infinite}
 #offlineUpdateBtn.new-version:hover{background:#db2335!important}
 @keyframes offlineUpdatePulse{0%,100%{filter:brightness(.85);box-shadow:0 0 6px rgba(255,59,75,.35)}50%{filter:brightness(1.4);box-shadow:0 0 24px 5px rgba(255,59,75,.9)}}
-#offlineUpdateStatus{display:block;width:100%;color:var(--mute);font-size:.8rem;line-height:1.3}
+/* An empty message must not break the top row in exported HTML files. */
+#offlineUpdateStatus{display:none;color:var(--mute);font-size:.8rem;line-height:1.3}
+#offlineUpdateStatus:not(:empty){display:block;flex:1 0 100%;order:10;min-width:0}
 @media(prefers-reduced-motion:reduce){#offlineUpdateBtn.new-version{animation:none}}
 </style>
-
-
-<meta name="riven-standalone" content="true"></head>
+<script id="goatcounterConfig">window.goatcounter={path:'/riven-calculator'};</script>
+<script data-goatcounter="https://unified-codex.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</head>
 <body>
 <main>
-
-<div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden=""></ul></div>
-<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-label="Version 4.1.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"></path></svg><span>v.4.1.1</span><span class="version-note-label">Patch Notes</span></button></h1>
+<div class="mobile-offline-install" id="mobileOfflineInstall" hidden><button type="button" id="installOfflineBtn" aria-haspopup="dialog" aria-controls="offlineInstallOverlay"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 18v3h16v-3"/></svg>Get Mobile App Version</button></div>
+<div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-label="Version 4.1.2 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.4.1.2</span><span class="version-note-label">Patch Notes</span></button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
-<div class="lk"><button id="offlineUpdateBtn" type="button" class="upd" title="Check GitHub for a newer Riven Calculator version" aria-live="polite">Check Github For Updates</button><span id="offlineUpdateStatus" role="status" aria-live="polite"></span><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"></path></svg>Join The Discord!</a><span class="vc" id="vc" title="Website View Counter" aria-label="Website View Counter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.7 9.2 1.5 12c1.2 2.8 5 7 10.5 7s9.3-4.2 10.5-7C21.3 9.2 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"></path></svg><b id="vcn" aria-live="polite">—</b></span><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>Support The Channel!</a></div>
+<div class="lk"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Riven_Calculator_v4.1.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a><span class="vc" id="vc" title="Website View Counter" aria-label="Website View Counter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.7 9.2 1.5 12c1.2 2.8 5 7 10.5 7s9.3-4.2 10.5-7C21.3 9.2 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/></svg><b id="vcn" aria-live="polite">—</b></span></div>
 
 <section class="panel">
  <div style="margin-bottom:18px"><label class="lbl" for="wn">Weapon name (optional, fills in the weapon type)</label><input type="text" id="wn" list="wl" placeholder="Start typing, e.g. Soma Prime" autocomplete="off"><datalist id="wl"></datalist><div class="chip" id="wc"></div></div>
@@ -513,7 +521,7 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
  <div class="tool-actions" aria-label="Configuration tools"><button type="button" class="ghost" id="copyStatsBtn">Copy Stats</button><button type="button" class="ghost" id="saveSetupBtn">Save Setup</button><button type="button" class="ghost" id="loadSetupBtn">Load Saved</button><button type="button" class="ghost" id="shareSetupBtn">Copy Riven Code</button></div><p class="m" id="toolStatus" role="status" aria-live="polite"></p>
  <div class="spw"><button type="button" class="import-url-btn" id="importRivenUrlBtn">Import Riven Code</button><button type="button" class="spb" id="spb" aria-expanded="false" aria-controls="spp">View Spliced Stats Combos</button></div>
 </section>
-<section class="explain" id="spp" hidden="" style="margin:-4px 0 16px">
+<section class="explain" id="spp" hidden style="margin:-4px 0 16px">
 <h2>Spliced stat combinations</h2>
 <p class="m">A Riven Splicer consumes two matching stats on one riven and replaces them with the spliced stat plus one random stat. Only one spliced stat can be on a riven. Where a stat lists more than one recipe, either pair works.</p>
 <div class="seg" id="spf" style="margin:10px 0 12px"></div>
@@ -522,8 +530,8 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 </section>
 
 <div class="res" id="res"></div>
-<button type="button" class="xbtn alt" id="bb" aria-expanded="false" aria-controls="bp">Show Base Stat Values<i>▾</i></button>
-<section class="explain" id="bp" hidden="">
+<button type="button" class="xbtn alt" id="bb" aria-expanded="false" aria-controls="bp">Show Base Stat Values<i>&#9662;</i></button>
+<section class="explain" id="bp" hidden>
 <h2>Base stat values</h2>
 <p class="m">Switch between positive and negative ranges, then pick a weapon category to see its base values and roll ranges for every riven layout.</p>
 <div class="seg" id="bm" style="margin:10px 0 8px"></div>
@@ -531,8 +539,8 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <div class="tw"><table id="bt"></table></div>
 <p class="m" id="bn" style="font-size:.82rem"></p>
 </section>
-<button type="button" class="xbtn" id="xb" aria-expanded="false" aria-controls="xp">How Do Rivens Work?<i>▾</i></button>
-<section class="explain" id="xp" hidden="">
+<button type="button" class="xbtn" id="xb" aria-expanded="false" aria-controls="xp">How Do Rivens Work?<i>&#9662;</i></button>
+<section class="explain" id="xp" hidden>
 <h2>The whole formula</h2>
 <div class="fm">Final value = base value × layout multiplier × roll</div>
 <p>Every riven stat is these three numbers multiplied together. Only the roll is random.</p>
@@ -543,12 +551,12 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <h2>Step 2: Layout multiplier</h2>
 <p>How many positive and negative stats the riven has changes how strong each stat is. The multiplier is the same for every positive stat on the riven, and the negative stat has its own value.</p>
 <div class="tw"><table>
-<tbody><tr><th>Layout</th><th>Positive</th><th>Negative</th><th>What it means</th></tr>
+<tr><th>Layout</th><th>Positive</th><th>Negative</th><th>What it means</th></tr>
 <tr><td>2 pos, 0 neg</td><td class="g">0.99</td><td class="m">none</td><td>Each stat is at 99% of base value</td></tr>
 <tr><td>2 pos, 1 neg</td><td class="g">1.2375</td><td class="r">-0.495</td><td>Each stat is boosted to 123.75% of base value</td></tr>
 <tr><td>3 pos, 0 neg</td><td class="g">0.75</td><td class="m">none</td><td>Each stat is 75% of base value</td></tr>
 <tr><td>3 pos, 1 neg</td><td class="g">0.9375</td><td class="r">-0.75</td><td>Each stat is at 93.75% of base value</td></tr>
-</tbody></table></div>
+</table></div>
 <p>Adding a negative boosts every positive by 25% compared to the same riven without one: 0.99 × 1.25 = 1.2375 and 0.75 × 1.25 = 0.9375.</p>
 
 <h2>Step 3: The random roll</h2>
@@ -565,26 +573,37 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
 <div class="fm">108 × -0.75 = -81% center<br>Low roll: -81 × 0.9 = -72.9%<br>High roll: -81 × 1.1 = -89.1%</div>
 <p class="m">The negative uses its own value from the layout table, which is why it has a separate multiplier from the positives.</p>
 </section>
-
-
-<div class="version-overlay" id="versionPopup" role="dialog" aria-modal="true" aria-labelledby="versionTitle" hidden="">
+<div class="version-overlay" id="offlineInstallOverlay" role="dialog" aria-modal="true" aria-labelledby="offlineInstallTitle" aria-describedby="offlineInstallMessage" hidden>
+  <div class="version-dialog">
+    <h2 id="offlineInstallTitle">Install the Offline Calculator</h2>
+    <p id="offlineInstallMessage">Add the Riven Calculator to your home screen to open it like an app and use it without internet after the first online load.</p>
+    <ol id="offlineInstallSteps" class="offline-install-guide"></ol>
+    <p id="offlineInstallNote" class="m" style="font-size:.86rem">The calculator checks for updates when you reconnect. Internet is needed for external links and any future online-only features.</p>
+    <button type="button" class="version-close" id="offlineInstallClose">Close</button>
+  </div>
+</div>
+<div id="pwaUpdateNotice" role="status" aria-live="polite" hidden>
+  <div><strong>A calculator update is ready.</strong> Refresh to use the latest version; your locally saved setups will stay on this device.</div>
+  <div class="pwa-update-actions"><button type="button" id="pwaUpdateLater">Later</button><button type="button" id="pwaUpdateNow">Update Now</button></div>
+</div>
+<div class="version-overlay" id="versionPopup" role="dialog" aria-modal="true" aria-labelledby="versionTitle" hidden>
   <div class="version-dialog">
     <h2 id="versionTitle">Patch Notes</h2>
     <div class="patch-search-bar">
-      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg>
       <input type="search" id="patchSearch" autocomplete="off" spellcheck="false" aria-label="Search patch notes by version or keyword" placeholder="Search version or keyword…">
     </div>
     <div id="patchNotesBrowse">
       <div id="patchNotesList"></div>
       <button type="button" class="older-notes-toggle" id="olderNotesToggle" aria-expanded="false" aria-controls="olderPatchNotes">Read Older Patchnotes</button>
-      <div id="olderPatchNotes" hidden=""></div>
+      <div id="olderPatchNotes" hidden></div>
     </div>
-    <div id="patchSearchResults" hidden=""></div>
-    <div id="patchSearchStatus" role="status" aria-live="polite" hidden=""></div>
+    <div id="patchSearchResults" hidden></div>
+    <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <button type="button" class="version-close" id="versionClose">Close</button>
   </div>
 </div>
-<div class="version-overlay" id="setupOverlay" hidden="">
+<div class="version-overlay" id="setupOverlay" hidden>
   <section class="setup-dialog" role="dialog" aria-modal="true" aria-labelledby="setupDialogTitle" aria-describedby="setupDialogMessage">
     <h2 id="setupDialogTitle">Saved Configurations</h2>
     <p id="setupDialogMessage"></p>
@@ -659,6 +678,10 @@ const versionPopup=$('versionPopup');
 // always read the complete historical notes. Use HTML only for trusted,
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
+  {
+    version: '4.1.2',
+    content: 'Restored the single-row desktop action layout, moved the borderless view counter after Support The Channel, and fixed the offline update-status element forcing the buttons onto a second row. The visitor counter now remembers its last successfully retrieved total when temporarily unavailable.'
+  },
   {
     version: '4.1.1',
     content: 'Moved the website view counter beside the Discord button on desktop and into the upper-left header space on mobile. Simplified it to an unobtrusive eye icon and live total with a Website View Counter hover tooltip.'
@@ -1113,7 +1136,7 @@ function buildRivenCardSvg(weapon,layout,entries){
     return `<g><rect x="34" y="${y}" width="832" height="${rowHeight}" rx="13" fill="${p.panel2}" stroke="${accent}" stroke-opacity=".8" stroke-width="2"/><rect x="34" y="${y}" width="6" height="${rowHeight}" rx="3" fill="${accent}"/><text x="60" y="${y+27}" fill="${accent}" font-size="15" font-weight="700" letter-spacing="2">${label}</text><text x="60" y="${y+55}" fill="${p.text}" font-size="23" font-weight="600">${xmlSafe(it.name)}</text><text x="838" y="${y+47}" fill="${accent}" font-size="21" font-weight="700" text-anchor="end">${xmlSafe(it.range)}</text>${doubled}</g>`;
   }).join(''):(rowOffset=92,`<text x="450" y="${top+38}" text-anchor="middle" fill="${p.mute}" font-size="22">Select stats to populate this Riven card</text>`);
   const height=top+rowOffset+bottom;
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p.bg}"/><stop offset="1" stop-color="${p.panel}"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p.gold}"/><stop offset=".5" stop-color="${p.accent}"/><stop offset="1" stop-color="${p.gold}"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="${p.accent}"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="${p.bg}"/><text x="88" y="45" fill="${p.accent}" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="${p.text}" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="${p.mute}" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="${p.line}" stroke-width="2"/>${rows}<text x="38" y="${height-52}" fill="${p.mute}" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="${p.gold}">UNIFIED_CODEX</tspan></text><text x="38" y="${height-28}" fill="${p.mute}" font-size="11.5">Try it yourself at unified-codex.github.io/Riven-Calculator</text><text x="862" y="${height-52}" fill="${p.mute}" font-size="14" text-anchor="end">v.4.1.1</text></svg>`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}"><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p.bg}"/><stop offset="1" stop-color="${p.panel}"/></linearGradient><linearGradient id="edge" x1="0" y1="0" x2="1" y2="1"><stop stop-color="${p.gold}"/><stop offset=".5" stop-color="${p.accent}"/><stop offset="1" stop-color="${p.gold}"/></linearGradient></defs><rect width="900" height="${height}" rx="25" fill="url(#bg)"/><rect x="10" y="10" width="880" height="${height-20}" rx="19" fill="none" stroke="url(#edge)" stroke-width="3"/><path d="M35 42 L52 25 L69 42 L52 59 Z" fill="${p.accent}"/><path d="M52 32 L62 42 L52 52 L42 42 Z" fill="${p.bg}"/><text x="88" y="45" fill="${p.accent}" font-size="16" font-weight="700" letter-spacing="4">RIVEN MOD</text><text x="38" y="103" fill="${p.text}" font-size="34" font-weight="700">${xmlSafe(weapon)}</text><text x="40" y="137" fill="${p.mute}" font-size="17">${xmlSafe(layout)} · ROLL RANGE</text><line x1="35" y1="153" x2="865" y2="153" stroke="${p.line}" stroke-width="2"/>${rows}<text x="38" y="${height-52}" fill="${p.mute}" font-size="12.5" letter-spacing=".8">RIVEN STAT RANGE CALCULATOR - BROUGHT TO YOU BY <tspan fill="${p.gold}">UNIFIED_CODEX</tspan></text><text x="38" y="${height-28}" fill="${p.mute}" font-size="11.5">Try it yourself at unified-codex.github.io/Riven-Calculator</text><text x="862" y="${height-52}" fill="${p.mute}" font-size="14" text-anchor="end">v.4.1.2</text></svg>`;
 }
 function svgToPngBlob(svg){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml;charset=utf-8'})),img=new Image();img.onload=()=>{try{const canvas=document.createElement('canvas');canvas.width=img.naturalWidth;canvas.height=img.naturalHeight;const ctx=canvas.getContext('2d');ctx.fillStyle='#171326';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0);canvas.toBlob(blob=>{URL.revokeObjectURL(url);blob?resolve(blob):reject(new Error('PNG conversion failed'))},'image/png')}catch(e){URL.revokeObjectURL(url);reject(e)}};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('SVG rendering failed'))};img.src=url})}
 $('copyStatsBtn').addEventListener('click',async()=>{
@@ -1362,6 +1385,134 @@ $('spb').onclick=()=>{const p=$('spp'),o=p.hidden;p.hidden=!o;$('spb').setAttrib
 $('bb').onclick=()=>{const p=$('bp'),o=p.hidden;p.hidden=!o;$('bb').setAttribute('aria-expanded',o);if(o){bs.w=st.w;renderBase()}};
 $('xb').onclick=()=>{const p=$('xp'),o=p.hidden;p.hidden=!o;$('xb').setAttribute('aria-expanded',o)};
 render();
+
+/* Offline mobile app support (the calculator itself remains fully client-side). */
+(function initOfflineApp(){
+  const button=$('installOfflineBtn');
+  const installContainer=$('mobileOfflineInstall');
+  const guide=$('offlineInstallOverlay');
+  const guideClose=$('offlineInstallClose');
+  const guideSteps=$('offlineInstallSteps');
+  const updateNotice=$('pwaUpdateNotice');
+  let deferredInstallPrompt=null;
+  let installedInThisSession=false;
+  let serviceWorkerRegistration=null;
+  let refreshingForUpdate=false;
+  let requestedUpdate=false;
+  let lastUpdateCheck=0;
+  const modeQuery=window.matchMedia('(display-mode: standalone)');
+  const isRunningInstalled=()=>modeQuery.matches||
+    window.matchMedia('(display-mode: fullscreen)').matches||
+    window.navigator.standalone===true;
+  function refreshInstallButton(){
+    const onMobile=window.matchMedia('(max-width:620px)').matches;
+    installContainer.hidden=!onMobile||isRunningInstalled()||installedInThisSession;
+  }
+  refreshInstallButton();
+  if(modeQuery.addEventListener)modeQuery.addEventListener('change',refreshInstallButton);
+  window.addEventListener('resize',refreshInstallButton);
+  window.addEventListener('beforeinstallprompt',event=>{
+    if(isRunningInstalled())return;
+    event.preventDefault();
+    deferredInstallPrompt=event;
+    refreshInstallButton();
+  });
+  window.addEventListener('appinstalled',()=>{
+    installedInThisSession=true;
+    deferredInstallPrompt=null;
+    guide.hidden=true;
+    refreshInstallButton();
+  });
+  function openGuide(){
+    const ua=navigator.userAgent||'';
+    const isiOS=/iPhone|iPad|iPod/.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+    const isAndroid=/Android/.test(ua);
+    const steps=isiOS
+      ? ['Open this calculator in a browser that supports Add to Home Screen (Safari is a reliable choice).',
+         'Tap Share, then choose Add to Home Screen.',
+         'Enable Open as Web App if the option appears, then tap Add.',
+         'Launch Riven Calculator from your Home Screen.']
+      : isAndroid
+      ? ['Open the calculator in Chrome or another browser that supports installing web apps.',
+         'Open the browser menu (⋮) and select Install app or Add to Home screen.',
+         'Confirm installation, then launch the calculator from your Home Screen.']
+      : ['Open this page in a browser that supports installing websites as apps.',
+         'Use the browser menu to choose Install app or Add to Home Screen.'];
+    guideSteps.replaceChildren(...steps.map(step=>{const li=document.createElement('li');li.textContent=step;return li;}));
+    guide.hidden=false;
+    guideClose.focus();
+  }
+  function closeGuide(){guide.hidden=true;button.focus();}
+  guideClose.addEventListener('click',closeGuide);
+  guide.addEventListener('click',e=>{if(e.target===guide)closeGuide();});
+  guide.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){e.preventDefault();closeGuide();}
+    if(e.key==='Tab'){
+      // Only one interactive control in the guide: keep focus within the dialog.
+      e.preventDefault();guideClose.focus();
+    }
+  });
+  button.addEventListener('click',async()=>{
+    if(isRunningInstalled()){refreshInstallButton();return;}
+    const prompt=deferredInstallPrompt;
+    if(!prompt){openGuide();return;}
+    deferredInstallPrompt=null;
+    try{
+      await prompt.prompt();
+      const result=await prompt.userChoice;
+      if(result&&result.outcome==='accepted'){
+        installedInThisSession=true;
+        refreshInstallButton();
+      }
+    }catch(e){openGuide();}
+  });
+
+  function showUpdateReady(){
+    if(serviceWorkerRegistration?.waiting&&navigator.serviceWorker.controller){updateNotice.hidden=false;}
+  }
+  function watchNewWorker(worker){
+    if(!worker)return;
+    worker.addEventListener('statechange',()=>{
+      if(worker.state==='installed')showUpdateReady();
+    });
+  }
+  function watchRegistration(reg){
+    serviceWorkerRegistration=reg;
+    showUpdateReady();
+    watchNewWorker(reg.installing);
+    reg.addEventListener('updatefound',()=>watchNewWorker(reg.installing));
+  }
+  async function checkForUpdates(force=false){
+    if(!serviceWorkerRegistration||!navigator.onLine)return;
+    const now=Date.now();
+    if(!force&&now-lastUpdateCheck<60000)return;
+    lastUpdateCheck=now;
+    try{await serviceWorkerRegistration.update();showUpdateReady();}catch(e){/* Retry on the next reconnect/focus. */}
+  }
+  updateNotice.querySelector('#pwaUpdateNow').addEventListener('click',()=>{
+    const waiting=serviceWorkerRegistration?.waiting;
+    if(!waiting)return;
+    requestedUpdate=true;
+    updateNotice.hidden=true;
+    waiting.postMessage({type:'SKIP_WAITING'});
+  });
+  updateNotice.querySelector('#pwaUpdateLater').addEventListener('click',()=>{updateNotice.hidden=true;});
+  if('serviceWorker' in navigator&&window.isSecureContext){
+    navigator.serviceWorker.addEventListener('controllerchange',()=>{
+      if(requestedUpdate&&!refreshingForUpdate){
+        refreshingForUpdate=true;
+        window.location.reload();
+      }
+    });
+    navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'})
+      .then(reg=>{watchRegistration(reg);checkForUpdates(true);})
+      .catch(()=>{/* Browser settings may block offline use; online calculator still works. */});
+    window.addEventListener('online',()=>checkForUpdates(true));
+    window.addEventListener('focus',()=>checkForUpdates());
+    document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkForUpdates();});
+    setInterval(()=>{if(!document.hidden)checkForUpdates();},30*60*1000);
+  }
+})();
 </script>
 <script id="siteVisitsCounter">
 /* Public GoatCounter site-wide visitor counter. Does not use a secret API key.
@@ -1374,15 +1525,20 @@ render();
   const URL='https://unified-codex.goatcounter.com/counter/TOTAL.json';
   const REFRESH=5*60*1000;
   let lastCheck=0,shown=null,inFlight=false;
+  const KEY='riven-calculator-public-views-v1';
+  const MAX_CACHE_AGE=7*24*60*60*1000;
   box.hidden=false;
   box.title='Website View Counter';
-  function render(value){
+  function render(value,cacheResult=false){
     if(!Number.isSafeInteger(value)||value<0)return;
     num.textContent=value.toLocaleString('en-US');
     if(shown!==null&&shown!==value){
       box.classList.remove('bump');void box.offsetWidth;box.classList.add('bump');
     }
     shown=value;
+    if(cacheResult){
+      try{localStorage.setItem(KEY,JSON.stringify({count:value,time:Date.now()}));}catch(e){}
+    }
     box.title='Website View Counter';
   }
   async function load(){
@@ -1395,7 +1551,7 @@ render();
       const raw=String(data?.count??'').trim();
       if(!/^\d[\d,\s]*$/.test(raw))throw new Error('Invalid count');
       const n=Number(raw.replace(/[,\s]/g,''));
-      render(n);
+      render(n,true);
     }catch(e){
       if(shown===null){
         num.textContent='—';
@@ -1403,6 +1559,14 @@ render();
       }
     }finally{inFlight=false;}
   }
+  // On a blocked request, show a recently fetched value instead of a blank counter.
+  // It is a last-known value, not a claim that every visit can be tracked.
+  try{
+    const cached=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(cached&&Number.isFinite(cached.time)&&Date.now()-cached.time<MAX_CACHE_AGE){
+      render(cached.count);
+    }
+  }catch(e){}
   setTimeout(load,1000);
   setInterval(function(){if(document.visibilityState==='visible')load()},REFRESH);
   addEventListener('online',load);
@@ -1550,6 +1714,5 @@ render();
   setTimeout(()=>check(false),1250);
 })();
 </script>
-
-
-</body></html>
+</body>
+</html>
