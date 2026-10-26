@@ -1,4 +1,4 @@
-Riven Calculator v4.1.2 — Complete GitHub Pages release
+Riven Calculator v4.1.3 — Complete GitHub Pages release
 
 This folder contains the entire deployable GitHub Pages site (not the downloadable standalone HTML).
 
@@ -11,9 +11,9 @@ UPLOAD TO GITHUB:
 5. Once GitHub Pages publishes, open https://unified-codex.github.io/Riven-Calculator/.
 
 FILES:
-- index.html: current v4.1.2 online calculator, Riven Codes, patch notes, view counter,
+- index.html: current v4.1.3 online calculator, Riven Codes, patch notes, view counter,
   and standalone HTML download generator.
-- sw.js: v4.1.2 service worker for installed mobile app caching/updates.
+- sw.js: v4.1.3 service worker for installed mobile app caching/updates.
 - manifest.json: installed app settings.
 - icon-192.png, icon-512.png, apple-touch-icon.png: installed app icons.
 
