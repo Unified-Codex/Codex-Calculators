@@ -43,3 +43,9 @@ RELEASE 3.6.3: Copy Stats card colors now match the selected site theme.
 The stat calculations, copied-card row layout, clipboard text fallback,
 installer and offline behavior remain unchanged. The service worker cache was
 updated so existing installed users can be offered the new release.
+
+RELEASE 3.6.4: Added a Website Visits counter (GoatCounter, site code unified-codex).
+The counter counts every page load, including returning visitors, and re-checks about
+every 5 minutes while the page is visible. It stays hidden if GoatCounter cannot be
+reached. Calculations, installer and offline behavior are unchanged. The service-worker
+cache was incremented so installed users are offered the update.

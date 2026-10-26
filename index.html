@@ -379,15 +379,25 @@ h1{font-size:1.4rem;line-height:1.2;padding-right:84px}
     18%,78% {opacity:.33;}
   }
 }
+.vc{display:inline-flex;align-items:center;gap:.5em;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);color:var(--mute);font-size:.88rem;font-weight:600}
+.vc[hidden]{display:none}
+.vc svg{width:1.15em;height:1.15em;fill:currentColor;flex:none}
+.vc b{color:var(--gold);font-size:1rem;font-variant-numeric:tabular-nums}
+.vc.bump b{animation:vcbump .9s ease-out}
+@keyframes vcbump{0%{transform:scale(1.3)}100%{transform:scale(1)}}
+@media(max-width:620px){.vc{flex:1 1 100%;justify-content:center}}
+@media (prefers-reduced-motion: reduce){.vc.bump b{animation:none}}
 </style>
+<script>window.goatcounter={path:'/riven-calculator'};</script>
+<script data-goatcounter="https://unified-codex.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 </head>
 <body>
 <main>
 <div class="mobile-offline-install" id="mobileOfflineInstall" hidden><button type="button" id="installOfflineBtn" aria-haspopup="dialog" aria-controls="offlineInstallOverlay"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 18v3h16v-3"/></svg>Get Mobile App Version</button></div>
 <div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
-<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.6.3</button></h1>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-haspopup="dialog" aria-controls="versionPopup">v.3.6.4</button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
-<div class="lk"><a class="upd" href="./index.html" download="Riven Stat Range Calculator.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+<div class="lk"><a class="upd" href="./index.html" download="Riven Stat Range Calculator.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a><span class="vc" id="vc" hidden title="Total page loads. Refreshes about every 5 minutes while this page is open."><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5C6.5 5 2.7 9.2 1.5 12c1.2 2.8 5 7 10.5 7s9.3-4.2 10.5-7C21.3 9.2 17.5 5 12 5zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-2.2a1.8 1.8 0 1 0 0-3.6 1.8 1.8 0 0 0 0 3.6z"/></svg>Website Visits <b id="vcn" aria-live="polite">0</b></span></div>
 
 <section class="panel">
  <div style="margin-bottom:18px"><label class="lbl" for="wn">Weapon name (optional, fills in the weapon type)</label><input type="text" id="wn" list="wl" placeholder="Start typing, e.g. Soma Prime" autocomplete="off"><datalist id="wl"></datalist><div class="chip" id="wc"></div></div>
@@ -552,6 +562,10 @@ const versionPopup=$('versionPopup');
 // always read the complete historical notes. Use HTML only for trusted,
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
+  {
+    version: '3.6.4',
+    content: 'Added a Website Visits counter beside the links at the top. It shows how many times the calculator has been opened, including returning visitors, and re-checks about every 5 minutes while the page stays open. Calculations and offline behavior are unchanged.'
+  },
   {
     version: '3.6.3',
     content: 'Copy Stats cards now automatically use the currently selected theme colors, including backgrounds, stat highlights and borders, while preserving their existing layout and results.'
@@ -1196,6 +1210,37 @@ render();
     document.addEventListener('visibilitychange',()=>{if(!document.hidden)checkForUpdates();});
     setInterval(()=>{if(!document.hidden)checkForUpdates();},30*60*1000);
   }
+})();
+</script>
+<script>
+/* Website Visits counter: reads the GoatCounter total, shows it, and re-checks every 5 minutes
+   while the page is visible. If GoatCounter cannot be reached (offline, blocked) the chip stays hidden. */
+(function(){
+  var BASE='https://unified-codex.goatcounter.com',PATH='/riven-calculator',EVERY=300000;
+  var box=document.getElementById('vc'),num=document.getElementById('vcn');
+  if(!box||!num||!window.fetch)return;
+  var shown=null,last=0,busy=false,raf=0;
+  function digits(s){return parseInt(String(s).replace(/[^0-9]/g,''),10)}
+  function paint(n){num.textContent=n.toLocaleString()}
+  function show(n){
+    if(shown===null||n<shown){shown=n;paint(n);return}
+    if(n===shown)return;
+    var from=shown,t0=performance.now();shown=n;
+    box.classList.remove('bump');void box.offsetWidth;box.classList.add('bump');
+    cancelAnimationFrame(raf);
+    (function step(t){var k=Math.min(1,(t-t0)/700);paint(Math.round(from+(n-from)*k));if(k<1)raf=requestAnimationFrame(step)})(t0);
+  }
+  function load(){
+    if(busy)return;busy=true;
+    fetch(BASE+'/counter/'+encodeURIComponent(PATH)+'.json',{cache:'no-store'})
+      .then(function(r){if(!r.ok)throw 0;return r.json()})
+      .then(function(j){var n=digits(j&&j.count);if(isNaN(n))throw 0;last=Date.now();box.hidden=false;show(n)})
+      .catch(function(){})
+      .then(function(){busy=false});
+  }
+  setTimeout(load,2500); /* give GoatCounter a moment to record this visit first */
+  setInterval(function(){if(document.visibilityState==='visible')load()},EVERY);
+  document.addEventListener('visibilitychange',function(){if(document.visibilityState==='visible'&&Date.now()-last>EVERY)load()});
 })();
 </script>
 </body>
