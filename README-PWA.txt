@@ -1,4 +1,4 @@
-Riven Calculator v4.1.3 — Complete GitHub Pages release
+Riven Calculator v4.3.4 — Complete GitHub Pages release
 
 This folder contains the entire deployable GitHub Pages site (not the downloadable standalone HTML).
 
@@ -11,9 +11,9 @@ UPLOAD TO GITHUB:
 5. Once GitHub Pages publishes, open https://unified-codex.github.io/Riven-Calculator/.
 
 FILES:
-- index.html: current v4.1.3 online calculator, Riven Codes, patch notes, view counter,
+- index.html: current v4.3.4 online calculator, Riven Codes, patch notes, view counter,
   and standalone HTML download generator.
-- sw.js: v4.1.3 service worker for installed mobile app caching/updates.
+- sw.js: v4.3.4 service worker for installed mobile app caching/updates.
 - manifest.json: installed app settings.
 - icon-192.png, icon-512.png, apple-touch-icon.png: installed app icons.
 
@@ -23,3 +23,6 @@ self-contained offline HTML. It is NOT the same as index.html in this archive.
 Existing app users may need to reopen the website while connected to refresh
 their installed app cache. Do not remove the mobile app without first backing
 up any locally stored settings.
+
+VERSION 4.3.4 LOCALIZATION UPDATE:
+Expanded the language dictionaries and corrected stat/category names, the Riven Splicer explanation and recipes, base-stat tables, result cards, saved-setup and Riven Code dialogs, offline-install help, historical patch-note summaries, and copied-card text. Canonical Warframe names and Riven codes remain unchanged. English originals of historical patch notes are available under the labeled English-details disclosures.
