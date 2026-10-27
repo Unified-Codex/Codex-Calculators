@@ -1,40 +1,32 @@
-Riven Calculator v4.4 — Complete GitHub Pages release
-
-This folder contains the entire deployable GitHub Pages site (not the downloadable standalone HTML).
+Riven Calculator v4.5 — Complete GitHub Pages release
 
 UPLOAD TO GITHUB:
-1. Extract the ZIP on your computer.
-2. Open the root of your existing Riven-Calculator GitHub repository.
-3. Upload the SIX site files inside this archive to that root; replace matching files.
-   Do NOT upload the enclosing folder or the ZIP itself as a single GitHub file.
-4. Keep other repository files you may have; deleting them is not necessary.
-5. Once GitHub Pages publishes, open https://unified-codex.github.io/Riven-Calculator/.
+1. Extract this ZIP locally.
+2. Upload the SIX site files (index.html, sw.js, manifest.json and 3 icons)
+   to the root of your existing Riven-Calculator GitHub repository.
+3. Replace matching files. Keep any other repository files.
+4. When GitHub Pages publishes, open https://unified-codex.github.io/Riven-Calculator/.
 
-FILES:
-- index.html: current v4.4 online calculator, Riven Codes, patch notes, view counter,
-  and standalone HTML download generator.
-- sw.js: v4.4 service worker for installed mobile app caching/updates.
-- manifest.json: installed app settings.
-- icon-192.png, icon-512.png, apple-touch-icon.png: installed app icons.
+VERSION 4.5:
+- Renamed the Patch Notes tracker tooltip from Total Site Views to Total Visits,
+  localized for all 11 languages. No changes to GoatCounter tracking.
+- Added a first-visit share prompt, with the requested Tenno/Kuva message,
+  a Do not show again checkbox checked by default, and a Copy Link button.
+- Uses localStorage to remember the prompt BEFORE showing it (not on Close),
+  so refresh, quitting/reopening the browser, and PWA revisits do not retrigger it.
+- Detects existing v4.4/earlier visitors via established local preference keys:
+  they won't get an unexpected welcome prompt when upgrading.
+- If users deliberately UNCHECK Do not show again before dismissing, they opt in
+  to seeing the prompt on later visits. Otherwise it will never reappear
+  while this browser profile's stored site data exists.
+- If storage is blocked, the notice is suppressed completely (rather than
+  appearing on every visit).
+- This is browser/site storage, not hardware identity. Clearing site data,
+  private tabs, a new browser profile, and some separately sandboxed installed
+  PWAs can make a returning human look like a first-time visitor.
+- Includes localized v4.5 release notes and updated sw.js PWA cache version.
 
-The 'Download Raw HTML Code' button on the published site generates a separate
-self-contained offline HTML. It is NOT the same as index.html in this archive.
-
-Existing app users may need to reopen the website while connected to refresh
-their installed app cache. Do not remove the mobile app without first backing
-up any locally stored settings.
-
-VERSION 4.4 — PATCH NOTES HEADER & CLEANER MAIN PAGE:
-- Moved the existing GoatCounter public total from the calculator main toolbar
-  to the Patch Notes header, beside a compact X close button.
-- Kept the same recording script and total endpoint, last-good-value cache and
-  five-minute refresh. No duplicate tracker or new tracking added.
-- Added translated Total Site Views tooltip for every supported language and
-  theme-aware subdued colors. Tooltip makes clear totals may be delayed.
-- Added a localized First Released (October 2026, month confirmed from initial
-  website release period) and Current Version footer to Patch Notes.
-- Included localized v4.4 notes in every supported language.
-- Updated v4.4 identifiers, clipboard card version, HTML download filename and
-  service worker shell cache name so installed mobile apps get the revision.
-
-Earlier release history is preserved (including v4.3.4).
+The Download Raw HTML Code action still generates a separate, self-contained
+single-file offline HTML. It is different from this website's index.html.
+When using a previously installed mobile app, reconnect and visit the updated
+site once for its service worker to detect/cache the new release.
