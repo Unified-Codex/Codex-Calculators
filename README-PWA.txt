@@ -166,3 +166,13 @@ Codex Calcs v5.0.1: Home hub redesign
 - Each tool has a Set as default page checkbox; by default the site opens the hub.
 - The mobile install button is available on the hub in mobile browsers and hidden inside installed apps.
 - Upload index.html AND sw.js for the new offline cache version.
+
+
+v5.2 — Circuit Rotation Calendar
+- Fifth tool: Normal Circuit (11 rotating groups of three Warframes) and Steel Path Circuit (9 groups of five Incarnon Genesis adapters).
+- Server weekly reset: Monday 00:00 UTC; calendar anchored on 2026-10-26 (Normal 7, Steel Path I).
+- Rewards are from the documented October 2026 rotations. Digital Extremes may adjust the schedule with an update.
+- Search for any listed Warframe or adapter, see its next appearance, save favorites locally, and browse future dates.
+- Standalone/offline-friendly: all rotation schedules and translations are embedded in index.html.
+- Existing defaults, weekly completion and hidden preferences use their previous localStorage keys and are preserved.
+- Rotation references: https://wiki.warframe.com/w/The_Circuit and https://warframe-app.digitalshopuy.com/circuit (cross-checked October 28, 2026).
