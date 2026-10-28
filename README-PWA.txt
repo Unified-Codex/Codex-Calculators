@@ -1,4 +1,4 @@
-Codex Calcs v4.9.5 — Full GitHub Pages release
+Codex Calcs v5.0 — The Warframe Tools Update (Full GitHub Pages release)
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,33 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.9.5:
+NEW IN v5.0 — THE WARFRAME TOOLS UPDATE:
+- Codex Calcs officially moves beyond a standalone Riven Calculator into a
+  unified Warframe tools site, with four tools accessible from one homepage:
+  * Riven Calculator: stat ranges, F–S grade bands, spliced combinations,
+    saved setups and copyable Riven stat cards.
+  * Melee Duplicate Calculator: optimal critical chance and expected damage.
+  * Weekly Tracker: weekly activities and purchases, hide/unhide, local saved
+    progress, weekly reset and five shared Search Pulses.
+  * Relic Probability Calculator: rare reward chances and Radiant relic
+    Radsharing versus Staggering comparisons.
+- Added the v5.0 generational release note to the full patch history, with
+  translations of the new release summary for all 11 supported languages.
+- The same offline support, homepage remember-option, themes, language choices,
+  and Wally's Domain surprise are preserved.
+- Site version markers, downloaded HTML filename, exported-card version, and
+  offline service-worker cache have been bumped to 5.0.
+- No formulas or existing user preference / saved progress keys were changed.
+
+PREVIOUS v4.9.6 CHANGES:
+- Removed Yuvan Peak — Cryobells as a separate weekly checklist activity.
+- Icebind alone tracks the 3 weekly rewarded completions.
+- Added a separate note below Icebind: "You can hold up to 6 Cryokeys at max".
+- Note translated into all 11 languages. Overall weekly total is reduced by 1.
+- Previous progress and hidden preferences for other activities are preserved.
+- No changes to other tools or their calculations.
+
+PREVIOUS v4.9.5 CHANGES:
 - Every Weekly Tracker activity now has a Hide button.
 - Hidden entries are omitted from main and category completion totals.
 - An expandable Hidden section at the bottom lists hidden tasks with Unhide buttons.
