@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.0.1">
+<meta name="riven-version" content="5.0.2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -572,6 +572,25 @@ html:not([data-calculator-view="relic"]) #relicApp{display:none!important}
 #calculatorHome .calc-topline .tm ul{z-index:41}
 html[lang="ar"] #calculatorHome .calc-topline .tm ul{right:auto;left:0}
 
+/* v5.0.2: On phones, open Themes toward the middle of the page instead
+   of aligning its right edge to the left-hand Themes button. For RTL
+   layouts the control appears on the other side, so reverse the anchor. */
+@media (max-width:620px){
+  #calculatorHome .calc-topline .tm ul{
+    left:0;
+    right:auto;
+    width:max-content;
+    min-width:176px;
+    max-width:calc(100vw - 32px);
+    max-height:min(65dvh,420px);
+    overflow-y:auto;
+    overscroll-behavior:contain;
+    overflow-wrap:anywhere;
+  }
+  html[lang="ar"] #calculatorHome .calc-topline .tm ul{left:auto;right:0}
+}
+
+
 .calc-lang-box{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:.81rem}
 .calc-lang-box select{width:auto;max-width:166px;padding:6px 9px;font-size:.84rem}
 #calculatorHome .home-eyebrow{color:var(--acc);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px}
@@ -837,8 +856,8 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
     </div>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.0.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.0.1</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.0.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.0.2 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.0.2</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.0.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
     </div>
 
   </div>
@@ -1072,7 +1091,7 @@ html[lang="ar"] #relicApp{text-align:right}
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.0.1</span></span>
+      <span><strong>Current Version:</strong> <span>v5.0.2</span></span>
     </div>
   </div>
 </div>
@@ -1197,6 +1216,7 @@ const versionPopup=$('versionPopup');
 // always read the complete historical notes. Use HTML only for trusted,
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
+  {version:'5.0.2',content:'Fixed the Themes dropdown on mobile: it now opens inward toward the center of the screen rather than extending off-screen. Added proper right-to-left positioning and a scrollable height limit for narrow screens. Desktop themes and the Wally\'s Domain surprise are unchanged.'},
   {version:'5.0.1',content:'Homepage redesign: moved Patch Notes, the full offline HTML download, Discord, and YouTube support links to the Warframe Tools hub. Added an independent Set as default page checkbox for each tool; selecting one is optional, and otherwise both new and existing visitors start at the multi-tool hub. Moved the mobile app install prompt and shared dialogs to the homepage. Preserved offline/PWA functionality and all four tools.'},
   {version:'5.0',content:"Codex Calcs is no longer just a Riven Calculator! What began as a simple Riven stat range calculator has grown into a collection of Warframe tools. <strong>Version 5.0 — The Warframe Tools Update</strong> marks our shift to a unified, multi-tool site with four dedicated utilities.<br><br><strong>Riven Calculator:</strong> Calculate Riven roll ranges, inspect F–S grades, explore spliced combinations, and save configurations.<br><strong>Melee Duplicate Calculator:</strong> Find the critical chance that maximizes expected damage by balancing yellow and orange crits.<br><strong>Weekly Tracker:</strong> Check off recurring activities and vendor purchases, hide unneeded weeklies, track shared Search Pulses, and reset automatically each week.<br><strong>Relic Probability Calculator:</strong> Calculate relic reward odds and compare Radshares with Relic Staggering to weigh quick drops against potential copies.<br><br>All four tools share a single homepage, themes, multilingual support, offline availability, and the option to remember your preferred tool. <strong>Version 5.0 represents a new direction for Codex Calcs</strong> — practical, accessible tools for all Tenno. And this is only the beginning!"},
   {version:'4.9.6',content:'Weekly Tracker: merged Yuvan Peak Cryobells into The Icebind. Removed the redundant separate Cryobells counter so Icebind alone tracks 3 weekly rewarded runs. Added an Icebind note about the maximum of 6 Cryokeys, translated across 11 languages. Weekly progress and hidden preferences remain stored under the existing keys; all other tools are unchanged.'},

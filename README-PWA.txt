@@ -1,4 +1,4 @@
-Codex Calcs v5.0 — The Warframe Tools Update (Full GitHub Pages release)
+Codex Calcs v5.0.2 — Mobile Themes Menu Fix (Full GitHub Pages release)
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -7,6 +7,14 @@ UPLOAD TO GITHUB:
 3. Keep any existing unrelated repository files.
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
+
+NEW IN v5.0.2 — MOBILE THEMES MENU FIX:
+- On mobile, the Themes popup now opens from the left edge of the button
+  toward the center of the screen, rather than extending off-screen left.
+- Right-to-left (Arabic) mode opens inward from the opposite edge.
+- The popup has a mobile-safe maximum width and scrollable height.
+- Theme selections, Wally's Domain, and desktop menu positioning are unchanged.
+- Updated the HTML version marker and PWA service worker cache version.
 
 NEW IN v5.0 — THE WARFRAME TOOLS UPDATE:
 - Codex Calcs officially moves beyond a standalone Riven Calculator into a
