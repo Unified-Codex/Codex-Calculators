@@ -111,3 +111,9 @@ activity completion from Warframe accounts or sync across different devices.
 Not every offering is available to every player; prerequisites and rotation
 conditions apply. Baro's visits and several open-world cycles are not weekly.
 All original calculations remain unchanged.
+
+Codex Calcs v5.0.1: Home hub redesign
+- Patch Notes, full HTML download, Discord and YouTube links are on the main Warframe Tools page.
+- Each tool has a Set as default page checkbox; by default the site opens the hub.
+- The mobile install button is available on the hub in mobile browsers and hidden inside installed apps.
+- Upload index.html AND sw.js for the new offline cache version.
