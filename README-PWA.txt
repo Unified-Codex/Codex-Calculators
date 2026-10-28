@@ -1,4 +1,4 @@
-Codex Calcs v4.9.4 — Full GitHub Pages release
+Codex Calcs v4.9.5 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,18 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.9.4:
+NEW IN v4.9.5:
+- Every Weekly Tracker activity now has a Hide button.
+- Hidden entries are omitted from main and category completion totals.
+- An expandable Hidden section at the bottom lists hidden tasks with Unhide buttons.
+- Hiding a task does not delete its saved completion, its weekly counter, or any
+  shared Search Pulse spending. Restoring the task restores its current progress.
+- Hidden choices survive weekly resets (including Friday Conclave resets) and
+  are saved locally on each device, separately from regular weekly progress.
+- New controls and descriptions are translated into all 11 languages.
+- Existing calculators, themes, and other tracker features are unchanged.
+
+PREVIOUS v4.9.4 CHANGES:
 - New Flare Beating Heartstrings Kuva (14k per purchase, 3x per week).
 - New Acrithis Scuttler Husk Kuva (14k per purchase, 3x per week).
 - October 2026 values and individual counters for Nightcap (3), Zorba (7),
