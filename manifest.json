@@ -1,7 +1,7 @@
 {
-  "name": "Riven Stat Range Calculator",
-  "short_name": "Riven Calc",
-  "description": "Warframe Riven stat range calculator with offline access and saved configurations.",
+  "name": "Warframe Calculators — Rivens & Melee Duplicate",
+  "short_name": "Warframe Calcs",
+  "description": "Riven stat range and Melee Duplicate calculators. Offline support, saved Riven configurations, and optional remembered calculator selection.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
