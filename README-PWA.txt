@@ -1,3 +1,44 @@
+CODEX CALCS v5.1 — LOCALIZATION OVERHAUL (2026-10-28)
+
+Game-text source: localized Warframe export strings mirrored at
+https://github.com/calamity-inc/warframe-public-export-plus
+https://browse.wf/warframe-public-export-plus/dict.en.json
+Language mirrors: dict.es, dict.pt, dict.fr, dict.de, dict.it, dict.pl, dict.zh.
+Original format and language availability:
+https://wiki.warframe.com/w/Public_Export
+
+Exact source keys consulted:
+/Lotus/Language/Upgrades/WeaponCritChance
+/Lotus/Language/Upgrades/WeaponCritDamage
+/Lotus/Language/Upgrades/WeaponDamage
+/Lotus/Language/Upgrades/WeaponElectricityDamage
+/Lotus/Language/Upgrades/WeaponFireDamage
+/Lotus/Language/Upgrades/WeaponFireRate
+/Lotus/Language/Upgrades/WeaponFreezeDamage
+/Lotus/Language/Upgrades/WeaponImpactDamage
+/Lotus/Language/Upgrades/WeaponMeleeAttackSpeed
+/Lotus/Language/Upgrades/WeaponMeleeComboUsageEfficiency
+/Lotus/Language/Upgrades/WeaponMultishotModDesc
+/Lotus/Language/Upgrades/WeaponPoisonDamage
+/Lotus/Language/Upgrades/WeaponProcTimeModDesc
+/Lotus/Language/Upgrades/WeaponProjectileSpeedModDesc
+/Lotus/Language/Upgrades/WeaponPunctureDamage
+/Lotus/Language/Upgrades/WeaponRecoilModDesc
+/Lotus/Language/Upgrades/WeaponReloadSpeedModDesc
+/Lotus/Language/Upgrades/WeaponSlashDamage
+/Lotus/Language/1999/1999ResourceDefenseName
+
+IMPORTANT LOCALIZATION SCOPE:
+- Seven source-verified languages received changes to in-game stat terminology
+  and/or the Flare resource name: es, pt, fr, de, it, pl, zh.
+- English master, Russian, Japanese and Arabic entries remain available.
+  Their translations were NOT all verified against matching game-export data.
+- Only direct in-game equivalents were revised. Site-specific wording,
+  invented Riven grade labels, and community strategy descriptions are
+  site translations; they are NOT official Digital Extremes translations.
+- This bundle is not affiliated with or endorsed by Digital Extremes.
+- The site is entirely self-contained/offline once cached.
+
 Codex Calcs v5.0.2 — Mobile Themes Menu Fix (Full GitHub Pages release)
 
 UPLOAD TO GITHUB:
