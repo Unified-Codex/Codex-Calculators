@@ -1,4 +1,4 @@
-Codex Calcs v4.9.3 — Full GitHub Pages release
+Codex Calcs v4.9.4 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,18 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.9.3:
+NEW IN v4.9.4:
+- New Flare Beating Heartstrings Kuva (14k per purchase, 3x per week).
+- New Acrithis Scuttler Husk Kuva (14k per purchase, 3x per week).
+- October 2026 values and individual counters for Nightcap (3), Zorba (7),
+  Hunhow (3), and Melica (4); clarified Acrithis rotating Wares and
+  Teshin's weekly rotation, with translated reward descriptions.
+- Icebind now counts up to 3 weekly successful completions, with updated rewards.
+- Netracells checkbox now spends ONLY the remaining Search Pulses: after
+  ETA + EDA (4 used), one click marks Netracells 1/1 and pulses 5/5.
+- Existing local progress remains saved; same weekly reset behavior.
+
+PREVIOUS v4.9.3 CHANGES:
 - Corrected the URL printed on Riven Copy Stats cards to:
   https://unified-codex.github.io/Codex-Calculators/
 - Copy Stats text fallback and share-link prompt now use the same address.
