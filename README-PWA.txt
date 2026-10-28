@@ -1,51 +1,36 @@
-Warframe Calculators v4.7.2 — Complete GitHub Pages release
+Codex Calcs v4.8 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
-1. Extract this ZIP and upload/replace ALL SIX website files in the same
-   root folder as the current site: index.html, sw.js, manifest.json,
-   icon-192.png, icon-512.png, apple-touch-icon.png.
-2. Keep any other existing repository files. README-PWA.txt is optional.
-3. Visit the existing GitHub Pages URL after Actions reports a deployment.
-4. If an installed offline app is still showing an older release, open it while online
-   and accept its update prompt to refresh the service worker cache.
+1. Extract the ZIP into your existing GitHub Pages repository location.
+2. Replace index.html, sw.js, manifest.json, icon-192.png,
+   icon-512.png and apple-touch-icon.png (all six website files).
+3. Keep any existing unrelated repository files.
+4. Confirm the GitHub Pages deployment in Actions. If using an installed
+   offline app, open it while online and accept the update prompt.
 
-NEW IN v4.7.2:
-- The displayed F minimum matches the main Riven card's exact displayed minimum.
-- The displayed S maximum matches the main Riven card's exact displayed maximum.
-- Works for negative stats and doubled Heavy Attack / Bow values as well.
-- Internal grade cutoffs remain calculated from the unrounded midpoint.
-- No changes to the core Riven or Melee Duplicate formulas.
-- Updated offline/PWA cache version to v4.7.2.
+NEW IN v4.8:
+- New third homepage tool, WEEKLY TRACKER, alongside Rivens and Melee Duplicate.
+- Existing Remember this option supports all three tools, without changing
+  saved Riven configurations, preferences or calculated values.
+- 35 individual weekly activity/vendor checklists, each describing rewards.
+- Individual counters for 25 Kuva packs, 25 Void Relic packs, 5 Netracells,
+  Steel Path Circuit's two Incarnon milestones and 3 Cryobells.
+- All three Search Pulse uses share the same five-pulse allowance: 1 per
+  Netracell, 2 each for Elite Deep and Elite Temporal Archimedea.
+  Over-allocation is prevented.
+- Offline localStorage progress persists across page visits without an
+  account; progress resets on the first visit or each second after a reset.
+- Warframe main weekly reset is Monday 00:00 UTC, which corresponds to
+  Sunday 8 PM EDT in summer and Sunday 7 PM EST in winter. The app uses
+  the device's system clock, so an incorrect local clock can affect resets.
+- Conclave's separately timed Friday 00:00 UTC checkbox resets on Friday.
+- Task filtering, progress indicator, manual clear and a live countdown.
+- Mobile-friendly and keyboard-accessible controls; tool selection labels
+  and all 35 reward descriptions translated for the existing 11 languages.
+- v4.8 patch notes and offline cache version updated.
 
-PREVIOUS UPDATE v4.7.1:
-- Reversed the expanded grade tables to display S at top through F at bottom.
-- All grade thresholds and calculations are unchanged.
-- Updated cache version to v4.7.1 to enable offline app updates.
-
-PREVIOUS UPDATE v4.7:
-- Added a Show Grade Ranges button inside each selected Riven stat result.
-- On click, expands that stat's possible values into eleven grade bands:
-  F, C-, C, C+, B-, B, B+, A-, A, A+, S.
-- Cutoffs use deviations from the exact, UNROUNDED Riven midpoint:
-  -10, -9.5, -7.5, -5.5, -3.5, -1.5, +1.5, +3.5,
-  +5.5, +7.5, +9.5, +10 percent.
-- Negative values are ordered by magnitude, including recoil reductions.
-- Heavy Attack Critical Chance and Bow Fire Rate also show doubled values
-  in the expanded grading table where the main Riven card doubles them.
-- Table numbers use extra precision where necessary to distinguish narrow
-  bands; card ranges remain exactly as before.
-- Expansions stay open if you change stat, layout, language, or weapon type.
-- All new user-facing strings translated into the existing 11 languages.
-- Release notes added without deleting the previous history.
-- Updated cache version to v4.7 for the original grade-range release.
-
-IMPORTANT:
-- This grading scale is community-derived from the supplied grading
-  examples. It is NOT an official Digital Extremes / Warframe grade system,
-  and it has NOT been proven to precisely match every community grading bot.
-- A larger negative magnitude receives a higher roll-strength grade, but is
-  not necessarily more desirable. Displayed numbers are rounded, so exact
-  edge cases can be ambiguous.
-- Every calculator remains self-contained inside index.html with no Python
-  or additional service required. Existing Riven calculations, preferences,
-  saved configurations, Melee Duplicate, chooser, and translations preserved.
+Notes: The tracker is a local user-maintained checklist. It cannot verify
+activity completion from Warframe accounts or sync across different devices.
+Not every offering is available to every player; prerequisites and rotation
+conditions apply. Baro's visits and several open-world cycles are not weekly.
+All original calculations remain unchanged.

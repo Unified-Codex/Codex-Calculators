@@ -1,7 +1,7 @@
 {
-  "name": "Warframe Calculators — Rivens & Melee Duplicate",
-  "short_name": "Warframe Calcs",
-  "description": "Riven stat range and Melee Duplicate calculators. Offline support, saved Riven configurations, and optional remembered calculator selection.",
+  "name": "Codex Calcs — Rivens, Melee Duplicate & Weekly Tracker",
+  "short_name": "Codex Calcs",
+  "description": "Offline Warframe Riven and Melee Duplicate calculators, plus a saved weekly activity tracker that resets automatically with Warframe server weeks.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
