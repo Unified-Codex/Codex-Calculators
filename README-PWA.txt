@@ -1,4 +1,4 @@
-Warframe Calculators v4.7 — Complete GitHub Pages release
+Warframe Calculators v4.7.2 — Complete GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract this ZIP and upload/replace ALL SIX website files in the same
@@ -6,10 +6,23 @@ UPLOAD TO GITHUB:
    icon-192.png, icon-512.png, apple-touch-icon.png.
 2. Keep any other existing repository files. README-PWA.txt is optional.
 3. Visit the existing GitHub Pages URL after Actions reports a deployment.
-4. If an installed offline app is still showing v4.6, open it while online
+4. If an installed offline app is still showing an older release, open it while online
    and accept its update prompt to refresh the service worker cache.
 
-NEW IN v4.7:
+NEW IN v4.7.2:
+- The displayed F minimum matches the main Riven card's exact displayed minimum.
+- The displayed S maximum matches the main Riven card's exact displayed maximum.
+- Works for negative stats and doubled Heavy Attack / Bow values as well.
+- Internal grade cutoffs remain calculated from the unrounded midpoint.
+- No changes to the core Riven or Melee Duplicate formulas.
+- Updated offline/PWA cache version to v4.7.2.
+
+PREVIOUS UPDATE v4.7.1:
+- Reversed the expanded grade tables to display S at top through F at bottom.
+- All grade thresholds and calculations are unchanged.
+- Updated cache version to v4.7.1 to enable offline app updates.
+
+PREVIOUS UPDATE v4.7:
 - Added a Show Grade Ranges button inside each selected Riven stat result.
 - On click, expands that stat's possible values into eleven grade bands:
   F, C-, C, C+, B-, B, B+, A-, A, A+, S.
@@ -24,7 +37,7 @@ NEW IN v4.7:
 - Expansions stay open if you change stat, layout, language, or weapon type.
 - All new user-facing strings translated into the existing 11 languages.
 - Release notes added without deleting the previous history.
-- Updated cache version to v4.7 for offline and installed-web-app updates.
+- Updated cache version to v4.7 for the original grade-range release.
 
 IMPORTANT:
 - This grading scale is community-derived from the supplied grading
