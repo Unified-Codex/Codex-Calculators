@@ -1,37 +1,38 @@
-Warframe Calculators v4.6 — Complete GitHub Pages release
+Warframe Calculators v4.7 — Complete GitHub Pages release
 
 UPLOAD TO GITHUB:
-1. Extract this ZIP.
-2. Upload / replace all SIX site files (index.html, sw.js, manifest.json,
-   icon-192.png, icon-512.png, apple-touch-icon.png) in the SAME root
-   folder of your existing Riven-Calculator GitHub repository.
-3. Keep any other repository files. README-PWA.txt is optional.
-4. Visit https://unified-codex.github.io/Riven-Calculator/ when GitHub Pages deploys.
+1. Extract this ZIP and upload/replace ALL SIX website files in the same
+   root folder as the current site: index.html, sw.js, manifest.json,
+   icon-192.png, icon-512.png, apple-touch-icon.png.
+2. Keep any other existing repository files. README-PWA.txt is optional.
+3. Visit the existing GitHub Pages URL after Actions reports a deployment.
+4. If an installed offline app is still showing v4.6, open it while online
+   and accept its update prompt to refresh the service worker cache.
 
-VERSION 4.6:
-- New "Which calculator do you need?" launcher with Rivens and Melee Duplicate.
-- "Remember this option" checkbox on the launcher (unchecked by default for
-  users without a saved choice). Checking it stores the calculator you open.
-- Returning to the main selection screen is always possible from BOTH tools,
-  even if you remembered a preference. To stop automatic opening, return to
-  the launcher and uncheck "Remember this option".
-- Both calculators run within the SAME index.html file; no new HTML pages
-  or external JavaScript files are required.
-- The Melee Duplicate calculator preserves the supplied Python model, searching
-  100%-200% critical chance in 1% increments. Only yellow crits duplicate.
-- Launcher, navigation, and new calculator have translations for the existing
-  11 languages and share the existing saved language / theme preferences.
-- All original Riven calculator features, data, saved setups, patch notes,
-  download, theme controls, share prompt, and analytics remain in place.
-- Riven's welcome/share prompt opens when a new visitor actually enters Rivens,
-  rather than covering the calculator chooser.
-- Service-worker cache version updated so PWA/offline users receive the update.
-- The "Download Raw HTML Code" button still exports a self-contained HTML
-  containing both calculators, without service-worker / install components.
+NEW IN v4.7:
+- Added a Show Grade Ranges button inside each selected Riven stat result.
+- On click, expands that stat's possible values into eleven grade bands:
+  F, C-, C, C+, B-, B, B+, A-, A, A+, S.
+- Cutoffs use deviations from the exact, UNROUNDED Riven midpoint:
+  -10, -9.5, -7.5, -5.5, -3.5, -1.5, +1.5, +3.5,
+  +5.5, +7.5, +9.5, +10 percent.
+- Negative values are ordered by magnitude, including recoil reductions.
+- Heavy Attack Critical Chance and Bow Fire Rate also show doubled values
+  in the expanded grading table where the main Riven card doubles them.
+- Table numbers use extra precision where necessary to distinguish narrow
+  bands; card ranges remain exactly as before.
+- Expansions stay open if you change stat, layout, language, or weapon type.
+- All new user-facing strings translated into the existing 11 languages.
+- Release notes added without deleting the previous history.
+- Updated cache version to v4.7 for offline and installed-web-app updates.
 
 IMPORTANT:
-- The choice uses localStorage for THIS site in THIS browser profile. Clearing
-  site data or using another browser/device resets it. Saving a preference may
-  be unavailable when a browser blocks storage; the chooser still works.
-- For previously installed mobile apps, connect to the internet and open the
-  updated site to let the service worker detect and cache the release.
+- This grading scale is community-derived from the supplied grading
+  examples. It is NOT an official Digital Extremes / Warframe grade system,
+  and it has NOT been proven to precisely match every community grading bot.
+- A larger negative magnitude receives a higher roll-strength grade, but is
+  not necessarily more desirable. Displayed numbers are rounded, so exact
+  edge cases can be ambiguous.
+- Every calculator remains self-contained inside index.html with no Python
+  or additional service required. Existing Riven calculations, preferences,
+  saved configurations, Melee Duplicate, chooser, and translations preserved.
