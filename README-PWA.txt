@@ -1,4 +1,4 @@
-Codex Calcs v4.8 — Full GitHub Pages release
+Codex Calcs v4.8.1 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,13 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.8:
+NEW IN v4.8.1:
+- Moved Themes menu from Riven calculator to the home screen, beside Language.
+- Selected theme still applies across all three tools.
+- Preserved Wallys Domain jumpscare imagery and its occasional visual trigger.
+- Bumped service-worker cache version for offline updates.
+
+FEATURES ADDED IN v4.8:
 - New third homepage tool, WEEKLY TRACKER, alongside Rivens and Melee Duplicate.
 - Existing Remember this option supports all three tools, without changing
   saved Riven configurations, preferences or calculated values.

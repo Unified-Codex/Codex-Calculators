@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="4.8">
+<meta name="riven-version" content="4.8.1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Warframe Calculators">
@@ -563,6 +563,14 @@ html:not([data-calculator-view="weekly"]) #weeklyApp{display:none!important}
 #calculatorHome{max-width:760px;min-height:90vh;min-height:90dvh;display:flex;flex-direction:column;justify-content:center;padding-block:28px 50px}
 #calculatorHome .home-shell{width:100%}
 .calc-topline{display:flex;justify-content:flex-end;align-items:center;min-height:44px;margin-bottom:16px}
+/* Shared theme selector belongs to the calculator chooser, not the Riven-only view. */
+#calculatorHome .calc-topline{justify-content:space-between;gap:12px}
+#calculatorHome .calc-topline>.tm{position:relative;top:auto;right:auto;display:block;flex:0 0 auto;margin:0;min-height:0;z-index:40}
+#calculatorHome .calc-topline #tb{min-height:35px;padding:7px 12px;border:1px solid var(--line);background:var(--panel);color:var(--text);font-weight:600}
+#calculatorHome .calc-topline #tb:hover,#calculatorHome .calc-topline #tb[aria-expanded="true"]{border-color:var(--acc);color:var(--acc)}
+#calculatorHome .calc-topline .tm ul{z-index:41}
+html[lang="ar"] #calculatorHome .calc-topline .tm ul{right:auto;left:0}
+
 .calc-lang-box{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:.81rem}
 .calc-lang-box select{width:auto;max-width:166px;padding:6px 9px;font-size:.84rem}
 #calculatorHome .home-eyebrow{color:var(--acc);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin:0 0 12px}
@@ -706,7 +714,7 @@ html[lang="ar"] #weeklyApp .weekly-reset{text-align:left}
 <body>
 <main id="calculatorHome" aria-labelledby="calculatorHomeTitle">
   <div class="home-shell">
-    <div class="calc-topline"><label class="calc-lang-box" for="calculatorHomeLanguage">Language <select id="calculatorHomeLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></label></div>
+    <div class="calc-topline"><div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div><label class="calc-lang-box" for="calculatorHomeLanguage">Language <select id="calculatorHomeLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></label></div>
     <p class="home-eyebrow">Warframe calculators</p>
     <h1 id="calculatorHomeTitle">Which tool do you need?</h1>
     <p class="home-description">Choose a tool to get started. You can switch between tools at any time.</p>
@@ -797,11 +805,10 @@ html[lang="ar"] #weeklyApp .weekly-reset{text-align:left}
 <main id="rivenApp">
 <button type="button" class="calc-back" data-calc-back>← <span>Back to calculator selection</span></button>
 <div class="mobile-offline-install" id="mobileOfflineInstall" hidden><button type="button" id="installOfflineBtn" aria-haspopup="dialog" aria-controls="offlineInstallOverlay"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 18v3h16v-3"/></svg>Get Mobile App Version</button></div>
-<div class="tm"><button type="button" id="tb" aria-haspopup="true" aria-expanded="false">Themes</button><ul id="tl" role="menu" hidden></ul></div>
 <div class="language-switch"><label for="rivenLanguage" id="languageLabel">Language</label><select id="rivenLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></div>
-<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-label="Version 4.8 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.4.8</span><span class="version-note-label">Patch Notes</span></button></h1>
+<h1>Riven Stat Range Calculator <button type="button" class="version" id="versionBtn" aria-label="Version 4.8.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.4.8.1</span><span class="version-note-label">Patch Notes</span></button></h1>
 <p class="sub">Pick the weapon type, riven layout and stats to see the exact roll range for each stat.</p>
-<div class="lk"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Riven_Calculator_v4.8_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+<div class="lk"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v4.8.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
 
 <section class="panel">
  <div style="margin-bottom:18px"><label class="lbl" for="wn">Weapon name (optional, fills in the weapon type)</label><input type="text" id="wn" list="wl" placeholder="Start typing, e.g. Soma Prime" autocomplete="off"><datalist id="wl"></datalist><div class="chip" id="wc"></div></div>
@@ -904,7 +911,7 @@ html[lang="ar"] #weeklyApp .weekly-reset{text-align:left}
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v4.8</span></span>
+      <span><strong>Current Version:</strong> <span>v4.8.1</span></span>
     </div>
   </div>
 </div>
@@ -1028,6 +1035,7 @@ const versionPopup=$('versionPopup');
 // always read the complete historical notes. Use HTML only for trusted,
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
+  {version:'4.8.1',content:'Moved the shared Themes picker to the main calculator-selection page, removing it from the Riven calculator. Theme choice still applies to Rivens, Melee Duplicate and Weekly Tracker and stays saved across visits. The original Wallys Domain visual surprise and its trigger logic are preserved.'},
   {version:'4.8',content:'Added Weekly Tracker as the third homepage tool. Track all major weekly activities and vendors, including individual Kuva and Relic pack purchases, Search Pulses shared by Netracells and both Elite Archimedeas, Incarnon Circuit progression, and special weekly challenges. Includes local saved progress, reset at Monday 00:00 UTC, and independent Conclave Friday reset. Riven and Melee Duplicate calculations remain unchanged.'},
   {version:'4.7.2',content:'Capped the visible F minimum and S maximum to exactly match the main Riven roll-range card (for example 151.9%–185.6% for 3-positive/1-negative Rifle Critical Chance). Inner grade boundaries, grading thresholds, and all calculator formulas are unchanged.'},
   {version:'4.7.1',content:'Reversed the Show Grade Ranges tables so S appears first and F last. Grade values, boundaries, all Riven calculations, and Melee Duplicate remain unchanged.'},
