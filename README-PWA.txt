@@ -1,4 +1,4 @@
-Codex Calcs v4.9.1 — Full GitHub Pages release
+Codex Calcs v4.9.3 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,15 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.9.1:
+NEW IN v4.9.3:
+- Corrected the URL printed on Riven Copy Stats cards to:
+  https://unified-codex.github.io/Codex-Calculators/
+- Copy Stats text fallback and share-link prompt now use the same address.
+- Updated standalone HTML GitHub version checks to the new repository path.
+- Exported card version is read from the current HTML version marker.
+- No Riven, Melee Duplicate, Relic or Weekly Tracker calculations changed.
+
+PREVIOUS v4.9.2 CHANGES:
 - Removed minutes-per-mission and per-hour estimates; comparisons now focus on
   relic efficiency and number of runs.
 - Expanded reward-overlap and filler-relic metrics: labels above, large numbers below.
