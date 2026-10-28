@@ -1,6 +1,6 @@
 /* Riven Calculator offline app. Bump CACHE_VERSION on each public release.
  * Offline HTML must be cached even when a nonessential icon fails to load. */
-const CACHE_VERSION='v4.8.1';
+const CACHE_VERSION='v4.9.1';
 const SHELL_CACHE=`riven-calculator-shell-${CACHE_VERSION}-share-once-v1`;
 const FONT_CACHE='riven-calculator-google-fonts-v1';
 const APP_INDEX=new URL('./index.html',self.registration.scope).href;

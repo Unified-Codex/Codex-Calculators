@@ -1,4 +1,4 @@
-Codex Calcs v4.8.1 — Full GitHub Pages release
+Codex Calcs v4.9.1 — Full GitHub Pages release
 
 UPLOAD TO GITHUB:
 1. Extract the ZIP into your existing GitHub Pages repository location.
@@ -8,7 +8,22 @@ UPLOAD TO GITHUB:
 4. Confirm the GitHub Pages deployment in Actions. If using an installed
    offline app, open it while online and accept the update prompt.
 
-NEW IN v4.8.1:
+NEW IN v4.9.1:
+- Removed minutes-per-mission and per-hour estimates; comparisons now focus on
+  relic efficiency and number of runs.
+- Expanded reward-overlap and filler-relic metrics: labels above, large numbers below.
+- Clearer explanations of Radsharing vs staggering; removed redundant footer.
+- Fixed double percent sign in the English drop-chance summary.
+- The underlying probability formulas and all other tools remain unchanged.
+
+FEATURES ADDED IN v4.9:
+- Relic Probability: per-relic odds and squad results (Intact, Exceptional, Flawless, Radiant).
+- Compare all-at-once Radshare versus per-player staggered relic openings with equal target-relic budgets.
+- Compare expected target copies, chance of overlapping rare rolls, required mission runs, filler relics, and runs required (no minutes or per-hour math).
+- Designed for offline use, mobile/desktop, all 11 supported languages, and previous theme options.
+- Existing tools, Wally theme surprise, offline preferences, and weekly tracking unchanged.
+
+FEATURES ADDED IN v4.8.1:
 - Moved Themes menu from Riven calculator to the home screen, beside Language.
 - Selected theme still applies across all three tools.
 - Preserved Wallys Domain jumpscare imagery and its occasional visual trigger.

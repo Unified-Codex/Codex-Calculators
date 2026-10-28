@@ -1,7 +1,7 @@
 {
-  "name": "Codex Calcs — Rivens, Melee Duplicate & Weekly Tracker",
+  "name": "Codex Calcs — Rivens, Melee Duplicate, Weekly Tracker & Relic Probability",
   "short_name": "Codex Calcs",
-  "description": "Offline Warframe Riven and Melee Duplicate calculators, plus a saved weekly activity tracker that resets automatically with Warframe server weeks.",
+  "description": "Offline Warframe Riven and Melee Duplicate calculators, a weekly activity tracker, and a Void Relic probability and staggering comparison tool.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
