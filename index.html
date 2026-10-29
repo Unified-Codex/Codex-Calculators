@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.3.1">
+<meta name="riven-version" content="5.3.2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -884,7 +884,7 @@ html[lang="ar"] #relicApp{text-align:right}
 .coin-perspective{width:100%;height:100%;display:block;position:relative;perspective:1100px;filter:drop-shadow(0 20px 25px rgba(0,0,0,.36))}
 .coin-disc{width:100%;height:100%;position:relative;display:block;transform-style:preserve-3d;transform:rotateY(0deg);border-radius:50%;will-change:transform}
 .coin-face{position:absolute;inset:0;border-radius:50%;overflow:hidden;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:radial-gradient(circle at 30% 25%,#fff7d2,#989a90 66%,#333f43);border:2px solid #acaba0;box-shadow:inset 0 0 10px #fff9,inset 0 0 2px #000c}
-.coin-back{transform:rotateY(180deg)}
+.coin-back{display:none}
 .coin-face img{width:100%;height:100%;display:block;object-fit:cover;pointer-events:none}
 .coin-disc.coin-spinning{animation:coin-rise 2.7s cubic-bezier(.28,.6,.32,1) both}
 @keyframes coin-rise{0%{filter:brightness(1);translate:0 0}27%{filter:brightness(1.22);translate:0 -50px}66%{filter:brightness(.93);translate:0 -18px}86%{translate:0 5px}100%{filter:brightness(1);translate:0 0}}
@@ -958,7 +958,7 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
       <div class="calc-choice-item">
       <button type="button" class="calc-choice" data-open-calculator="coin" aria-label="Coin Toss">
-        <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg></span>
+        <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><circle cx="16" cy="16" r="14"/><circle cx="16" cy="16" r="11.8" stroke-width=".6"/><path d="M16 5.5c-2.6 3.2-5.4 4.5-7.1 8.5L5.9 11l1.1 6.8 5.2 4.9 3.8 3.7 3.8-3.7 5.2-4.9 1.1-6.8-3 3c-1.7-4-4.5-5.3-7.1-8.5Z"/><path d="M16 11c-2 2.2-3.8 4.3-4.4 7.1l4.4 4.7 4.4-4.7C19.8 15.3 18 13.2 16 11Z"/><path d="M11 17.5l-3.6 1.3 5.3 5.8M21 17.5l3.6 1.3-5.3 5.8M14.4 19.2h3.2M15 22.3h2"/></svg></span>
         <span class="choice-title" id="calcChoiceTitle-coin">Coin Toss</span>
         <span class="choice-description">Lotus or Natah. Flip once or ten times.</span>
       </button>
@@ -966,8 +966,8 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
     </div>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.3.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.3.1</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.3.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.3.2 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.3.2</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.3.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
     </div>
 
   </div>
@@ -1252,7 +1252,7 @@ html[lang="ar"] #relicApp{text-align:right}
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.3.1</span></span>
+      <span><strong>Current Version:</strong> <span>v5.3.2</span></span>
     </div>
   </div>
 </div>
@@ -2130,7 +2130,11 @@ render();
 </script>
 <script id="patchNotesData" type="application/json">[
   {
-    "version": "5.3.1",
+    "version": "5.3.2",
+    "content": "Fixed the Coin Toss spin to display Lotus and Natah on alternating half-turns, with face changes only at the edge. Replaced the homepage Coin Toss globe with a Lotus coin icon."
+  },
+  {
+    "version": "5.3.2",
     "content": "Coin Toss: animated flips now show both faces and settle on the correct side. Added a rare Man in the Wall interruption to single flips."
   },
   {
@@ -3248,29 +3252,42 @@ function randomUnit(){const bytes=new Uint32Array(1);if(globalThis.crypto?.getRa
 function sample(){return randomUnit()<.5?0:1;}
 function setBusy(v){busy=v;flip.disabled=v;ten.disabled=v;touch.disabled=v;}
 function resetVoid(){voidFace.hidden=true;voidFace.classList.remove('coin-glitch');}
-function animateSide(side,duration){
-  // Each 180° is a genuine face change. Finish on exactly the requested face,
-  // using an even count of extra half-turns, with no final image swap.
-  const current=angle;
-  const normalized=((current%360)+360)%360;
-  const currentSide=Math.round(normalized/180)%2;
-  const additionalHalfTurns=12+(currentSide===side?0:1);
-  const target=current+additionalHalfTurns*180;
-  const keyframes=[];
-  for(let i=0;i<=additionalHalfTurns;i++){
-    const progress=i/additionalHalfTurns;
-    keyframes.push({offset:progress,transform:`rotateY(${current+i*180}deg) rotateZ(${Math.sin(progress*Math.PI)*3}deg)`});
-  }
-  const animation=disc.animate(keyframes,{duration,easing:'cubic-bezier(.20,.48,.25,1)',fill:'forwards'});
-  disc.classList.add('coin-spinning');
-  return animation.finished.catch(()=>{}).then(()=>{
-    angle=target;
-    disc.style.transform=`rotateY(${angle}deg)`;
-    animation.cancel();
-    disc.classList.remove('coin-spinning');
-  });
+// Render one actual coin face at a time; change images only when edge-on.
+// This avoids Safari/WebKit incorrectly painting the front on both 3D sides.
+const visibleFace=disc.querySelector('.coin-front img');
+const sideSources=[visibleFace.src,disc.querySelector('.coin-back img').src];
+function showPhysicalFace(side){
+  visibleFace.src=sideSources[side];
+  // At a half-turn the disc is mirrored; reverse the picture to keep text upright.
+  visibleFace.style.transform=side?'scaleX(-1)':'none';
 }
-function instantSide(side){resetVoid();angle=(Math.floor(angle/360)+2)*360+(side?180:0);disc.style.transform=`rotateY(${angle}deg)`;}
+async function animateSide(side,duration){
+  const currentSide=Math.round((((angle%360)+360)%360)/180)%2;
+  const halfTurns=12+(currentSide===side?0:1);
+  const ms=duration/halfTurns;
+  for(let i=0;i<halfTurns;i++){
+    const beginning=angle;
+    // First quarter: the currently visible face narrows to the coin's edge.
+    const a=disc.animate([{transform:`rotateY(${beginning}deg)`},
+      {transform:`rotateY(${beginning+90}deg)`}],
+      {duration:ms*.5,easing:'ease-in',fill:'forwards'});
+    await a.finished.catch(()=>{});
+    disc.style.transform=`rotateY(${beginning+90}deg)`;
+    a.cancel();
+    // Swap only when edge-on; the Natah/Lotus art is truly shown mid-spin.
+    const nextSide=(Math.round((((beginning%360)+360)%360)/180)+1)%2;
+    showPhysicalFace(nextSide);
+    const b=disc.animate([{transform:`rotateY(${beginning+90}deg)`},
+      {transform:`rotateY(${beginning+180}deg)`}],
+      {duration:ms*.5,easing:'ease-out',fill:'forwards'});
+    await b.finished.catch(()=>{});
+    angle=beginning+180;
+    disc.style.transform=`rotateY(${angle}deg)`;
+    b.cancel();
+  }
+  disc.classList.remove('coin-spinning');
+}
+function instantSide(side){resetVoid();angle=(Math.floor(angle/360)+2)*360+(side?180:0);showPhysicalFace(side);disc.style.transform=`rotateY(${angle}deg)`;}
 function displayResults(arr){const lotus=arr.filter(x=>x===0).length,natah=arr.length-lotus;summary.hidden=false;summary.innerHTML=`<strong>${L(9)}</strong><div class="coin-bars"><span class="coin-lotus-bar" style="width:${lotus*10}%"></span><span class="coin-natah-bar" style="width:${natah*10}%"></span></div><div class="coin-stats"><span>${L(7)}: ${lotus}</span><span>${L(8)}: ${natah}</span></div><div class="coin-sequence">${arr.map(x=>x===0?L(7):L(8)).join(' · ')}</div>`;}
 async function voidInterruption(fast){
   // Show the exact asset used by the Wally's Domain theme, on the coin itself.
