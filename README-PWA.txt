@@ -168,7 +168,7 @@ Codex Calcs v5.0.1: Home hub redesign
 - Upload index.html AND sw.js for the new offline cache version.
 
 
-v5.2 — Circuit Rotation Calendar
+v5.2.1 — Circuit Rotation Calendar
 - Fifth tool: Normal Circuit (11 rotating groups of three Warframes) and Steel Path Circuit (9 groups of five Incarnon Genesis adapters).
 - Server weekly reset: Monday 00:00 UTC; calendar anchored on 2026-10-26 (Normal 7, Steel Path I).
 - Rewards are from the documented October 2026 rotations. Digital Extremes may adjust the schedule with an update.
