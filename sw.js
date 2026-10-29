@@ -1,11 +1,11 @@
 /* Riven Calculator offline app. Bump CACHE_VERSION on each public release.
  * Offline HTML must be cached even when a nonessential icon fails to load. */
-const CACHE_VERSION='v5.2.3';
+const CACHE_VERSION='v5.2.1';
 const SHELL_CACHE=`riven-calculator-shell-${CACHE_VERSION}-share-once-v1`;
 const FONT_CACHE='riven-calculator-google-fonts-v1';
 const APP_INDEX=new URL('./index.html',self.registration.scope).href;
 const APP_ORIGIN=new URL(self.registration.scope).origin;
-const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./tool-riven.png','./tool-duplicate.png','./tool-relic.png'];
+const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png'];
 
 async function precacheCore(){
   const cache=await caches.open(SHELL_CACHE);
