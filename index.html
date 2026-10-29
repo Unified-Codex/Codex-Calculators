@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.3.7">
+<meta name="riven-version" content="5.4">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -908,6 +908,18 @@ html[lang="ar"] #relicApp{text-align:right}
 @keyframes coin-void-glitch{0%{opacity:1;filter:hue-rotate(0)}25%{opacity:.15;filter:hue-rotate(80deg)}50%{opacity:1;filter:hue-rotate(-45deg)}75%{opacity:.25;filter:hue-rotate(180deg)}100%{opacity:1}}
 @media(prefers-reduced-motion:reduce){.coin-void-face.coin-glitch{animation:none}}
 </style>
+<style id="feedbackStyle">
+#feedbackDialog[hidden]{display:none!important}
+.feedback-overlay{position:fixed;inset:0;z-index:999999;display:grid;place-items:center;background:rgba(0,0,0,.72);padding:18px;overflow-y:auto}
+.feedback-panel{width:min(100%,490px);max-height:calc(100dvh - 30px);overflow:auto;box-sizing:border-box;padding:22px;border:1px solid var(--line);border-radius:17px;background:var(--panel,#22232a);color:var(--text,#fff);box-shadow:0 22px 90px rgba(0,0,0,.5);font-family:inherit}
+.feedback-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.feedback-head h2{margin:0;font-size:1.4rem}.feedback-close{border:1px solid var(--line);border-radius:9px;background:var(--panel2);color:var(--text);font-size:24px;width:39px;height:39px;cursor:pointer}
+#feedbackIntro{font-size:.9rem;color:var(--mute);margin:5px 0 17px}.feedback-panel form{display:flex;flex-direction:column;gap:9px}.feedback-panel label{font-size:.9rem;font-weight:700}.feedback-panel select,.feedback-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:9px;font:inherit}.feedback-panel textarea{resize:vertical;min-height:110px}.feedback-panel select:focus-visible,.feedback-panel textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.feedback-meta{min-height:26px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mute);font-size:.8rem}.feedback-meta [role=status]{text-align:right}.feedback-meta .feedback-error{color:#ff9999}.feedback-meta .feedback-success{color:#8de0ae}.feedback-send{font:inherit;font-weight:750;padding:12px;border:1px solid var(--acc);background:var(--acc);color:var(--bg,#16151b);border-radius:10px;cursor:pointer}.feedback-send:disabled{opacity:.55;cursor:wait}
+.feedback-honeypot{position:absolute!important;left:-9999px!important;opacity:0!important;width:1px!important;height:1px!important}
+#feedbackOpen{font:inherit;cursor:pointer}
+.feedback-turnstile{min-height:42px;display:flex;align-items:center;justify-content:center;margin:6px 0}.feedback-cooldown{font-weight:700;color:var(--mute)}
+@media(max-width:600px){.feedback-overlay{align-items:center}.feedback-panel{padding:17px}}
+</style>
 </head>
 <body>
 <main id="calculatorHome" aria-labelledby="calculatorHomeTitle">
@@ -974,12 +986,28 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
     </div>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.3.3 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.3.3</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.3.3_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.4</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
     </div>
 
   </div>
 </main>
+<div id="feedbackDialog" class="feedback-overlay" role="presentation" hidden>
+  <section class="feedback-panel" role="dialog" aria-modal="true" aria-labelledby="feedbackTitle" aria-describedby="feedbackIntro">
+    <div class="feedback-head"><h2 id="feedbackTitle">Submit Feedback</h2><button class="feedback-close" id="feedbackClose" type="button" aria-label="Close">×</button></div>
+    <p id="feedbackIntro">Suggestions, bugs, or general feedback.</p>
+    <form id="feedbackForm" novalidate>
+      <label for="feedbackCategory" id="feedbackCategoryLabel">Category</label>
+      <select id="feedbackCategory" required><option value="general">General Feedback</option><option value="bug">Bug Report</option><option value="feature">Feature Suggestion</option></select>
+      <label for="feedbackMessage" id="feedbackMessageLabel">Message</label>
+      <textarea id="feedbackMessage" rows="5" required minlength="5" maxlength="1500" placeholder="Write your feedback here..."></textarea>
+      <input class="feedback-honeypot" id="feedbackWebsite" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div id="feedbackTurnstile" class="feedback-turnstile" aria-label="Spam verification"></div>
+      <div class="feedback-meta"><small id="feedbackCount">0 / 1500</small><span role="status" aria-live="polite" id="feedbackStatus"></span></div>
+      <button class="feedback-send" id="feedbackSend" type="submit">Send Feedback</button>
+    </form>
+  </section>
+</div>
 <main id="coinApp" aria-labelledby="coinAppTitle">
   <div class="coin-top"><button type="button" class="calc-back" data-calc-back>← <span>Back to calculator selection</span></button>
     <label class="calc-lang-box" for="calculatorCoinLanguage"><span id="coinLangLabel">Language</span> <select id="calculatorCoinLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></label>
@@ -2138,6 +2166,10 @@ render();
 </script>
 <script id="patchNotesData" type="application/json">[
   {
+    "version": "5.4",
+    "content": "Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."
+  },
+  {
     "version": "5.3.3",
     "content": "Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."
   },
@@ -2211,7 +2243,7 @@ render();
   },
   {
     "version": "3.5",
-    "content": "<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴<\/span>......and then it laughed<\/em><\/span><br>Wallys Domain Theme added, use at your own risk"
+    "content": "<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"
   },
   {
     "version": "3.3",
@@ -3305,6 +3337,99 @@ async function toss(n){
   setBusy(false);
 }
 flip.addEventListener('click',()=>toss(1));ten.addEventListener('click',()=>toss(10));touch.addEventListener('click',()=>toss(1));document.getElementById('rivenLanguage')?.addEventListener('change',update);document.addEventListener('calculator-view-change',e=>{if(e.detail.view==='coin')update()});update();
+})();
+</script>
+<script id="feedbackScript">
+(()=>{'use strict';
+  const endpoint='https://codex-tools-feedback.unified-codex.workers.dev/';
+  const open=document.getElementById('feedbackOpen'),dialog=document.getElementById('feedbackDialog');
+  const close=document.getElementById('feedbackClose'),form=document.getElementById('feedbackForm');
+  const message=document.getElementById('feedbackMessage'),category=document.getElementById('feedbackCategory');
+  const send=document.getElementById('feedbackSend'),status=document.getElementById('feedbackStatus');
+  const count=document.getElementById('feedbackCount'),website=document.getElementById('feedbackWebsite');
+  if(!open||!dialog)return;
+  const labels={
+    en:['Submit Feedback','Suggestions, bugs, or general feedback.','Category','Message','Write your feedback here...','Send Feedback','Sending...','Thank you! Feedback sent.','Could not send feedback. Try again.','Please enter 5–1500 characters.','Please wait before sending another message.','General Feedback','Bug Report','Feature Suggestion'],
+    es:['Enviar comentarios','Sugerencias, errores o comentarios.','Categoría','Mensaje','Escribe tus comentarios aquí...','Enviar','Enviando...','¡Gracias! Enviado.','No se pudo enviar. Inténtalo de nuevo.','Escribe entre 5 y 1500 caracteres.','Espera antes de enviar otro mensaje.','Comentarios generales','Informar de un error','Sugerir función'],
+    pt:['Enviar feedback','Sugestões, erros ou comentários.','Categoria','Mensagem','Escreva seu feedback aqui...','Enviar feedback','Enviando...','Obrigado! Enviado.','Não foi possível enviar. Tente novamente.','Escreva entre 5 e 1500 caracteres.','Aguarde antes de enviar outra mensagem.','Feedback geral','Relatar erro','Sugerir recurso'],
+    fr:['Envoyer un avis','Suggestions, bugs ou commentaires.','Catégorie','Message','Écrivez votre avis ici...','Envoyer','Envoi...','Merci ! Message envoyé.','Envoi impossible. Réessayez.','Saisissez entre 5 et 1 500 caractères.','Attendez avant un nouvel envoi.','Avis général','Signaler un bug','Suggérer une fonction'],
+    de:['Feedback senden','Vorschläge, Fehler oder allgemeines Feedback.','Kategorie','Nachricht','Feedback hier eingeben...','Feedback senden','Wird gesendet...','Danke! Gesendet.','Senden fehlgeschlagen. Erneut versuchen.','Bitte 5–1500 Zeichen eingeben.','Bitte vor dem nächsten Senden warten.','Allgemeines Feedback','Fehler melden','Funktion vorschlagen'],
+    it:['Invia feedback','Suggerimenti, bug o commenti.','Categoria','Messaggio','Scrivi qui il feedback...','Invia','Invio...','Grazie! Inviato.','Invio non riuscito. Riprova.','Inserisci da 5 a 1500 caratteri.','Attendi prima di inviare un altro messaggio.','Feedback generale','Segnala bug','Suggerisci funzione'],
+    pl:['Wyślij opinię','Sugestie, błędy i uwagi.','Kategoria','Wiadomość','Wpisz opinię...','Wyślij','Wysyłanie...','Dziękujemy! Wysłano.','Nie udało się wysłać. Spróbuj ponownie.','Wpisz od 5 do 1500 znaków.','Poczekaj przed kolejną wiadomością.','Ogólna opinia','Zgłoszenie błędu','Propozycja funkcji'],
+    ru:['Отправить отзыв','Предложения, ошибки или отзывы.','Категория','Сообщение','Напишите отзыв...','Отправить','Отправка...','Спасибо! Отправлено.','Не удалось отправить. Повторите попытку.','Введите от 5 до 1500 символов.','Подождите перед следующей отправкой.','Общий отзыв','Сообщить об ошибке','Предложить функцию'],
+    zh:['提交反馈','建议、错误报告或其他反馈。','类别','内容','在这里输入反馈...','发送反馈','发送中...','谢谢！反馈已发送。','发送失败，请重试。','请输入 5–1500 个字符。','请稍后再发送。','一般反馈','报告错误','功能建议'],
+    ja:['フィードバックを送信','提案・不具合・その他のご意見。','種類','内容','フィードバックを入力...','送信','送信中...','送信しました。ありがとうございます。','送信できませんでした。再度お試しください。','5～1500文字で入力してください。','次の送信までお待ちください。','一般的な意見','不具合報告','機能の提案'],
+    ar:['إرسال ملاحظات','اقتراحات أو أخطاء أو ملاحظات عامة.','الفئة','الرسالة','اكتب ملاحظاتك هنا...','إرسال','جارٍ الإرسال...','شكرًا! تم الإرسال.','تعذر الإرسال. حاول مجددًا.','اكتب من 5 إلى 1500 حرف.','انتظر قبل إرسال رسالة أخرى.','ملاحظات عامة','الإبلاغ عن خطأ','اقتراح ميزة']
+  };
+  // Public Turnstile site key: replace this placeholder with your own site key.
+  // NEVER put the private Turnstile secret or Discord webhook in this HTML.
+  const TURNSTILE_SITE_KEY='0x4AAAAAAFrQ4WlGDyUr2wgm';
+  const COOLDOWN_MS=10*60*1000;
+  const STORAGE_KEY='codex-feedback-next-allowed-v1';
+  let sending=false,lastFocus=null,widgetId=null,challengeToken='',expiry=0;
+  try{expiry=Number(localStorage.getItem(STORAGE_KEY))||0;}catch{}
+  const verifySlot=document.getElementById('feedbackTurnstile');
+  const language=()=>{const select=document.getElementById('calculatorHomeLanguage');let code=select?.value||'auto';if(code==='auto')code=navigator.language||'en';code=code.toLowerCase().split('-')[0];return labels[code]||labels.en;};
+  const configured=()=>TURNSTILE_SITE_KEY!=='REPLACE_WITH_TURNSTILE_SITE_KEY';
+  function timeLeft(){return Math.max(0,Math.ceil((expiry-Date.now())/1000));}
+  function fmt(sec){return `${Math.floor(sec/60)}:${String(sec%60).padStart(2,'0')}`;}
+  function updateButton(){
+    const sec=timeLeft();send.disabled=sending||sec>0||!configured();
+    if(sending){send.textContent=language()[6];return;}
+    if(sec>0){send.textContent=`${language()[10]} (${fmt(sec)})`;return;}
+    send.textContent=configured()?language()[5]:'Verification setup required';
+  }
+  function localize(){const L=language();open.textContent=L[0];document.getElementById('feedbackTitle').textContent=L[0];document.getElementById('feedbackIntro').textContent=L[1];document.getElementById('feedbackCategoryLabel').textContent=L[2];document.getElementById('feedbackMessageLabel').textContent=L[3];message.placeholder=L[4];[...category.options].forEach((o,i)=>o.textContent=L[11+i]);updateButton();}
+  function feedback(text,ok=false){status.textContent=text;status.className=ok?'feedback-success':'feedback-error';}
+  function mountChallenge(){
+    if(!configured()){verifySlot.textContent='Spam verification is not configured yet.';return;}
+    if(widgetId!==null)return;
+    const render=()=>{
+      if(widgetId!==null||!window.turnstile)return;
+      widgetId=window.turnstile.render(verifySlot,{
+        sitekey:TURNSTILE_SITE_KEY,theme:'auto',
+        callback(token){challengeToken=token;},
+        'expired-callback'(){challengeToken='';},
+        'error-callback'(){challengeToken='';}
+      });
+    };
+    if(window.turnstile){render();return;}
+    if(!document.getElementById('codexTurnstileApi')){
+      const el=document.createElement('script');el.id='codexTurnstileApi';
+      el.src='https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      el.async=true;el.onload=render;el.onerror=()=>feedback('Could not load spam verification.');
+      document.head.appendChild(el);
+    }else{const poll=setInterval(()=>{if(window.turnstile){clearInterval(poll);render();}},250);setTimeout(()=>clearInterval(poll),10000);}
+  }
+  function show(){lastFocus=document.activeElement;localize();dialog.hidden=false;feedback('');mountChallenge();updateButton();message.focus();}
+  function hide(){if(sending)return;dialog.hidden=true;lastFocus?.focus?.();}
+  open.addEventListener('click',show);close.addEventListener('click',hide);
+  dialog.addEventListener('click',event=>{if(event.target===dialog)hide();});
+  document.addEventListener('keydown',event=>{if(dialog.hidden)return;if(event.key==='Escape'){hide();return;}if(event.key==='Tab'){const nodes=[...dialog.querySelectorAll('button,select,textarea')].filter(el=>!el.disabled);const first=nodes[0],last=nodes.at(-1);if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}}});
+  message.addEventListener('input',()=>{count.textContent=`${message.value.length} / 1500`;feedback('');});
+  document.getElementById('calculatorHomeLanguage')?.addEventListener('change',localize);
+  setInterval(()=>{if(!dialog.hidden||timeLeft()>0)updateButton();},1000);
+  window.addEventListener('storage',event=>{if(event.key===STORAGE_KEY){expiry=Number(event.newValue)||0;updateButton();}});
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();if(sending)return;
+    const L=language();const body=message.value.trim();
+    if(body.length<5||body.length>1500||!/[\p{L}\p{N}]/u.test(body)||/^(.)\1{4,}$/su.test(body)){feedback(L[9]);return;}
+    if(timeLeft()>0){feedback(`${L[10]} (${fmt(timeLeft())})`);updateButton();return;}
+    if(!challengeToken){feedback('Complete spam verification before submitting.');return;}
+    sending=true;updateButton();feedback('');
+    try{
+      const ctrl=new AbortController();const timeout=setTimeout(()=>ctrl.abort(),15000);
+      let result;
+      try{result=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({category:category.value,message:body,website:website.value,turnstileToken:challengeToken}),signal:ctrl.signal});}finally{clearTimeout(timeout);}
+      const answer=await result.json().catch(()=>({}));
+      if(result.status===429){const retry=Number(result.headers.get('Retry-After'))||600;expiry=Date.now()+retry*1000;try{localStorage.setItem(STORAGE_KEY,String(expiry));}catch{};feedback(`${L[10]} (${fmt(timeLeft())})`);return;}
+      if(!result.ok||answer.success!==true)throw new Error('Submission failed');
+      expiry=Date.now()+COOLDOWN_MS;try{localStorage.setItem(STORAGE_KEY,String(expiry));}catch{}
+      form.reset();count.textContent='0 / 1500';feedback(L[7],true);
+    }catch(error){feedback(L[8]);console.error('Feedback delivery failed',error);}
+    finally{sending=false;challengeToken='';if(widgetId!==null&&window.turnstile)window.turnstile.reset(widgetId);updateButton();}
+  });
+  localize();
 })();
 </script>
 </body>
