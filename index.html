@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.4.7">
+<meta name="riven-version" content="5.4.8">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -965,7 +965,9 @@ a.upd.patreon::after{
 #calculatorHome .tool-drag-handle{position:absolute;right:12px;top:12px;z-index:2;display:grid;place-items:center;width:35px;height:35px;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);font-size:22px;line-height:1;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
 #calculatorHome .tool-drag-handle:active{cursor:grabbing}
 #calculatorHome .tool-drag-handle:hover,#calculatorHome .tool-drag-handle:focus-visible{border-color:var(--acc);color:var(--acc)}
-#calculatorHome .calc-choice-item.tool-dragging{opacity:.55;outline:2px dashed var(--acc);outline-offset:2px;z-index:3}
+#calculatorHome .calc-choice-item.tool-drag-placeholder{opacity:.24;outline:2px dashed var(--acc);outline-offset:-2px}
+.tool-drag-preview{filter:drop-shadow(0 16px 25px rgba(0,0,0,.5));opacity:.97;border-color:var(--acc)!important;cursor:grabbing!important}
+body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-select:none!important;-webkit-user-select:none!important}
 #calculatorHome .calc-choice-item.tool-drag-target{box-shadow:0 0 0 3px var(--acc)}
 #calculatorHome .hidden-tools{margin:18px 0 8px;border:1px solid var(--line);border-radius:13px;overflow:hidden;background:var(--panel)}
 #calculatorHome .hidden-tools[hidden],#calculatorHome .hidden-tools-list[hidden]{display:none!important}
@@ -1052,7 +1054,7 @@ a.upd.patreon::after{
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
       <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.4.7</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4.7_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4.8_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
 
   </div>
@@ -1353,7 +1355,7 @@ a.upd.patreon::after{
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.4.7</span></span>
+      <span><strong>Current Version:</strong> <span>v5.4.8</span></span>
     </div>
   </div>
 </div>
@@ -2346,127 +2348,7 @@ render();
     "content": "Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."
   }
 ]</script>
-<script id="patchNotesRenderer">
-(function(){
-  try {
-    const dataNode=document.getElementById('patchNotesData');
-    const parsed=JSON.parse(dataNode.textContent);
-    if(!Array.isArray(parsed)||!parsed.every(n=>n&&typeof n.version==='string'&&typeof n.content==='string')) throw new Error('Invalid patch notes data');
-    const PATCH_NOTES=parsed;
-
-// Classify every historical release automatically, including legacy "4.15"-style
-// micro versions, which belong beneath their 4.1 chapter.
-function patchLevel(version){
-  if(/^\d+\.0$/.test(version))return 'major';
-  if(/^\d+\.[1-9]$/.test(version))return 'chapter';
-  return 'micro';
-}
-function patchParent(version){
-  const pieces=version.split('.');
-  if(pieces.length>=3)return pieces[0]+'.'+pieces[1];
-  if(pieces.length===2&&pieces[1].length>=2)return pieces[0]+'.'+pieces[1][0];
-  return null;
-}
-function comparePatchVersions(a,b){
-  const x=a.split('.').map(Number),y=b.split('.').map(Number);
-  for(let i=0;i<Math.max(x.length,y.length);i++){
-    const difference=(x[i]||0)-(y[i]||0);
-    if(difference)return difference;
-  }
-  return 0;
-}
-function patchCard(note,showParent=false){
-  const tier=patchLevel(note.version);
-  const typeName=tier==='major'?'Generational Release':tier==='chapter'?'Chapter Update':'Micro Update';
-  const tierBadge=tier==='major'?'':`<span class="patch-level">${rivenLabel(typeName)}</span>`;
-  const parent=showParent&&tier==='micro'?patchParent(note.version):null;
-  const translatedSummary=translatedPatchSummary(note.version);const localized=rivenLang()!=='en'&&translatedSummary;const patchBody=localized?`<p>${translatedSummary}</p><details class="patch-original"><summary>${rivenUi("English details")}</summary><p>${note.content}</p></details>`:`<p>${note.content}</p>`;
-  return `<section class="patch-note ${tier}" aria-label="${rivenUi('Version')} ${note.version}, ${rivenLabel(typeName)}"><h3>${rivenUi('Version')} ${note.version}${tierBadge}</h3>${parent?`<small class="patch-context">${rivenUi("Part of Chapter")} ${parent}</small>`:''}${patchBody}</section>`;
-}
-function patchGroups(){
-  const groups=[];
-  const parentMap=new Map();
-  for(const note of PATCH_NOTES){
-    if(patchLevel(note.version)==='micro')continue;
-    const group={note,micros:[]};
-    groups.push(group);
-    parentMap.set(note.version,group);
-  }
-  for(const note of PATCH_NOTES){
-    if(patchLevel(note.version)!=='micro')continue;
-    const parent=parentMap.get(patchParent(note.version));
-    if(parent)parent.micros.push(note);
-    else groups.push({note,micros:[]}); // Keep historical notes even if no parent entry exists.
-  }
-  groups.sort((a,b)=>comparePatchVersions(b.note.version,a.note.version));
-  for(const group of groups)group.micros.sort((a,b)=>comparePatchVersions(b.version,a.version));
-  return groups;
-}
-function patchGroupHTML(group){
-  const children=group.micros;
-  const newest=PATCH_NOTES[0]?.version;
-  const showNewest=children.some(note=>note.version===newest);
-  const subnotes=children.length?`<details class="patch-micro-group" ${showNewest?'open':''}><summary>${rivenUi("Micro Updates")} <span class="micro-count">${children.length}</span></summary>${children.map(note=>patchCard(note)).join('')}</details>`:'';
-  return `<div class="patch-group">${patchCard(group.note)}${subnotes}</div>`;
-}
-// Text extraction once for full-text keyword and version searching. HTML in notes
-// is trusted, authored content; search results reuse the unchanged original markup.
-const PATCH_SEARCH_INDEX=PATCH_NOTES.map(note=>{
-  const scratch=document.createElement('div');
-  scratch.innerHTML=note.content;
-  const level=patchLevel(note.version);
-  return {note,haystack:[note.version,scratch.textContent,level,level==='major'?'generational':level==='chapter'?'chapter':'micro',patchParent(note.version)||'',...Object.values(RIVEN_PATCH_SUMMARIES).map(a=>a[RIVEN_PATCH_VERSION_ORDER.indexOf(note.version)]||''),note.version==='5.0'?Object.values(RIVEN_PATCH_50).join(' '):'',note.version==='4.5'?Object.values(RIVEN_PATCH_45).join(' '):'',note.version==='4.4'?Object.values(RIVEN_PATCH_44).join(' '):''].join(' ').toLocaleLowerCase()};
-});
-function renderPatchNotes(){
-  const groups=patchGroups();
-  $('patchNotesList').innerHTML=groups.length?patchGroupHTML(groups[0]):'<p>'+rivenUi('No patch notes available.')+'</p>';
-  $('olderPatchNotes').innerHTML=groups.slice(1).map(patchGroupHTML).join('');
-  const toggle=$('olderNotesToggle');
-  toggle.hidden=groups.length<=1;
-  $('olderPatchNotes').hidden=true;
-  toggle.setAttribute('aria-expanded','false');
-  toggle.textContent=rivenUi('Read Older Patchnotes');
-}
-function filterPatchNotes(){
-  const terms=$('patchSearch').value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
-  const searching=terms.length>0;
-  $('patchNotesBrowse').hidden=searching;
-  $('patchSearchResults').hidden=!searching;
-  $('patchSearchStatus').hidden=!searching;
-  if(!searching){$('patchSearchResults').innerHTML='';return;}
-  const found=PATCH_SEARCH_INDEX.filter(item=>terms.every(term=>item.haystack.includes(term)))
-    .sort((a,b)=>comparePatchVersions(b.note.version,a.note.version));
-  $('patchSearchResults').innerHTML=found.length?found.map(item=>patchCard(item.note,true)).join(''):'<p class="patch-search-empty">'+rivenUi('No matching patch notes. Try a different version or keyword.')+'</p>';
-  $('patchSearchStatus').textContent=found.length+rivenUi(found.length===1?' matching update':' matching updates');
-}
-renderPatchNotes();
-window.renderPatchNotes=renderPatchNotes;
-window.filterPatchNotes=filterPatchNotes;
-$('patchSearch').addEventListener('input',filterPatchNotes);
-$('olderNotesToggle').addEventListener('click',()=>{
-  const older=$('olderPatchNotes'),toggle=$('olderNotesToggle');
-  const opening=older.hidden;
-  older.hidden=!opening;
-  toggle.setAttribute('aria-expanded',String(opening));
-  toggle.textContent=rivenUi(opening?'Hide Older Patchnotes':'Read Older Patchnotes');
-});
-$('versionBtn').addEventListener('click',()=>{versionPopup.hidden=false;$('versionClose').focus()});
-$('versionClose').addEventListener('click',()=>{versionPopup.hidden=true;$('versionBtn').focus()});
-versionPopup.addEventListener('click',e=>{if(e.target===versionPopup){versionPopup.hidden=true;$('versionBtn').focus()}});
-document.addEventListener('keydown',e=>{if(versionPopup.hidden)return;if(e.key==='Escape'){e.preventDefault();versionPopup.hidden=true;$('versionBtn').focus();return;}if(e.key==='Tab'){const focusable=[...versionPopup.querySelectorAll('button:not([disabled]),input:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden&&el.getClientRects().length);if(!focusable.length){e.preventDefault();return;}const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&(document.activeElement===first||!versionPopup.contains(document.activeElement))){e.preventDefault();last.focus();}else if(!e.shiftKey&&(document.activeElement===last||!versionPopup.contains(document.activeElement))){e.preventDefault();first.focus();}}});
-
-  } catch(error) {
-    console.error('Patch notes unavailable:',error);
-    const btn=document.getElementById('versionBtn');
-    const popup=document.getElementById('versionPopup');
-    const list=document.getElementById('patchNotesList');
-    if(list)list.textContent='Patch notes are temporarily unavailable.';
-    if(btn&&popup)btn.addEventListener('click',()=>{popup.hidden=false});
-    const close=document.getElementById('versionClose');
-    if(close&&popup)close.addEventListener('click',()=>popup.hidden=true);
-  }
-})();
-</script>
+<script id="patchNotesRenderer">[{"version":"5.4.8","content":"Improved homepage tool reordering with live card movement, smoother dragging and more precise placement on desktop and mobile."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴<\/span>......and then it laughed<\/em><\/span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
 
 <script id="siteVisitsCounter">
 /* Public GoatCounter site-wide visitor counter. Does not use a secret API key.
@@ -2869,15 +2751,114 @@ function setOrderFromVisible(){const visible=[...grid.querySelectorAll('.calc-ch
 for(const btn of document.querySelectorAll('[data-hide-tool]'))btn.addEventListener('click',()=>{const id=btn.dataset.hideTool;if(!hidden.includes(id)){hidden.push(id);save(KEYS.hidden,hidden);render();}});
 toggle.addEventListener('click',()=>{expanded=!expanded;render();});
 document.getElementById('showAllTools').addEventListener('click',()=>{hidden=[];save(KEYS.hidden,hidden);expanded=false;render();});
-let dragging=null,target=null,startX=0,startY=0,moved=false;
-function clearTarget(){if(target)target.classList.remove('tool-drag-target');target=null;}
-function finish(pointerId){if(!dragging)return;const card=dragging;clearTarget();card.classList.remove('tool-dragging');dragging=null;if(moved)setOrderFromVisible();moved=false;}
+let drag=null, frame=0, autoScroll=0;
+const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const shownCards=()=>[...grid.querySelectorAll('.calc-choice-item:not([hidden])')];
+function animateReflow(mutation){
+ const before=new Map(shownCards().map(card=>[card,card.getBoundingClientRect()]));
+ mutation();
+ if(reduced())return;
+ for(const card of shownCards()){
+  if(drag&&card===drag.card)continue;
+  const prev=before.get(card);if(!prev)continue;
+  const now=card.getBoundingClientRect();const dx=prev.left-now.left,dy=prev.top-now.top;
+  if(Math.abs(dx)+Math.abs(dy)<1)continue;
+  // Cancel the previous movement before starting the next, so nearby cards track
+  // the insertion position without snapping back on repeated pointer movements.
+  card.getAnimations().filter(a=>a.id==='codex-reorder').forEach(a=>a.cancel());
+  const a=card.animate([{transform:`translate(${dx}px, ${dy}px)`},{transform:'translate(0, 0)'}],{duration:200,easing:'cubic-bezier(.2,.8,.25,1)'});
+  a.id='codex-reorder';
+ }
+}
+function shiftOrder(card, before){
+ if(card===before)return;
+ animateReflow(()=>grid.insertBefore(card,before));
+}
+function dragMove(x,y){
+ if(!drag)return;
+ drag.x=x;drag.y=y;
+ if(!frame)frame=requestAnimationFrame(()=>{
+  frame=0;if(!drag)return;
+  const d=drag;
+  if(!d.started&&Math.hypot(d.x-d.startX,d.y-d.startY)<5)return;
+  if(!d.started){
+   d.started=true;
+   const r=d.card.getBoundingClientRect();
+   d.ghost=d.card.cloneNode(true);
+   d.ghost.classList.add('tool-drag-preview');d.ghost.removeAttribute('hidden');
+   Object.assign(d.ghost.style,{position:'fixed',left:r.left+'px',top:r.top+'px',width:r.width+'px',height:r.height+'px',margin:'0',zIndex:'2147483000',pointerEvents:'none',boxSizing:'border-box',transform:'translate3d(0,0,0)',transition:'none'});
+   document.body.appendChild(d.ghost);
+   d.card.classList.add('tool-drag-placeholder');
+   d.ghostLeft=r.left;d.ghostTop=r.top;
+  }
+  const dx=d.x-d.startX,dy=d.y-d.startY;
+  d.ghost.style.transform=`translate3d(${dx}px,${dy}px,0)`;
+  const options=shownCards().filter(card=>card!==d.card);
+  if(!options.length)return;
+  // Pick the nearest occupied slot, not just the element beneath the pointer.
+  // This is accurate between columns and in the gaps between cards.
+  const candidates=options.map(card=>{const r=card.getBoundingClientRect();return {card,r,cx:r.left+r.width/2,cy:r.top+r.height/2};});
+  let closest=candidates[0],best=Infinity;
+  for(const c of candidates){const dist=(c.cx-d.x)**2+(c.cy-d.y)**2;if(dist<best){closest=c;best=dist;}}
+  const c=closest,columns=getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+  let insertBefore;
+  if(columns<=1)insertBefore=d.y<c.cy;
+  else {
+   // Position using the actual 2D grid order, allowing precise cross-row moves.
+   const targetIndex=options.indexOf(c.card),dragIndex=shownCards().indexOf(d.card);
+   insertBefore=dragIndex>targetIndex;
+   if(d.y>c.cy+c.r.height*.12)insertBefore=false;
+   if(d.y<c.cy-c.r.height*.12)insertBefore=true;
+   if(Math.abs(d.y-c.cy)<c.r.height*.3)insertBefore=d.x<c.cx;
+  }
+  const next=insertBefore?c.card:c.card.nextElementSibling;
+  if(next!==d.card&&!(next===null&&grid.lastElementChild===d.card)){
+   shiftOrder(d.card,next);
+  }
+ });
+}
+function endDrag(cancelled=false){
+ const d=drag;if(!d)return;drag=null;
+ cancelAnimationFrame(frame);frame=0;cancelAnimationFrame(autoScroll);autoScroll=0;
+ document.body.classList.remove('tool-sort-active');
+ if(d.ghost){
+  const destination=d.card.getBoundingClientRect();
+  const x=destination.left-d.ghostLeft,y=destination.top-d.ghostTop;
+  const animation=d.ghost.animate([{transform:d.ghost.style.transform},{transform:`translate3d(${x}px,${y}px,0)`,opacity:.9}],{duration:reduced()?0:150,easing:'ease-out'});
+  animation.finished.catch(()=>{}).then(()=>d.ghost.remove());
+  if(!cancelled)setOrderFromVisible();
+ }
+ d.card.classList.remove('tool-drag-placeholder');
+ if(cancelled&&d.started)render();
+}
 for(const handle of document.querySelectorAll('[data-drag-tool]')){
- handle.addEventListener('pointerdown',e=>{if(e.button!==0)return;dragging=cards.get(handle.dataset.dragTool);startX=e.clientX;startY=e.clientY;moved=false;handle.setPointerCapture(e.pointerId);dragging.classList.add('tool-dragging');e.preventDefault();});
- handle.addEventListener('pointermove',e=>{if(!dragging||!handle.hasPointerCapture(e.pointerId))return;if(Math.hypot(e.clientX-startX,e.clientY-startY)<7&&!moved)return;moved=true;clearTarget();const hit=document.elementFromPoint(e.clientX,e.clientY)?.closest('.calc-choice-item');if(hit&&hit!==dragging&&!hit.hidden&&hit.parentElement===grid){target=hit;target.classList.add('tool-drag-target');const rect=hit.getBoundingClientRect();const before=window.matchMedia('(max-width:620px)').matches?e.clientY<rect.top+rect.height/2:e.clientX<rect.left+rect.width/2;grid.insertBefore(dragging,before?hit:hit.nextSibling);}});
- handle.addEventListener('pointerup',e=>{if(dragging)finish(e.pointerId);});
- handle.addEventListener('pointercancel',e=>{if(dragging)finish(e.pointerId);});
- handle.addEventListener('keydown',e=>{if(e.key!=='ArrowUp'&&e.key!=='ArrowDown')return;e.preventDefault();const card=cards.get(handle.dataset.dragTool);const visible=[...grid.querySelectorAll('.calc-choice-item:not([hidden])')];const idx=visible.indexOf(card);const next=visible[idx+(e.key==='ArrowUp'?-1:1)];if(!next)return;grid.insertBefore(card,e.key==='ArrowUp'?next:next.nextSibling);setOrderFromVisible();handle.focus();});
+ handle.addEventListener('pointerdown',e=>{
+  if(e.button!==0||drag)return;
+  const card=cards.get(handle.dataset.dragTool);if(!card||card.hidden)return;
+  drag={card,id:e.pointerId,startX:e.clientX,startY:e.clientY,x:e.clientX,y:e.clientY,started:false,ghost:null};
+  document.body.classList.add('tool-sort-active');if(!autoScroll)autoScroll=requestAnimationFrame(scrollLoop);e.preventDefault();
+ });
+ handle.addEventListener('keydown',e=>{
+  if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))return;
+  e.preventDefault();const card=cards.get(handle.dataset.dragTool),visible=shownCards(),idx=visible.indexOf(card);
+  const cols=getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+  const delta=e.key==='ArrowUp'?-cols:e.key==='ArrowDown'?cols:e.key==='ArrowLeft'?-1:1;
+  const destination=Math.max(0,Math.min(visible.length-1,idx+delta));
+  if(idx===destination)return;
+  const other=visible[destination];
+  animateReflow(()=>grid.insertBefore(card,destination<idx?other:other.nextSibling));
+  setOrderFromVisible();handle.focus();
+  handle.setAttribute('aria-label','Move '+name(handle.dataset.dragTool)+', position '+(destination+1)+' of '+visible.length);
+ });
+}
+window.addEventListener('pointermove',e=>{if(drag&&e.pointerId===drag.id){dragMove(e.clientX,e.clientY);e.preventDefault();}},{passive:false});
+window.addEventListener('pointerup',e=>{if(drag&&e.pointerId===drag.id)endDrag();});
+window.addEventListener('pointercancel',e=>{if(drag&&e.pointerId===drag.id)endDrag(true);});
+window.addEventListener('blur',()=>endDrag(true));
+// Scroll the page smoothly if the pointer approaches the viewport edges.
+function scrollLoop(){
+ if(drag&&drag.started){const edge=85,y=drag.y,h=innerHeight;const amount=y<edge?-Math.min(14,(edge-y)*.16):y>h-edge?Math.min(14,(y-(h-edge))*.16):0;if(amount){window.scrollBy(0,amount);dragMove(drag.x,drag.y);}}
+ if(drag)autoScroll=requestAnimationFrame(scrollLoop);else autoScroll=0;
 }
 render();
 })();
