@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.4.8">
+<meta name="riven-version" content="5.5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -19,7 +19,7 @@
 (function(){
   var route='home';
   try{var saved=localStorage.getItem('codex-tools-default-page-v1');
-    if(['riven','duplicate','weekly','relic','circuit','coin'].includes(saved)){var hidden=JSON.parse(localStorage.getItem('codex-hidden-tools-v1')||'[]');if(!Array.isArray(hidden)||!hidden.includes(saved))route=saved;else localStorage.removeItem('codex-tools-default-page-v1');}
+    if(['riven','duplicate','weekly','relic','circuit','coin','nightwave'].includes(saved)){var hidden=JSON.parse(localStorage.getItem('codex-hidden-tools-v1')||'[]');if(!Array.isArray(hidden)||!hidden.includes(saved))route=saved;else localStorage.removeItem('codex-tools-default-page-v1');}
   }catch(e){} // Storage can be disabled (private / hardened browsers).
   document.documentElement.setAttribute('data-calculator-view',route);
 })();
@@ -621,7 +621,8 @@ html:not([data-calculator-view="duplicate"]) #duplicateApp,
 html:not([data-calculator-view="weekly"]) #weeklyApp,
 html:not([data-calculator-view="relic"]) #relicApp,
 html:not([data-calculator-view="circuit"]) #circuitApp,
-html:not([data-calculator-view="coin"]) #coinApp{display:none!important}
+html:not([data-calculator-view="coin"]) #coinApp,
+html:not([data-calculator-view="nightwave"]) #nightwaveApp{display:none!important}
 #calculatorHome{max-width:760px;min-height:90vh;min-height:90dvh;display:flex;flex-direction:column;justify-content:center;padding-block:28px 50px}
 #calculatorHome .home-shell{width:100%}
 .calc-topline{display:flex;justify-content:flex-end;align-items:center;min-height:44px;margin-bottom:16px}
@@ -980,6 +981,25 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
 #calculatorHome .show-all-tools{margin-top:11px}
 @media(max-width:620px){#calculatorHome .tool-card-actions .default-tool-label{padding:11px 12px}#calculatorHome .tool-hide-button{padding:8px 12px}}
 </style>
+<style id="nightwaveStyles">
+#nightwaveApp{max-width:780px;min-height:100vh;margin:0 auto;padding:22px 18px 70px;color:var(--text)}
+.nightwave-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#nightwaveApp h1{font-size:clamp(1.6rem,4vw,2.25rem);margin:25px 0 7px;color:var(--text)}
+.nw-subtitle{color:var(--mute);margin:0 0 22px;font-size:.95rem}
+.nightwave-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.nightwave-card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px}
+.nightwave-card h2{font-size:1rem;margin:0 0 18px;color:var(--acc)}
+.nightwave-card label{display:flex;flex-direction:column;gap:5px;font-size:.9rem;margin:0 0 16px}
+.nightwave-card small{color:var(--mute);font-size:.75rem}
+.nightwave-card input{width:100%;max-width:190px;font:inherit;color:var(--text);background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 11px}
+.nightwave-card input:focus-visible,.nw-calculate:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.nw-calculate{display:block;margin:18px 0;width:100%;padding:13px 18px;border:1px solid var(--acc);border-radius:10px;background:var(--acc);color:var(--bg);font:inherit;font-weight:800;cursor:pointer}
+#nwResult{padding:20px;border:1px solid var(--acc);border-radius:14px;background:var(--panel);line-height:1.6}
+#nwResult[hidden]{display:none!important}#nwResult h2{margin:0 0 9px;font-size:1.1rem;color:var(--acc)}
+#nwResult .nw-big{font-size:clamp(1.2rem,4vw,1.55rem);font-weight:800;margin-bottom:8px}
+#nwResult .nw-details{font-size:.88rem;color:var(--mute);margin-top:7px}
+@media(max-width:600px){#nightwaveApp{padding:12px 14px 32px}.nightwave-grid{grid-template-columns:1fr}.nightwave-card{padding:15px}#nightwaveApp h1{margin-top:18px}}
+</style>
 </head>
 <body>
 <main id="calculatorHome" aria-labelledby="calculatorHomeTitle">
@@ -1050,11 +1070,20 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
       </button>
         <div class="tool-card-actions"><label class="default-tool-label"><input type="checkbox" data-default-tool="coin" aria-labelledby="calcChoiceTitle-coin defaultText-coin"> <span id="defaultText-coin">Set as default page</span></label><button class="tool-hide-button" type="button" data-hide-tool="coin" aria-label="Hide coin tool">Hide Tool</button></div>
       </div>
+      <div class="calc-choice-item">
+        <button type="button" class="tool-drag-handle" data-drag-tool="nightwave" title="Drag to reorder; use arrow keys to move" aria-label="Reorder nightwave; drag or use arrow keys" aria-keyshortcuts="ArrowUp ArrowDown">⠿</button>
+        <button type="button" class="calc-choice" data-open-calculator="nightwave" aria-label="Nightwave Rank ETA">
+          <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><path d="M21 4a12 12 0 1 0 0 24 14 14 0 0 1 0-24Z"/><path d="M6 19l5-5 4 4 5-7 6 5"/><circle cx="23" cy="8" r="1.5"/></svg></span>
+          <span class="choice-title" id="calcChoiceTitle-nightwave">Nightwave Rank ETA</span>
+          <span class="choice-description" id="nightwaveCardDescription">Estimate when you'll reach your target Nightwave rank.</span>
+        </button>
+        <div class="tool-card-actions"><label class="default-tool-label"><input type="checkbox" data-default-tool="nightwave" aria-labelledby="calcChoiceTitle-nightwave defaultText-nightwave"> <span id="defaultText-nightwave">Set as default page</span></label><button class="tool-hide-button" type="button" data-hide-tool="nightwave" aria-label="Hide Nightwave tool">Hide Tool</button></div>
+      </div>
     </div>
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.4.7</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4.8_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.5</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.5_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
 
   </div>
@@ -1075,6 +1104,25 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
     </form>
   </section>
 </div>
+
+<main id="nightwaveApp" aria-labelledby="nightwaveTitle">
+  <div class="nightwave-top"><button type="button" class="calc-back" data-calc-back>← <span>Back to calculator selection</span></button><label class="calc-lang-box"> <span id="nightwaveLanguageLabel">Language</span> <select id="calculatorNightwaveLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></label></div>
+  <h1 id="nightwaveTitle">Nightwave Rank ETA</h1>
+  <p class="nw-subtitle" id="nwSubtitle">Earliest estimated target date when completing all available Nightwave acts.</p>
+  <div class="nightwave-grid">
+   <section class="nightwave-card"><h2 id="nwProgressTitle">Rank Progress</h2>
+     <label><span id="nwCurrentRankLabel">Current Rank</span><small id="nwCurrentRankHint">0 = new season</small><input type="number" id="nwCurrentRank" value="0" min="0" max="30" step="1"></label>
+     <label><span id="nwProgressLabel">Progress to Next Rank</span><small id="nwProgressHint">Standing: 0–9999</small><input type="number" id="nwProgress" value="0" min="0" max="9999" step="1"></label>
+     <label><span id="nwTargetRankLabel">Target Rank</span><input type="number" id="nwTargetRank" value="10" min="0" max="30" step="1"></label>
+   </section>
+   <section class="nightwave-card"><h2 id="nwWeekTitle">Current Week</h2>
+     <label><span id="nwWeekliesLabel">Weeklies Left</span><small id="nwWeekliesHint">Uncompleted standard acts</small><input type="number" id="nwWeeklies" value="5" min="0" max="10" step="1"></label>
+     <label><span id="nwElitesLabel">Elite Weeklies Left</span><input type="number" id="nwElites" value="2" min="0" max="5" step="1"></label>
+   </section>
+  </div>
+  <button type="button" class="nw-calculate" id="nwCalculate">Calculate ETA</button>
+  <div id="nwResult" role="status" aria-live="polite" hidden></div>
+</main>
 <main id="coinApp" aria-labelledby="coinAppTitle">
   <div class="coin-top"><button type="button" class="calc-back" data-calc-back>← <span>Back to calculator selection</span></button>
     <label class="calc-lang-box" for="calculatorCoinLanguage"><span id="coinLangLabel">Language</span> <select id="calculatorCoinLanguage" aria-label="Language"><option value="auto">Auto (Browser)</option><option value="en">English</option><option value="es">Español</option><option value="pt">Português</option><option value="fr">Français</option><option value="ru">Русский</option><option value="de">Deutsch</option><option value="it">Italiano</option><option value="pl">Polski</option><option value="zh">中文</option><option value="ja">日本語</option><option value="ar">العربية</option></select></label>
@@ -1355,7 +1403,7 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.4.8</span></span>
+      <span><strong>Current Version:</strong> <span>v5.5</span></span>
     </div>
   </div>
 </div>
@@ -2232,6 +2280,10 @@ render();
 </script>
 <script id="patchNotesData" type="application/json">[
   {
+    "version": "5.5",
+    "content": "Added the Nightwave Rank ETA calculator with themed interface and multilingual support."
+  },
+  {
     "version": "5.4.7",
     "content": "Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."
   },
@@ -2348,7 +2400,7 @@ render();
     "content": "Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."
   }
 ]</script>
-<script id="patchNotesRenderer">[{"version":"5.4.8","content":"Improved homepage tool reordering with live card movement, smoother dragging and more precise placement on desktop and mobile."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴<\/span>......and then it laughed<\/em><\/span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script id="patchNotesRenderer">[{"version":"5.5","content":"Added Nightwave Rank ETA with themed layout and translations."},{"version":"5.4.9","content":"Improved homepage tool reordering with live card movement, smoother dragging and more precise placement on desktop and mobile."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴<\/span>......and then it laughed<\/em><\/span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
 
 <script id="siteVisitsCounter">
 /* Public GoatCounter site-wide visitor counter. Does not use a secret API key.
@@ -2688,17 +2740,17 @@ update();observer.observe(document.body,{childList:true,subtree:true,characterDa
 (function(){
   'use strict';
   const KEY='codex-tools-default-page-v1';
-  const supported=['riven','duplicate','weekly','relic','circuit','coin'];
+  const supported=['riven','duplicate','weekly','relic','circuit','coin','nightwave'];
   const defaults=[...document.querySelectorAll('[data-default-tool]')];
   const rivenLang=document.getElementById('rivenLanguage');
-  const mirrorLangs=['calculatorHomeLanguage','calculatorDuplicateLanguage','calculatorWeeklyLanguage','calculatorRelicLanguage','calculatorCircuitLanguage','calculatorCoinLanguage'].map(id=>document.getElementById(id));
+  const mirrorLangs=['calculatorHomeLanguage','calculatorDuplicateLanguage','calculatorWeeklyLanguage','calculatorRelicLanguage','calculatorCircuitLanguage','calculatorCoinLanguage','calculatorNightwaveLanguage'].map(id=>document.getElementById(id));
   function saved(){try{const value=localStorage.getItem(KEY);return supported.includes(value)?value:null;}catch(e){return null;}}
   function store(value){try{if(value)localStorage.setItem(KEY,value);else localStorage.removeItem(KEY);}catch(e){}}
   function syncDefault(){const current=saved();for(const input of defaults)input.checked=input.dataset.defaultTool===current;}
   function show(view){
     if(view!=='home'&&!supported.includes(view))return;
     document.documentElement.setAttribute('data-calculator-view',view);
-    document.title=view==='home'?'Codex Calcs | Warframe Tools & Circuit Calendar':view==='riven'?'Riven Stat Range Calculator':view==='duplicate'?'Melee Duplicate Calculator':view==='relic'?'Relic Probability | Codex Calcs':view==='circuit'?'Circuit Rotation Calendar | Codex Calcs':view==='coin'?'Coin Toss | Codex Calcs':'Weekly Tracker | Codex Calcs';
+    document.title=view==='home'?'Codex Calcs | Warframe Tools & Circuit Calendar':view==='riven'?'Riven Stat Range Calculator':view==='duplicate'?'Melee Duplicate Calculator':view==='relic'?'Relic Probability | Codex Calcs':view==='circuit'?'Circuit Rotation Calendar | Codex Calcs':view==='coin'?'Coin Toss | Codex Calcs':view==='nightwave'?'Nightwave Rank ETA | Codex Calcs':'Weekly Tracker | Codex Calcs';
     mirrorLangs.forEach(el=>{if(el)el.value=rivenLang.value});
     window.scrollTo(0,0);
     document.dispatchEvent(new CustomEvent('calculator-view-change',{detail:{view}}));
@@ -2728,7 +2780,7 @@ const KEYS={hidden:'codex-hidden-tools-v1',order:'codex-tool-order-v1',default:'
 const grid=document.querySelector('#calculatorHome .calc-choice-grid');
 const section=document.getElementById('hiddenToolsSection');
 if(!grid||!section)return;
-const valid=['riven','duplicate','weekly','relic','circuit','coin'];
+const valid=['riven','duplicate','weekly','relic','circuit','coin','nightwave'];
 const cards=new Map([...grid.querySelectorAll('.calc-choice-item')].map(card=>[card.querySelector('[data-open-calculator]')?.dataset.openCalculator,card]));
 const count=document.getElementById('hiddenToolsCount'),toggle=document.getElementById('hiddenToolsToggle'),list=document.getElementById('hiddenToolsList'),items=document.getElementById('hiddenToolsItems');
 let hidden=[],order=[...valid],expanded=false;
@@ -2755,18 +2807,20 @@ let drag=null, frame=0, autoScroll=0;
 const reduced=()=>window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const shownCards=()=>[...grid.querySelectorAll('.calc-choice-item:not([hidden])')];
 function animateReflow(mutation){
- const before=new Map(shownCards().map(card=>[card,card.getBoundingClientRect()]));
+ // Capture where cards are ACTUALLY being painted, then stop earlier animations
+ // before changing layout. Otherwise the next move measures animated positions
+ // and repeatedly reverses the previous move.
+ const visible=shownCards();
+ const before=new Map(visible.map(card=>[card,card.getBoundingClientRect()]));
+ for(const card of visible)card.getAnimations().filter(a=>a.id==='codex-reorder').forEach(a=>a.cancel());
  mutation();
  if(reduced())return;
  for(const card of shownCards()){
   if(drag&&card===drag.card)continue;
   const prev=before.get(card);if(!prev)continue;
   const now=card.getBoundingClientRect();const dx=prev.left-now.left,dy=prev.top-now.top;
-  if(Math.abs(dx)+Math.abs(dy)<1)continue;
-  // Cancel the previous movement before starting the next, so nearby cards track
-  // the insertion position without snapping back on repeated pointer movements.
-  card.getAnimations().filter(a=>a.id==='codex-reorder').forEach(a=>a.cancel());
-  const a=card.animate([{transform:`translate(${dx}px, ${dy}px)`},{transform:'translate(0, 0)'}],{duration:200,easing:'cubic-bezier(.2,.8,.25,1)'});
+  if(Math.abs(dx)+Math.abs(dy)<.5)continue;
+  const a=card.animate([{transform:`translate(${dx}px, ${dy}px)`},{transform:'translate(0, 0)'}],{duration:230,easing:'cubic-bezier(.22,.75,.28,1)'});
   a.id='codex-reorder';
  }
 }
@@ -2783,6 +2837,11 @@ function dragMove(x,y){
   if(!d.started&&Math.hypot(d.x-d.startX,d.y-d.startY)<5)return;
   if(!d.started){
    d.started=true;
+   // Freeze the grid's slot geometry before any card starts animating.
+   const initial=shownCards();
+   d.slots=initial.map(card=>{const r=card.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2};});
+   d.slotIndex=initial.indexOf(d.card);
+   d.lastShift=-Infinity;
    const r=d.card.getBoundingClientRect();
    d.ghost=d.card.cloneNode(true);
    d.ghost.classList.add('tool-drag-preview');d.ghost.removeAttribute('hidden');
@@ -2793,28 +2852,30 @@ function dragMove(x,y){
   }
   const dx=d.x-d.startX,dy=d.y-d.startY;
   d.ghost.style.transform=`translate3d(${dx}px,${dy}px,0)`;
-  const options=shownCards().filter(card=>card!==d.card);
-  if(!options.length)return;
-  // Pick the nearest occupied slot, not just the element beneath the pointer.
-  // This is accurate between columns and in the gaps between cards.
-  const candidates=options.map(card=>{const r=card.getBoundingClientRect();return {card,r,cx:r.left+r.width/2,cy:r.top+r.height/2};});
-  let closest=candidates[0],best=Infinity;
-  for(const c of candidates){const dist=(c.cx-d.x)**2+(c.cy-d.y)**2;if(dist<best){closest=c;best=dist;}}
-  const c=closest,columns=getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-  let insertBefore;
-  if(columns<=1)insertBefore=d.y<c.cy;
-  else {
-   // Position using the actual 2D grid order, allowing precise cross-row moves.
-   const targetIndex=options.indexOf(c.card),dragIndex=shownCards().indexOf(d.card);
-   insertBefore=dragIndex>targetIndex;
-   if(d.y>c.cy+c.r.height*.12)insertBefore=false;
-   if(d.y<c.cy-c.r.height*.12)insertBefore=true;
-   if(Math.abs(d.y-c.cy)<c.r.height*.3)insertBefore=d.x<c.cx;
+  // The target slots are captured when dragging STARTS. Do NOT derive targets
+  // from the moving, animated cards: that creates a feedback loop/flicker.
+  if(!d.slots?.length)return;
+  let bestIndex=d.slotIndex,bestDistance=Infinity;
+  for(let i=0;i<d.slots.length;i++){
+   const slot=d.slots[i];
+   const distance=(d.x-slot.x)**2+(d.y-slot.y)**2;
+   if(distance<bestDistance){bestDistance=distance;bestIndex=i;}
   }
-  const next=insertBefore?c.card:c.card.nextElementSibling;
-  if(next!==d.card&&!(next===null&&grid.lastElementChild===d.card)){
-   shiftOrder(d.card,next);
-  }
+  if(bestIndex===d.slotIndex)return;
+  const active=d.slots[d.slotIndex];
+  const activeDistance=(d.x-active.x)**2+(d.y-active.y)**2;
+  // Require a definite advantage before changing insertion slots. Briefly
+  // lock after a move to avoid ping-pong on a row/column boundary.
+  if(activeDistance-bestDistance<Math.pow(26,2)||performance.now()-d.lastShift<110)return;
+  const items=shownCards();
+  const oldIndex=items.indexOf(d.card);
+  const targetIndex=Math.min(bestIndex,items.length-1);
+  if(oldIndex===targetIndex){d.slotIndex=targetIndex;return;}
+  const others=items.filter(card=>card!==d.card);
+  const target=others[targetIndex]||null;
+  animateReflow(()=>grid.insertBefore(d.card,target));
+  d.slotIndex=targetIndex;
+  d.lastShift=performance.now();
  });
 }
 function endDrag(cancelled=false){
@@ -3546,6 +3607,49 @@ flip.addEventListener('click',()=>toss(1));ten.addEventListener('click',()=>toss
   });
   localize();
 })();
+</script>
+<script id="nightwaveScript">
+(()=>{'use strict';
+const fields={title:'nightwaveTitle',sub:'nwSubtitle',progressTitle:'nwProgressTitle',rank:'nwCurrentRankLabel',rankHint:'nwCurrentRankHint',progress:'nwProgressLabel',progressHint:'nwProgressHint',target:'nwTargetRankLabel',weekTitle:'nwWeekTitle',weekly:'nwWeekliesLabel',weeklyHint:'nwWeekliesHint',elite:'nwElitesLabel',calculate:'nwCalculate',language:'nightwaveLanguageLabel',card:'nightwaveCardDescription'};
+const EN={title:'Nightwave Rank ETA',sub:'Earliest estimated date assuming every available act is completed.',progressTitle:'Rank Progress',rank:'Current Rank',rankHint:'0 = new season',progress:'Progress to Next Rank',progressHint:'Standing: 0–9999',target:'Target Rank',weekTitle:'Current Week',weekly:'Weeklies Left',weeklyHint:'Uncompleted standard acts',elite:'Elite Weeklies Left',calculate:'Calculate ETA',language:'Language',card:'Estimate when you will reach your target Nightwave rank.',invalid:'Check your inputs. Enter valid whole numbers within each field’s range.',already:'Already there',alreadyDesc:'Your current standing already meets or exceeds the target rank.',today:'Target reached this week',todayDesc:'Completing remaining weeklies and elite weeklies is enough.',estimated:'Estimated ETA',days:'Daily resets',weeks:'Weekly resets',start:'Starting standing',finish:'Standing at completion',needed:'Standing needed',after:'Standing after remaining acts',out:'Out of range',outDesc:'Could not estimate within ten years.'};
+const changes={
+es:{title:'ETA de rango de Onda Nocturna',sub:'Fecha más temprana estimada si completas todos los desafíos disponibles.',progressTitle:'Progreso de rango',rank:'Rango actual',rankHint:'0 = nueva temporada',progress:'Progreso al siguiente rango',progressHint:'Reputación: 0–9999',target:'Rango objetivo',weekTitle:'Semana actual',weekly:'Semanales restantes',weeklyHint:'Desafíos normales sin completar',elite:'Semanales de élite restantes',calculate:'Calcular fecha',language:'Idioma',card:'Calcula cuándo alcanzarás tu rango objetivo de Onda Nocturna.',invalid:'Comprueba los valores introducidos.',already:'Ya alcanzado',alreadyDesc:'Tu reputación actual ya alcanza el rango objetivo.',today:'Objetivo alcanzable esta semana',todayDesc:'Basta con completar los desafíos semanales restantes.',estimated:'Fecha estimada',days:'Reinicios diarios',weeks:'Reinicios semanales',start:'Reputación inicial',finish:'Reputación final',needed:'Reputación necesaria',after:'Reputación tras los desafíos',out:'Fuera de rango',outDesc:'No se pudo calcular una fecha en diez años.'},
+pt:{title:'Previsão de Rank da Nightwave',sub:'Data mais próxima prevista ao concluir todos os desafios disponíveis.',progressTitle:'Progresso do Rank',rank:'Rank Atual',rankHint:'0 = nova temporada',progress:'Progresso para o Próximo Rank',progressHint:'Reputação: 0–9999',target:'Rank Desejado',weekTitle:'Semana Atual',weekly:'Semanais Restantes',weeklyHint:'Desafios normais não concluídos',elite:'Semanais de Elite Restantes',calculate:'Calcular Previsão',language:'Idioma',card:'Estime quando você alcançará seu rank desejado na Nightwave.',invalid:'Verifique os valores informados.',already:'Já alcançado',alreadyDesc:'Sua reputação atual já alcançou o rank desejado.',today:'Alcançável nesta semana',todayDesc:'Concluir os desafios semanais restantes é suficiente.',estimated:'Data Estimada',days:'Reinícios diários',weeks:'Reinícios semanais',start:'Reputação inicial',finish:'Reputação final',needed:'Reputação necessária',after:'Reputação após os desafios',out:'Fora do intervalo',outDesc:'Não foi possível calcular uma data em dez anos.'},
+fr:{title:'Estimation de rang Nightwave',sub:'Date minimale estimée en terminant tous les défis disponibles.',progressTitle:'Progression du rang',rank:'Rang actuel',rankHint:'0 = nouvelle saison',progress:'Progression vers le rang suivant',progressHint:'Réputation : 0–9999',target:'Rang souhaité',weekTitle:'Semaine actuelle',weekly:'Défis hebdomadaires restants',weeklyHint:'Défis normaux non terminés',elite:'Défis élite restants',calculate:'Calculer la date',language:'Langue',card:'Estimez la date à laquelle vous atteindrez votre rang Nightwave.',invalid:'Vérifiez les valeurs saisies.',already:'Déjà atteint',alreadyDesc:'Votre réputation atteint déjà le rang souhaité.',today:'Atteignable cette semaine',todayDesc:'Terminer les défis restants suffit.',estimated:'Date estimée',days:'Réinitialisations quotidiennes',weeks:'Réinitialisations hebdomadaires',start:'Réputation initiale',finish:'Réputation finale',needed:'Réputation nécessaire',after:'Réputation après les défis',out:'Hors limites',outDesc:'Aucune date trouvée dans les dix prochaines années.'},
+de:{title:'Nightwave-Rangprognose',sub:'Frühestmöglicher Termin bei Abschluss aller verfügbaren Aufgaben.',progressTitle:'Rangfortschritt',rank:'Aktueller Rang',rankHint:'0 = neue Saison',progress:'Fortschritt zum nächsten Rang',progressHint:'Ansehen: 0–9999',target:'Zielrang',weekTitle:'Aktuelle Woche',weekly:'Verbleibende Wochenaufgaben',weeklyHint:'Noch offene normale Aufgaben',elite:'Verbleibende Elite-Aufgaben',calculate:'Termin berechnen',language:'Sprache',card:'Schätze, wann du deinen Nightwave-Zielrang erreichst.',invalid:'Bitte überprüfe die Eingabewerte.',already:'Bereits erreicht',alreadyDesc:'Dein aktuelles Ansehen reicht bereits für den Zielrang.',today:'Diese Woche erreichbar',todayDesc:'Die verbleibenden Wochenaufgaben reichen aus.',estimated:'Voraussichtlicher Termin',days:'Tägliche Resets',weeks:'Wöchentliche Resets',start:'Start-Ansehen',finish:'Ansehen am Ziel',needed:'Benötigtes Ansehen',after:'Ansehen nach Aufgaben',out:'Außerhalb des Bereichs',outDesc:'Innerhalb von zehn Jahren kein Termin gefunden.'},
+it:{title:'Previsione grado Nightwave',sub:'Prima data stimata completando tutte le sfide disponibili.',progressTitle:'Progressi grado',rank:'Grado attuale',rankHint:'0 = nuova stagione',progress:'Progressi al prossimo grado',progressHint:'Reputazione: 0–9999',target:'Grado obiettivo',weekTitle:'Settimana attuale',weekly:'Settimanali rimanenti',weeklyHint:'Sfide normali da completare',elite:'Settimanali élite rimanenti',calculate:'Calcola data',language:'Lingua',card:'Stima quando raggiungerai il grado Nightwave desiderato.',invalid:'Controlla i valori inseriti.',already:'Già raggiunto',alreadyDesc:'La reputazione attuale è sufficiente.',today:'Obiettivo raggiungibile questa settimana',todayDesc:'Basta completare le sfide rimanenti.',estimated:'Data stimata',days:'Reset giornalieri',weeks:'Reset settimanali',start:'Reputazione iniziale',finish:'Reputazione finale',needed:'Reputazione necessaria',after:'Reputazione dopo le sfide',out:'Fuori intervallo',outDesc:'Nessuna data trovata entro dieci anni.'},
+pl:{title:'Prognoza rangi Nightwave',sub:'Najwcześniejszy szacowany termin przy ukończeniu wszystkich dostępnych zadań.',progressTitle:'Postęp rangi',rank:'Obecna ranga',rankHint:'0 = nowy sezon',progress:'Postęp do następnej rangi',progressHint:'Reputacja: 0–9999',target:'Docelowa ranga',weekTitle:'Bieżący tydzień',weekly:'Pozostałe zadania tygodniowe',weeklyHint:'Nieukończone zwykłe zadania',elite:'Pozostałe elitarne zadania',calculate:'Oblicz termin',language:'Język',card:'Sprawdź, kiedy osiągniesz docelową rangę Nightwave.',invalid:'Sprawdź wprowadzone wartości.',already:'Już osiągnięto',alreadyDesc:'Obecna reputacja wystarcza do osiągnięcia celu.',today:'Cel w tym tygodniu',todayDesc:'Wystarczy ukończyć pozostałe zadania.',estimated:'Szacowana data',days:'Dzienne resetowania',weeks:'Tygodniowe resetowania',start:'Reputacja początkowa',finish:'Reputacja końcowa',needed:'Wymagana reputacja',after:'Reputacja po zadaniach',out:'Poza zakresem',outDesc:'Nie znaleziono daty w ciągu dziesięciu lat.'},
+ru:{title:'Прогноз ранга Ночной волны',sub:'Самая ранняя дата при выполнении всех доступных заданий.',progressTitle:'Прогресс ранга',rank:'Текущий ранг',rankHint:'0 = новый сезон',progress:'Прогресс до следующего ранга',progressHint:'Репутация: 0–9999',target:'Целевой ранг',weekTitle:'Текущая неделя',weekly:'Осталось еженедельных',weeklyHint:'Невыполненные обычные задания',elite:'Осталось элитных заданий',calculate:'Рассчитать дату',language:'Язык',card:'Узнайте, когда достигнете целевого ранга Ночной волны.',invalid:'Проверьте введённые значения.',already:'Уже достигнуто',alreadyDesc:'Текущей репутации достаточно.',today:'Цель достижима на этой неделе',todayDesc:'Достаточно выполнить оставшиеся задания.',estimated:'Ожидаемая дата',days:'Ежедневные сбросы',weeks:'Еженедельные сбросы',start:'Начальная репутация',finish:'Итоговая репутация',needed:'Нужно репутации',after:'После заданий',out:'Вне диапазона',outDesc:'Не удалось найти дату в пределах десяти лет.'},
+zh:{title:'午夜电波等级预计日期',sub:'假设完成所有可用任务，估算最早达到目标等级的日期。',progressTitle:'等级进度',rank:'当前等级',rankHint:'0 = 新赛季',progress:'下一等级进度',progressHint:'声望：0–9999',target:'目标等级',weekTitle:'本周任务',weekly:'剩余每周任务',weeklyHint:'尚未完成的普通任务',elite:'剩余精英每周任务',calculate:'计算预计日期',language:'语言',card:'估算达到午夜电波目标等级的时间。',invalid:'请检查输入值。',already:'已达成',alreadyDesc:'当前声望已达到目标等级。',today:'本周可达成',todayDesc:'完成剩余每周任务即可达成。',estimated:'预计日期',days:'每日重置',weeks:'每周重置',start:'初始声望',finish:'最终声望',needed:'所需声望',after:'任务后声望',out:'超出范围',outDesc:'无法在十年内估算日期。'},
+ja:{title:'Nightwaveランク到達予測',sub:'利用可能な課題をすべて達成した場合の最短到達日を推定します。',progressTitle:'ランク進行状況',rank:'現在のランク',rankHint:'0 = 新シーズン',progress:'次のランクまでの進行度',progressHint:'地位ポイント：0～9999',target:'目標ランク',weekTitle:'今週の課題',weekly:'残りの週間課題',weeklyHint:'未完了の通常課題',elite:'残りのエリート週間課題',calculate:'到達日を計算',language:'言語',card:'Nightwaveの目標ランクへの到達日を推定します。',invalid:'入力値を確認してください。',already:'達成済み',alreadyDesc:'現在のポイントで目標ランクに到達しています。',today:'今週達成可能',todayDesc:'残りの週間課題を完了すれば達成できます。',estimated:'到達予定日',days:'デイリー更新回数',weeks:'週間更新回数',start:'開始時ポイント',finish:'到達時ポイント',needed:'必要ポイント',after:'課題完了後ポイント',out:'計算範囲外',outDesc:'10年以内の到達日を算出できませんでした。'},
+ar:{title:'توقع رتبة نايت ويف',sub:'تقدير أقرب موعد للوصول إلى الرتبة المستهدفة مع إكمال كل المهام المتاحة.',progressTitle:'تقدم الرتبة',rank:'الرتبة الحالية',rankHint:'0 = موسم جديد',progress:'التقدم للرتبة التالية',progressHint:'السمعة: 0–9999',target:'الرتبة المستهدفة',weekTitle:'الأسبوع الحالي',weekly:'المهام الأسبوعية المتبقية',weeklyHint:'المهام العادية غير المكتملة',elite:'مهام النخبة الأسبوعية المتبقية',calculate:'احسب الموعد',language:'اللغة',card:'توقع موعد الوصول إلى رتبتك المستهدفة في نايت ويف.',invalid:'تحقق من القيم المدخلة.',already:'تم الوصول',alreadyDesc:'سمعتك الحالية تكفي للوصول إلى الرتبة المستهدفة.',today:'يمكن الوصول هذا الأسبوع',todayDesc:'يكفي إكمال المهام الأسبوعية المتبقية.',estimated:'الموعد المتوقع',days:'إعادات الضبط اليومية',weeks:'إعادات الضبط الأسبوعية',start:'السمعة الأولية',finish:'السمعة عند الوصول',needed:'السمعة المطلوبة',after:'السمعة بعد المهام',out:'خارج النطاق',outDesc:'تعذر حساب موعد خلال عشر سنوات.'}}
+const locales={en:EN};for(const [key,val] of Object.entries(changes))locales[key]={...EN,...val};
+const root=document.getElementById('nightwaveApp');if(!root)return;
+const result=document.getElementById('nwResult');const source=document.getElementById('rivenLanguage');let lastCalculated=false;
+function lang(){const selected=source?.value||'auto';const code=(selected==='auto'?(navigator.language||'en'):selected).toLowerCase().split('-')[0];return locales[code]?code:'en';}
+function l(k){return locales[lang()][k];}
+function translate(){for(const [key,id] of Object.entries(fields)){const node=document.getElementById(id);if(node)node.textContent=l(key);}if(lastCalculated)calculate();}
+function num(id,min,max){const v=document.getElementById(id).value.trim();if(!/^\d+$/.test(v))throw Error('invalid');const n=Number(v);if(!Number.isSafeInteger(n)||n<min||n>max)throw Error('invalid');return n;}
+const MS_DAY=86400000;const partsFormatter=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit'});
+function nyParts(dt){const parts=Object.fromEntries(partsFormatter.formatToParts(dt).map(p=>[p.type,p.value]));return [Number(parts.year),Number(parts.month),Number(parts.day)];}
+function nyTimeToUTC(y,m,d){const guess=Date.UTC(y,m-1,d,20);const named=new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',timeZoneName:'shortOffset'}).formatToParts(new Date(guess)).find(p=>p.type==='timeZoneName')?.value||'GMT-5';const match=named.match(/GMT([+-])(\d+)(?::(\d+))?/);const minutes=match?(match[1]==='-'?-1:1)*(Number(match[2])*60+Number(match[3]||0)):-300;return new Date(Date.UTC(y,m-1,d,20)-minutes*60000);}
+function nextDaily(){const now=new Date();let [y,m,d]=nyParts(now);let dt=nyTimeToUTC(y,m,d);if(dt<=now){const t=new Date(Date.UTC(y,m-1,d)+MS_DAY);dt=nyTimeToUTC(t.getUTCFullYear(),t.getUTCMonth()+1,t.getUTCDate());}return dt;}
+function advanceNY(dt){const [y,m,d]=nyParts(dt);const next=new Date(Date.UTC(y,m-1,d)+MS_DAY);return nyTimeToUTC(next.getUTCFullYear(),next.getUTCMonth()+1,next.getUTCDate());}
+function sundayNY(dt){return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short'}).format(dt)==='Sun';}
+function fmt(n){return n.toLocaleString(lang()==='en'?'en-US':lang());}
+function output(title,big,description,details){result.hidden=false;result.replaceChildren();const h=document.createElement('h2');h.textContent=title;result.append(h);if(big){const b=document.createElement('div');b.className='nw-big';b.textContent=big;result.append(b);}const p=document.createElement('p');p.textContent=description;result.append(p);if(details){const d=document.createElement('div');d.className='nw-details';for(const [label,value] of details){const row=document.createElement('div');row.textContent=label+': '+value;d.append(row);}result.append(d);}}
+function calculate(){lastCalculated=true;let rank,progress,target,weekly,elite;try{rank=num('nwCurrentRank',0,30);progress=num('nwProgress',0,9999);target=num('nwTargetRank',0,30);weekly=num('nwWeeklies',0,10);elite=num('nwElites',0,5);}catch{output(l('invalid'),'','');return;}
+const initial=rank*10000+progress,needed=target*10000;let rep=initial;if(rep>=needed){output(l('already'),' ',l('alreadyDesc'),[[l('start'),fmt(initial)],[l('needed'),fmt(needed)]]);return;}
+rep+=weekly*4500+elite*7000;if(rep>=needed){output(l('today'),new Date().toLocaleDateString(lang(),{year:'numeric',month:'long',day:'numeric'}),l('todayDesc'),[[l('after'),fmt(rep)],[l('needed'),fmt(needed)]]);return;}
+let reset=nextDaily(),days=0,weeks=0;for(let i=0;i<3650;i++){days++;rep+=1000;if(sundayNY(reset)){rep+=5*4500+2*7000;weeks++;}if(rep>=needed)break;reset=advanceNY(reset);}
+if(rep<needed){output(l('out'),' ',l('outDesc'));return;}const date=reset.toLocaleString(lang()==='en'?'en-US':lang(),{weekday:'long',year:'numeric',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'});output(l('estimated'),date,`${l('days')}: ${days} · ${l('weeks')}: ${weeks}`,[[l('start'),fmt(initial)],[l('finish'),fmt(rep)],[l('needed'),fmt(needed)]]);
+}
+document.getElementById('nwCalculate').addEventListener('click',calculate);
+source?.addEventListener('change',translate);
+document.addEventListener('calculator-view-change',e=>{if(e.detail.view==='nightwave')translate();});
+translate();
+})();
+
 </script>
 </body>
 </html>
