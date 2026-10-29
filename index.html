@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.4">
+<meta name="riven-version" content="5.4.2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -843,6 +843,10 @@ html[lang="ar"] #relicApp{text-align:right}
 #calculatorHome #mobileOfflineInstall{margin:2px 0 20px}
 @media(max-width:620px){#calculatorHome .calc-choice-grid{grid-template-columns:1fr}#calculatorHome .calc-choice-item .calc-choice{min-height:0;padding:16px 18px 11px}#calculatorHome .calc-choice-item .choice-icon{margin-bottom:10px}#calculatorHome .default-tool-label{padding:11px 18px}#calculatorHome .home-actions{grid-template-columns:1fr}#calculatorHome .home-actions .upd{min-height:44px;font-size:.87rem}#calculatorHome{padding-top:26px}#calculatorHome .home-description{margin-bottom:20px}}
 @media(min-width:621px) and (max-width:820px){#calculatorHome .home-actions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Patreon inherits the theme-aware homepage link design. */
+a.upd.patreon{background:var(--acc);color:var(--accfg)}
+a.upd.patreon svg{fill:currentColor}
 </style>
 <script id="rivenShareVisitGuard">
 /* This is a local UI preference, not an analytics visitor identifier.
@@ -916,7 +920,22 @@ html[lang="ar"] #relicApp{text-align:right}
 #feedbackIntro{font-size:.9rem;color:var(--mute);margin:5px 0 17px}.feedback-panel form{display:flex;flex-direction:column;gap:9px}.feedback-panel label{font-size:.9rem;font-weight:700}.feedback-panel select,.feedback-panel textarea{box-sizing:border-box;width:100%;padding:11px 12px;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:9px;font:inherit}.feedback-panel textarea{resize:vertical;min-height:110px}.feedback-panel select:focus-visible,.feedback-panel textarea:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
 .feedback-meta{min-height:26px;display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--mute);font-size:.8rem}.feedback-meta [role=status]{text-align:right}.feedback-meta .feedback-error{color:#ff9999}.feedback-meta .feedback-success{color:#8de0ae}.feedback-send{font:inherit;font-weight:750;padding:12px;border:1px solid var(--acc);background:var(--acc);color:var(--bg,#16151b);border-radius:10px;cursor:pointer}.feedback-send:disabled{opacity:.55;cursor:wait}
 .feedback-honeypot{position:absolute!important;left:-9999px!important;opacity:0!important;width:1px!important;height:1px!important}
-#feedbackOpen{font:inherit;cursor:pointer}
+/* Consistent high-contrast feedback action across all palettes, including Wally. */
+#calculatorHome .home-actions #feedbackOpen{
+  font-family:inherit;font-size:1rem;font-weight:800;line-height:1.35;
+  letter-spacing:.012em;color:#fff;
+  background:color-mix(in srgb,var(--acc) 18%,#151b27);
+  border:1px solid color-mix(in srgb,var(--acc) 74%,#e5e7eb);
+  text-shadow:0 1px 1px rgba(0,0,0,.35);
+  min-height:48px;cursor:pointer;
+}
+#calculatorHome .home-actions #feedbackOpen:hover{
+  background:color-mix(in srgb,var(--acc) 28%,#151b27);
+}
+#calculatorHome .home-actions #feedbackOpen:focus-visible{
+  outline:3px solid var(--acc);outline-offset:3px;
+}
+@media(max-width:620px){#calculatorHome .home-actions #feedbackOpen{font-size:1rem;min-height:48px}}
 .feedback-turnstile{min-height:42px;display:flex;align-items:center;justify-content:center;margin:6px 0}.feedback-cooldown{font-weight:700;color:var(--mute)}
 @media(max-width:600px){.feedback-overlay{align-items:center}.feedback-panel{padding:17px}}
 </style>
@@ -986,8 +1005,8 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
     </div>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.4</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.4.2</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.4.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Support on Patreon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Patreon</a></div>
     </div>
 
   </div>
@@ -1288,7 +1307,7 @@ html[lang="ar"] #relicApp{text-align:right}
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.3.3</span></span>
+      <span><strong>Current Version:</strong> <span>v5.4.2</span></span>
     </div>
   </div>
 </div>
@@ -2165,6 +2184,11 @@ render();
 })();
 </script>
 <script id="patchNotesData" type="application/json">[
+  {"version":"5.4.2","content":"Added a Patreon link to the homepage."},
+  {
+    "version": "5.4.1",
+    "content": "Improved homepage Submit Feedback button contrast and readability across themes."
+  },
   {
     "version": "5.4",
     "content": "Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."
