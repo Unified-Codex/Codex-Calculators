@@ -4,14 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.2.1">
+<meta name="riven-version" content="5.2.3">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
 <link rel="manifest" href="./manifest.json">
 <link rel="apple-touch-icon" href="./apple-touch-icon.png">
 <title>Codex Calcs | Warframe Tools & Circuit Calendar</title>
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2064%2064'%3E%3Cdefs%3E%3ClinearGradient%20id='a'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%23d6c8ff'/%3E%3Cstop%20offset='.55'%20stop-color='%238b6cff'/%3E%3Cstop%20offset='1'%20stop-color='%23f2c75c'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpolygon%20points='32,2%2062,32%2032,62%202,32'%20fill='url%28%23a%29'/%3E%3Cpolygon%20points='32,11%2053,32%2032,53%2011,32'%20fill='%2317142b'/%3E%3Cpolygon%20points='32,17%2036,28%2047,32%2036,36%2032,47%2028,36%2017,32%2028,28'%20fill='%23e9defd'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
 <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script id="calculatorRouteBoot">
 // New visitors always see the hub. Only an explicit per-tool opt-in skips it.
@@ -556,7 +557,7 @@ html[lang="ar"] .range,html[lang="ar"] .math,html[lang="ar"] .val,html[lang="ar"
 html[lang="ar"] #shareWelcomeOverlay .version-dialog{direction:rtl;text-align:right}
 
 
-/* v5.2.1 — offline Circuit Calendar */
+/* v5.2.3 — streamlined patch notes and icon refresh */
 #circuitApp{width:min(100%,1020px);padding-top:25px;padding-bottom:48px}
 #circuitApp .circuit-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:22px}
 #circuitApp .circuit-head{margin-bottom:20px}
@@ -661,6 +662,7 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul{right:auto;left:0}
 .calc-choice:active{transform:translateY(0)}
 .calc-choice .choice-icon{display:grid;place-items:center;width:42px;height:42px;margin-bottom:18px;color:var(--acc);background:color-mix(in srgb,var(--acc) 14%,var(--panel2));border:1px solid color-mix(in srgb,var(--acc) 28%,var(--line));border-radius:12px}
 .calc-choice .choice-icon svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-width:1.8}
+.calc-choice .choice-icon img{width:28px;height:28px;display:block;object-fit:contain;filter:drop-shadow(0 0 8px color-mix(in srgb,var(--acc) 28%, transparent))}
 .calc-choice .choice-title{font-size:1.28rem;font-weight:700;display:block;margin:0 0 7px}
 .calc-choice .choice-description{font-size:.9rem;line-height:1.55;color:var(--mute);display:block}
 .calc-preference{margin-top:23px;background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 16px}
@@ -883,7 +885,7 @@ html[lang="ar"] #relicApp{text-align:right}
     <div class="calc-choice-grid">
       <div class="calc-choice-item">
       <button type="button" class="calc-choice" data-open-calculator="riven" aria-label="Rivens">
-        <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m12 2 8 8-8 12L4 10zM4 10h16M12 2l3 8-3 12-3-12z"/></svg></span>
+        <span class="choice-icon" aria-hidden="true"><img src="./tool-riven.png" alt=""></span>
         <span class="choice-title" id="calcChoiceTitle-riven">Rivens</span>
         <span class="choice-description">Calculate weapon Riven stat ranges, spliced combinations, and saved builds.</span>
       </button>
@@ -891,7 +893,7 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
       <div class="calc-choice-item">
       <button type="button" class="calc-choice" data-open-calculator="duplicate" aria-label="Melee Duplicate">
-        <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7.5 3 3 7.5l9 9L16.5 12zM12 21l9-9-3-3-9 9zM14 3l7 7M3 14l7 7"/></svg></span>
+        <span class="choice-icon" aria-hidden="true"><img src="./tool-duplicate.png" alt=""></span>
         <span class="choice-title" id="calcChoiceTitle-duplicate">Melee Duplicate</span>
         <span class="choice-description">Find the crit chance that maximizes average damage with Melee Duplicate.</span>
       </button>
@@ -907,7 +909,7 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
       <div class="calc-choice-item">
       <button type="button" class="calc-choice" data-open-calculator="relic" aria-label="Relic Probability">
-        <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2 20 7v10l-8 5-8-5V7zM4 7l8 5 8-5M12 12v10M8 4.5l8 5M16 4.5l-8 5"/></svg></span>
+        <span class="choice-icon" aria-hidden="true"><img src="./tool-relic.png" alt=""></span>
         <span class="choice-title" id="calcChoiceTitle-relic">Relic Probability</span>
         <span class="choice-description">Calculate rare drop odds and compare Radshares with relic staggering.</span>
       </button>
@@ -923,8 +925,8 @@ html[lang="ar"] #relicApp{text-align:right}
       </div>
     </div>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.2.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.2.1</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.2.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.2.3 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.2.3</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.2.3_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Support The Channel!</a></div>
     </div>
 
   </div>
@@ -1191,7 +1193,7 @@ html[lang="ar"] #relicApp{text-align:right}
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.2.1</span></span>
+      <span><strong>Current Version:</strong> <span>v5.2.3</span></span>
     </div>
   </div>
 </div>
@@ -1250,7 +1252,7 @@ const RIVEN_PATCH_48={"es":"Nuevo Weekly Tracker en la pantalla inicial: 35 tare
 const RIVEN_PATCH_51={"es":"Actualización de localización: terminología de atributos Riven contrastada con los textos del juego y nombres de recursos semanales actualizados; correcciones en todas las herramientas sin modificar fórmulas.","pt":"Revisão da localização: atributos Riven alinhados às traduções presentes no jogo e recursos semanais atualizados; nenhuma fórmula foi alterada.","fr":"Révision de la localisation : les attributs Riven utilisent les termes du jeu lorsqu’ils sont vérifiés, avec les noms des ressources hebdomadaires correspondants. Aucun calcul modifié.","de":"Lokalisierungsüberarbeitung: geprüfte Riven-Attribute verwenden Spielbegriffe; wöchentliche Gegenstandsnamen wurden korrigiert. Berechnungen bleiben unverändert.","it":"Revisione della localizzazione: termini Riven allineati ai nomi nel gioco e risorse settimanali corrette. Nessuna formula modificata.","pl":"Aktualizacja lokalizacji: zweryfikowano nazwy statystyk Riven z tłumaczeniami w grze oraz nazwy cotygodniowych zasobów. Obliczenia bez zmian.","ru":"Улучшена локализация: проверены названия характеристик и еженедельных наград. Формулы калькуляторов не изменены.","zh":"本地化全面整理：已核对并修正裂罅属性用语、每周资源名称及相关术语；计算公式保持不变。","ja":"ローカライズ改善：ゲーム内用語との整合性を確認し、ウィークリーの資源名などを整理。計算式は変更なし。","ar":"مراجعة التعريب: تحسين اتساق أسماء إحصائيات الريفن والموارد الأسبوعية مع مصطلحات اللعبة عندما تتوفر مراجع موثوقة. لم تتغير الحسابات."};
 const RIVEN_PATCH_50={"es":"Codex Calcs ya no es solo una calculadora de Rivens. La versión 5.0 convierte el sitio en una colección de cuatro herramientas de Warframe: Riven Calculator (rangos, notas F–S y configuraciones guardadas), Melee Duplicate (probabilidad crítica óptima y daño medio), Weekly Tracker (actividades, compras, pulsos compartidos, ocultación y reinicio semanal) y Relic Probability (probabilidades de recompensas y comparación entre Radshare y apertura escalonada). Una sola página de inicio, temas, idiomas, uso sin conexión y la opción de recordar tu herramienta preferida.","pt":"O Codex Calcs deixou de ser apenas uma calculadora de Rivens. A versão 5.0 transforma o site numa coleção de quatro ferramentas de Warframe: Riven Calculator (intervalos, notas F–S e configurações salvas), Melee Duplicate (chance crítica ideal e dano médio), Weekly Tracker (atividades, compras, pulsos compartilhados, ocultação e reinício semanal) e Relic Probability (chances de recompensas e comparação entre Radshare e aberturas alternadas). Tudo numa página inicial, com temas, idiomas, modo offline e opção de lembrar a ferramenta escolhida.","fr":"Codex Calcs n’est plus seulement un calculateur de Rivens. La version 5.0 transforme le site en une collection de quatre outils Warframe : Riven Calculator (fourchettes, notes F–S et configurations sauvegardées), Melee Duplicate (chance critique optimale et dégâts moyens), Weekly Tracker (activités, achats, impulsions partagées, masquage et réinitialisation hebdomadaire) et Relic Probability (probabilités de récompenses et comparaison Radshare/ouverture échelonnée). Le tout depuis un accueil unique, avec thèmes, langues, accès hors ligne et mémorisation de l’outil préféré.","de":"Codex Calcs ist nicht mehr nur ein Riven-Rechner. Version 5.0 macht die Website zu einer Sammlung von vier Warframe-Werkzeugen: Riven Calculator (Wertebereiche, F–S-Bewertungen und gespeicherte Setups), Melee Duplicate (optimale Krit-Chance und durchschnittlicher Schaden), Weekly Tracker (Aufgaben, Käufe, gemeinsame Suchimpulse, Ausblenden und wöchentlicher Reset) sowie Relic Probability (Belohnungschancen und Vergleich von Radshare und gestaffeltem Öffnen). Alles über eine Startseite, mit Designs, Sprachwahl, Offline-Nutzung und gespeicherter Werkzeugauswahl.","it":"Codex Calcs non è più soltanto un calcolatore di Riven. La versione 5.0 trasforma il sito in una raccolta di quattro strumenti di Warframe: Riven Calculator (intervalli, voti F–S e configurazioni salvate), Melee Duplicate (probabilità critica ottimale e danno medio), Weekly Tracker (attività, acquisti, impulsi condivisi, nascondimento e reset settimanale) e Relic Probability (probabilità delle ricompense e confronto tra Radshare e apertura scaglionata). Tutto da una sola pagina iniziale, con temi, lingue, utilizzo offline e scelta dello strumento memorizzata.","pl":"Codex Calcs to już nie tylko kalkulator Rivenów. Wersja 5.0 zmienia witrynę w zestaw czterech narzędzi Warframe: Riven Calculator (zakresy, oceny F–S i zapisane konfiguracje), Melee Duplicate (optymalna szansa na trafienie krytyczne i średnie obrażenia), Weekly Tracker (aktywności, zakupy, wspólne impulsy, ukrywanie i cotygodniowy reset) oraz Relic Probability (szanse nagród i porównanie Radshare z otwieraniem na zmianę). Wszystko na jednej stronie głównej, z motywami, językami, trybem offline i zapamiętywaniem wybranego narzędzia.","ru":"Codex Calcs теперь не просто калькулятор Ривенов. Версия 5.0 объединяет четыре инструмента Warframe: Riven Calculator (диапазоны, оценки F–S и сохранённые сборки), Melee Duplicate (оптимальный шанс крита и средний урон), Weekly Tracker (еженедельные задания, покупки, общие импульсы, скрытие и сброс) и Relic Probability (шансы наград и сравнение Radshare с поочерёдным открытием). Всё доступно с одной главной страницы, с темами, языками, офлайн-режимом и запоминанием выбранного инструмента.","zh":"Codex Calcs 不再只是紫卡计算器！5.0 版本将网站升级为包含四款 Warframe 工具的平台：Riven Calculator（词条范围、F–S 评级与保存配置）、Melee Duplicate（最佳暴击率与平均伤害）、Weekly Tracker（每周任务、兑换、共享搜索脉冲、隐藏与自动重置）以及 Relic Probability（遗物奖励概率和 Radshare 与轮流开启的对比）。四款工具共用主页、主题、语言、离线支持及记住首选工具的功能。","ja":"Codex Calcs は Riven 計算機だけのサイトではなくなりました！v5.0 では 4 つの Warframe ツールを統合：Riven Calculator（数値範囲、F–S 評価、設定の保存）、Melee Duplicate（最適クリティカル率と平均ダメージ）、Weekly Tracker（週課、購入、共有サーチパルス、非表示設定、自動リセット）、Relic Probability（報酬確率と Radshare／交互開封の比較）。共通ホーム画面、テーマ、多言語対応、オフライン機能、お気に入りツールの記憶にも対応します。","ar":"لم يعد Codex Calcs مجرد حاسبة لخصائص الريفن! يحوّل الإصدار 5.0 الموقع إلى مجموعة تضم أربع أدوات للعبة Warframe: حاسبة Riven Calculator لنطاقات القيم وتقييمات F–S والإعدادات المحفوظة، وMelee Duplicate لاختيار فرصة الضربة الحرجة المثلى، وWeekly Tracker لمتابعة المهام والمشتريات والنبضات المشتركة والإخفاء وإعادة الضبط الأسبوعية، وRelic Probability لحساب فرص المكافآت ومقارنة فتح الآثار معًا أو بالتناوب. تتوفر جميع الأدوات من صفحة رئيسية واحدة مع المظاهر واللغات والعمل دون اتصال وخيار تذكّر الأداة المفضلة."};
 const RIVEN_PATCH_52={"es":"Nuevo Calendario del Circuito: alterna entre Circuito normal (11 grupos de Warframes) y Senda de Acero (9 grupos de adaptadores Incarnon). Consulta semanas futuras, busca la próxima aparición de una recompensa y guarda una lista de deseos. Funciona sin conexión en los 11 idiomas.","pt":"Novo Calendário do Circuito: alterne entre Circuito Normal (11 grupos de Warframes) e Caminho de Aço (9 grupos de adaptadores Incarnon). Veja semanas futuras, encontre a próxima aparição de uma recompensa e salve favoritos. Funciona offline em 11 idiomas.","fr":"Nouveau calendrier du Circuit : passez du Circuit normal (11 groupes de Warframes) à la Route de l’Acier (9 groupes d’adaptateurs Incarnon). Consultez les semaines à venir, retrouvez la prochaine rotation d’une récompense et gardez une liste de souhaits, même hors ligne.","de":"Neuer Circuit-Kalender: Wechsel zwischen normalem Circuit (11 Warframe-Gruppen) und Stählernem Pfad (9 Incarnon-Adapter-Gruppen). Plane kommende Wochen, finde die nächste Belohnungsrotation und speichere deine Merkliste – auch offline.","it":"Nuovo Calendario Circuito: passa dal Circuito normale (11 gruppi di Warframe) al Percorso d’Acciaio (9 gruppi di adattatori Incarnon). Consulta le settimane future, trova quando ritorna una ricompensa e salva i preferiti anche offline.","pl":"Dodano Kalendarz Obwodu. Przełączaj między zwykłym Obwodem (11 grup Warframe’ów) a Stalową Ścieżką (9 grup adapterów Incarnon). Planuj kolejne tygodnie, znajdź następny termin nagrody i zapisuj listę życzeń offline.","ru":"Добавлен Календарь Цепи: обычная Цепь (11 групп Варфреймов) и Стальной Путь (9 групп адаптеров Инкарнон). Планируйте будущие недели, ищите ближайшее появление награды и сохраняйте избранное без интернета.","zh":"新增回廊轮换日历！可切换普通回廊（11 组战甲）和钢铁之路回廊（9 组灵化适配器），查看未来轮换、查询下次出现时间并保存愿望清单，支持离线使用。","ja":"サーキットカレンダーを追加。通常サーキット（Warframe全11組）と鋼の道のり（インカーノンアダプター全9組）を切り替え、今後の報酬や次の登場週を調べてリストに保存できます。オフライン対応。","ar":"إضافة تقويم الحلبة مع التبديل بين الحلبة العادية (11 مجموعة وارفريم) وحلبة المسار الفولاذي (9 مجموعات من محوّلات إنكارنون). اعرض الأسابيع القادمة وابحث عن ظهور المكافآت واحفظ قائمة الرغبات دون اتصال."};
-function translatedPatchSummary(version){if(version==='5.2.1')return RIVEN_PATCH_52[rivenLang()]||null;let lang=rivenLang();if(version==='5.1')return RIVEN_PATCH_51[lang]||null;if(version==='5.0')return RIVEN_PATCH_50[lang]||null;if(version==='4.8')return RIVEN_PATCH_48[lang]||null;if(version==='4.7.2')return RIVEN_PATCH_472[lang]||null;if(version==='4.7.1')return RIVEN_PATCH_471[lang]||null;if(version==='4.7')return RIVEN_PATCH_47[lang]||null;if(version==='4.6')return RIVEN_PATCH_46[lang]||null;if(version==='4.5')return RIVEN_PATCH_45[lang]||null;if(version==='4.4')return RIVEN_PATCH_44[lang]||null;const recent=["4.3.4","4.3.3","4.3.2","4.3"];const j=recent.indexOf(version);if(j>=0)return RIVEN_PATCH_RECENT[lang]?.[j]||null;const old=RIVEN_PATCH_LEGACY_VERSIONS.indexOf(version);if(old>=0)return RIVEN_PATCH_LEGACY[lang]?.[old]||null;const list=RIVEN_PATCH_SUMMARIES[lang];const i=RIVEN_PATCH_VERSION_ORDER.indexOf(version);return i>=0&&list?list[i]:null}
+function translatedPatchSummary(version){let lang=rivenLang();if(version==='5.2.3')return null;if(version==='5.2')return RIVEN_PATCH_52[lang]||null;if(version==='5.1')return RIVEN_PATCH_51[lang]||null;if(version==='5.0')return RIVEN_PATCH_50[lang]||null;if(version==='4.8')return RIVEN_PATCH_48[lang]||null;if(version==='4.7')return RIVEN_PATCH_47[lang]||null;if(version==='4.6')return RIVEN_PATCH_46[lang]||null;if(version==='4.5')return RIVEN_PATCH_45[lang]||null;if(version==='4.4')return RIVEN_PATCH_44[lang]||null;const recent=['4.3.4','4.3.3','4.3.2','4.3'];const j=recent.indexOf(version);if(j>=0)return RIVEN_PATCH_RECENT[lang]?.[j]||null;const old=RIVEN_PATCH_LEGACY_VERSIONS.indexOf(version);if(old>=0)return RIVEN_PATCH_LEGACY[lang]?.[old]||null;const list=RIVEN_PATCH_SUMMARIES[lang];const i=RIVEN_PATCH_VERSION_ORDER.indexOf(version);return i>=0&&list?list[i]:null}
 </script>
 <script id="calculatorScript">
 const W=['Rifle','Shotgun','Pistol','Archgun','Melee / Zaw'];
@@ -1318,141 +1320,26 @@ const versionPopup=$('versionPopup');
 // always read the complete historical notes. Use HTML only for trusted,
 // authored note content (for example, links); do not insert user-provided HTML.
 const PATCH_NOTES = [
-  {version:'5.2.1',content:'Localization corrections: improved Weekly Tracker activity names across 11 languages, incorporated reviewed Brazilian Portuguese gameplay terminology, and preserved existing official labels.'},
-  {version:'5.2',content:'Added the Circuit Rotation Calendar as the fifth Warframe Tool. Switch between Normal Circuit (11 groups of three Warframes) and Steel Path Circuit (9 groups of five Incarnon Genesis adapters, including the June 2026 additions). Browse future rotations with weekly dates anchored to Monday 00:00 UTC. Search for a reward to find its next appearance, save a persistent wishlist, and mark favorite Warframes and adapters. Entirely offline, with support for all 11 site languages and the existing optional default-tool system. All existing calculators, tracker data, themes and effects remain unchanged.'},
-  {version:'5.1',content:'Localization Overhaul: cross-checked Riven stats against the localized Warframe game-text export in Spanish, Brazilian Portuguese, French, German, Italian, Polish, and Simplified Chinese. Corrected critical chance/damage, base damage, element types, status duration, fire rate/attack speed, multishot and other directly matched terms in stat labels. Updated Flare’s Beating Heartstrings resource name to the in-game localization across those languages. Existing Russian, Japanese, and Arabic text is preserved where matching public game source strings could not be verified. Audited all four tools’ translation dictionaries for completeness; restored no English placeholders and kept all existing calculations, saved state, offline behavior and themes unchanged. Sources and scope are documented in README-PWA.txt.'},
-  {version:'5.0.2',content:'Fixed the Themes dropdown on mobile: it now opens inward toward the center of the screen rather than extending off-screen. Added proper right-to-left positioning and a scrollable height limit for narrow screens. Desktop themes and the Wally\'s Domain surprise are unchanged.'},
-  {version:'5.0.1',content:'Homepage redesign: moved Patch Notes, the full offline HTML download, Discord, and YouTube support links to the Warframe Tools hub. Added an independent Set as default page checkbox for each tool; selecting one is optional, and otherwise both new and existing visitors start at the multi-tool hub. Moved the mobile app install prompt and shared dialogs to the homepage. Preserved offline/PWA functionality and all four tools.'},
-  {version:'5.0',content:"Codex Calcs is no longer just a Riven Calculator! What began as a simple Riven stat range calculator has grown into a collection of Warframe tools. <strong>Version 5.0 — The Warframe Tools Update</strong> marks our shift to a unified, multi-tool site with four dedicated utilities.<br><br><strong>Riven Calculator:</strong> Calculate Riven roll ranges, inspect F–S grades, explore spliced combinations, and save configurations.<br><strong>Melee Duplicate Calculator:</strong> Find the critical chance that maximizes expected damage by balancing yellow and orange crits.<br><strong>Weekly Tracker:</strong> Check off recurring activities and vendor purchases, hide unneeded weeklies, track shared Search Pulses, and reset automatically each week.<br><strong>Relic Probability Calculator:</strong> Calculate relic reward odds and compare Radshares with Relic Staggering to weigh quick drops against potential copies.<br><br>All four tools share a single homepage, themes, multilingual support, offline availability, and the option to remember your preferred tool. <strong>Version 5.0 represents a new direction for Codex Calcs</strong> — practical, accessible tools for all Tenno. And this is only the beginning!"},
-  {version:'4.9.6',content:'Weekly Tracker: merged Yuvan Peak Cryobells into The Icebind. Removed the redundant separate Cryobells counter so Icebind alone tracks 3 weekly rewarded runs. Added an Icebind note about the maximum of 6 Cryokeys, translated across 11 languages. Weekly progress and hidden preferences remain stored under the existing keys; all other tools are unchanged.'},
-  {version:'4.9.5',content:'Weekly Tracker now lets you Hide individual activities from the checklist and progress totals. Hidden entries move to an expandable Hidden section at the bottom, where you can restore them at any time. Hidden choices persist across weekly and Friday resets, while completion state and shared Search Pulses are preserved independently. Added Hide/Unhide translations in all 11 languages; calculator formulas remain unchanged.'},
-  {version:'4.9.4',content:'October 2026 Weekly Tracker audit: added Flare Beating Heartstrings and Acrithis Scuttler Husk Kuva purchases, updated Nightcap/Hunhow/Zorba/Melica quantities and weekly limits, clarified the rotating Acrithis Wares and Steel Path Circuit options, changed Icebind to 3 weekly completions, and corrected Netracell checkbox to use only remaining shared Search Pulses (such as 1 after ETA + EDA). Weekly progress and all calculator formulas are preserved.'},
-  {version:'4.9.3',content:'Updated the Riven Copy Stats image footer and text fallback to the Codex-Calculators website address. Updated the share-prompt link and offline-update GitHub links to the same location. The card now displays the current site version.'},
-  {version:'4.9.2',content:'Renamed the homepage eyebrow to Warframe Tools rather than Warframe Calculators, with translations in all 11 languages. No calculator, tracker, theme, or other site features were changed.'},
-  {version:'4.9.1',content:'Refined the Relic Probability comparison: removed mission-time inputs and drops-per-hour estimates, enlarged the three strategy-stat cards with values on their own rows, clarified the Radshare versus Stagger explanations, and removed redundant bottom notes. Probabilities and relic-budget calculations are unchanged.'},
-  {version:'4.9',content:'Added Relic Probability as a fourth homepage tool. Calculates individual relic drop chances and squad outcomes across multiple runs, plus a same-relic-budget comparison of Radshares versus Relic Staggering, extra rare copy potential, filler relic cost, and missions spent. Uses official rarity probabilities; all math runs offline. Existing calculators, themes, and weekly tracking remain unchanged.'},
-  {version:'4.8.1',content:'Moved the shared Themes picker to the main calculator-selection page, removing it from the Riven calculator. Theme choice still applies to Rivens, Melee Duplicate and Weekly Tracker and stays saved across visits. The original Wallys Domain visual surprise and its trigger logic are preserved.'},
-  {version:'4.8',content:'Added Weekly Tracker as the third homepage tool. Track all major weekly activities and vendors, including individual Kuva and Relic pack purchases, Search Pulses shared by Netracells and both Elite Archimedeas, Incarnon Circuit progression, and special weekly challenges. Includes local saved progress, reset at Monday 00:00 UTC, and independent Conclave Friday reset. Riven and Melee Duplicate calculations remain unchanged.'},
-  {version:'4.7.2',content:'Capped the visible F minimum and S maximum to exactly match the main Riven roll-range card (for example 151.9%–185.6% for 3-positive/1-negative Rifle Critical Chance). Inner grade boundaries, grading thresholds, and all calculator formulas are unchanged.'},
-  {version:'4.7.1',content:'Reversed the Show Grade Ranges tables so S appears first and F last. Grade values, boundaries, all Riven calculations, and Melee Duplicate remain unchanged.'},
-  {version:'4.7',content:'Added Show Grade Ranges to every Riven stat result. Expand any roll range into F, C-, C, C+, B-, B, B+, A-, A, A+, and S bands using the exact unrounded midpoint and proposed community grading thresholds. Includes negative rolls, appropriately precise boundaries, heavy-attack and bow doubled stat columns, all supported languages, and accessibility improvements. The grading is an estimate, not an official in-game rating.'},
-  {version:'4.6',content:'Added a calculator selection home screen for Rivens and Melee Duplicate. The Remember this option checkbox can launch your preferred calculator automatically on later visits; both calculators have a Back to calculator selection button. Melee Duplicate now runs directly in the same offline-capable site, with its original damage model, theme-aware styling, and language support.'},
-  {version:'4.5',content:'Renamed the Patch Notes counter tooltip to Total Visits in all 11 languages. Added a single-visit share request for first-time visitors with the Do not show again option checked by default, a Copy Link button, and suppression for returning users. The message stores its dismissal locally before being shown. Existing GoatCounter tracking is unchanged.'},
-  {version:'4.4',content:'Moved the existing website view total off the main calculator and into the Patch Notes header beside a compact close button. Added a localized Total Site Views tooltip, theme-aware muted styling, mobile spacing, and a small First Released / Current Version footer. GoatCounter tracking and counter behavior are unchanged.'},
-  {version:'4.3.4',content:'Audited and expanded translations across all supported languages, including the Splicer explanation and weapon filters, base-stat values, result cards, mobile installation, and dynamically generated UI text. Corrected untranslated categories and removed English leftovers from major calculator panels.'},
-  {version:'4.3.3',content:'Localized complete spliced stat names and recipe ingredients in all 11 languages, replacing partial word substitutions and translating the recipe legend.'},
-  {version:'4.3.2',content:'Extended the complete Riven formula walkthrough and its worked examples across all supported languages; improved translation coverage for long-form mathematical explanations.'},
-  {version:'4.3',content:'Expanded localization coverage across all 11 supported languages, including dynamically generated weapon selectors, layout controls, base-stat tables, spliced-stat results, and tooltips. Improved right-to-left numerical formatting and introduced a broader localization audit. Some historical details and specialized text still require translation and native-speaker review.'},
-  {version:'4.2.3',content:'Improved language support in stat dropdowns, calculated result cards, stat searches, and patch note headings. Added localized summaries for recent releases, while retaining the full original text for historical accuracy.'},
-  {version:'4.2',content:'Added automatic browser-language detection and a manual Language selector with saved preferences. Major interface controls, dialogs, and update prompts now have built-in offline translations; Riven data and identity codes remain language-independent.'},
-  {
-    version: '4.1.3',
-    content: 'Reworked mobile app update detection to check published release versions, show prompts only for genuinely newer versions, and automatically dismiss outdated prompts after updating.'
-  },
-  {
-    version: '4.1.2',
-    content: 'Restored the single-row desktop action layout, moved the borderless view counter after Support The Channel, and fixed the offline update-status element forcing the buttons onto a second row. The visitor counter now remembers its last successfully retrieved total when temporarily unavailable.'
-  },
-  {
-    version: '4.1.1',
-    content: 'Moved the website view counter beside the Discord button on desktop and into the upper-left header space on mobile. Simplified it to an unobtrusive eye icon and live total with a Website View Counter hover tooltip.'
-  },
-  {
-    version: '4.1',
-    content: 'Redesigned the Patch Notes button with a larger label and notes icon. Reorganized the entire release history into gold Generational, cyan Chapter, and violet Micro Updates, with expandable micro updates nested under their parent chapters. Added instant version-number and keyword search across all patch notes.'
-  },
-  {
-    version: '4.0',
-    content: "Version 4.0 is here! This generational leap was brought to us by the <strong>new riven code system</strong>! Now instead of long obnoxious URL's codes to paste, you instead use much shorter unique <strong>riven identity tags when sending someone a build</strong>, which have the added benefit of working offline as well!"
-  },
-  {
-    version: '3.6.5',
-    content: 'Raw HTML downloads are now versioned, self-contained single-file calculators with an offline-only GitHub update checker that highlights available new versions. The Website Visits eye now displays the GoatCounter site total when its public counter is enabled, while remaining visible when counts are unavailable.'
-  },
-  {
-    version: '3.6.4',
-    content: 'Added a Website Visits counter beside the links at the top. It shows how many times the calculator has been opened, including returning visitors, and re-checks about every 5 minutes while the page stays open. Calculations and offline behavior are unchanged.'
-  },
-  {
-    version: '3.6.3',
-    content: 'Copy Stats cards now automatically use the currently selected theme colors, including backgrounds, stat highlights and borders, while preserving their existing layout and results.'
-  },
-  {
-    version: '3.6.2',
-    content: 'Renamed the mobile installation button to Get Mobile App Version for clearer distinction from the raw HTML download.'
-  },
-  {
-    version: '3.6.1',
-    content: 'Fixed offline installation when an app icon is missing or moved; made the calculator itself cache independently, and corrected home-screen icon paths for the published repository.'
-  },
-  {
-    version: '3.6',
-    content: 'Added mobile offline installation, home-screen app support and automatic update checks when connected. Removed the mobile Scroll/Compact selector; the compact table is now the default view.'
-  },
-  {
-    version: '3.5',
-    content: '<span class="void-whisper"><em>The V̸o̴i̵d̶...... it <span class="void-redact">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk'
-  },
-  {
-    version: '3.3.8',
-    content: 'Minor visual polish and theme refinements.'
-  },
-  {
-    version: '3.3.7',
-    content: 'Clarified the four Riven layout multiplier descriptions to consistently express each positive stat as a percentage of its base value.'
-  },
-  {
-    version: '3.3.6',
-    content: 'Adjusted Wallys Domain button, community-link and expandable-section styling to use consistent gray and charcoal colors with restrained hover contrast.'
-  },
-  {
-    version: '3.3.5',
-    content: 'Strengthened shared URL and saved setup validation: share codes include weapon category names, named weapons must match their actual category and bow status, invalid names cannot be exported, and stat selections share one rule that prevents more than one Spliced stat across dropdowns, imports and automatic repairs. Added Wallys Domain, a soft-contrast, true dark theme with a gray theme dot.'
-  },
-  {
-    version: '3.3.4',
-    content: 'Added red doubled Critical Chance values with a Heavy Attacks explanation to copied Riven cards, and made bow Fire Rate show the normal range followed by its doubled red range in both the calculator and copied cards.'
-  },
-  {
-    version: '3.3.3',
-    content: 'Added a red Fire Rate note beneath the selected stat whenever a bow is selected, matching the existing melee Critical Chance warning.'
-  },
-  {
-    version: '3.3.2',
-    content: 'Fixed share/import validation so only supported setups load, enforced the one-Spliced-stat limit everywhere, corrected Mutalist Cernos bow handling, cleared stale weapon lookup state, kept Copy Stats aligned with melee heavy-attack critical chance output, improved invalid shared-link feedback, and refreshed the copied card branding.'
-  },
-  {
-    version: '3.3.1',
-    content: 'Fixed shared URL and saved-setup validation, hardened malformed imports, corrected saved-setup deletion feedback, and removed redundant work from stat rendering.'
-  },
-  {
-    version: '3.3',
-    content: 'Copy Stats now copies a polished Riven-style stat card as an image when clipboard image support is available, with readable text as a fallback.'
-  },
-  {
-    version: '3.2.3',
-    content: 'Removed Punch Through from being mistakenly listed as a spliced stat.'
-  },
-  {
-    version: '3.2.2',
-    content: `Added an import riven URL button which allows you to load someone's riven config without having to paste it into your search bar, this is especially useful when using the mobile web-app version on the calculator.`
-  },
-  {
-    version: '3.2.1',
-    content: 'Added background forced refresh command when using someone\'s build URL to reduce instances of the calculator not updating to show the new stats.'
-  },
-  {
-    version: '3.2',
-    content: 'Added Copy Stats to copy the current Riven setup and calculated ranges; Save Setup and Load Saved to store and restore named configurations in your browser; and Share Setup URL to send a link that restores your configuration for other people. The save/load tools now use in-page dialogs, saved setups can be deleted, duplicate names can be replaced, and sharing includes a manual-copy fallback when clipboard access is unavailable. The new configuration controls are arranged for easier use on mobile.'
-  },
-  {
-    version: '3.1',
-    content: 'Fixed some mobile formatting issues, and added the new &quot;Scroll/Compact&quot; options on mobile which will primarily adjust how the &quot;Show Base Stats&quot; popup looks.'
-  },
-  {
-    version: '3.0',
-    content: 'Version 3.0 is live, and with it the calculator is now a fully fledged website. You no longer need to download any code - and updates automatically go live for everyone! Have any thoughts? Share them in the <a href="https://discord.com/invite/unifiedcodex" target="_blank" rel="noopener noreferrer">Discord</a>!'
-  }
+  {version:'5.2.3',content:'Streamlined and consolidated the full patch note history. Refreshed site branding with a Unified Codex favicon/app icon and custom homepage icons for Rivens, Melee Duplicate, and Relic Probability.'},
+  {version:'5.2',content:'Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward's next appearance, and keep a saved wishlist.'},
+  {version:'5.1',content:'Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset.'},
+  {version:'5.0',content:'Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability.'},
+  {version:'4.9',content:'Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links.'},
+  {version:'4.8',content:'Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup.'},
+  {version:'4.7',content:'Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints.'},
+  {version:'4.6',content:'Merged Melee Duplicate into the site and introduced the first tool-selection homepage.'},
+  {version:'4.5',content:'Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools.'},
+  {version:'4.4',content:'Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout.'},
+  {version:'4.3',content:'Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text.'},
+  {version:'4.2',content:'Added browser-language detection plus a manual Language selector with saved preferences.'},
+  {version:'4.1',content:'Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements.'},
+  {version:'4.0',content:'Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline.'},
+  {version:'3.6',content:'Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements.'},
+  {version:'3.5',content:'<span class="void-whisper"><em>The V̸o̴i̵d̶...... it <span class="void-redact">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk'},
+  {version:'3.3',content:'Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally's Domain styling.'},
+  {version:'3.2',content:'Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds.'},
+  {version:'3.1',content:'Improved mobile layout and added the original Scroll/Compact mobile viewing options.'},
+  {version:'3.0',content:'Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool.'}
 ];
 // Classify every historical release automatically, including legacy "4.15"-style
 // micro versions, which belong beneath their 4.1 chapter.
