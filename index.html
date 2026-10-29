@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.5.1">
+<meta name="riven-version" content="5.5.2">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -1082,8 +1082,8 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
     </div>
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.4 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.5</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.5.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.5.2 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.5.2</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.5.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
 
   </div>
@@ -1403,7 +1403,7 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span>v5.5</span></span>
+      <span><strong>Current Version:</strong> <span>v5.5.2</span></span>
     </div>
   </div>
 </div>
@@ -2278,8 +2278,128 @@ render();
   }
 })();
 </script>
-<script id="patchNotesData" type="application/json">[{"version":"5.5.1","content":"Relic Probability: prevent rounded probabilities below 100% from displaying as 100.00%."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
-<script id="patchNotesRenderer">[{"version":"5.5","content":"Added Nightwave Rank ETA with themed layout and translations."},{"version":"5.4.9","content":"Improved homepage tool reordering with live card movement, smoother dragging and more precise placement on desktop and mobile."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴<\/span>......and then it laughed<\/em><\/span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script id="patchNotesData" type="application/json">[{"version":"5.5.2","content":"Repaired Patch Notes button and release history rendering; corrected version labels. Retained Relic Probability display rounding fix."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.6","content":"Added a subtle, occasional holographic shimmer to the Patreon button."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script id="patchNotesRenderer">
+(function(){
+  try {
+    const dataNode=document.getElementById('patchNotesData');
+    const parsed=JSON.parse(dataNode.textContent);
+    if(!Array.isArray(parsed)||!parsed.every(n=>n&&typeof n.version==='string'&&typeof n.content==='string')) throw new Error('Invalid patch notes data');
+    const PATCH_NOTES=parsed;
+
+// Classify every historical release automatically, including legacy "4.15"-style
+// micro versions, which belong beneath their 4.1 chapter.
+function patchLevel(version){
+  if(/^\d+\.0$/.test(version))return 'major';
+  if(/^\d+\.[1-9]$/.test(version))return 'chapter';
+  return 'micro';
+}
+function patchParent(version){
+  const pieces=version.split('.');
+  if(pieces.length>=3)return pieces[0]+'.'+pieces[1];
+  if(pieces.length===2&&pieces[1].length>=2)return pieces[0]+'.'+pieces[1][0];
+  return null;
+}
+function comparePatchVersions(a,b){
+  const x=a.split('.').map(Number),y=b.split('.').map(Number);
+  for(let i=0;i<Math.max(x.length,y.length);i++){
+    const difference=(x[i]||0)-(y[i]||0);
+    if(difference)return difference;
+  }
+  return 0;
+}
+function patchCard(note,showParent=false){
+  const tier=patchLevel(note.version);
+  const typeName=tier==='major'?'Generational Release':tier==='chapter'?'Chapter Update':'Micro Update';
+  const tierBadge=tier==='major'?'':`<span class="patch-level">${rivenLabel(typeName)}</span>`;
+  const parent=showParent&&tier==='micro'?patchParent(note.version):null;
+  const translatedSummary=translatedPatchSummary(note.version);const localized=rivenLang()!=='en'&&translatedSummary;const patchBody=localized?`<p>${translatedSummary}</p><details class="patch-original"><summary>${rivenUi("English details")}</summary><p>${note.content}</p></details>`:`<p>${note.content}</p>`;
+  return `<section class="patch-note ${tier}" aria-label="${rivenUi('Version')} ${note.version}, ${rivenLabel(typeName)}"><h3>${rivenUi('Version')} ${note.version}${tierBadge}</h3>${parent?`<small class="patch-context">${rivenUi("Part of Chapter")} ${parent}</small>`:''}${patchBody}</section>`;
+}
+function patchGroups(){
+  const groups=[];
+  const parentMap=new Map();
+  for(const note of PATCH_NOTES){
+    if(patchLevel(note.version)==='micro')continue;
+    const group={note,micros:[]};
+    groups.push(group);
+    parentMap.set(note.version,group);
+  }
+  for(const note of PATCH_NOTES){
+    if(patchLevel(note.version)!=='micro')continue;
+    const parent=parentMap.get(patchParent(note.version));
+    if(parent)parent.micros.push(note);
+    else groups.push({note,micros:[]}); // Keep historical notes even if no parent entry exists.
+  }
+  groups.sort((a,b)=>comparePatchVersions(b.note.version,a.note.version));
+  for(const group of groups)group.micros.sort((a,b)=>comparePatchVersions(b.version,a.version));
+  return groups;
+}
+function patchGroupHTML(group){
+  const children=group.micros;
+  const newest=PATCH_NOTES[0]?.version;
+  const showNewest=children.some(note=>note.version===newest);
+  const subnotes=children.length?`<details class="patch-micro-group" ${showNewest?'open':''}><summary>${rivenUi("Micro Updates")} <span class="micro-count">${children.length}</span></summary>${children.map(note=>patchCard(note)).join('')}</details>`:'';
+  return `<div class="patch-group">${patchCard(group.note)}${subnotes}</div>`;
+}
+// Text extraction once for full-text keyword and version searching. HTML in notes
+// is trusted, authored content; search results reuse the unchanged original markup.
+const PATCH_SEARCH_INDEX=PATCH_NOTES.map(note=>{
+  const scratch=document.createElement('div');
+  scratch.innerHTML=note.content;
+  const level=patchLevel(note.version);
+  return {note,haystack:[note.version,scratch.textContent,level,level==='major'?'generational':level==='chapter'?'chapter':'micro',patchParent(note.version)||'',...Object.values(RIVEN_PATCH_SUMMARIES).map(a=>a[RIVEN_PATCH_VERSION_ORDER.indexOf(note.version)]||''),note.version==='5.0'?Object.values(RIVEN_PATCH_50).join(' '):'',note.version==='4.5'?Object.values(RIVEN_PATCH_45).join(' '):'',note.version==='4.4'?Object.values(RIVEN_PATCH_44).join(' '):''].join(' ').toLocaleLowerCase()};
+});
+function renderPatchNotes(){
+  const groups=patchGroups();
+  $('patchNotesList').innerHTML=groups.length?patchGroupHTML(groups[0]):'<p>'+rivenUi('No patch notes available.')+'</p>';
+  $('olderPatchNotes').innerHTML=groups.slice(1).map(patchGroupHTML).join('');
+  const toggle=$('olderNotesToggle');
+  toggle.hidden=groups.length<=1;
+  $('olderPatchNotes').hidden=true;
+  toggle.setAttribute('aria-expanded','false');
+  toggle.textContent=rivenUi('Read Older Patchnotes');
+}
+function filterPatchNotes(){
+  const terms=$('patchSearch').value.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  const searching=terms.length>0;
+  $('patchNotesBrowse').hidden=searching;
+  $('patchSearchResults').hidden=!searching;
+  $('patchSearchStatus').hidden=!searching;
+  if(!searching){$('patchSearchResults').innerHTML='';return;}
+  const found=PATCH_SEARCH_INDEX.filter(item=>terms.every(term=>item.haystack.includes(term)))
+    .sort((a,b)=>comparePatchVersions(b.note.version,a.note.version));
+  $('patchSearchResults').innerHTML=found.length?found.map(item=>patchCard(item.note,true)).join(''):'<p class="patch-search-empty">'+rivenUi('No matching patch notes. Try a different version or keyword.')+'</p>';
+  $('patchSearchStatus').textContent=found.length+rivenUi(found.length===1?' matching update':' matching updates');
+}
+renderPatchNotes();
+window.renderPatchNotes=renderPatchNotes;
+window.filterPatchNotes=filterPatchNotes;
+$('patchSearch').addEventListener('input',filterPatchNotes);
+$('olderNotesToggle').addEventListener('click',()=>{
+  const older=$('olderPatchNotes'),toggle=$('olderNotesToggle');
+  const opening=older.hidden;
+  older.hidden=!opening;
+  toggle.setAttribute('aria-expanded',String(opening));
+  toggle.textContent=rivenUi(opening?'Hide Older Patchnotes':'Read Older Patchnotes');
+});
+$('versionBtn').addEventListener('click',()=>{versionPopup.hidden=false;$('versionClose').focus()});
+$('versionClose').addEventListener('click',()=>{versionPopup.hidden=true;$('versionBtn').focus()});
+versionPopup.addEventListener('click',e=>{if(e.target===versionPopup){versionPopup.hidden=true;$('versionBtn').focus()}});
+document.addEventListener('keydown',e=>{if(versionPopup.hidden)return;if(e.key==='Escape'){e.preventDefault();versionPopup.hidden=true;$('versionBtn').focus();return;}if(e.key==='Tab'){const focusable=[...versionPopup.querySelectorAll('button:not([disabled]),input:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])')].filter(el=>!el.hidden&&el.getClientRects().length);if(!focusable.length){e.preventDefault();return;}const first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&(document.activeElement===first||!versionPopup.contains(document.activeElement))){e.preventDefault();last.focus();}else if(!e.shiftKey&&(document.activeElement===last||!versionPopup.contains(document.activeElement))){e.preventDefault();first.focus();}}});
+
+  } catch(error) {
+    console.error('Patch notes unavailable:',error);
+    const btn=document.getElementById('versionBtn');
+    const popup=document.getElementById('versionPopup');
+    const list=document.getElementById('patchNotesList');
+    if(list)list.textContent='Patch notes are temporarily unavailable.';
+    if(btn&&popup)btn.addEventListener('click',()=>{popup.hidden=false});
+    const close=document.getElementById('versionClose');
+    if(close&&popup)close.addEventListener('click',()=>popup.hidden=true);
+  }
+})();
+</script>
 
 <script id="siteVisitsCounter">
 /* Public GoatCounter site-wide visitor counter. Does not use a secret API key.
