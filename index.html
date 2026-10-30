@@ -5,7 +5,7 @@
 <meta name="referrer" content="same-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#12111c">
-<meta name="riven-version" content="5.5.8">
+<meta name="riven-version" content="5.5.9">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Codex Calcs">
@@ -865,6 +865,52 @@ a.upd.patreon svg{fill:currentColor}
  63%,100%{transform:translateX(180%) skewX(-10deg);opacity:0}
 }
 @media(prefers-reduced-motion:reduce){#calculatorHome a.upd.patreon::after,#calculatorHome a.upd.yt::after{animation:none;display:none}}
+
+/* Riven roll cost modal */
+.roll-overlay:not([hidden]){position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:99999;display:flex;justify-content:center;align-items:center;padding:12px}
+.roll-dialog{width:min(850px,100%);max-height:92dvh;overflow:auto;background:var(--panel,#151624);color:var(--fg,#f4f3f8);background-color:var(--bg,#171724);border:1px solid var(--acc,#af95db);border-radius:14px;padding:18px;box-shadow:0 15px 70px #0009}
+.roll-header{display:flex;align-items:center;justify-content:space-between;gap:16px}.roll-header h2{margin:0;font-size:1.4rem}.roll-header-actions{display:flex;align-items:center;gap:8px}.roll-ip-example strong{color:var(--acc,#e1b7ff);font-weight:800}.roll-slot-options label:has(input:disabled){opacity:.43}.roll-slot-options input:disabled{cursor:not-allowed}
+.roll-dialog p{line-height:1.5}.roll-controls{display:grid;grid-template-columns:2fr 1fr 1.5fr;gap:10px;margin:14px 0}.roll-controls label{display:flex;flex-direction:column;gap:6px;font-size:.83rem}
+.roll-dialog input[type=number],.roll-dialog select{width:100%;min-width:0;padding:9px;border-radius:7px;background:var(--bg,#171724);color:inherit;border:1px solid var(--acc,#999)}
+.roll-slot-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.roll-slot{border:1px solid color-mix(in srgb,var(--acc,#999) 42%,transparent);border-radius:8px;padding:10px}.roll-slot strong{display:block;margin-bottom:5px}.roll-slot small{display:block;color:var(--muted,#aaa);margin-bottom:8px}.roll-slot-options{max-height:162px;overflow:auto;display:grid;gap:5px;padding-right:3px}.roll-slot-options label{font-size:.84rem;display:flex;align-items:flex-start;gap:7px;line-height:1.28}.roll-slot-options label input{margin:2px 0 0;flex:none;accent-color:var(--acc,#bca6eb)}
+.roll-ip{margin:16px 0;border:1px solid var(--acc,#888);border-radius:8px;padding:12px}.roll-ip summary{cursor:pointer;font-weight:600}.roll-ips{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px}.roll-ips input{accent-color:var(--acc,#bca6eb)}
+.roll-output{margin-top:14px}.roll-output table{width:100%;border-collapse:collapse}.roll-output th,.roll-output td{padding:9px 5px;border-bottom:1px solid #7775;text-align:left;font-size:.88rem}.roll-output th:nth-child(n+2),.roll-output td:nth-child(n+2){text-align:right}.roll-output .roll-warning{margin:10px 0;color:var(--acc,#e1b7ff)}.roll-resultline{margin:8px 0;font-weight:600}
+@media(max-width:650px){.roll-controls{grid-template-columns:1fr 1fr}.roll-controls label:first-child{grid-column:span 2}.roll-slot-grid{grid-template-columns:1fr}.roll-dialog{padding:12px}.roll-output{overflow-x:auto}}
+
+/* Desktop panel customization: original full-width layout until a side placement is chosen. */
+@media(min-width:1000px){
+ #rivenApp .codex-riven-grid,#weeklyApp #weeklyList{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
+ #rivenApp .codex-riven-grid.codex-columns,#weeklyApp #weeklyList.codex-columns{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #rivenApp .codex-riven-grid>.codex-layout-panel,#weeklyApp #weeklyList>.weekly-group{min-width:0;margin:0}
+ #rivenApp .codex-riven-grid>.codex-layout-panel>section.panel{margin:0}
+ #rivenApp .codex-riven-grid>.codex-layout-panel>#res{width:100%}
+ #rivenApp .codex-riven-grid:not(.codex-columns)>.codex-layout-panel,#weeklyApp #weeklyList:not(.codex-columns)>.weekly-group{grid-column:1/-1}
+ .codex-layout-panel .codex-dragbar,.weekly-group .codex-dragbar{display:grid;place-items:center;margin:0 0 8px auto;width:35px;height:35px;min-width:35px;padding:0;background:var(--panel);border:1px solid var(--line);border-radius:9px;color:var(--text);font:inherit;font-size:22px;line-height:1;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}.codex-layout-panel .codex-dragbar:hover,.weekly-group .codex-dragbar:hover,.codex-layout-panel .codex-dragbar:focus-visible,.weekly-group .codex-dragbar:focus-visible{color:var(--acc);border-color:var(--acc)}
+ .codex-layout-panel .codex-dragbar:active,.weekly-group .codex-dragbar:active{cursor:grabbing}
+ .codex-layout-panel.codex-dragging,.weekly-group.codex-dragging{opacity:.3}
+ .codex-drop-target{outline:2px solid var(--acc);outline-offset:2px}
+ .codex-layout-reset{display:inline-flex;margin:9px 0 14px;padding:8px 13px;border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:9px;cursor:pointer}
+ .codex-layout-ghost{position:fixed;z-index:99999;pointer-events:none;min-width:160px;max-width:280px;padding:13px 18px;border:1px solid var(--acc);border-radius:12px;background:var(--panel2);box-shadow:0 14px 35px #0007;color:var(--text);font-weight:600;opacity:.96;transform:translate3d(0,0,0)}
+ .codex-side-hint{outline:2px dashed var(--acc);outline-offset:3px}
+}
+@media(max-width:999px){#rivenApp .codex-riven-grid{display:contents}#weeklyApp #weeklyList{display:block}.codex-dragbar,.codex-layout-reset{display:none!important}}
+
+#duplicateApp .dupe-selectors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:13px}
+#duplicateApp .dupe-multi,#duplicateApp .dupe-combinations{border:1px solid var(--line);border-radius:10px;background:var(--panel2)}
+#duplicateApp .dupe-multi summary,#duplicateApp .dupe-combinations summary{cursor:pointer;padding:12px 14px;font-weight:700;list-style-position:inside}
+#duplicateApp .dupe-multi summary span{display:block;font-size:.75rem;font-weight:400;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin:3px 0 0 19px}
+#duplicateApp .dupe-menu-items{display:grid;gap:10px;padding:8px 15px 16px}
+#duplicateApp .dupe-menu-items label{display:flex;align-items:center;gap:9px;cursor:pointer}
+#duplicateApp .dupe-menu-items input{accent-color:var(--acc);width:17px;height:17px}
+#duplicateApp .dupe-menu-items .dupe-sub-option{padding-left:24px;opacity:.9}
+#duplicateApp .dupe-current{margin-top:12px}
+#duplicateApp .dupe-live-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+#duplicateApp .dupe-live-values>div{padding:13px;border:1px solid var(--line);border-radius:10px;background:var(--panel2);display:grid;gap:4px}
+#duplicateApp .dupe-live-values span{font-size:.82rem;opacity:.8}
+#duplicateApp .dupe-live-values strong{font-size:1.25rem;color:var(--acc)}
+#duplicateApp .dupe-combinations{margin-top:13px}
+#duplicateApp .dupe-combinations .dupe-opt-results{padding:0 12px 12px;margin-top:0}
+@media(max-width:650px){#duplicateApp .dupe-selectors{grid-template-columns:1fr}#duplicateApp .dupe-live-values strong{font-size:1rem}}
 </style>
 <script id="rivenShareVisitGuard">
 /* This is a local UI preference, not an analytics visitor identifier.
@@ -982,6 +1028,10 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
 #calculatorHome .hidden-tool-row button:hover,#calculatorHome .show-all-tools:hover{border-color:var(--acc);color:var(--acc)}
 #calculatorHome .show-all-tools{margin-top:11px}
 @media(max-width:620px){#calculatorHome .tool-card-actions .default-tool-label{padding:11px 12px}#calculatorHome .tool-hide-button{padding:8px 12px}}
+
+
+@media(min-width:1100px){#calculatorHome{width:min(100% - 36px,1600px);max-width:1600px;margin-inline:auto}#calculatorHome .calc-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:1700px){#calculatorHome .calc-choice-grid{grid-template-columns:repeat(5,minmax(0,1fr))}}
 </style>
 <style id="nightwaveStyles">
 #nightwaveApp{max-width:780px;min-height:100vh;margin:0 auto;padding:22px 18px 70px;color:var(--text)}
@@ -1001,6 +1051,42 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
 #nwResult .nw-big{font-size:clamp(1.2rem,4vw,1.55rem);font-weight:800;margin-bottom:8px}
 #nwResult .nw-details{font-size:.88rem;color:var(--mute);margin-top:7px}
 @media(max-width:600px){#nightwaveApp{padding:12px 14px 32px}.nightwave-grid{grid-template-columns:1fr}.nightwave-card{padding:15px}#nightwaveApp h1{margin-top:18px}}
+</style>
+<style id="v6FixedToolLayouts">
+#rivenApp .codex-riven-grid{display:contents!important}
+#weeklyApp #weeklyList{display:block!important}
+#rivenApp .codex-layout-panel{display:contents!important}
+.codex-dragbar,.codex-layout-reset,.codex-layout-actions{display:none!important}
+#rivenApp,#weeklyApp{max-width:var(--site-tool-original-max, 1200px)}
+@media(min-width:1100px){#calculatorHome{width:min(calc(100% - 36px),1600px)!important;max-width:1600px!important}#calculatorHome .calc-choice-grid{grid-template-columns:repeat(4,minmax(0,1fr))!important}}
+@media(min-width:1750px){#calculatorHome .calc-choice-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important}}
+#duplicateApp .dupe-build{margin-top:22px;padding:20px;border:1px solid var(--line);border-radius:15px;background:var(--panel,rgba(255,255,255,.04))}
+#duplicateApp .dupe-build h2{margin:0 0 15px;font-size:1.2rem}
+#duplicateApp .dupe-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+#duplicateApp .dupe-fields label{display:flex;flex-direction:column;gap:6px;font-size:.88rem}
+#duplicateApp .dupe-fields input,#duplicateApp .dupe-fields select{box-sizing:border-box;width:100%;min-height:42px;border:1px solid var(--line);border-radius:9px;padding:8px 10px;color:var(--text);background:var(--panel2)}
+#duplicateApp .dupe-fields .dupe-check{flex-direction:row;align-items:center;gap:8px}
+#duplicateApp .dupe-fields .dupe-check input{width:17px;min-height:17px;accent-color:var(--acc)}
+#duplicateApp .dupe-computed{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:16px 0}
+#duplicateApp .dupe-computed>div{padding:12px;border:1px solid var(--line);border-radius:9px}
+#duplicateApp .dupe-computed small{display:block;opacity:.8}
+#duplicateApp .dupe-computed strong{display:block;font-size:1.4rem;margin-top:4px;color:var(--acc)}
+#duplicateApp .dupe-opt-btn{padding:10px 15px;border-radius:9px;background:var(--panel2);color:var(--text);border:1px solid var(--line);cursor:pointer}
+#duplicateApp .dupe-opt-results{display:grid;gap:9px;margin-top:13px}
+#duplicateApp .dupe-rank-row{display:flex;justify-content:space-between;gap:16px;padding:8px 0;flex-wrap:wrap}
+#duplicateApp .dupe-rank-row span:last-child{font-weight:700;color:var(--acc)}
+#duplicateApp .dupe-opt-result small{display:block;margin-top:8px;opacity:.75}
+#duplicateApp .dupe-opt-result{border:1px solid var(--line);padding:12px;border-radius:10px}
+#duplicateApp .dupe-opt-result strong{color:var(--acc)}
+#duplicateApp .dupe-opt-result small{display:block;opacity:.8;margin-top:4px}
+@media(max-width:720px){#duplicateApp .dupe-fields{grid-template-columns:repeat(2,minmax(0,1fr))}#duplicateApp .dupe-computed{grid-template-columns:1fr}}
+@media(max-width:420px){#duplicateApp .dupe-fields{grid-template-columns:1fr}}
+</style><style id="dupeCritCompactStyles">
+.dupe-crit-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:8px 14px;margin:14px 0}
+.dupe-crit-options .dupe-crit-check{display:flex;align-items:center;gap:8px;font-size:.9rem;line-height:1.35;padding:9px 10px;border:1px solid var(--border,rgba(140,150,165,.25));border-radius:9px;background:rgba(127,127,127,.045);cursor:pointer}
+.dupe-crit-options .dupe-crit-check input{accent-color:var(--acc,#70c7bd);flex-shrink:0}
+.dupe-crit-options .dupe-crit-extra{font-size:.9rem;display:flex;align-items:center;gap:8px;justify-content:space-between;padding:5px 9px}
+.dupe-crit-options .dupe-crit-extra input{width:95px;max-width:42%;padding:7px}
 </style>
 </head>
 <body>
@@ -1077,8 +1163,8 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
     </div>
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 5.5.8 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.5.5.8</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v5.5.8_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 6.0 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.6.0</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v6.0_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
 
   </div>
@@ -1165,6 +1251,35 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
         <div class="dupe-result"><span class="dupe-result-label">Optimal Crit Chance</span><strong id="duplicateOptimalCC" class="dupe-result-value">—</strong></div>
         <div class="dupe-result"><span class="dupe-result-label">Expected Damage</span><strong id="duplicateExpectedDamage" class="dupe-result-value">—</strong></div>
       </div>
+      <section class="dupe-build" id="dupeBuild" aria-labelledby="dupeBuildHeading">
+        <h2 id="dupeBuildHeading">Find Your Critical Chance</h2>
+        <div class="dupe-fields dupe-core-fields">
+          <label>Weapon base Critical Chance (%)<input id="dupeBase" type="number" min="0" step="any" value="25" inputmode="decimal"></label>
+          <label>Riven Critical Chance (%)<input id="dupeRiven" type="number" step="any" value="0" inputmode="decimal"></label>
+          <label>Combo multiplier<select id="dupeCombo"></select></label>
+        </div>
+        <div class="dupe-selectors">
+          <details class="dupe-multi" id="dupeModMenu"><summary>What mods will your build use? <span id="dupeModsCount">None</span></summary>
+            <div class="dupe-menu-items">
+              <label><input type="checkbox" id="dupeBloodRush"> Blood Rush</label>
+              <label><input type="checkbox" id="dupeGalvSteel" data-steel> Galvanized Steel</label>
+              <label><input type="checkbox" id="dupeTrueSteel" data-steel> True Steel</label>
+              <label><input type="checkbox" id="dupeSacSteel" data-steel> Sacrificial Steel</label>
+              <label class="dupe-sub-option"><input type="checkbox" id="dupeSacSet"> Sacrificial set bonus</label>
+            </div>
+          </details>
+          <details class="dupe-multi" id="dupeArcMenu"><summary>What arcanes will your build use? <span id="dupeArcsCount">None</span></summary>
+            <div class="dupe-menu-items">
+              <label><input type="checkbox" id="dupeAvenger"> Arcane Avenger (+45% flat)</label>
+              <label><input type="checkbox" id="dupeHotShot"> Arcane Hot Shot (+300% at maximum stacks)</label>
+            </div>
+          </details>
+        </div>
+        <div class="dupe-current" id="dupeCurrent" aria-live="polite"></div>
+        <details class="dupe-combinations" id="dupeCombinations"><summary>Closest critical chance for normal &amp; heavy attacks <span id="dupeCombinationCount"></span></summary>
+          <div class="dupe-opt-results" id="dupeRankResults"></div>
+        </details>
+      </section>
     </div>
   </section>
 </main>
@@ -1308,8 +1423,20 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
  <div class="sh"><span class="lbl" style="margin:0">Stats on the riven</span><button type="button" class="ghost" id="ca">Clear All</button></div>
  <div class="slots" id="slots"></div>
  <div class="tool-actions" aria-label="Configuration tools"><button type="button" class="ghost" id="copyStatsBtn">Copy Stats</button><button type="button" class="ghost" id="saveSetupBtn">Save Setup</button><button type="button" class="ghost" id="loadSetupBtn">Load Saved</button><button type="button" class="ghost" id="shareSetupBtn">Copy Riven Code</button></div><p class="m" id="toolStatus" role="status" aria-live="polite"></p>
- <div class="spw"><button type="button" class="import-url-btn" id="importRivenUrlBtn">Import Riven Code</button><button type="button" class="spb" id="spb" aria-expanded="false" aria-controls="spp">View Spliced Stats Combos</button></div>
+ <div class="spw"><button type="button" class="spb" id="rollCostOpen">Calculate Roll Cost</button><button type="button" class="import-url-btn" id="importRivenUrlBtn">Import Riven Code</button><button type="button" class="spb" id="spb" aria-expanded="false" aria-controls="spp">View Spliced Stats Combos</button></div>
 </section>
+
+<div id="rollCostOverlay" class="roll-overlay" hidden role="presentation">
+ <section class="roll-dialog" role="dialog" aria-modal="true" aria-labelledby="rollTitle" tabindex="-1">
+  <div class="roll-header"><h2 id="rollTitle">Calculate Roll Cost</h2><div class="roll-header-actions"><button type="button" id="rollClear" class="ghost">Clear Stats</button><button type="button" id="rollCostClose" class="ghost" aria-label="Close">✕</button></div></div>
+  <p class="m" id="rollIntro">Select the target layout and any acceptable stats for each slot. No checked stats means any stat is acceptable in that slot.</p>
+  <div class="roll-controls"><label><span id="rollLayoutLabel">Desired layout</span><select id="rollLayout"><option value="2/0">2 positive / 0 negative</option><option value="2/1">2 positive / 1 negative</option><option value="3/0">3 positive / 0 negative</option><option value="3/1">3 positive / 1 negative</option></select></label><label><span id="rollCyclesLabel">Current cycles</span><input id="rollCycles" type="number" min="0" max="100000" value="10" inputmode="numeric"></label><label><span id="rollBudgetLabel">Kuva budget</span><input id="rollBudget" type="number" min="0" max="100000000000" placeholder="Optional" inputmode="numeric"></label></div>
+  <div class="roll-slot-grid" id="rollSlots"></div>
+  <details class="roll-ip"><summary id="rollIPTitle">Manually adjust eligible physical damage stats (Impact / Puncture / Slash)</summary><p class="m" id="rollIPInfo">If you believe your weapon cannot roll a particular physical damage stat, check its box to remove it from the RNG pool. Variant inheritance and exceptions exist. Verified restrictions are automatically applied; manual choices only affect this estimate.</p><p id="rollIPExample" class="m roll-ip-example">For example, Verglas Rivens are <strong>not able</strong> to roll Impact, Puncture, or Slash.</p><div id="rollIPChecks" class="roll-ips"><label><input type="checkbox" value="Impact Damage"> <span>Exclude Impact</span></label><label><input type="checkbox" value="Puncture Damage"> <span>Exclude Puncture</span></label><label><input type="checkbox" value="Slash Damage"> <span>Exclude Slash</span></label></div></details>
+  <button type="button" class="spb" id="rollCompute">Calculate expected Kuva</button>
+  <div id="rollOutput" class="roll-output" role="status" aria-live="polite"></div>
+ </section>
+</div>
 <section class="explain" id="spp" hidden style="margin:-4px 0 16px">
 <h2>Spliced stat combinations</h2>
 <p class="m">A Riven Splicer consumes two matching stats on one riven and replaces them with the spliced stat plus one random stat. Only one spliced stat can be on a riven. Where a stat lists more than one recipe, either pair works.</p>
@@ -1549,10 +1676,41 @@ function setWeaponLookupSummary(name){
   $('wc').textContent=found?found[0]+': '+W[found[1]]+(found[3]?' (bow, fire rate doubled)':''):'';
   return found;
 }
+// Conservative, individually verified IPS restrictions. Never infer a blanket
+// exclusion from a weapon variant's damage values: Rivens may inherit the base
+// weapon's eligibility, and the 25% guideline has documented exceptions.
+const VERIFIED_IPS_EXCLUSIONS={
+  'verglas':['Impact Damage','Puncture Damage','Slash Damage'],
+  'verglas prime':['Impact Damage','Puncture Damage','Slash Damage']
+};
+const IPS_RESTRICTION_NOTE={
+  en:'Verified restriction: Verglas cannot roll Impact, Puncture, or Slash. Other weapons may have exceptions to the usual 25% physical-damage rule; this calculator does not automatically exclude unverified stats.',
+  es:'Restricción verificada: Verglas no puede obtener Impacto, Perforación ni Corte. Otras armas pueden tener excepciones a la regla habitual del 25 % de daño físico; no se excluyen estadísticas sin verificar.',
+  pt:'Restrição verificada: Verglas não pode obter Impacto, Perfuração nem Corte. Outras armas podem ter exceções à regra usual de 25% de dano físico; atributos não verificados não são excluídos.',
+  fr:'Restriction vérifiée : le Verglas ne peut pas obtenir Impact, Perforation ou Tranchant. D’autres armes peuvent faire exception à la règle habituelle des 25 % de dégâts physiques ; les statistiques non vérifiées ne sont pas exclues.',
+  de:'Bestätigte Einschränkung: Verglas kann weder Einschlag, Durchschlag noch Schnitt würfeln. Bei anderen Waffen gibt es Ausnahmen von der üblichen 25-%-Regel für physischen Schaden; unbestätigte Werte werden nicht ausgeschlossen.',
+  it:'Limitazione verificata: Verglas non può ottenere Impatto, Perforazione o Taglio. Altre armi possono fare eccezione alla consueta regola del 25% dei danni fisici; le statistiche non verificate non vengono escluse.',
+  pl:'Potwierdzone ograniczenie: Verglas nie może wylosować Obrażeń Obuchowych, Przebijających ani Tnących. Inne bronie mogą stanowić wyjątek od reguły 25% obrażeń fizycznych; niezweryfikowane statystyki nie są wykluczane.',
+  ru:'Подтверждено: на Verglas не выпадают Удар, Пронзание и Разрез. Для другого оружия возможны исключения из обычного правила 25% физического урона; неподтверждённые характеристики не исключаются.',
+  zh:'已确认：Verglas 无法洗出冲击、穿刺或切割属性。其他武器可能不遵循通常的 25% 物理伤害规则；未核实的属性不会被自动排除。',
+  ja:'確認済み：Verglasでは衝撃・貫通・切断のRiven属性は出現しません。他の武器には通常の物理ダメージ25％ルールの例外があるため、未確認の属性は除外しません。',
+  ar:'قيد مؤكد: لا يمكن لـ Verglas الحصول على ضرر الصدم أو الثقب أو القطع. قد توجد استثناءات لقاعدة الضرر الجسدي المعتادة البالغة 25٪ في أسلحة أخرى، لذا لا تُستبعد الإحصاءات غير المؤكدة.'
+};
+function restrictedIPS(i){
+  const weapon=getMatchedWeapon($('wn').value);
+  return !!weapon&&(VERIFIED_IPS_EXCLUSIONS[weapon[0].toLowerCase()]||[]).includes(S[i]?.[0]);
+}
+function updateIPSNotice(){
+  let note=$('verifiedIpsNotice');
+  if(!note){note=document.createElement('p');note.id='verifiedIpsNotice';note.style.cssText='font-size:.8rem;line-height:1.45;color:var(--muted);margin:6px 0 10px;';$('wc').insertAdjacentElement('afterend',note);}
+  const weapon=getMatchedWeapon($('wn').value);
+  note.hidden=!(weapon&&VERIFIED_IPS_EXCLUSIONS[weapon[0].toLowerCase()]);
+  if(!note.hidden){const lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];note.textContent=IPS_RESTRICTION_NOTE[lang]||IPS_RESTRICTION_NOTE.en;}
+}
 function countSelectedSpliced(sel,ignoreIndex=-1){return sel.reduce((count,v,i)=>count+((i!==ignoreIndex)&&v>=0&&SPLD.has(S[v][0])?1:0),0)}
 // One source of truth for dropdown picks, URL imports and automatic state repairs.
 function isSelectableStat(v,w,k,cfg,used){
-  if(!avail(v,w)||used.includes(v))return false;
+  if(!avail(v,w)||used.includes(v)||restrictedIPS(v))return false;
   const name=S[v][0];
   if(k>=cfg.p&&NONEG.has(name))return false;
   if(SPLD.has(name)&&countSelectedSpliced(used)>0)return false;
@@ -1625,6 +1783,7 @@ function btns(el,items,cur,fn){
 }
 function render(){
   fix();
+  updateIPSNotice();
   const cfg=C[st.c];
   btns($('wt'),W.map(rivenLabel),st.w,i=>{st.w=i;st.bow=false;$('wn').value='';$('wc').textContent='';render()});
   btns($('cfg'),C.map(c=>`${c.p} ${rivenLabel('Positive')}, ${c.n} ${rivenLabel('Negative')}`),st.c,i=>{st.c=i;render()});
@@ -1731,7 +1890,7 @@ function cb(d,k,v){
   const mark=n=>{const a=en();a.forEach(x=>x.classList.remove('act'));if(a.length){act=(n+a.length)%a.length;a[act].classList.add('act');a[act].scrollIntoView({block:'nearest'})}};
   const show=q=>{
     const qt=q.trim().toLowerCase().split(/\s+/).filter(Boolean);
-    const isNeg=k>=C[st.c].p,hasS=countSelectedSpliced(st.sel,k)>0;let L=(isNeg?ORDN:ORD).filter(i=>avail(i,st.w)&&(!isNeg||!NONEG.has(S[i][0])));
+    const isNeg=k>=C[st.c].p,hasS=countSelectedSpliced(st.sel,k)>0;let L=(isNeg?ORDN:ORD).filter(i=>avail(i,st.w)&&!restrictedIPS(i)&&(!isNeg||!NONEG.has(S[i][0])));
     if(qt.length){
       const w=L.filter(i=>{const t=(S[i][0]+" "+rivenLabel(S[i][0])).toLowerCase().split(/[\s\/]+/);return qt.every(x=>t.some(y=>y.startsWith(x)))});
       L=w.length?w:L.filter(i=>(S[i][0]+" "+rivenLabel(S[i][0])).toLowerCase().includes(qt.join(' ')));
@@ -2273,7 +2432,374 @@ render();
   }
 })();
 </script>
-<script type="application/json" id="patchNotesData">[{"version":"5.5.8","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.8","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"\u003cspan class=\"void-whisper\">\u003cem>The V̸o̴i̵d̶...... it \u003cspan class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴\u003c/span>......and then it laughed\u003c/em>\u003c/span>\u003cbr>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script id="rollCostCalculatorScript">
+(function(){'use strict';
+const $=id=>document.getElementById(id), overlay=$('rollCostOverlay');if(!overlay)return;
+const dict={
+ en:['Calculate Roll Cost','Select your target layout and acceptable stats in each slot. Empty slots accept any eligible stat.','Desired layout','Current cycles','Kuva budget','Adjust physical damage eligibility (Impact / Puncture / Slash)','If you think this weapon cannot roll any of these, check them to exclude them from this model. Exceptions and base-variant inheritance exist. Confirm restrictions independently.','Calculate expected Kuva','Positive','Negative','No restrictions (any eligible stat)','Expected Kuva','Budget success','Direct random rolls','One desired positive locked','Splice first (any recipe)','Cannot be rolled directly: this target contains a spliced-only stat.','Model estimates: uniform selection without replacement; equal probability for four unlocked layouts. Lock/splice plans assume fixed layout after locking, one manual lock, and simplified stage transitions. These are not exact optimal strategies; the splice scenario approximates acquiring both elemental components together and completing the remaining slots without a second manual lock.','Insufficient or impossible target under the selected restrictions.','Chance per roll','Approximate','Check the desired stats and eligible pool.','No positive stat is eligible for manual locking.','Close','Exclude Impact','Exclude Puncture','Exclude Slash'],
+ es:['Calcular coste de ciclos','Selecciona la configuración y los atributos aceptables por casilla. Sin selección significa cualquiera.','Configuración','Ciclos actuales','Presupuesto de Kuva','Ajustar elegibilidad de daño físico (Impacto / Perforación / Corte)','Marca las estadísticas que crees que no puede obtener esta arma. Hay excepciones y variantes base.','Calcular Kuva esperado','Positivo','Negativo','Cualquier atributo permitido','Kuva esperado','Éxito con presupuesto','Ciclos aleatorios','Un positivo deseado bloqueado','Primero fusionar (elemental)','Este atributo fusionado no puede obtenerse con un ciclo normal.','Estimaciones basadas en selección uniforme sin repetición. Estrategias de bloqueo/fusión simplificadas, no necesariamente óptimas.','Objetivo imposible con estas restricciones.','Probabilidad por ciclo','Aproximado','Revisa los atributos deseados.','No hay un positivo apto para bloquear.','Cerrar','Excluir Impacto','Excluir Perforación','Excluir Corte'],
+ pt:['Calcular custo de ciclos','Selecione a configuração e os atributos aceitáveis em cada espaço. Sem seleção significa qualquer atributo.','Configuração','Ciclos atuais','Orçamento de Kuva','Ajustar elegibilidade de dano físico (Impacto / Perfuração / Corte)','Marque os atributos que esta arma não pode obter. Há exceções e variantes base.','Calcular Kuva esperado','Positivo','Negativo','Qualquer atributo elegível','Kuva esperado','Chance no orçamento','Ciclos aleatórios','Um positivo desejado bloqueado','Fusão primeiro (elemental)','O atributo fundido não pode surgir normalmente.','Estimativas com seleção uniforme sem repetição. Estratégias simplificadas, não necessariamente ideais.','Alvo impossível com estas restrições.','Chance por ciclo','Aproximado','Revise os atributos desejados.','Nenhum positivo elegível para bloquear.','Fechar','Excluir Impacto','Excluir Perfuração','Excluir Corte'],
+ fr:['Calculer le coût des cycles','Choisissez la configuration et les stats acceptables par emplacement. Aucun choix signifie toute stat admissible.','Configuration','Cycles actuels','Budget Kuva','Ajuster les dégâts physiques (Impact / Perforation / Tranchant)','Cochez les stats que cette arme ne peut pas obtenir selon vous. Des exceptions existent.','Calculer le Kuva moyen','Positif','Négatif','Toute stat admissible','Kuva moyen','Réussite selon budget','Cycles aléatoires','Une stat positive verrouillée','Fusion d’abord (élémentaire)','Une stat fusionnée ne peut pas apparaître directement.','Estimations selon une sélection uniforme sans répétition. Stratégies simplifiées, non nécessairement optimales.','Objectif impossible avec ces exclusions.','Chance par cycle','Approximatif','Vérifiez vos choix.','Aucune stat positive ne peut être verrouillée.','Fermer','Exclure Impact','Exclure Perforation','Exclure Tranchant'],
+ de:['Roll-Kosten berechnen','Wähle Layout und akzeptable Werte pro Platz. Ohne Auswahl gilt jeder erlaubte Wert.','Layout','Aktuelle Zyklen','Kuva-Budget','Physische Schadenswerte anpassen (Einschlag / Durchschlag / Schnitt)','Schließe nach eigener Prüfung unzulässige Werte aus. Ausnahmen und Basisvarianten sind möglich.','Erwartetes Kuva berechnen','Positiv','Negativ','Jeder erlaubte Wert','Erwartetes Kuva','Erfolg im Budget','Zufälliges Rollen','Ein positiver Wert gesperrt','Zuerst verschmelzen (Element)','Verschmolzene Werte können nicht direkt gewürfelt werden.','Schätzungen bei gleichmäßiger Auswahl ohne Wiederholung; vereinfachte Sperr- und Verschmelzungsstrategien.','Ziel unter diesen Einschränkungen unmöglich.','Chance pro Zyklus','Ungefähr','Prüfe die gewünschten Werte.','Kein sperrbarer positiver Wert.','Schließen','Einschlag ausschließen','Durchschlag ausschließen','Schnitt ausschließen'],
+ it:['Calcola costo cicli','Seleziona configurazione e statistiche accettabili per ogni posizione. Nessuna selezione significa qualsiasi.','Configurazione','Cicli attuali','Budget Kuva','Modifica danni fisici (Impatto / Perforazione / Taglio)','Escludi quelli che ritieni impossibili. Esistono eccezioni e varianti base.','Calcola Kuva previsto','Positivo','Negativo','Qualsiasi statistica valida','Kuva previsto','Successo nel budget','Cicli casuali','Un positivo bloccato','Prima fusione (elemento)','La statistica fusa non compare direttamente.','Stime con estrazione uniforme senza ripetizioni. Strategie di blocco e fusione semplificate.','Obiettivo impossibile con queste esclusioni.','Probabilità per ciclo','Approssimato','Controlla le statistiche scelte.','Nessun positivo bloccabile.','Chiudi','Escludi Impatto','Escludi Perforazione','Escludi Taglio'],
+ pl:['Oblicz koszt losowań','Wybierz układ i akceptowane statystyki w każdym polu. Brak zaznaczenia oznacza dowolną.','Układ','Obecne cykle','Budżet Kuva','Dostosuj obrażenia fizyczne (Obuchowe / Przebijające / Tnące)','Zaznacz niedostępne statystyki. Istnieją wyjątki i dziedziczenie wariantów.','Oblicz oczekiwane Kuva','Dodatnia','Ujemna','Dowolna dozwolona statystyka','Oczekiwane Kuva','Szansa w budżecie','Losowe cykle','Jedna dodatnia zablokowana','Najpierw łączenie (żywioł)','Statystyka łączona nie wypada bezpośrednio.','Szacunki dla równych szans bez powtórzeń. Uproszczone strategie blokowania i łączenia.','Cel niemożliwy przy tych wykluczeniach.','Szansa na cykl','Przybliżenie','Sprawdź wybrane statystyki.','Brak dodatniej statystyki do blokowania.','Zamknij','Wyklucz Obuchowe','Wyklucz Przebijające','Wyklucz Tnące'],
+ ru:['Рассчитать стоимость роллов','Выберите раскладку и допустимые характеристики для каждого слота. Пустой выбор означает любую.','Раскладка','Текущие циклы','Бюджет Кувы','Изменить допуск физического урона (Удар / Пронзание / Разрез)','Отметьте характеристики, которые оружие не может получить. Возможны исключения и наследование базовой версии.','Рассчитать ожидаемую Куву','Положительная','Отрицательная','Любая допустимая характеристика','Ожидаемая Кува','Успех в бюджете','Случайные роллы','Одна положительная закреплена','Сначала соединить (элемент)','Соединённая характеристика не выпадает напрямую.','Оценки при равных шансах без повторов. Упрощённые стратегии закрепления и соединения.','Цель невозможна с этими ограничениями.','Шанс за цикл','Приблизительно','Проверьте выбранные характеристики.','Нет доступной положительной характеристики для закрепления.','Закрыть','Исключить Удар','Исключить Пронзание','Исключить Разрез'],
+ zh:['计算洗练消耗','选择目标词条布局及每个位置允许的属性。未勾选表示接受所有可用属性。','目标布局','当前洗练次数','赤毒预算','调整物理伤害属性（冲击／穿刺／切割）','勾选你认为此武器无法洗出的属性。基础武器继承与例外情况可能存在。','计算预期赤毒','正面','负面','任意允许的属性','预期赤毒','预算内成功率','完全随机洗练','锁定一条目标正面属性','先融合（元素）','融合属性不能直接洗出。','假设可用属性等概率且不重复。锁定与融合策略为简化估算，并非严格最优。','当前限制下无法达成目标。','每次洗练概率','近似值','请检查所选属性。','没有可锁定的正面属性。','关闭','排除冲击','排除穿刺','排除切割'],
+ ja:['ロール費用を計算','目標構成と各枠で許容するステータスを選択します。未選択ならすべて許容します。','目標構成','現在のサイクル数','Kuva予算','物理ダメージ候補の調整（衝撃／貫通／切断）','出現しないと考える属性にチェックしてください。基本武器の継承や例外があります。','期待Kuvaを計算','プラス','マイナス','許可された任意の属性','期待Kuva','予算内の成功率','完全ランダム','目標プラスを1つ固定','先に合成（属性）','合成ステータスは通常のロールでは出ません。','重複なしの一様抽選を仮定した推定。固定・合成戦略は簡略化しており、最適とは限りません。','制限条件では目標を達成できません。','1回あたりの確率','概算','選択した属性をご確認ください。','固定できるプラス属性がありません。','閉じる','衝撃を除外','貫通を除外','切断を除外'],
+ ar:['حساب تكلفة التدوير','اختر التوزيع والإحصاءات المقبولة في كل خانة. عدم الاختيار يعني قبول أي إحصاء متاح.','التوزيع المطلوب','عدد التدويرات الحالي','ميزانية كوفا','تعديل أهلية الضرر الجسدي (الصدم / الثقب / القطع)','حدد الإحصاءات التي تعتقد أنها غير متاحة لهذا السلاح. توجد استثناءات ووراثة من السلاح الأساسي.','حساب كوفا المتوقعة','موجب','سالب','أي إحصاء مسموح','كوفا المتوقعة','النجاح ضمن الميزانية','تدوير عشوائي','تثبيت إحصاء موجب واحد','الدمج أولاً (عنصر)','لا يمكن الحصول على الإحصاء المدمج بالتدوير المباشر.','تقديرات بافتراض فرص متساوية دون تكرار؛ استراتيجيات التثبيت والدمج مبسطة وليست مثالية بالضرورة.','الهدف مستحيل مع القيود المختارة.','فرصة لكل تدوير','تقريبي','راجع الإحصاءات المختارة.','لا توجد إحصاءات موجبة مؤهلة للتثبيت.','إغلاق','استبعاد الصدم','استبعاد الثقب','استبعاد القطع']
+};
+const locale=()=>{let v=$('rivenLanguage')?.value||'auto';if(v==='auto'){v=(navigator.language||'en').split('-')[0].toLowerCase();}return dict[v]?v:'en'};
+const rollExtras={
+ en:['Clear Stats','For example, Verglas Rivens are ','not able',' to roll Impact, Puncture, or Slash.'],
+ es:['Borrar atributos','Por ejemplo, los Rivens de Verglas ','no pueden',' obtener Impacto, Perforación ni Corte.'],
+ pt:['Limpar atributos','Por exemplo, os Rivens de Verglas ','não podem',' obter Impacto, Perfuração ou Corte.'],
+ fr:['Effacer les stats','Par exemple, les Rivens du Verglas ','ne peuvent pas',' obtenir Impact, Perforation ou Tranchant.'],
+ de:['Werte löschen','Beispielsweise können Verglas-Rivens ','keine',' Einschlag-, Durchschlags- oder Schnittschaden-Werte erhalten.'],
+ it:['Cancella statistiche','Per esempio, i Riven di Verglas ','non possono',' ottenere Impatto, Perforazione o Taglio.'],
+ pl:['Wyczyść statystyki','Na przykład Rivenu Verglas ','nie mogą',' mieć Obrażeń od Uderzeń, Przebicia ani Cięcia.'],
+ ru:['Очистить характеристики','Например, моды Разлома для Verglas ','не могут',' получить Удар, Пронзание или Разрез.'],
+ zh:['清除属性','例如，Verglas 裂罅 Mod ','无法',' 随机获得冲击、穿刺或切割伤害。'],
+ ja:['ステータスを消去','たとえば Verglas の Riven には、衝撃・貫通・切断ダメージが ','出現しません','。'],
+ ar:['مسح الخصائص','على سبيل المثال، ريفن سلاح Verglas ','لا يمكنه',' الحصول على ضرر الصدم أو الثقب أو القطع.']
+};
+let t=dict.en, chosen=[], lastFocus=null;
+const fmt=n=>!Number.isFinite(n)?'—':n>=1e12?n.toExponential(2):Math.round(n).toLocaleString();
+const pct=p=>p<=0?'0%':p>=1?'100%':(100*p).toPrecision(p<.000001?3:4)+'%';
+const layouts=[{id:'2/0',p:2,n:0},{id:'2/1',p:2,n:1},{id:'3/0',p:3,n:0},{id:'3/1',p:3,n:1}];
+const physical=['Impact Damage','Puncture Damage','Slash Damage'];
+const spliced=new Set(SR.map(row=>row[0]));
+const isStatEligible=(i,negative,excluded)=>avail(i,st.w)&&!excluded.has(S[i][0])&&(!negative||!NONEG.has(S[i][0]))&&!spliced.has(S[i][0]);
+function exclusions(){const x=new Set();physical.forEach(name=>{const i=STAT_INDEX.get(name);if(i!==undefined&&restrictedIPS(i))x.add(name)});$('rollIPChecks').querySelectorAll('input:checked').forEach(el=>x.add(el.value));return x;}
+function syncExclusions(){const hidden=physical.map(n=>{const i=STAT_INDEX.get(n);return i!==undefined&&restrictedIPS(i)});$('rollIPChecks').querySelectorAll('input').forEach((el,i)=>{el.checked=hidden[i];el.disabled=hidden[i];el.closest('label').title=hidden[i]?'Verified weapon-specific restriction':''})}
+function labels(){
+ t=dict[locale()]||dict.en;
+ ['rollTitle','rollIntro','rollLayoutLabel','rollCyclesLabel','rollBudgetLabel','rollIPTitle','rollIPInfo','rollCompute'].forEach((id,i)=>{$(id).textContent=t[i]});
+ $('rollCostOpen').textContent=t[0];$('rollCostClose').setAttribute('aria-label',t[23]);
+ $('rollIPChecks').querySelectorAll('label span').forEach((el,i)=>el.textContent=t[24+i]);
+ const parts=rollExtras[locale()]||rollExtras.en;
+ $('rollClear').textContent=parts[0];
+ const p=$('rollIPExample'),strong=document.createElement('strong');strong.textContent=parts[2];
+ p.replaceChildren(document.createTextNode(parts[1]),strong,document.createTextNode(parts[3]));
+}
+
+function layout(){return layouts.find(x=>x.id===$('rollLayout').value)||layouts[3]}
+function updateSlotExclusivity(){
+ // Alternatives for a spliced result must all belong to ONE positive slot.
+ // Ordinary stats can similarly be selected in only one slot.
+ const owners=new Map();let spliceOwner=-1;
+ chosen.forEach((set,k)=>set.forEach(i=>{
+  owners.set(i,k);
+  if(spliced.has(S[i][0])&&spliceOwner<0)spliceOwner=k;
+ }));
+ $('rollSlots').querySelectorAll('.roll-slot').forEach((card,k)=>{
+  const scroller=card.querySelector('.roll-slot-options');
+  const rows=[...scroller.querySelectorAll('label')];
+  for(const row of rows){
+   const cb=row.querySelector('input[type="checkbox"]'),i=Number(cb.value);
+   const selectedElsewhere=owners.has(i)&&owners.get(i)!==k;
+   const otherSplice=spliced.has(S[i][0])&&spliceOwner>=0&&spliceOwner!==k;
+   cb.disabled=selectedElsewhere||otherSplice;
+   cb.title=cb.disabled?'Stat already selected elsewhere':'';
+   row.title=cb.title;
+   row.style.opacity=cb.disabled?'0.48':'';
+   row.style.cursor=cb.disabled?'not-allowed':'';
+  }
+  // Keep the main dropdown's priority order for available choices.
+  // Move unavailable choices to the bottom, retaining their relative order.
+  rows.sort((a,b)=>{
+   const ca=a.querySelector('input'),cb=b.querySelector('input');
+   return Number(ca.disabled)-Number(cb.disabled)||Number(a.dataset.priority)-Number(b.dataset.priority);
+  }).forEach(row=>scroller.append(row));
+ });
+}
+function buildSlots(){
+ const cfg=layout(),old=chosen;
+ chosen=Array.from({length:cfg.p+cfg.n},(_,i)=>old[i]||new Set());
+ // Normalize persisted selections: a stat may occupy only one box, and
+ // every spliced-stat alternative must share the same positive box.
+ const used=new Set();let spliceOwner=-1;
+ chosen.forEach((set,k)=>{for(const i of [...set]){
+  const isSplice=spliced.has(S[i][0]);
+  if(used.has(i)||(isSplice&&(k>=cfg.p||(spliceOwner>=0&&spliceOwner!==k)))){
+   set.delete(i);continue;
+  }
+  used.add(i);if(isSplice)spliceOwner=k;
+ }});
+ const root=$('rollSlots');root.replaceChildren();const ex=exclusions();
+ for(let k=0;k<chosen.length;k++){
+  const neg=k>=cfg.p,card=document.createElement('div');card.className='roll-slot';
+  const title=document.createElement('strong');title.textContent=(neg?t[9]:t[8])+' '+(neg?k-cfg.p+1:k+1);card.append(title);
+  const tip=document.createElement('small');tip.textContent=t[10];card.append(tip);
+  const scroller=document.createElement('div');scroller.className='roll-slot-options';
+  // Same category-specific priority order as the main Riven dropdowns.
+  const allowed=(neg?ORDN:ORD).filter(i=>isStatEligible(i,neg,ex)||(spliced.has(S[i][0])&&avail(i,st.w)&&!neg));
+  for(const i of allowed){
+   const line=document.createElement('label'),cb=document.createElement('input');line.dataset.priority=String(allowed.indexOf(i));cb.type='checkbox';cb.value=i;cb.checked=chosen[k].has(i);
+   cb.addEventListener('change',()=>{if(cb.checked){const otherSplice=spliced.has(S[i][0])&&chosen.some((set,j)=>j!==k&&[...set].some(v=>spliced.has(S[v][0])));const alreadyElsewhere=chosen.some((set,j)=>j!==k&&set.has(i));if(otherSplice||alreadyElsewhere){cb.checked=false;return}chosen[k].add(i)}else{chosen[k].delete(i)}updateSlotExclusivity()});
+   const name=document.createElement('span');name.textContent=S[i][0]+(spliced.has(S[i][0])?' ✧':'');line.append(cb,name);scroller.append(line);
+  }
+  card.append(scroller);root.append(card);
+ }
+ updateSlotExclusivity();
+}
+// Positive and negative slots are UNORDERED. Count each distinct set of
+// rolled stats once, using uniform draws without replacement.
+const probCache=new Map();
+function matchesSlots(values,slots){
+ if(values.length!==slots.length)return false;
+ const used=new Set();
+ function go(k){if(k===slots.length)return true;
+  for(const v of values){if(used.has(v)||slots[k].size&&!slots[k].has(v))continue;
+   used.add(v);if(go(k+1))return true;used.delete(v)}return false;
+ }return go(0);
+}
+function probability(choices,cfg,excluded,fixed=-1){
+ const key=[cfg.p,cfg.n,fixed,[...excluded].sort().join('|'),choices.map(x=>[...x].sort((a,b)=>a-b).join(',')).join('/')].join(':');
+ if(probCache.has(key))return probCache.get(key);
+ const pos=S.map((r,i)=>i).filter(i=>isStatEligible(i,false,excluded));
+ const neg=new Set(S.map((r,i)=>i).filter(i=>isStatEligible(i,true,excluded)));
+ if(fixed>=0&&!pos.includes(fixed))return 0;
+ const draws=cfg.p-(fixed>=0?1:0),pool=pos.filter(i=>i!==fixed);
+ if(pool.length<draws)return 0;
+ let total=0,count=0;
+ const picked=[];
+ const visit=(start)=>{
+  if(picked.length===draws){count++;
+   const all=fixed>=0?[fixed,...picked]:picked;
+   if(!matchesSlots(all,choices.slice(0,cfg.p)))return;
+   if(!cfg.n){total++;return}
+   const candidates=[...neg].filter(i=>!all.includes(i));
+   if(!candidates.length)return;
+   if(cfg.n===1){const accepted=choices[cfg.p];total+=candidates.filter(i=>!accepted.size||accepted.has(i)).length/candidates.length;return}
+   // Future-proof for layouts with multiple negatives.
+   let favorable=0,possible=0;
+   for(let i=0;i<candidates.length;i++)for(let j=i+1;j<candidates.length;j++){
+    possible++;if(matchesSlots([candidates[i],candidates[j]],choices.slice(cfg.p)))favorable++;
+   }
+   total+=possible?favorable/possible:0;return;
+  }
+  for(let i=start;i<=pool.length-(draws-picked.length);i++){
+   picked.push(pool[i]);visit(i+1);picked.pop();
+  }
+ };visit(0);
+ const result=count?total/count:0;probCache.set(key,result);return result;
+}
+function anyDrawChance(poolSize,draws,wanted){
+ if(!wanted||draws<=0)return 0;let miss=1;
+ for(let i=0;i<draws;i++)miss*=(poolSize-wanted-i)/(poolSize-i);
+ return Math.max(0,Math.min(1,1-miss));
+}
+function cost(cycle,locked){return (cycle<1?900:cycle<2?1000:cycle<3?1200:cycle<4?1400:cycle<5?1700:cycle<6?2000:cycle<7?2350:cycle<8?2750:cycle<9?3150:3500)*(locked?2:1)}
+function costForExpected(steps,start,locked){if(!Number.isFinite(steps))return Infinity;const count=Math.min(steps,10000);let sum=0,i=0;for(;i<Math.min(20,Math.ceil(count));i++)sum+=Math.max(0,Math.min(1,count-i))*cost(start+i,locked);if(count>i)sum+=(count-i)*cost(start+i,locked);return sum}
+function budgetProb(p,budget,start,locked){let tries=0;while(tries<100000&&budget>=cost(start+tries,locked)){budget-=cost(start+tries,locked);tries++}return tries? -Math.expm1(tries*Math.log1p(-p)):0}
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+// A strategy is a sequence of geometric waiting stages. The DP below keeps
+// the probability of occupying each stage at each paid cycle, rather than
+// rounding expected stage durations and mispricing subsequent cycles.
+function strategyResult(stages,start,budget){
+ if(!stages.length||stages.some(s=>!(s.p>0)))return null;
+ let states=Array(stages.length+1).fill(0);states[0]=1;
+ let expected=0,cycles=0;const cap=14;
+ for(let i=0;i<cap;i++){
+   let next=Array(states.length).fill(0);
+   for(let j=0;j<stages.length;j++){
+     expected+=states[j]*cost(start+i,stages[j].lock);
+     next[j]+=states[j]*(1-stages[j].p);
+     next[j+1]+=states[j]*stages[j].p;
+   }
+   next[stages.length]+=states[stages.length];states=next;
+ }
+ // Cycle costs have reached their 3500 Kuva plateau; the expected
+ // remaining cost follows exactly from the geometric holding times.
+ for(let j=0;j<stages.length;j++){
+  let visits=0;for(let k=0;k<=j;k++)visits+=states[k];
+  expected+=3500*(stages[j].lock?2:1)*visits/stages[j].p;
+ }
+ if(budget===null)return {kuva:expected,success:null,stages};
+ // Budget success is an exact finite-state DP over stage and Kuva spent.
+ // At very large budgets, stop once the remaining failure mass is tiny.
+ let dist=new Map([['0,0',1]]), success=0, spentCycle=0;
+ const queue=[{stage:0,spent:0,prob:1}];let active=queue;
+ for(let i=0;i<20000&&active.length;i++){
+  const next=new Map();for(const q of active){
+   const price=cost(start+i,stages[q.stage].lock),newSpent=q.spent+price;
+   if(newSpent>budget)continue;
+   const passed=q.prob*stages[q.stage].p,failed=q.prob-passed;
+   if(q.stage===stages.length-1)success+=passed;
+   else if(passed>1e-15){const key=(q.stage+1)+','+newSpent;next.set(key,(next.get(key)||0)+passed)}
+   if(failed>1e-15){const key=q.stage+','+newSpent;next.set(key,(next.get(key)||0)+failed)}
+  }
+  if(next.size>250000)break;
+  active=[...next].map(([key,prob])=>{let a=key.split(',');return {stage:+a[0],spent:+a[1],prob}});
+  if(1-success<1e-11)break;
+ }
+ return {kuva:expected,success:Math.min(1,success),stages};
+}
+// Probability of rolling at least one compatible second ingredient while
+// preserving the chosen layout, with one manually locked positive OR negative.
+function spliceSecondChance(locked,lockNegative,pairs,cfg,positive,negative){
+ const complements=new Set();
+ for(const pair of pairs){if(pair.a===locked)complements.add(pair.b);if(pair.b===locked)complements.add(pair.a)}
+ if(!complements.size)return 0;
+ const pSlots=cfg.p-(lockNegative?0:1),nSlots=cfg.n-(lockNegative?1:0);
+ if(pSlots<0||nSlots<0)return 0;
+ const pPool=positive.filter(i=>i!==locked);
+ const nPool=negative.filter(i=>i!==locked);
+ if(pPool.length<pSlots)return 0;
+ const selected=[];let total=0,good=0;
+ const visit=(from)=>{
+  if(selected.length===pSlots){
+   const negatives=nSlots?nPool.filter(i=>!selected.includes(i)):[-1];
+   if(!negatives.length)return;
+   const already=selected.some(i=>complements.has(i));
+   for(const ni of negatives){total+=1/negatives.length;if(already||(ni>=0&&complements.has(ni)))good+=1/negatives.length}
+   return;
+  }
+  for(let j=from;j<=pPool.length-(pSlots-selected.length);j++){selected.push(pPool[j]);visit(j+1);selected.pop()}
+ };visit(0);
+ return total?good/total:0;
+}
+function compute(){
+ const cfg=layout(),ex=exclusions(),start=Math.max(0,Math.trunc(+$('rollCycles').value||0)),budget=$('rollBudget').value.trim()===''?null:Math.max(0,+$('rollBudget').value||0),out=$('rollOutput');
+ probCache.clear();
+ const pos=S.map((r,i)=>i).filter(i=>isStatEligible(i,false,ex));
+ const target=chosen.map(x=>new Set(x));
+ const recipes=new Map();for(const [result,a,b] of SR){if(!recipes.has(result))recipes.set(result,[]);recipes.get(result).push([a,b]);}
+ const spliceRequests=target.slice(0,cfg.p).map((set,k)=>({k,ids:[...set].filter(i=>recipes.has(S[i][0]))})).filter(x=>x.ids.length);
+ const plans=[];const notes=[];
+ const add=(family,name,stages,detail)=>{
+  const result=strategyResult(stages,start,budget);
+  if(result&&Number.isFinite(result.kuva))plans.push({family,name,...result,detail});
+ };
+ const pFull=probability(target,cfg,ex);
+ if(pFull>0)add('direct','Direct random rolling',[{p:pFull/4,lock:false}],'Unrestricted layout; all desired stats must appear on the same roll.');
+ if(!spliceRequests.length){
+  // 'Any desired stat' policy. Targets are unordered; the first matching
+  // positive can be locked. This avoids listing Crit Chance and Crit Damage
+  // as separate strategies when they have identical odds.
+  const wanted=new Set(target.slice(0,cfg.p).flatMap(x=>[...x]).filter(i=>pos.includes(i)));
+  const useful=[...wanted];
+  const firstP=anyDrawChance(pos.length,cfg.p,useful.length)/4;
+  if(firstP>0&&useful.length){
+   const finishes=useful.map(i=>({i,p:probability(target,cfg,ex,i)})).filter(x=>x.p>0);
+   if(finishes.length){
+    // Always choose the candidate with the highest modeled completion
+    // probability. When multiple are equally eligible, their identities are
+    // intentionally collapsed into one adaptive strategy.
+    const best=Math.max(...finishes.map(x=>x.p));
+    const equivalent=finishes.filter(x=>Math.abs(x.p-best)<1e-12);
+    // Restrict acquisition to candidates giving the same optimal continuation.
+    const getP=anyDrawChance(pos.length,cfg.p,equivalent.length)/4;
+    if(getP>0)add('lock','Lock any useful positive',[{p:getP,lock:false},{p:best,lock:true}],
+      'Accept whichever of '+equivalent.map(x=>S[x.i][0]).join(', ')+' appears first, lock it, then finish the unlocked traits.');
+    if(finishes.some(x=>x.p!==best))notes.push('Locking comparison uses the best equivalent group of desirable stats; not all intermediate rolls are optimally exploited.');
+   }
+  }
+ }
+ // Multiple accepted splice results in ONE positive slot are alternatives,
+ // not multiple splices on the same Riven. Consider every compatible recipe.
+ if(spliceRequests.length===1){
+  const {k,ids}=spliceRequests[0];
+  const remain=target.filter((_,j)=>j!==k),postCfg={p:cfg.p-1,n:cfg.n};
+  const finish=probability(remain,postCfg,ex);
+  const postPlans=[];
+  if(finish>0)postPlans.push({name:'Finish unlocked',stages:[{p:finish,lock:false}]});
+  const candidates=[...new Set(remain.slice(0,postCfg.p).flatMap(x=>[...x]).filter(i=>pos.includes(i)))];
+  const continuation=candidates.map(i=>({i,p:probability(remain,postCfg,ex,i)})).filter(x=>x.p>0);
+  if(continuation.length){
+   const best=Math.max(...continuation.map(x=>x.p));
+   const equivalent=continuation.filter(x=>Math.abs(x.p-best)<1e-12);
+   const first=anyDrawChance(pos.length,postCfg.p,equivalent.length);
+   if(first>0)postPlans.push({name:'Lock any useful positive',stages:[{p:first,lock:false},{p:best,lock:true}]});
+  }
+  const pairs=[];
+  for(const id of ids)for(const [a,b] of (recipes.get(S[id][0])||[])){
+   const ai=STAT_INDEX.get(a),bi=STAT_INDEX.get(b);
+   if(ai===undefined||bi===undefined||ai===bi)continue;
+   // A recipe is possible if each ingredient can occupy an allowed sign.
+   const possible=(i)=>isStatEligible(i,false,ex)||(cfg.n>0&&isStatEligible(i,true,ex));
+   if(possible(ai)&&possible(bi)&&!pairs.some(x=>x.a===ai&&x.b===bi||x.a===bi&&x.b===ai))pairs.push({a:ai,b:bi,name:S[id][0]});
+  }
+  if(pairs.length){
+   // Exact distribution over the *unordered* roll: positive choices are
+   // sampled without replacement; an eligible negative is selected from
+   // the negative pool excluding the already rolled positives.
+   const negative=S.map((_,i)=>i).filter(i=>isStatEligible(i,true,ex));
+   const counts=new Map(),completed={weight:0},first=new Map();
+   const ingredients=new Set(pairs.flatMap(x=>[x.a,x.b]));
+   const selected=[];let sampleTotal=0;
+   const process=()=>{
+    const negChoices=cfg.n?negative.filter(i=>!selected.includes(i)):[-1];
+    if(!negChoices.length)return;
+    const w=1/negChoices.length;
+    for(const ni of negChoices){
+     sampleTotal+=w;
+     const present=new Set(selected);if(ni>=0)present.add(ni);
+     if(pairs.some(x=>present.has(x.a)&&present.has(x.b))){completed.weight+=w;continue}
+     const useful=[...present].filter(i=>ingredients.has(i));
+     if(!useful.length)continue;
+     // If several ingredients appear without a complete recipe, the user
+     // can choose which one to lock. Use the one with best continuation.
+     const eligible=useful.map(i=>({i,negative:i===ni,p:spliceSecondChance(i,i===ni,pairs,cfg,pos,negative)}))
+       .filter(x=>x.p>0).sort((a,b)=>b.p-a.p);
+     if(!eligible.length)continue;
+     const best=eligible[0],key=best.i+':'+(best.negative?'N':'P');
+     const old=first.get(key)||{weight:0,p:best.p};old.weight+=w;first.set(key,old);
+    }
+   };
+   const choose=(from)=>{if(selected.length===cfg.p){process();return}
+    for(let i=from;i<=pos.length-(cfg.p-selected.length);i++){
+     selected.push(pos[i]);choose(i+1);selected.pop();
+    }
+   };choose(0);
+   if(sampleTotal>0){
+    const together=completed.weight/sampleTotal/4;
+    const singles=[...first.values()];
+    const singleWeight=singles.reduce((n,x)=>n+x.weight,0);
+    const initial=singleWeight/sampleTotal/4;
+    // Weighted geometric mean waiting time, respecting each ingredient's
+    // positive/negative eligibility and its available complement(s).
+    const other=singleWeight?singleWeight/singles.reduce((n,x)=>n+x.weight/x.p,0):0;
+    for(const follow of postPlans){
+     if(together>0)add('spliceTogether','Splice · any accepted recipe together'+(follow.name==='Finish unlocked'?'':' · then lock'),
+      [{p:together,lock:false},...follow.stages],
+      'Accept any completed compatible ingredient pair, with positive and negative pools modeled separately; '+follow.name.toLowerCase()+'.');
+     if(initial>0&&other>0)add('spliceSequential','Splice · lock any useful ingredient'+(follow.name==='Finish unlocked'?'':' · then lock'),
+      [{p:initial,lock:false},{p:other,lock:true},...follow.stages],
+      'Accept any ingredient of any selected splice recipe, including an eligible negative ingredient. Lock the most useful ingredient until a complementary stat rolls; '+follow.name.toLowerCase()+'.');
+    }
+   }
+  }
+  notes.push('One spliced stat is produced, but any selected splice alternative may satisfy the same positive slot. Positive and negative eligibility are separate: elemental ingredients cannot roll negative; eligible Damage and Multishot ingredients can. A negative ingredient is replaced with a negative stat when spliced.');
+  notes.push('Multiple ingredient paths are combined without double-counting completed recipes. Sequential completion is an expected-value approximation after choosing a useful ingredient; intermediate multi-stat opportunities and globally optimal lock decisions remain unmodeled.');
+ }else if(spliceRequests.length){notes.push('Several different positive slots request splice results. Only one splice may exist on a Riven, so an exact multi-splice target is impossible.');}
+ if(!plans.length){out.textContent=t[18];return}
+ // Keep one representative per genuinely different strategy family and
+ // continuation policy. Alternate recipes remain eligible for comparison,
+ // but don't create pages of near-duplicate rows.
+ const dedup=new Map();
+ for(const plan of plans){
+  const key=plan.family+'|'+plan.name;
+  const previous=dedup.get(key);
+  if(!previous||plan.kuva<previous.kuva)dedup.set(key,plan);
+ }
+ const selected=[...dedup.values()].sort((a,b)=>a.kuva-b.kuva);
+ const title=document.createElement('p');title.className='roll-resultline';
+ title.textContent='Lowest modeled cost: '+selected[0].name+' · '+fmt(selected[0].kuva)+' Kuva';
+ const table=document.createElement('table');
+ const head=document.createElement('tr');for(const heading of (budget===null?['Strategy',t[11]]:['Strategy',t[11],t[12]])){const th=document.createElement('th');th.textContent=heading;head.append(th)}
+ const thead=document.createElement('thead');thead.append(head);table.append(thead);
+ const tbody=document.createElement('tbody');
+ for(const plan of selected){const tr=document.createElement('tr');for(const val of (budget===null?[plan.name,fmt(plan.kuva)]:[plan.name,fmt(plan.kuva),pct(plan.success)])){const td=document.createElement('td');td.textContent=val;tr.append(td)}tr.title=plan.detail;tbody.append(tr)}table.append(tbody);
+ out.replaceChildren(title,table);
+}
+
+function open(){lastFocus=document.activeElement;labels();$('rollLayout').value=C[st.c]?.id||'3/1';syncExclusions();chosen=[];const cfg=layout();for(let k=0;k<cfg.p+cfg.n;k++){const i=st.sel[k];chosen.push(new Set(Number.isInteger(i)&&i>=0?[i]:[]))}buildSlots();$('rollOutput').replaceChildren();overlay.hidden=false;document.body.style.overflow='hidden';$('rollCostClose').focus()}
+function close(){overlay.hidden=true;document.body.style.overflow='';lastFocus?.focus?.()}
+$('rollClear').addEventListener('click',()=>{chosen=chosen.map(()=>new Set());syncExclusions();buildSlots();$('rollOutput').replaceChildren()});$('rollCostOpen').addEventListener('click',open);$('rollCostClose').addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close()});document.addEventListener('keydown',e=>{if(!overlay.hidden&&e.key==='Escape')close()});$('rollLayout').addEventListener('change',buildSlots);$('rollIPChecks').addEventListener('change',buildSlots);$('rollCompute').addEventListener('click',compute);$('rivenLanguage')?.addEventListener('change',()=>{labels();if(!overlay.hidden)buildSlots()});labels();
+})();
+</script>
+<script type="application/json" id="patchNotesData">[{"version":"6.0","content":"Added the Riven Roll Cost Calculator with flexible target stats, Kuva budget and locking/splicing comparisons. Expanded Melee Duplicate with live normal/heavy critical chance comparisons and an Auto Optimize mod-combination finder."},{"version":"5.5.9","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.9","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
 <script id="patchNotesRenderer">
 (function(){
   try {
@@ -2305,7 +2831,7 @@ function comparePatchVersions(a,b){
 }
 function patchCard(note,showParent=false){
   const tier=patchLevel(note.version);
-  const typeName=tier==='major'?'Generational Release':tier==='chapter'?'Chapter Update':'Micro Update';
+  const typeName=tier==='major'?'Major Updates':tier==='chapter'?'Chapter Update':'Micro Update';
   const tierBadge=tier==='major'?'':`<span class="patch-level">${rivenLabel(typeName)}</span>`;
   const parent=showParent&&tier==='micro'?patchParent(note.version):null;
   const translatedSummary=translatedPatchSummary(note.version);const localized=rivenLang()!=='en'&&translatedSummary;const patchBody=localized?`<p>${translatedSummary}</p><details class="patch-original"><summary>${rivenUi("English details")}</summary><p>${note.content}</p></details>`:`<p>${note.content}</p>`;
@@ -2598,7 +3124,7 @@ document.addEventListener('keydown',e=>{if(versionPopup.hidden)return;if(e.key==
 <script id="rivenI18n">
 (function(){
 'use strict';
-const KEYS=["Language", "Auto (Browser)", "Themes", "Patch Notes", "Riven Stat Range Calculator", "Pick the weapon type, riven layout and stats to see the exact roll range for each stat.", "Download Raw HTML Code", "Join The Discord!", "Become a Youtube Member", "Weapon name (optional, fills in the weapon type)", "Weapon type", "Riven layout", "Stats on the riven", "Clear All", "Copy Stats", "Save Setup", "Load Setup", "Copy Riven Code", "Import Riven Code", "View Spliced Stats Combos", "Spliced stat combinations", "Search version or keyword…", "Read Older Patchnotes", "Close", "Later", "Update Now", "A calculator update is ready.", "Refresh to use the latest version; your locally saved setups will stay on this device.", "Get Mobile App Version", "Check Github For Updates", "New Version Available Online", "Website View Counter", "Saved Configurations", "Rifle", "Shotgun", "Pistol", "Archgun", "Melee / Zaw", "Generational Release", "Chapter Update", "Micro Update", "Search patch notes by version or keyword", "Start typing, e.g. Soma Prime"];
+const KEYS=["Language", "Auto (Browser)", "Themes", "Patch Notes", "Riven Stat Range Calculator", "Pick the weapon type, riven layout and stats to see the exact roll range for each stat.", "Download Raw HTML Code", "Join The Discord!", "Become a Youtube Member", "Weapon name (optional, fills in the weapon type)", "Weapon type", "Riven layout", "Stats on the riven", "Clear All", "Copy Stats", "Save Setup", "Load Setup", "Copy Riven Code", "Import Riven Code", "View Spliced Stats Combos", "Spliced stat combinations", "Search version or keyword…", "Read Older Patchnotes", "Close", "Later", "Update Now", "A calculator update is ready.", "Refresh to use the latest version; your locally saved setups will stay on this device.", "Get Mobile App Version", "Check Github For Updates", "New Version Available Online", "Website View Counter", "Saved Configurations", "Rifle", "Shotgun", "Pistol", "Archgun", "Melee / Zaw", "Major Updates", "Chapter Update", "Micro Update", "Search patch notes by version or keyword", "Start typing, e.g. Soma Prime"];
 const PACKS={"ar":["اللغة", "تلقائي (المتصفح)", "السمات", "ملاحظات التحديث", "حاسبة نطاق إحصائيات الريفن", "اختر نوع السلاح وتكوين الريفن والإحصائيات لعرض النطاق الدقيق لكل إحصائية.", "تنزيل ملف HTML", "انضم إلى ديسكورد!", "ادعم القناة!", "اسم السلاح (اختياري، يحدد النوع)", "نوع السلاح", "تكوين الريفن", "إحصائيات الريفن", "مسح الكل", "نسخ الإحصائيات", "حفظ التكوين", "تحميل التكوين", "نسخ رمز الريفن", "استيراد رمز الريفن", "عرض مجموعات الإحصائيات المدمجة", "مجموعات الإحصائيات المدمجة", "ابحث عن إصدار أو كلمة مفتاحية…", "قراءة الملاحظات السابقة", "إغلاق", "لاحقًا", "التحديث الآن", "يوجد تحديث جديد للحاسبة.", "حدّث الصفحة لاستخدام أحدث إصدار؛ ستبقى تكويناتك المحفوظة على هذا الجهاز.", "الحصول على نسخة الهاتف", "البحث عن تحديثات على GitHub", "يتوفر إصدار جديد عبر الإنترنت", "عداد زيارات الموقع", "التكوينات المحفوظة", "بندقية", "بندقية خرطوش", "مسدس", "سلاح آرك", "قتال قريب / زاو", "إصدار رئيسي", "تحديث الفصل", "تحديث مصغّر", "البحث في ملاحظات التحديث حسب الإصدار أو الكلمة", "ابدأ الكتابة، مثل Soma Prime"],"es": ["Idioma", "Automático (navegador)", "Temas", "Notas de versión", "Calculadora de estadísticas Riven", "Selecciona el tipo de arma, la configuración y las estadísticas para ver sus rangos exactos.", "Descargar HTML", "¡Únete a Discord!", "¡Apoya el canal!", "Nombre del arma (opcional, detecta el tipo)", "Tipo de arma", "Configuración Riven", "Estadísticas del Riven", "Borrar todo", "Copiar estadísticas", "Guardar configuración", "Cargar configuración", "Copiar código Riven", "Importar código Riven", "Ver combinaciones fusionadas", "Combinaciones de estadísticas fusionadas", "Buscar versión o palabra…", "Ver notas anteriores", "Cerrar", "Más tarde", "Actualizar ahora", "Hay una actualización disponible.", "Actualiza para usar la última versión; tus configuraciones guardadas permanecerán en el dispositivo.", "Obtener app móvil", "Buscar actualizaciones en GitHub", "Nueva versión disponible", "Contador de visitas", "Configuraciones guardadas", "Rifle", "Escopeta", "Pistola", "Arma pesada", "Cuerpo a cuerpo / Zaw", "Versión generacional", "Actualización de capítulo", "Microactualización", "Buscar notas por versión o palabra", "Escribe, p. ej., Soma Prime"], "pt": ["Idioma", "Automático (navegador)", "Temas", "Notas da versão", "Calculadora de atributos Riven", "Selecione o tipo de arma, a configuração e os atributos para ver os intervalos exatos.", "Baixar HTML", "Entrar no Discord!", "Apoie o canal!", "Nome da arma (opcional, identifica o tipo)", "Tipo de arma", "Configuração Riven", "Atributos do Riven", "Limpar tudo", "Copiar atributos", "Salvar configuração", "Carregar configuração", "Copiar código Riven", "Importar código Riven", "Ver combinações fundidas", "Combinações de atributos fundidos", "Buscar versão ou palavra…", "Ler notas anteriores", "Fechar", "Mais tarde", "Atualizar agora", "Há uma atualização disponível.", "Atualize para usar a versão mais recente; suas configurações permanecerão neste dispositivo.", "Obter versão móvel", "Verificar atualizações no GitHub", "Nova versão disponível", "Contador de visitas", "Configurações salvas", "Rifle", "Escopeta", "Pistola", "Arma pesada", "Corpo a corpo / Zaw", "Versão geracional", "Atualização de capítulo", "Microatualização", "Pesquisar notas por versão ou palavra", "Digite, ex.: Soma Prime"], "fr": ["Langue", "Auto (navigateur)", "Thèmes", "Notes de version", "Calculateur de statistiques Riven", "Choisissez le type d’arme, la configuration et les statistiques pour voir les plages exactes.", "Télécharger le HTML", "Rejoindre Discord !", "Soutenir la chaîne !", "Nom de l’arme (facultatif, détecte le type)", "Type d’arme", "Configuration Riven", "Statistiques du Riven", "Tout effacer", "Copier les stats", "Enregistrer", "Charger", "Copier le code Riven", "Importer un code Riven", "Voir les combinaisons fusionnées", "Combinaisons de statistiques fusionnées", "Rechercher une version ou un mot…", "Anciennes notes", "Fermer", "Plus tard", "Mettre à jour", "Une mise à jour est disponible.", "Actualisez pour utiliser la dernière version ; vos configurations resteront enregistrées sur cet appareil.", "Obtenir l’app mobile", "Vérifier sur GitHub", "Nouvelle version disponible", "Compteur de visites", "Configurations enregistrées", "Fusil", "Fusil à pompe", "Pistolet", "Arme lourde", "Mêlée / Zaw", "Version générationnelle", "Mise à jour de chapitre", "Micro-mise à jour", "Chercher par version ou mot-clé", "Saisir, ex. : Soma Prime"], "ru": ["Язык", "Авто (браузер)", "Темы", "История версий", "Калькулятор статов Ривен", "Выберите тип оружия, набор параметров и характеристики, чтобы увидеть точный диапазон.", "Скачать HTML", "Присоединиться к Discord!", "Поддержать канал!", "Название оружия (необязательно)", "Тип оружия", "Схема Ривена", "Характеристики Ривена", "Очистить всё", "Копировать статы", "Сохранить набор", "Загрузить набор", "Копировать код Ривена", "Импорт кода Ривена", "Комбинации слияния", "Комбинации характеристик", "Поиск версии или слова…", "Старые изменения", "Закрыть", "Позже", "Обновить", "Доступно обновление.", "Обновите страницу; сохранённые наборы останутся на устройстве.", "Мобильная версия", "Проверить GitHub", "Доступна новая версия", "Счётчик посещений", "Сохранённые наборы", "Винтовка", "Дробовик", "Пистолет", "Тяжёлое оружие", "Ближний бой / Зав", "Крупная версия", "Обновление главы", "Микрообновление", "Поиск по версии или слову", "Введите, например, Soma Prime"], "de": ["Sprache", "Auto (Browser)", "Designs", "Versionshinweise", "Riven-Statistikrechner", "Wähle Waffentyp, Riven-Konfiguration und Werte für die genauen Bereiche.", "HTML herunterladen", "Discord beitreten!", "Kanal unterstützen!", "Waffenname (optional, erkennt Typ)", "Waffentyp", "Riven-Konfiguration", "Riven-Werte", "Alles löschen", "Werte kopieren", "Setup speichern", "Setup laden", "Riven-Code kopieren", "Riven-Code importieren", "Fusionierte Kombinationen", "Fusionierte Stat-Kombinationen", "Version oder Stichwort suchen…", "Ältere Hinweise", "Schließen", "Später", "Jetzt aktualisieren", "Ein Update ist verfügbar.", "Neu laden für die neueste Version; gespeicherte Setups bleiben auf diesem Gerät.", "Mobile App holen", "GitHub auf Updates prüfen", "Neue Version verfügbar", "Besucherzähler", "Gespeicherte Setups", "Gewehr", "Schrotflinte", "Pistole", "Archgun", "Nahkampf / Zaw", "Generationsversion", "Kapitel-Update", "Mikro-Update", "Versionshinweise durchsuchen", "Eingeben, z. B. Soma Prime"], "it": ["Lingua", "Auto (browser)", "Temi", "Note di versione", "Calcolatore statistiche Riven", "Scegli tipo di arma, configurazione e statistiche per vedere gli intervalli esatti.", "Scarica HTML", "Unisciti a Discord!", "Supporta il canale!", "Nome arma (facoltativo, rileva il tipo)", "Tipo di arma", "Configurazione Riven", "Statistiche Riven", "Cancella tutto", "Copia statistiche", "Salva configurazione", "Carica configurazione", "Copia codice Riven", "Importa codice Riven", "Combinazioni fuse", "Combinazioni statistiche fuse", "Cerca versione o parola…", "Note precedenti", "Chiudi", "Più tardi", "Aggiorna ora", "È disponibile un aggiornamento.", "Aggiorna per la versione più recente; le configurazioni salvate restano sul dispositivo.", "Ottieni app mobile", "Controlla GitHub", "Nuova versione disponibile", "Contatore visite", "Configurazioni salvate", "Fucile", "Fucile a pompa", "Pistola", "Arma pesante", "Mischia / Zaw", "Versione generazionale", "Aggiornamento capitolo", "Microaggiornamento", "Cerca nelle note per versione o parola", "Digita, es. Soma Prime"], "pl": ["Język", "Auto (przeglądarka)", "Motywy", "Informacje o wersjach", "Kalkulator statystyk Riven", "Wybierz typ broni, układ i statystyki, aby zobaczyć dokładny zakres.", "Pobierz HTML", "Dołącz do Discorda!", "Wesprzyj kanał!", "Nazwa broni (opcjonalnie, rozpoznaje typ)", "Typ broni", "Układ Riven", "Statystyki Riven", "Wyczyść", "Kopiuj statystyki", "Zapisz zestaw", "Wczytaj zestaw", "Kopiuj kod Riven", "Importuj kod Riven", "Pokaż kombinacje", "Połączenia statystyk", "Szukaj wersji lub słowa…", "Starsze zmiany", "Zamknij", "Później", "Aktualizuj", "Dostępna jest aktualizacja.", "Odśwież, aby użyć najnowszej wersji; zapisane zestawy pozostaną na urządzeniu.", "Pobierz wersję mobilną", "Sprawdź GitHub", "Dostępna nowa wersja", "Licznik odwiedzin", "Zapisane zestawy", "Karabin", "Strzelba", "Pistolet", "Broń ciężka", "Broń wręcz / Zaw", "Wersja generacyjna", "Aktualizacja rozdziału", "Mikroaktualizacja", "Szukaj według wersji lub słowa", "Wpisz np. Soma Prime"], "zh": ["语言", "自动（浏览器）", "主题", "更新日志", "裂罅属性计算器", "选择武器类型、裂罅配置和属性，查看精确数值范围。", "下载 HTML", "加入 Discord！", "支持频道！", "武器名称（可选，自动识别类型）", "武器类型", "裂罅配置", "裂罅属性", "全部清除", "复制属性", "保存配置", "加载配置", "复制裂罅代码", "导入裂罅代码", "查看融合组合", "融合属性组合", "搜索版本或关键词…", "查看旧日志", "关闭", "稍后", "立即更新", "有新版本可用。", "刷新即可使用最新版本；已保存的配置仍保留在本设备上。", "获取移动版", "检查 GitHub 更新", "发现新版本", "网站访问计数", "已保存的配置", "步枪", "霰弹枪", "手枪", "Archgun", "近战 / Zaw", "世代更新", "章节更新", "微更新", "按版本或关键词搜索", "输入，例如 Soma Prime"], "ja": ["言語", "自動（ブラウザー）", "テーマ", "更新履歴", "Riven ステータス計算機", "武器種、Riven 構成、ステータスを選んで正確な範囲を確認します。", "HTML をダウンロード", "Discord に参加！", "チャンネルを支援！", "武器名（任意・種類を自動判別）", "武器種", "Riven 構成", "Riven ステータス", "すべて消去", "ステータスをコピー", "構成を保存", "構成を読み込む", "Riven コードをコピー", "Riven コードをインポート", "融合の組み合わせ", "融合ステータスの組み合わせ", "バージョンやキーワードで検索…", "過去の履歴", "閉じる", "後で", "今すぐ更新", "更新があります。", "更新すると最新版になります。保存済みの構成はこの端末に残ります。", "モバイル版を入手", "GitHub を確認", "新バージョンあり", "閲覧数", "保存した構成", "ライフル", "ショットガン", "ピストル", "アークガン", "近接 / Zaw", "世代更新", "チャプター更新", "マイクロ更新", "バージョンかキーワードで検索", "入力例：Soma Prime"]};
 const AR_EXTRA={
  'Base stat values':'قيم الإحصائيات الأساسية','Show Base Stat Values':'عرض قيم الإحصائيات الأساسية',
@@ -2632,7 +3158,7 @@ const AR_EXTRA={
  '2 pos, 0 neg':'٢ موجب، ٠ سالب','2 pos, 1 neg':'٢ موجب، ١ سالب',
  '3 pos, 0 neg':'٣ موجب، ٠ سالب','3 pos, 1 neg':'٣ موجب، ١ سالب',
  'Positive 1':'موجب ١','Positive 2':'موجب ٢','Positive 3':'موجب ٣','Negative 1':'سالب ١',
- 'Generational Release':'إصدار رئيسي','Chapter Update':'تحديث الفصل','Micro Update':'تحديث مصغّر',
+ 'Major Updates':'إصدار رئيسي','Chapter Update':'تحديث الفصل','Micro Update':'تحديث مصغّر',
  'Select a stat':'اختر إحصائية','Search stats':'ابحث عن إحصائية',
  'Critical Chance is doubled for heavy attacks':'تتضاعف فرصة الضربة الحرجة في الهجمات الثقيلة',
  'Positive ranges are base × layout multiplier × 0.9 to 1.1.':'النطاقات الموجبة = القيمة الأساسية × معامل التكوين × ٠٫٩ إلى ١٫١.',
@@ -2975,6 +3501,95 @@ render();
   }
   document.getElementById('duplicateCalculatorForm').addEventListener('submit',event=>{event.preventDefault();calculate()});
   calculate();
+})();
+</script>
+<script id="duplicateCritBuildScript">
+(function(){
+ 'use strict';
+ const el=id=>document.getElementById(id);
+ const base=el('dupeBase'),riven=el('dupeRiven'),combo=el('dupeCombo'),critMulti=el('duplicateCritMultiplier');
+ const result=el('dupeRankResults'),current=el('dupeCurrent');
+ if(!base||!riven||!combo||!result)return;
+ for(let n=1;n<=12;n++){const option=document.createElement('option');option.value=n;option.textContent='×'+n;combo.append(option)}
+ combo.value='12';
+ const names={dupeBloodRush:'Blood Rush',dupeGalvSteel:'Galvanized Steel',dupeTrueSteel:'True Steel',dupeSacSteel:'Sacrificial Steel',dupeAvenger:'Arcane Avenger',dupeHotShot:'Arcane Hot Shot'};
+ const steels=['dupeGalvSteel','dupeTrueSteel','dupeSacSteel'];
+ const selected=id=>Boolean(el(id)?.checked);
+ const fmt=value=>Number.isFinite(value)?value.toFixed(1)+'%':'—';
+ const targetCrit=()=>{
+  const mult=Number(critMulti.value);if(!Number.isFinite(mult)||mult<=0)return NaN;
+  let best=100,damage=-Infinity;
+  for(let i=100;i<=200;i++){const p=i/100,y=2-p,o=p-1,d=(y*mult+o*(2*mult-1))*(1+y);if(d>damage){damage=d;best=i}}
+  return best;
+ };
+ const ranks={dupeBloodRush:10,dupeGalvSteel:10,dupeTrueSteel:5,dupeSacSteel:10};
+ const mods=['dupeBloodRush',...steels],arcs=['dupeAvenger','dupeHotShot'];
+ function bonus(id,rank){
+  if(rank<0)return 0;
+  if(id==='dupeBloodRush')return (rank+1)*40/11*(Number(combo.value)-1);
+  if(id==='dupeGalvSteel')return (rank+1)*10;
+  if(id==='dupeTrueSteel')return (rank+1)*20;
+  if(id==='dupeSacSteel')return (rank+1)*(selected('dupeSacSet')?25:20);
+  return 0;
+ }
+ function chance(choices,heavy){
+  const rawBase=Number(base.value),rawRiven=Number(riven.value);
+  let add=rawRiven*(heavy?2:1)+(selected('dupeHotShot')?300:0);
+  for(const [id,rank] of choices){let value=bonus(id,rank);if(heavy&&id!=='dupeBloodRush')value*=2;add+=value}
+  return rawBase*(1+add/100)+(selected('dupeAvenger')?45:0);
+ }
+ function makeOptions(){
+  const activeMods=mods.filter(selected),lists=activeMods.map(id=>id==='dupeGalvSteel'?[[id,ranks[id]]]:Array.from({length:ranks[id]+2},(_,n)=>[id,n-1]));
+  let combinations=[[]];for(const variants of lists){combinations=combinations.flatMap(existing=>variants.map(item=>[...existing,item]))}
+  const optimum=targetCrit(),out=[];
+  for(const pick of combinations){
+   const normal=chance(pick,false),heavy=chance(pick,true);
+   if(!Number.isFinite(normal)||!Number.isFinite(heavy))continue;
+   const deltaNormal=Math.abs(normal-optimum),deltaHeavy=Math.abs(heavy-optimum);
+   out.push({pick,normal,heavy,deltaNormal,deltaHeavy,score:Math.min(deltaNormal,deltaHeavy)});
+  }
+  const rankScore = item => item.pick.reduce((sum,[id,rank])=>sum+(rank>=0?1:0),0);
+  const pickBest = key => out.slice().sort((a,b)=>a[key]-b[key] || rankScore(a)-rankScore(b) || a.score-b.score)[0];
+  return {bestNormal:pickBest('deltaNormal'),bestHeavy:pickBest('deltaHeavy'),optimum,activeMods};
+ }
+ function draw(){
+  const b=Number(base.value),r=Number(riven.value),opt=targetCrit();
+  const noValue=base.value.trim()===''||riven.value.trim()===''||!Number.isFinite(b)||b<0||!Number.isFinite(r)||!Number.isFinite(opt);
+  result.replaceChildren();current.replaceChildren();
+  for(const [ids,countId] of [[mods,'dupeModsCount'],[arcs,'dupeArcsCount']]){
+   const active=ids.filter(selected);el(countId).textContent=active.length?active.map(id=>names[id]).join(', '):'None';
+  }
+  el('dupeSacSet').disabled=!selected('dupeSacSteel');
+  if(noValue){current.textContent='Enter valid critical chance values to see results.';el('dupeCombinationCount').textContent='';return}
+  const data=makeOptions();
+  const full=data.activeMods.map(id=>[id,ranks[id]]);
+  const normal=chance(full,false),heavy=chance(full,true);
+  const stat=document.createElement('div');stat.className='dupe-live-values';
+  for(const [name,value] of [['Optimal',opt],['Normal',normal],['Heavy',heavy]]){
+   const cell=document.createElement('div');const title=document.createElement('span');title.textContent=name;const figure=document.createElement('strong');figure.textContent=fmt(value);cell.append(title,figure);stat.append(cell)
+  }
+  current.append(stat);
+  el('dupeCombinationCount').textContent='';
+  for(const [label,item,key] of [['Normal attacks',data.bestNormal,'deltaNormal'],['Heavy attacks',data.bestHeavy,'deltaHeavy']]){
+   if(!item)continue;
+   const card=document.createElement('div');card.className='dupe-opt-result';
+   const heading=document.createElement('strong');heading.textContent=label;card.append(heading);
+   const name=document.createElement('div');name.textContent=item.pick.filter(([id,rank])=>rank>=0).map(([id,rank])=>names[id]+' R'+rank).join(' + ')||'No crit mods';card.append(name);
+   const row=document.createElement('div');row.className='dupe-rank-row';
+   const n=document.createElement('span');n.textContent='Normal '+fmt(item.normal)+' · Heavy '+fmt(item.heavy);
+   const d=document.createElement('span');d.textContent='Δ '+fmt(item[key])+' from optimal';
+   row.append(n,d);card.append(row);result.append(card);
+  }
+ }
+ for(const id of mods.concat(arcs,['dupeSacSet'])){
+  el(id).addEventListener('change',()=>{
+   if(steels.includes(id)&&selected(id))for(const other of steels)if(other!==id)el(other).checked=false;
+   draw();
+  });
+ }
+ for(const control of [base,riven,combo,critMulti])control.addEventListener('input',draw);
+ el('duplicateCalculatorForm')?.addEventListener('submit',()=>queueMicrotask(draw));
+ draw();
 })();
 </script>
 <script id="shareWelcomeController">
