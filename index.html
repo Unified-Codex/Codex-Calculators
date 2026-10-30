@@ -1081,6 +1081,15 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
 #duplicateApp .dupe-opt-result small{display:block;opacity:.8;margin-top:4px}
 @media(max-width:720px){#duplicateApp .dupe-fields{grid-template-columns:repeat(2,minmax(0,1fr))}#duplicateApp .dupe-computed{grid-template-columns:1fr}}
 @media(max-width:420px){#duplicateApp .dupe-fields{grid-template-columns:1fr}}
+
+/* Melee Duplicate: aligned compact selectors */
+#duplicateApp .dupe-core-fields{align-items:end;gap:12px}
+#duplicateApp .dupe-core-fields>label{display:grid;grid-template-rows:minmax(2.8em,auto) 42px;gap:5px;align-content:end;min-width:0}
+#duplicateApp .dupe-core-fields input,#duplicateApp .dupe-core-fields select{height:42px;min-height:42px}
+#duplicateApp .dupe-selectors{gap:10px;margin-top:11px}
+#duplicateApp .dupe-multi summary{padding:9px 11px;line-height:1.4}
+#duplicateApp .dupe-multi summary span{display:none!important}
+@media(max-width:420px){#duplicateApp .dupe-core-fields>label{grid-template-rows:auto 42px}}
 </style><style id="dupeCritCompactStyles">
 .dupe-crit-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:8px 14px;margin:14px 0}
 .dupe-crit-options .dupe-crit-check{display:flex;align-items:center;gap:8px;font-size:.9rem;line-height:1.35;padding:9px 10px;border:1px solid var(--border,rgba(140,150,165,.25));border-radius:9px;background:rgba(127,127,127,.045);cursor:pointer}
@@ -1259,7 +1268,7 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
           <label>Combo multiplier<select id="dupeCombo"></select></label>
         </div>
         <div class="dupe-selectors">
-          <details class="dupe-multi" id="dupeModMenu"><summary>What mods will your build use? <span id="dupeModsCount">None</span></summary>
+          <details class="dupe-multi" id="dupeModMenu"><summary>What mods will your build use? <span id="dupeModsCount" hidden></span></summary>
             <div class="dupe-menu-items">
               <label><input type="checkbox" id="dupeBloodRush"> Blood Rush</label>
               <label><input type="checkbox" id="dupeGalvSteel" data-steel> Galvanized Steel</label>
@@ -1268,7 +1277,7 @@ body.tool-sort-active,body.tool-sort-active *{cursor:grabbing!important;user-sel
               <label class="dupe-sub-option"><input type="checkbox" id="dupeSacSet"> Sacrificial set bonus</label>
             </div>
           </details>
-          <details class="dupe-multi" id="dupeArcMenu"><summary>What arcanes will your build use? <span id="dupeArcsCount">None</span></summary>
+          <details class="dupe-multi" id="dupeArcMenu"><summary>What arcanes will your build use? <span id="dupeArcsCount" hidden></span></summary>
             <div class="dupe-menu-items">
               <label><input type="checkbox" id="dupeAvenger"> Arcane Avenger (+45% flat)</label>
               <label><input type="checkbox" id="dupeHotShot"> Arcane Hot Shot (+300% at maximum stacks)</label>
