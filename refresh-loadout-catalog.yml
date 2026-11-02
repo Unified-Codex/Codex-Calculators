@@ -1,0 +1,39 @@
+name: Refresh Loadout Randomizer catalog
+
+on:
+  schedule:
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/refresh-loadout-catalog.yml'
+      - 'scripts/build_loadout_catalog.py'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-loadout-catalog
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download and validate Warframe equipment list
+        run: python3 scripts/build_loadout_catalog.py
+      - name: Commit catalog if changed
+        run: |
+          git add data/loadouts.json
+          if git diff --cached --quiet; then
+            echo 'No changes in the upstream catalog.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update Warframe loadout equipment catalog'
+          git push

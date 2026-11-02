@@ -1,7 +1,7 @@
 {
-  "name": "Codex Calcs — Warframe Tools & Galvanized Gunco Chart",
+  "name": "Codex Calcs — Warframe Tools & Loadout Randomizer",
   "short_name": "Codex Calcs",
-  "description": "Offline Warframe tools for Riven stats, Melee Duplicate, weekly resets, relics, Circuit rotations, Nightwave and GunCO weapon interactions.",
+  "description": "Offline Warframe calculators and tools, including a Loadout Randomizer, Weekly Tracker, Riven stats, GunCO and Circuit rotation calendar.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",

@@ -1,11 +1,11 @@
 /* Riven Calculator offline app. Bump CACHE_VERSION on each public release.
  * Offline HTML must be cached even when a nonessential icon fails to load. */
-const CACHE_VERSION='v6.17-searchable-timezone';
+const CACHE_VERSION='v6.19.2-sirius-orion-name';
 const SHELL_CACHE=`riven-calculator-shell-${CACHE_VERSION}-share-once-v1`;
 const FONT_CACHE='riven-calculator-google-fonts-v1';
 const APP_INDEX=new URL('./index.html',self.registration.scope).href;
 const APP_ORIGIN=new URL(self.registration.scope).origin;
-const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./tool-riven.png','./tool-duplicate.png','./tool-relic.png','./tool-nightwave.png'];
+const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./tool-riven.png','./tool-duplicate.png','./tool-relic.png','./tool-nightwave.png','./data/loadouts.json'];
 
 async function precacheCore(){
   const cache=await caches.open(SHELL_CACHE);
@@ -75,6 +75,20 @@ async function serveShellAsset(request){
     return response;
   }catch(error){return Response.error();}
 }
+// Data is refreshed by the daily GitHub Action. Do not serve an old
+// service-worker copy forever: network first, cached catalog when offline.
+async function serveEquipmentCatalog(request){
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),4500);
+  try{
+    const response=await fetch(request,{cache:'no-store',signal:controller.signal});
+    if(!response.ok)throw new Error('Catalog unavailable');
+    try{const cache=await caches.open(SHELL_CACHE);await cache.put(new URL('./data/loadouts.json',self.registration.scope).href,response.clone());}catch(e){}
+    return response;
+  }catch(e){
+    return (await caches.match(new URL('./data/loadouts.json',self.registration.scope).href))||Response.error();
+  }finally{clearTimeout(timer);}
+}
 async function serveGoogleFont(request){
   const cache=await caches.open(FONT_CACHE);
   const cached=await cache.match(request);
@@ -96,6 +110,7 @@ self.addEventListener('fetch',event=>{
     return;
   }
   if(url.origin!==APP_ORIGIN||!url.pathname.startsWith(new URL(self.registration.scope).pathname))return;
+  if(url.pathname===new URL('./data/loadouts.json',self.registration.scope).pathname){event.respondWith(serveEquipmentCatalog(req));return;}
   if(req.mode==='navigate')event.respondWith(servePage(req));
   else event.respondWith(serveShellAsset(req));
 });
