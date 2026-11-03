@@ -1,11 +1,11 @@
 /* Riven Calculator offline app. Bump CACHE_VERSION on each public release.
  * Offline HTML must be cached even when a nonessential icon fails to load. */
-const CACHE_VERSION='v6.20.2-original-steel-essence-icon';
+const CACHE_VERSION='v6.21-official-drops';
 const SHELL_CACHE=`riven-calculator-shell-${CACHE_VERSION}-share-once-v1`;
 const FONT_CACHE='riven-calculator-google-fonts-v1';
 const APP_INDEX=new URL('./index.html',self.registration.scope).href;
 const APP_ORIGIN=new URL(self.registration.scope).origin;
-const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./tool-riven.png','./tool-duplicate.png','./tool-relic.png','./tool-nightwave.png','./data/loadouts.json'];
+const OPTIONAL_ASSETS=['./','./manifest.json','./icon-192.png','./icon-512.png','./apple-touch-icon.png','./favicon-32.png','./tool-riven.png','./tool-duplicate.png','./tool-relic.png','./tool-nightwave.png','./data/loadouts.json','./data/drops.json'];
 
 async function precacheCore(){
   const cache=await caches.open(SHELL_CACHE);
@@ -83,10 +83,10 @@ async function serveEquipmentCatalog(request){
   try{
     const response=await fetch(request,{cache:'no-store',signal:controller.signal});
     if(!response.ok)throw new Error('Catalog unavailable');
-    try{const cache=await caches.open(SHELL_CACHE);await cache.put(new URL('./data/loadouts.json',self.registration.scope).href,response.clone());}catch(e){}
+    try{const cache=await caches.open(SHELL_CACHE);await cache.put(request.url,response.clone());}catch(e){}
     return response;
   }catch(e){
-    return (await caches.match(new URL('./data/loadouts.json',self.registration.scope).href))||Response.error();
+    return (await caches.match(request))||Response.error();
   }finally{clearTimeout(timer);}
 }
 async function serveGoogleFont(request){
@@ -110,7 +110,7 @@ self.addEventListener('fetch',event=>{
     return;
   }
   if(url.origin!==APP_ORIGIN||!url.pathname.startsWith(new URL(self.registration.scope).pathname))return;
-  if(url.pathname===new URL('./data/loadouts.json',self.registration.scope).pathname){event.respondWith(serveEquipmentCatalog(req));return;}
+  if(url.pathname===new URL('./data/loadouts.json',self.registration.scope).pathname||url.pathname===new URL('./data/drops.json',self.registration.scope).pathname){event.respondWith(serveEquipmentCatalog(req));return;}
   if(req.mode==='navigate')event.respondWith(servePage(req));
   else event.respondWith(serveShellAsset(req));
 });

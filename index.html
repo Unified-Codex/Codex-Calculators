@@ -20,7 +20,7 @@
 (function(){
   var route='home';
   try{var saved=localStorage.getItem('codex-tools-default-page-v1');
-    if(['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin'].includes(saved)){var hidden=JSON.parse(localStorage.getItem('codex-hidden-tools-v1')||'[]');if(!Array.isArray(hidden)||!hidden.includes(saved))route=saved;else localStorage.removeItem('codex-tools-default-page-v1');}
+    if(['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin','drops'].includes(saved)){var hidden=JSON.parse(localStorage.getItem('codex-hidden-tools-v1')||'[]');if(!Array.isArray(hidden)||!hidden.includes(saved))route=saved;else localStorage.removeItem('codex-tools-default-page-v1');}
   }catch(e){} // Storage can be disabled (private / hardened browsers).
   document.documentElement.setAttribute('data-calculator-view',route);
 })();
@@ -627,6 +627,7 @@ html:not([data-calculator-view="nightwave"]) #nightwaveApp,
 html:not([data-calculator-view="gunco"]) #guncoApp{display:none!important}
 html:not([data-calculator-view="loadout"]) #loadoutApp{display:none!important}
 html:not([data-calculator-view="teshin"]) #teshinApp{display:none!important}
+html:not([data-calculator-view="drops"]) #dropsApp{display:none!important}
 
 #calculatorHome{max-width:760px;min-height:90vh;min-height:90dvh;display:flex;flex-direction:column;justify-content:center;padding-block:28px 50px}
 #calculatorHome .home-shell{width:100%}
@@ -1317,6 +1318,63 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
 @media(max-width:760px){#loadoutApp{padding:15px 13px 44px}#loadoutApp .lr-settings-grid{grid-template-columns:1fr}#loadoutApp .lr-slot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#loadoutApp .lr-exclude-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:490px){#loadoutApp .lr-slot{min-height:147px;padding:12px}#loadoutApp .lr-slot strong{font-size:1.04rem}#loadoutApp .lr-slot-bottom{gap:6px}#loadoutApp .lr-modifier-grid{grid-template-columns:1fr}#loadoutApp .lr-exclusion-controls{grid-template-columns:1fr}#loadoutApp .lr-exclude-list{grid-template-columns:1fr}#loadoutApp .lr-main-action{flex:1}#loadoutApp .lr-header{margin-top:20px}}
 
+/* Official Warframe Drop Database: local styles, theme variables shared with Codex Calcs. */
+#dropsApp{max-width:1160px;min-height:100dvh;padding:20px 18px 72px}
+#dropsApp .dd-shell{max-width:1080px;margin:0 auto}
+#dropsApp .dd-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:28px}
+#dropsApp .dd-status{color:var(--mute);font-size:.77rem;overflow-wrap:anywhere}
+#dropsApp .dd-head{display:flex;align-items:center;gap:15px;margin-bottom:24px}
+#dropsApp .dd-symbol{display:grid;place-items:center;min-width:54px;width:54px;height:54px;color:var(--acc);border:1px solid color-mix(in srgb,var(--acc) 43%,var(--line));border-radius:15px;background:color-mix(in srgb,var(--acc) 10%,var(--panel))}
+#dropsApp .dd-symbol svg{width:30px;height:30px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round}
+#dropsApp h1{font-size:clamp(1.7rem,4vw,2.5rem);padding:0;margin:0 0 4px;letter-spacing:-.035em;line-height:1.18}
+#dropsApp .dd-head p{color:var(--mute);font-size:.9rem;margin:0}
+#dropsApp .dd-search-panel{padding:19px;background:linear-gradient(125deg,color-mix(in srgb,var(--acc) 10%,var(--panel)),var(--panel) 68%);border:1px solid var(--line);border-radius:18px}
+#dropsApp .dd-label{color:var(--mute);font-size:.78rem;font-weight:800;margin:0 0 8px;display:block}
+#dropsApp .dd-search-wrap{position:relative}
+#dropsApp #ddSearch{width:100%;height:53px;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:11px 45px 11px 46px;font:inherit;color:var(--text);font-size:1rem}
+#dropsApp #ddSearch:focus{outline:2px solid color-mix(in srgb,var(--acc) 47%,transparent);border-color:var(--acc)}
+#dropsApp .dd-search-wrap svg{position:absolute;top:15px;left:15px;width:22px;height:22px;stroke:var(--mute);fill:none;stroke-width:1.8;pointer-events:none}
+#dropsApp #ddClear{position:absolute;top:8px;right:7px;border:0;background:transparent;color:var(--mute);font:inherit;font-size:23px;width:38px;height:38px;cursor:pointer}
+#dropsApp .dd-controls{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px;margin:14px 0 0}
+#dropsApp .dd-controls label{display:block;color:var(--mute);font-size:.76rem;font-weight:750}
+#dropsApp .dd-controls select{display:block;margin-top:7px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);width:100%;font:inherit;font-size:.86rem;padding:9px 10px;min-height:43px}
+#dropsApp .dd-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+#dropsApp .dd-chip{padding:7px 12px;border:1px solid var(--line);border-radius:24px;background:var(--panel2);color:var(--mute);font:inherit;font-size:.76rem;font-weight:750;cursor:pointer}
+#dropsApp .dd-chip[aria-pressed=true]{color:var(--text);border-color:var(--acc);background:color-mix(in srgb,var(--acc) 15%,var(--panel))}
+#dropsApp .dd-chip:hover{border-color:var(--acc)}
+#dropsApp .dd-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:17px 0 25px}
+#dropsApp .dd-overview>div{padding:13px 15px;background:var(--panel);border:1px solid var(--line);border-radius:13px;min-width:0}
+#dropsApp .dd-overview strong{display:block;color:var(--acc);font-size:1.25rem;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+#dropsApp .dd-overview span{color:var(--mute);font-size:.73rem;font-weight:750}
+#dropsApp .dd-results-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin:0 0 12px}
+#dropsApp .dd-results-head h2{font-size:1.13rem;margin:0 0 2px}
+#dropsApp .dd-results-head p{font-size:.8rem;color:var(--mute);margin:0}
+#dropsApp .dd-refresh,#dropsApp #ddMore{background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--text);font:inherit;font-weight:750;font-size:.78rem;padding:9px 12px;cursor:pointer}
+#dropsApp .dd-refresh:hover,#dropsApp #ddMore:hover{border-color:var(--acc)}
+#dropsApp .dd-refresh:disabled{opacity:.55;cursor:default}
+#dropsApp .dd-tip{font-size:.76rem;color:var(--mute);line-height:1.6;margin:0 0 14px}
+#dropsApp .dd-results{display:grid;gap:9px}
+#dropsApp .dd-entry{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:12px;padding:14px 16px;min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+#dropsApp .dd-entry:hover{border-color:color-mix(in srgb,var(--acc) 50%,var(--line))}
+#dropsApp .dd-entry h3{font-size:.96rem;margin:0 0 5px;overflow-wrap:anywhere;line-height:1.4}
+#dropsApp .dd-meta{font-size:.77rem;color:var(--mute);display:flex;gap:5px 12px;flex-wrap:wrap;overflow-wrap:anywhere}
+#dropsApp .dd-source{color:var(--text);opacity:.83}
+#dropsApp .dd-group{font-size:.69rem;color:var(--acc);font-weight:800}
+#dropsApp .dd-rate{text-align:right;min-width:91px;font-variant-numeric:tabular-nums}
+#dropsApp .dd-rate strong{display:block;font-size:1.37rem;color:var(--acc)}
+#dropsApp .dd-rate span{display:block;color:var(--mute);font-size:.7rem;font-weight:700;margin-top:3px}
+#dropsApp .dd-bar{background:var(--panel2);height:4px;border-radius:9px;margin-top:9px;overflow:hidden}
+#dropsApp .dd-bar i{height:100%;display:block;background:var(--acc)}
+#dropsApp .dd-empty{padding:32px 19px;border:1px dashed var(--line);border-radius:12px;background:var(--panel);color:var(--mute);text-align:center}
+#dropsApp #ddMore{display:block;margin:17px auto 0;min-width:190px;padding:12px 16px}
+#dropsApp #ddMore[hidden]{display:none}
+#dropsApp .dd-footer{margin-top:33px;padding-top:17px;border-top:1px solid var(--line);color:var(--mute);font-size:.78rem;line-height:1.65}
+#dropsApp .dd-footer p{margin:0 0 10px}
+#dropsApp .dd-footer a{color:var(--acc);font-weight:750;text-decoration:underline;text-underline-offset:3px}
+#dropsApp .dd-footer small{font-size:.71rem}
+@media(max-width:660px){#dropsApp{padding:14px 13px 48px}#dropsApp .dd-search-panel{padding:13px}#dropsApp .dd-controls{grid-template-columns:repeat(2,minmax(0,1fr))}#dropsApp .dd-controls label:first-child{grid-column:span 2}#dropsApp .dd-symbol{min-width:43px;width:43px;height:43px;border-radius:12px}#dropsApp .dd-symbol svg{width:25px;height:25px}#dropsApp .dd-head{gap:11px}#dropsApp .dd-overview{gap:7px}#dropsApp .dd-overview>div{padding:9px}#dropsApp .dd-overview strong{font-size:1rem}#dropsApp .dd-overview span{font-size:.67rem}#dropsApp .dd-entry{padding:12px;gap:8px}#dropsApp .dd-rate strong{font-size:1.15rem}#dropsApp .dd-rate{min-width:73px}}
+@media(max-width:340px){#dropsApp .dd-controls{grid-template-columns:1fr}#dropsApp .dd-controls label:first-child{grid-column:auto}#dropsApp .dd-entry{grid-template-columns:1fr}#dropsApp .dd-rate{text-align:left;max-width:125px}}
+
 </style>
 </head>
 <body>
@@ -1420,11 +1478,21 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
         </button>
         <div class="tool-card-actions"><label class="default-tool-label"><input type="checkbox" data-default-tool="teshin" aria-labelledby="calcChoiceTitle-teshin defaultText-teshin"> <span id="defaultText-teshin">Set as default page</span></label><button type="button" class="tool-hide-button" data-hide-tool="teshin" aria-label="Hide Steel Path Honors">Hide Tool</button></div>
       </div>
+
+      <div class="calc-choice-item">
+        <button type="button" class="tool-drag-handle" data-drag-tool="drops" title="Drag to reorder; use arrow keys to move" aria-label="Reorder Drop Database; drag or use arrow keys" aria-keyshortcuts="ArrowUp ArrowDown">⠿</button>
+        <button type="button" class="calc-choice" data-open-calculator="drops" aria-label="Drop Database">
+          <span class="choice-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3.5" width="18" height="17" rx="3"/><path d="M7 8h10M7 12h6M7 16h8"/><circle cx="17.5" cy="16" r="1.5"/></svg></span>
+          <span class="choice-title" id="calcChoiceTitle-drops">Drop Database</span>
+          <span class="choice-description">Search official Warframe item, mission, relic, bounty and enemy drop rates.</span>
+        </button>
+        <div class="tool-card-actions"><label class="default-tool-label"><input type="checkbox" data-default-tool="drops" aria-labelledby="calcChoiceTitle-drops defaultText-drops"> <span id="defaultText-drops">Set as default page</span></label><button type="button" class="tool-hide-button" data-hide-tool="drops" aria-label="Hide Drop Database">Hide Tool</button></div>
+      </div>
     </div>
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 6.20.2 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.6.20.2</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v6.20.2_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 6.21 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.6.21</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v6.21_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
     <div class="ai-disclaimer-footer"><button id="aiDisclaimerOpen" type="button" aria-haspopup="dialog" aria-controls="aiDisclaimerDialog">AI Disclaimer</button></div>
 
@@ -1480,8 +1548,31 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
     <footer class="teshin-footer"><p id="teshinNote">One featured reward may be purchased per week. Purchase tracking stays on this device and resets with the weekly offering.</p><p><a href="https://wiki.warframe.com/w/The_Steel_Path" target="_blank" rel="noopener noreferrer" id="teshinSourceLink">Warframe Wiki · The Steel Path</a></p></footer>
   </div>
 </main>
+<main id="dropsApp" aria-labelledby="ddTitle">
+  <div class="dd-shell">
+    <div class="dd-back"><button class="calc-back" type="button" data-calc-back>← Back to Tools</button><div class="dd-status" id="ddStatus" role="status" aria-live="polite">Loading drop data…</div></div>
+    <header class="dd-head"><span class="dd-head-art" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="4"/><path d="M9 10h14M9 16h7M9 22h10"/><circle cx="23" cy="21" r="3.5"/></svg></span><div><h1 id="ddTitle">Drop Database</h1><p>Search Warframe's official PC drop tables.</p></div></header>
+    <section class="dd-search-panel" aria-label="Search and filter drop tables">
+      <label class="dd-searchlabel" for="ddSearch">Find an item, mission, relic, or enemy</label>
+      <div class="dd-search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg><input id="ddSearch" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. Intensify, Hydron, Axi, Gauss…"><button id="ddClear" type="button" title="Clear search" aria-label="Clear search">×</button></div>
+      <div class="dd-filters">
+        <label class="dd-control"><span>Search within</span><select id="ddScope"><option value="all">Items and sources</option><option value="item">Item names only</option><option value="source">Sources only</option></select></label>
+        <label class="dd-control"><span>Sort results</span><select id="ddSort"><option value="relevance">Best match</option><option value="high">Highest listed chance</option><option value="low">Lowest listed chance</option><option value="name">Item name A–Z</option></select></label>
+        <label class="dd-control"><span>Minimum chance</span><select id="ddMinimum"><option value="0">Any chance</option><option value="1">At least 1%</option><option value="5">At least 5%</option><option value="10">At least 10%</option><option value="25">At least 25%</option><option value="50">At least 50%</option></select></label>
+      </div>
+      <div class="dd-chips" id="ddCategories" role="group" aria-label="Reward category filter"></div>
+    </section>
+    <div class="dd-overview" aria-label="Database summary"><div><strong id="ddRows">—</strong><span>Drop entries</span></div><div><strong id="ddSources">—</strong><span>Unique sources</span></div><div><strong id="ddUpdated">—</strong><span>DE source update</span></div></div>
+    <div class="dd-list-head"><div><h2>Search results</h2><p id="ddResultCount" aria-live="polite">Searching the database…</p></div><button class="dd-retry" id="ddRefresh" type="button">Check for updates</button></div>
+    <p class="dd-tip">Listed percentages are per reward-table roll. For enemies, the separate table drop chance is shown when available; don't treat conditional percentages as overall drop odds.</p>
+    <div id="ddResults" class="dd-results" aria-live="off"><div class="dd-empty">Loading the official drop data…</div></div>
+    <button id="ddMore" class="dd-more" type="button" hidden>Show more results</button>
+    <footer class="dd-footer"><p><strong>Official data source: Digital Extremes.</strong> <a href="https://warframe-web-assets.nyc3.cdn.digitaloceanspaces.com/uploads/cms/hnfvc0o3jnfvc873njb03enrf56.html" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">View Digital Extremes' original Warframe drop tables</a>.</p><p id="ddDetails">Daily GitHub Actions checks plus browser refresh and offline fallback. Source data is published by DE, which notes that its tables may not include every game system or hotfix.</p><small id="ddMirrorCredit">Data may be normalized using the <a href="https://github.com/WFCD/warframe-drop-data" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Warframe Community Developers parser</a> when the local copy has not yet been refreshed.</small></footer>
+  </div>
+</main>
+
 <main id="loadoutApp" aria-labelledby="loadoutTitle">
-  <div class="lr-top"><button type="button" class="calc-back" data-calc-back>← Back to Tools</button><span class="lr-subtle">WFCD equipment data</span></div>
+  <div class="lr-top"><button type="button" class="calc-back" data-calc-back>← Back to Tools</button></div>
   <header class="lr-header"><h1 id="loadoutTitle">Loadout Randomizer</h1><p>Roll a complete Warframe loadout, or reroll any slot. Exclude gear you don't own and try optional build challenges.</p></header>
   <div class="lr-toolbar"><button type="button" id="lrRollAll" class="lr-main-action">⤨ Randomize Full Loadout</button><button type="button" id="lrClearRoll" class="lr-button">Clear Results</button></div>
   <div id="lrDataStatus" class="lr-status" aria-live="polite">Checking equipment catalog…</div>
@@ -1511,7 +1602,7 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
     <div id="lrExcludeList" class="lr-exclude-list" aria-live="polite"></div><button id="lrMoreItems" class="lr-button" type="button" hidden>Show more</button>
     <div class="lr-import-export"><button id="lrExport" type="button" class="lr-button">Export Exclusions</button><label class="lr-button lr-file-button">Import Exclusions<input type="file" id="lrImport" accept="application/json,.json"></label><button id="lrResetExclusions" type="button" class="lr-text-button">Clear exclusions</button></div>
   </section>
-  <footer class="lr-footer"><p>Equipment catalog: <a href="https://github.com/WFCD/warframe-items" target="_blank" rel="noopener noreferrer">WFCD Warframe Items</a>. Updates are checked once per 24 hours and cached for offline use after a successful download.</p><p>Companions include beasts and sentinels. Archguns are supported; Archmelee is intentionally excluded.</p></footer>
+  <footer class="lr-footer"><p>Companions include beasts and sentinels. Archguns are supported; Archmelee is intentionally excluded.</p><p><span class="lr-subtle">WFCD equipment data</span> · <a href="https://github.com/WFCD/warframe-items" target="_blank" rel="noopener noreferrer">WFCD Warframe Items</a>. Updates are checked once per 24 hours and cached for offline use after a successful download.</p></footer>
 </main>
 
 <main id="guncoApp" aria-labelledby="guncoTitle">
@@ -1880,7 +1971,7 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span id="patchCurrentVersion">v6.20.2</span></span>
+      <span><strong>Current Version:</strong> <span id="patchCurrentVersion">v6.21</span></span>
     </div>
   </div>
 </div>
@@ -3274,7 +3365,7 @@ function close(){overlay.hidden=true;document.body.style.overflow='';lastFocus?.
 $('rollClear').addEventListener('click',()=>{chosen=chosen.map(()=>new Set());syncExclusions();buildSlots();$('rollOutput').replaceChildren()});$('rollCostOpen').addEventListener('click',open);$('rollCostClose').addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close()});document.addEventListener('keydown',e=>{if(!overlay.hidden&&e.key==='Escape')close()});$('rollLayout').addEventListener('change',buildSlots);$('rollIPChecks').addEventListener('change',buildSlots);$('rollCompute').addEventListener('click',compute);$('rivenLanguage')?.addEventListener('change',()=>{labels();if(!overlay.hidden)buildSlots()});labels();
 })();
 </script>
-<script type="application/json" id="patchNotesData">[{"version":"6.20.2","content":"Steel Path Honors now uses the original Steel Essence artwork, with theme-matched tinting."},{"version":"6.20","content":"Added Steel Path Honors: Teshin’s eight-week weekly reward rotation, Steel Essence prices, upcoming dates and countdown in your chosen timezone, and a locally saved weekly purchased checkbox."},{"version":"6.19.2","content":"Corrected Sirius & Orion in the Loadout Randomizer, including the daily catalog updater and saved equipment names."},{"version":"6.19.1","content":"Moved the Loadout Randomizer’s surprise modifier reroll button into the Active Challenges box."},{"version":"6.19","content":"Loadout Randomizer: Surprise Modifiers now roll exactly one challenge, Incarnon challenges require an equipped compatible weapon, and equipment variants are grouped by family for rolls and exclusions. Updated the daily catalog refresh to use the same grouping."},{"version":"6.18","content":"Added Loadout Randomizer with independently rollable Warframes, weapons, companions and Archguns; saved equipment exclusions, optional challenge modifiers, and automatic daily equipment catalog updates."},{"version":"6.17","content":"Made the homepage timezone selector searchable by city or region, with keyboard navigation and saved selections."},{"version":"6.16","content":"Added the searchable Galvanized Gunco Chart from Rainy’s 38.0.12 sheet, a global timezone selector with automatic detection, and a single homepage language selector. Corrected theme dropdown positioning and displayed reset times in the selected timezone."},{"version":"6.15","content":"Browser Back and Forward buttons now navigate between the homepage and calculators without leaving Codex Calcs."},{"version":"6.1","content":"Clarified how Weakpoint Damage affects headshot multipliers. Added red 1.5× adjusted Riven ranges for headshot weakpoints and a detailed explanation of weakpoint bonuses and exceptions."},{"version":"6.0","content":"Added the Riven Roll Cost Calculator with flexible target stats, Kuva budget and locking/splicing comparisons. Expanded Melee Duplicate with live normal/heavy critical chance comparisons and an Auto Optimize mod-combination finder."},{"version":"5.5.9","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.9","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script type="application/json" id="patchNotesData">[{"version":"6.21","content":"Added Drop Database with searchable official DE drop tables, mission rotations, bounty stages, relic refinements, enemy drop details, daily GitHub Actions refresh and browser/offline fallback."},{"version":"6.20.3","content":"Moved the Loadout Randomizer WFCD data credit to the page footer so it no longer competes with Back to Tools."},{"version":"6.20.2","content":"Steel Path Honors now uses the original Steel Essence artwork, with theme-matched tinting."},{"version":"6.20","content":"Added Steel Path Honors: Teshin’s eight-week weekly reward rotation, Steel Essence prices, upcoming dates and countdown in your chosen timezone, and a locally saved weekly purchased checkbox."},{"version":"6.19.2","content":"Corrected Sirius & Orion in the Loadout Randomizer, including the daily catalog updater and saved equipment names."},{"version":"6.19.1","content":"Moved the Loadout Randomizer’s surprise modifier reroll button into the Active Challenges box."},{"version":"6.19","content":"Loadout Randomizer: Surprise Modifiers now roll exactly one challenge, Incarnon challenges require an equipped compatible weapon, and equipment variants are grouped by family for rolls and exclusions. Updated the daily catalog refresh to use the same grouping."},{"version":"6.18","content":"Added Loadout Randomizer with independently rollable Warframes, weapons, companions and Archguns; saved equipment exclusions, optional challenge modifiers, and automatic daily equipment catalog updates."},{"version":"6.17","content":"Made the homepage timezone selector searchable by city or region, with keyboard navigation and saved selections."},{"version":"6.16","content":"Added the searchable Galvanized Gunco Chart from Rainy’s 38.0.12 sheet, a global timezone selector with automatic detection, and a single homepage language selector. Corrected theme dropdown positioning and displayed reset times in the selected timezone."},{"version":"6.15","content":"Browser Back and Forward buttons now navigate between the homepage and calculators without leaving Codex Calcs."},{"version":"6.1","content":"Clarified how Weakpoint Damage affects headshot multipliers. Added red 1.5× adjusted Riven ranges for headshot weakpoints and a detailed explanation of weakpoint bonuses and exceptions."},{"version":"6.0","content":"Added the Riven Roll Cost Calculator with flexible target stats, Kuva budget and locking/splicing comparisons. Expanded Melee Duplicate with live normal/heavy critical chance comparisons and an Auto Optimize mod-combination finder."},{"version":"5.5.9","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.9","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
 <script id="patchNotesRenderer">
 (function(){
   try {
@@ -3794,7 +3885,7 @@ render();
 (function(){
   'use strict';
   const KEY='codex-tools-default-page-v1';
-  const supported=['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin'];
+  const supported=['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin','drops'];
   const defaults=[...document.querySelectorAll('[data-default-tool]')];
   const rivenLang=document.getElementById('rivenLanguage');
   function saved(){try{const value=localStorage.getItem(KEY);return supported.includes(value)?value:null;}catch(e){return null;}}
@@ -3803,7 +3894,7 @@ render();
   function show(view){
     if(view!=='home'&&!supported.includes(view))return;
     document.documentElement.setAttribute('data-calculator-view',view);
-    document.title=view==='home'?'Codex Calcs | Warframe Tools & Circuit Calendar':view==='riven'?'Riven Stat Range Calculator':view==='duplicate'?'Melee Duplicate Calculator':view==='relic'?'Relic Probability | Codex Calcs':view==='circuit'?'Circuit Rotation Calendar | Codex Calcs':view==='coin'?'Coin Toss | Codex Calcs':view==='nightwave'?'Nightwave Rank ETA | Codex Calcs':view==='gunco'?'Galvanized Gunco Chart | Codex Calcs':view==='loadout'?'Loadout Randomizer | Codex Calcs':view==='teshin'?'Steel Path Honors | Codex Calcs':'Weekly Tracker | Codex Calcs';
+    document.title=view==='home'?'Codex Calcs | Warframe Tools & Circuit Calendar':view==='riven'?'Riven Stat Range Calculator':view==='duplicate'?'Melee Duplicate Calculator':view==='relic'?'Relic Probability | Codex Calcs':view==='circuit'?'Circuit Rotation Calendar | Codex Calcs':view==='coin'?'Coin Toss | Codex Calcs':view==='nightwave'?'Nightwave Rank ETA | Codex Calcs':view==='gunco'?'Galvanized Gunco Chart | Codex Calcs':view==='loadout'?'Loadout Randomizer | Codex Calcs':view==='teshin'?'Steel Path Honors | Codex Calcs':view==='drops'?'Drop Database | Codex Calcs':'Weekly Tracker | Codex Calcs';
     window.scrollTo(0,0);
     document.dispatchEvent(new CustomEvent('calculator-view-change',{detail:{view}}));
   }
@@ -3849,7 +3940,7 @@ const KEYS={hidden:'codex-hidden-tools-v1',order:'codex-tool-order-v1',default:'
 const grid=document.querySelector('#calculatorHome .calc-choice-grid');
 const section=document.getElementById('hiddenToolsSection');
 if(!grid||!section)return;
-const valid=['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin'];
+const valid=['riven','duplicate','weekly','relic','circuit','coin','nightwave','gunco','loadout','teshin','drops'];
 const cards=new Map([...grid.querySelectorAll('.calc-choice-item')].map(card=>[card.querySelector('[data-open-calculator]')?.dataset.openCalculator,card]));
 const count=document.getElementById('hiddenToolsCount'),toggle=document.getElementById('hiddenToolsToggle'),list=document.getElementById('hiddenToolsList'),items=document.getElementById('hiddenToolsItems');
 let hidden=[],order=[...valid],expanded=false;
@@ -5166,5 +5257,138 @@ document.addEventListener('calculator-view-change',event=>{if(event.detail?.view
 render();setInterval(()=>{if(document.documentElement.getAttribute('data-calculator-view')==='teshin')tick()},1000);
 })();
 </script>
+<script id="dropDatabaseLogic">
+(()=>{'use strict';
+const app=document.getElementById('dropsApp');if(!app)return;
+const $=id=>document.getElementById(id);
+const RAW='https://raw.githubusercontent.com/WFCD/warframe-drop-data/main/data/all.json';
+const INFO='https://raw.githubusercontent.com/WFCD/warframe-drop-data/main/data/info.json';
+const CHECK='codex-drops-last-check-v1', CACHE='codex-drop-database-v1';
+const CACHE_URL=new URL('./data/browser-drop-cache.json',location.href).href, LOCAL='./data/drops.json';
+const categories=['All','Missions','Relics','Bounties','Enemy Drops','Dynamic Rewards','Keys','Sorties'];
+let catalog=null,rows=[],matches=[],limit=50,selected='All',active=false,started=false,busy=false,searchTimer=0;
+const clean=value=>String(value??'').trim().replace(/\s+/g,' ');
+const el=(tag,klass,value)=>{const x=document.createElement(tag);if(klass)x.className=klass;if(value!==undefined)x.textContent=value;return x;};
+const num=x=>typeof x==='number'&&Number.isFinite(x)?x:typeof x==='string'&&/^\d+(?:\.\d+)?$/.test(x)?Number(x):null;
+const fmt=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
+const percent=n=>n.toFixed(2)+'%';
+const okay=(data,min=15)=>data?.schema===1&&Array.isArray(data.rows)&&data.rows.length>=min&&data.rows.every(row=>Array.isArray(row)&&row.length>=7&&typeof row[0]==='string'&&typeof row[1]==='string'&&typeof row[3]==='string'&&Number.isFinite(row[4])&&row[4]>0&&row[4]<=100);
+function setStatus(msg){$('ddStatus').textContent=msg;}
+function display(data,label){
+ if(!okay(data))return false;
+ // Never replace the working full dataset with a tiny embedded fallback.
+ if(catalog&&catalog.rows.length>data.rows.length&&(!data.source_hash||data.source_hash===catalog.source_hash))return false;
+ catalog=data;rows=data.rows;
+ $('ddRows').textContent=fmt(rows.length);$('ddSources').textContent=fmt(new Set(rows.map(r=>r[1])).size);
+ $('ddUpdated').textContent=data.source_date||'Not listed';
+ $('ddDetails').textContent='Source update: '+(data.source_date||'not specified')+'. '+(data.sample?'The bundled sample is incomplete. Connect once to load the full tables. ':'')+'DE updates are not guaranteed for every hotfix.';
+ setStatus(label+' · '+fmt(rows.length)+' entries');search();return true;
+}
+function search(){if(!catalog)return;
+ const q=clean($('ddSearch').value).toLowerCase(),scope=$('ddScope').value,min=Number($('ddMinimum').value)||0,sort=$('ddSort').value;
+ const scored=[];
+ for(const row of rows){
+  if(selected!=='All'&&row[0]!==selected||row[4]<min)continue;
+  const item=row[3].toLowerCase(),src=row[1].toLowerCase(),context=(row[2]||'').toLowerCase();
+  if(q&&!(scope==='item'?item.includes(q):scope==='source'?(src.includes(q)||context.includes(q)):(item.includes(q)||src.includes(q)||context.includes(q))))continue;
+  const score=q?(item===q?5:item.startsWith(q)?4:src===q?3:item.includes(q)?2:1):0;
+  scored.push([row,score]);
+ }
+ if(sort==='high')scored.sort((a,b)=>b[0][4]-a[0][4]);
+ else if(sort==='low')scored.sort((a,b)=>a[0][4]-b[0][4]);
+ else if(sort==='name')scored.sort((a,b)=>a[0][3].localeCompare(b[0][3]));
+ else if(q)scored.sort((a,b)=>b[1]-a[1]||b[0][4]-a[0][4]);
+ matches=scored.map(x=>x[0]);limit=50;paint();
+}
+function paint(){const out=$('ddResults');out.replaceChildren();
+ if(!matches.length){out.append(el('div','dd-empty','No matching results. Try another search or category.'));$('ddMore').hidden=true;$('ddResultCount').textContent='No matches';return;}
+ const frag=document.createDocumentFragment();
+ for(const row of matches.slice(0,limit)){
+   const [category,source,context,item,rate,rarity,tableChance]=row;
+   const card=el('article','dd-entry'),body=el('div',''),meta=el('div','dd-meta'),right=el('div','dd-rate');
+   body.append(el('h3','',item));meta.append(el('span','dd-source',source));
+   if(context)meta.append(el('span','',context));meta.append(el('span','dd-group',category));
+   if(Number.isFinite(tableChance))meta.append(el('span','','Table roll: '+percent(tableChance)));
+   body.append(meta);right.append(el('strong','',percent(rate)),el('span','',rarity));
+   const bar=el('div','dd-bar'),fill=el('i');fill.style.width=Math.min(100,Math.max(0,rate))+'%';bar.append(fill);right.append(bar);
+   card.append(body,right);frag.append(card);
+ }
+ out.append(frag);$('ddMore').hidden=limit>=matches.length;
+ $('ddResultCount').textContent='Showing '+fmt(Math.min(limit,matches.length))+' of '+fmt(matches.length)+' results';
+}
+for(const c of categories){const button=el('button','dd-chip',c);button.type='button';button.dataset.category=c;button.setAttribute('aria-pressed',String(c==='All'));button.addEventListener('click',()=>{selected=c;for(const b of $('ddCategories').children)b.setAttribute('aria-pressed',String(b===button));search();});$('ddCategories').append(button);}
+$('ddSearch').addEventListener('input',()=>{clearTimeout(searchTimer);searchTimer=setTimeout(search,130);});
+for(const id of ['ddScope','ddSort','ddMinimum'])$(id).addEventListener('change',search);
+$('ddClear').addEventListener('click',()=>{$('ddSearch').value='';search();$('ddSearch').focus();});
+$('ddMore').addEventListener('click',()=>{limit+=50;paint();});
+$('ddRefresh').addEventListener('click',()=>refresh(true));
+function getCheck(){try{return Number(localStorage.getItem(CHECK))||0;}catch{return 0;}}
+function setCheck(){try{localStorage.setItem(CHECK,String(Date.now()));}catch{}}
+async function storageRead(){try{if(!('caches' in window))return null;const cache=await caches.open(CACHE);const r=await cache.match(CACHE_URL);return r?.ok?await r.json():null;}catch{return null;}}
+async function storageWrite(data){try{if(!okay(data,1500)||!('caches' in window))return;const cache=await caches.open(CACHE);await cache.put(CACHE_URL,new Response(JSON.stringify(data),{headers:{'Content-Type':'application/json'}}));}catch{}}
+async function getJSON(url){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);try{const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}finally{clearTimeout(timer);}}
+function convertMirror(all,meta){
+ const items=[],seen=new Set();
+ function add(group,source,context,item,p,rarity,table){
+  const n=num(p),t=num(table);source=clean(source);item=clean(item);
+  if(!item||!source||n===null||n<=0||n>100)return;
+  const row=[group,source,clean(context),item,n,clean(rarity)||'Unspecified',t];
+  const key=JSON.stringify(row);if(!seen.has(key)){seen.add(key);items.push(row);}
+ }
+ function walk(group,source,context,entries,table){
+  if(Array.isArray(entries)){for(const v of entries){
+    if(!v||typeof v!=='object')continue;
+    if(v.itemName||v.modName||v.item)add(group,source,[context,v.stage||''].filter(Boolean).join(' · '),v.itemName||v.modName||v.item,v.chance,v.rarity,table);
+    else if(v.rewards)walk(group,source,context,v.rewards,table);
+  }}else if(entries&&typeof entries==='object')for(const [key,value] of Object.entries(entries))walk(group,source,[context,key.length===1?'Rotation '+key:key].filter(Boolean).join(' · '),value,table);
+ }
+ for(const [planet,places] of Object.entries(all.missionRewards||{}))for(const [name,entry] of Object.entries(places||{})){
+  if(entry?.rewards)walk('Missions',planet+'/'+name+(entry.gameMode?' ('+entry.gameMode+')':''),'',entry.rewards,null);
+ }
+ for(const r of all.relics||[])if(r?.tier&&r?.relicName)walk('Relics',r.tier+' '+r.relicName+' Relic ('+(r.state||'Intact')+')','',r.rewards,null);
+ for(const r of all.transientRewards||[])walk('Dynamic Rewards',r.objectiveName||r.name||'Dynamic rewards','',r.rewards,null);
+ walk('Sorties','Sorties','',all.sortieRewards||[],null);
+ for(const x of all.enemyModTables||[])walk('Enemy Drops',x.enemyName,'',x.mods,x.enemyModDropChance);
+ for(const x of all.enemyBlueprintTables||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance);
+ for(const x of all.miscItems||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance);
+ for(const [key,location] of Object.entries({cetusBountyRewards:'Cetus',solarisBountyRewards:'Orb Vallis',deimosRewards:'Cambion Drift',zarimanRewards:'Zariman',entratiLabRewards:'Albrecht’s Laboratories',hexRewards:'1999'})){
+  for(const bounty of all[key]||[])walk('Bounties',location+' · '+(bounty.bountyLevel||bounty.name||'Bounty'),'',bounty.rewards,null);
+ }
+ for(const key of all.keyRewards||[])walk('Keys',key.objectiveName||key.name||'Key rewards','',key.rewards,null);
+ for(const key of ['resourceByAvatar','sigilByAvatar','additionalItemByAvatar','relicByAvatar'])for(const x of all[key]||[])walk('Enemy Drops',x.enemyName||x.avatarName||x.name||'Enemy','',x.items||x.resources||x.rewards||[],x.dropChance||x.enemyItemDropChance);
+ if(items.length<1500)throw Error('Insufficient upstream drop records: '+items.length);
+ const source_date=meta?.modified?new Date(Number(meta.modified)).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'}):'';
+ return {schema:1,source:'Digital Extremes (WFCD normalization)',source_date,source_hash:'wfcd-'+(meta?.hash||items.length),checked_at:new Date().toISOString(),rows:items};
+}
+async function refresh(manual=false){
+ if(busy||!active&&!manual)return;
+ if(!manual&&catalog?.rows.length>=1500&&getCheck()&&Date.now()-getCheck()<86400000)return;
+ busy=true;$('ddRefresh').disabled=true;setStatus('Checking for updates…');
+ try{
+  let local=null;try{local=await getJSON(LOCAL);}catch{}
+  if(okay(local,1500)){
+    if(display(local,'Official DE catalog'))await storageWrite(local);
+    setCheck();return;
+  }
+  // WFCD is a browser fallback until the supplied GitHub Action publishes the
+  // complete official-page parse. The original DE page remains the source of truth.
+  const [all,meta]=await Promise.all([getJSON(RAW),getJSON(INFO).catch(()=>null)]);
+  const normalized=convertMirror(all,meta);
+  if(display(normalized,'DE data via WFCD'))await storageWrite(normalized);
+  setCheck();
+ }catch(error){setStatus(catalog?'Offline or source unavailable · showing saved data':'Unable to load full data · try again online');}
+ finally{busy=false;$('ddRefresh').disabled=false;}
+}
+async function start(){if(started)return;started=true;
+ const saved=await storageRead();if(okay(saved))display(saved,'Cached offline copy');
+ try{const fallback=await getJSON(LOCAL);if(okay(fallback))display(fallback,fallback.sample?'Bundled preview · loading full catalog':'Official DE catalog');}catch{}
+ if(!catalog)$('ddResults').replaceChildren(el('div','dd-empty','Loading the drop database. Connect once to cache the complete tables.'));
+ if(!catalog||catalog.rows.length<1500||Date.now()-getCheck()>=86400000)refresh();
+}
+document.addEventListener('calculator-view-change',event=>{active=event.detail?.view==='drops';if(active)start();});
+active=document.documentElement.getAttribute('data-calculator-view')==='drops';if(active)start();
+})();
+</script>
+
 </body>
 </html>

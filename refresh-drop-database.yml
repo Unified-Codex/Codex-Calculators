@@ -1,0 +1,37 @@
+name: Refresh official Warframe drop database
+on:
+  schedule:
+    - cron: '43 7 * * *'
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/refresh-drop-database.yml'
+      - 'scripts/build_drop_database.py'
+permissions:
+  contents: write
+concurrency:
+  group: codex-official-drops
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Install HTML parser
+        run: python3 -m pip install --disable-pip-version-check beautifulsoup4==4.14.3
+      - name: Check Digital Extremes' official source and validate
+        run: python3 scripts/build_drop_database.py
+      - name: Publish only valid changes
+        run: |
+          git add data/drops.json
+          if git diff --cached --quiet; then
+            echo 'Official drop data unchanged.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Update official Warframe drop data'
+          git push
