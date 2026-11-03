@@ -1,7 +1,7 @@
 {
-  "name": "Codex Calcs — Warframe Tools & Loadout Randomizer",
+  "name": "Codex Calcs — Warframe Tools & Trackers",
   "short_name": "Codex Calcs",
-  "description": "Offline Warframe calculators and tools, including a Loadout Randomizer, Weekly Tracker, Riven stats, GunCO and Circuit rotation calendar.",
+  "description": "Offline Warframe tools including Rivens, Loadout Randomizer, GunCO, Steel Path Honors, weekly tasks and Circuit rotations.",
   "id": "./index.html",
   "start_url": "./index.html",
   "scope": "./",
