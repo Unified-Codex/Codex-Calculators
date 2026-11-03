@@ -1375,6 +1375,31 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
 @media(max-width:660px){#dropsApp{padding:14px 13px 48px}#dropsApp .dd-search-panel{padding:13px}#dropsApp .dd-controls{grid-template-columns:repeat(2,minmax(0,1fr))}#dropsApp .dd-controls label:first-child{grid-column:span 2}#dropsApp .dd-symbol{min-width:43px;width:43px;height:43px;border-radius:12px}#dropsApp .dd-symbol svg{width:25px;height:25px}#dropsApp .dd-head{gap:11px}#dropsApp .dd-overview{gap:7px}#dropsApp .dd-overview>div{padding:9px}#dropsApp .dd-overview strong{font-size:1rem}#dropsApp .dd-overview span{font-size:.67rem}#dropsApp .dd-entry{padding:12px;gap:8px}#dropsApp .dd-rate strong{font-size:1.15rem}#dropsApp .dd-rate{min-width:73px}}
 @media(max-width:340px){#dropsApp .dd-controls{grid-template-columns:1fr}#dropsApp .dd-controls label:first-child{grid-column:auto}#dropsApp .dd-entry{grid-template-columns:1fr}#dropsApp .dd-rate{text-align:left;max-width:125px}}
 
+
+/* Drop database v6.21.1 — source-first cards and honest drop probabilities. */
+#dropsApp #ddSearch::-webkit-search-cancel-button{-webkit-appearance:none;display:none}
+#dropsApp .dd-controls label{min-width:0}
+#dropsApp .dd-entry{align-items:start;padding:16px 17px;gap:16px}
+#dropsApp .dd-entry-body{min-width:0}
+#dropsApp .dd-entry h3{margin:7px 0 5px;font-size:1.02rem}
+#dropsApp .dd-entry-tags{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+#dropsApp .dd-group,#dropsApp .dd-kind{border-radius:100px;border:1px solid color-mix(in srgb,var(--acc) 29%,var(--line));background:color-mix(in srgb,var(--acc) 8%,var(--panel));padding:3px 8px;font-size:.68rem;font-weight:800;color:var(--acc)}
+#dropsApp .dd-kind{border-color:var(--line);color:var(--mute);background:var(--panel2)}
+#dropsApp .dd-entry-source{color:var(--text);font-size:.84rem;line-height:1.4;overflow-wrap:anywhere}
+#dropsApp .dd-entry-source strong{font-weight:800;color:var(--text)}
+#dropsApp .dd-source-prefix{color:var(--mute)}
+#dropsApp .dd-breakdown{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin:9px 0 4px;color:var(--mute);font-size:.76rem;line-height:1.45}
+#dropsApp .dd-breakdown>span:first-child,#dropsApp .dd-breakdown>span:last-child{border:1px solid var(--line);border-radius:7px;background:var(--panel2);padding:4px 7px}
+#dropsApp .dd-times{font-size:.92rem;font-weight:800;color:var(--acc)}
+#dropsApp .dd-meta{margin-top:7px;font-size:.74rem}
+#dropsApp .dd-unknown{color:var(--neg);font-weight:750}
+#dropsApp .dd-rate{padding-top:15px}
+#dropsApp .dd-rate strong{font-variant-numeric:tabular-nums}
+#dropsApp .dd-rate-conditional strong{color:var(--mute)}
+#dropsApp .dd-rate>span{max-width:120px;line-height:1.4}
+#dropsApp .dd-tip{line-height:1.6}
+#dropsApp .dd-status{font-size:.76rem}
+@media(max-width:600px){#dropsApp .dd-entry{grid-template-columns:minmax(0,1fr) auto;padding:13px 11px;gap:8px}#dropsApp .dd-rate{min-width:75px;padding-top:9px}#dropsApp .dd-rate strong{font-size:1.13rem}#dropsApp .dd-rate>span{font-size:.65rem}#dropsApp .dd-breakdown{gap:4px;font-size:.7rem}}
 </style>
 </head>
 <body>
@@ -1491,8 +1516,8 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
     </div>
     <section class="hidden-tools" id="hiddenToolsSection" hidden><button class="hidden-tools-toggle" type="button" id="hiddenToolsToggle" aria-expanded="false" aria-controls="hiddenToolsList"><span>Hidden Tools (<span id="hiddenToolsCount">0</span>)</span><span id="hiddenToolsChevron" aria-hidden="true">▾</span></button><div id="hiddenToolsList" class="hidden-tools-list" hidden><div id="hiddenToolsItems"></div><button type="button" id="showAllTools" class="show-all-tools">Show All Tools</button></div></section>
     <div class="home-utilities" aria-label="Website and community links">
-      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 6.21 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.6.21</span><span class="version-note-label">Patch Notes</span></button></div>
-      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v6.21_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
+      <div class="home-patch"><button type="button" class="version" id="versionBtn" aria-label="Version 6.21.1 — open patch notes" aria-haspopup="dialog" aria-controls="versionPopup" title="Open patch notes and version history"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4h11v14a3 3 0 0 1-3 3H7a4 4 0 0 1-4-4V6a2 2 0 0 1 2-2h3v13a2 2 0 0 1-4 0M11 9h5m-5 4h5"/></svg><span>v.6.21.1</span><span class="version-note-label">Patch Notes</span></button></div>
+      <div class="lk home-actions"><button type="button" class="upd" id="feedbackOpen" aria-haspopup="dialog" aria-controls="feedbackDialog">Submit Feedback</button><a class="upd" id="rawHtmlDownloadBtn" href="./index.html" download="Codex_Calcs_v6.21.1_Offline.html">Download Raw HTML Code <span aria-hidden="true">&#8595;</span></a><a class="upd dc" href="https://discord.gg/unifiedcodex" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/></svg>Join The Discord!</a><a class="upd yt" href="https://www.youtube.com/@Unified_Codex/join" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>Become a Youtube Member</a><a class="upd patreon" href="https://www.patreon.com/c/UnifiedCodex/membership" target="_blank" rel="noopener noreferrer" aria-label="Become a Patreon Supporter" referrerpolicy="no-referrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 2C10.8 2 7 5.8 7 10.5s3.8 8.5 8.5 8.5 8.5-3.8 8.5-8.5S20.2 2 15.5 2zM1 2h4v20H1z"/></svg>Become a Patreon Supporter</a></div>
     </div>
     <div class="ai-disclaimer-footer"><button id="aiDisclaimerOpen" type="button" aria-haspopup="dialog" aria-controls="aiDisclaimerDialog">AI Disclaimer</button></div>
 
@@ -1550,21 +1575,21 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
 </main>
 <main id="dropsApp" aria-labelledby="ddTitle">
   <div class="dd-shell">
-    <div class="dd-back"><button class="calc-back" type="button" data-calc-back>← Back to Tools</button><div class="dd-status" id="ddStatus" role="status" aria-live="polite">Loading drop data…</div></div>
-    <header class="dd-head"><span class="dd-head-art" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="4"/><path d="M9 10h14M9 16h7M9 22h10"/><circle cx="23" cy="21" r="3.5"/></svg></span><div><h1 id="ddTitle">Drop Database</h1><p>Search Warframe's official PC drop tables.</p></div></header>
+    <div class="dd-top"><button class="calc-back" type="button" data-calc-back>← Back to Tools</button><div class="dd-status" id="ddStatus" role="status" aria-live="polite">Loading drop data…</div></div>
+    <header class="dd-head"><span class="dd-symbol" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="3" y="4" width="26" height="24" rx="4"/><path d="M9 10h14M9 16h7M9 22h10"/><circle cx="23" cy="21" r="3.5"/></svg></span><div><h1 id="ddTitle">Drop Database</h1><p>Search Warframe's official PC drop tables.</p></div></header>
     <section class="dd-search-panel" aria-label="Search and filter drop tables">
-      <label class="dd-searchlabel" for="ddSearch">Find an item, mission, relic, or enemy</label>
+      <label class="dd-label" for="ddSearch">Find an item, mission, relic, or enemy</label>
       <div class="dd-search-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7"/><path d="m16 16 5 5"/></svg><input id="ddSearch" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. Intensify, Hydron, Axi, Gauss…"><button id="ddClear" type="button" title="Clear search" aria-label="Clear search">×</button></div>
-      <div class="dd-filters">
+      <div class="dd-controls">
         <label class="dd-control"><span>Search within</span><select id="ddScope"><option value="all">Items and sources</option><option value="item">Item names only</option><option value="source">Sources only</option></select></label>
-        <label class="dd-control"><span>Sort results</span><select id="ddSort"><option value="relevance">Best match</option><option value="high">Highest listed chance</option><option value="low">Lowest listed chance</option><option value="name">Item name A–Z</option></select></label>
+        <label class="dd-control"><span>Sort results</span><select id="ddSort"><option value="relevance">Best match</option><option value="high">Highest overall chance</option><option value="low">Lowest overall chance</option><option value="name">Item name A–Z</option></select></label>
         <label class="dd-control"><span>Minimum chance</span><select id="ddMinimum"><option value="0">Any chance</option><option value="1">At least 1%</option><option value="5">At least 5%</option><option value="10">At least 10%</option><option value="25">At least 25%</option><option value="50">At least 50%</option></select></label>
       </div>
       <div class="dd-chips" id="ddCategories" role="group" aria-label="Reward category filter"></div>
     </section>
     <div class="dd-overview" aria-label="Database summary"><div><strong id="ddRows">—</strong><span>Drop entries</span></div><div><strong id="ddSources">—</strong><span>Unique sources</span></div><div><strong id="ddUpdated">—</strong><span>DE source update</span></div></div>
-    <div class="dd-list-head"><div><h2>Search results</h2><p id="ddResultCount" aria-live="polite">Searching the database…</p></div><button class="dd-retry" id="ddRefresh" type="button">Check for updates</button></div>
-    <p class="dd-tip">Listed percentages are per reward-table roll. For enemies, the separate table drop chance is shown when available; don't treat conditional percentages as overall drop odds.</p>
+    <div class="dd-results-head"><div><h2>Search results</h2><p id="ddResultCount" aria-live="polite">Searching the database…</p></div><button class="dd-refresh" id="ddRefresh" type="button">Check for updates</button></div>
+    <p class="dd-tip">Mission, relic and bounty percentages are per reward roll. Enemy overall drop chance = table drop chance × item chance within that table. If DE does not list a table chance, the result is marked conditional only.</p>
     <div id="ddResults" class="dd-results" aria-live="off"><div class="dd-empty">Loading the official drop data…</div></div>
     <button id="ddMore" class="dd-more" type="button" hidden>Show more results</button>
     <footer class="dd-footer"><p><strong>Official data source: Digital Extremes.</strong> <a href="https://warframe-web-assets.nyc3.cdn.digitaloceanspaces.com/uploads/cms/hnfvc0o3jnfvc873njb03enrf56.html" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">View Digital Extremes' original Warframe drop tables</a>.</p><p id="ddDetails">Daily GitHub Actions checks plus browser refresh and offline fallback. Source data is published by DE, which notes that its tables may not include every game system or hotfix.</p><small id="ddMirrorCredit">Data may be normalized using the <a href="https://github.com/WFCD/warframe-drop-data" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">Warframe Community Developers parser</a> when the local copy has not yet been refreshed.</small></footer>
@@ -1971,7 +1996,7 @@ html[lang="ar"] #calculatorHome .calc-topline .tm ul.codex-menu-flip{left:auto!i
     <div id="patchSearchStatus" role="status" aria-live="polite" hidden></div>
     <div class="patch-meta-footer">
       <span><strong>First Released:</strong> <time id="patchFirstReleasedDate" datetime="2026-10">October 2026</time></span>
-      <span><strong>Current Version:</strong> <span id="patchCurrentVersion">v6.21</span></span>
+      <span><strong>Current Version:</strong> <span id="patchCurrentVersion">v6.21.1</span></span>
     </div>
   </div>
 </div>
@@ -3365,7 +3390,7 @@ function close(){overlay.hidden=true;document.body.style.overflow='';lastFocus?.
 $('rollClear').addEventListener('click',()=>{chosen=chosen.map(()=>new Set());syncExclusions();buildSlots();$('rollOutput').replaceChildren()});$('rollCostOpen').addEventListener('click',open);$('rollCostClose').addEventListener('click',close);overlay.addEventListener('click',e=>{if(e.target===overlay)close()});document.addEventListener('keydown',e=>{if(!overlay.hidden&&e.key==='Escape')close()});$('rollLayout').addEventListener('change',buildSlots);$('rollIPChecks').addEventListener('change',buildSlots);$('rollCompute').addEventListener('click',compute);$('rivenLanguage')?.addEventListener('change',()=>{labels();if(!overlay.hidden)buildSlots()});labels();
 })();
 </script>
-<script type="application/json" id="patchNotesData">[{"version":"6.21","content":"Added Drop Database with searchable official DE drop tables, mission rotations, bounty stages, relic refinements, enemy drop details, daily GitHub Actions refresh and browser/offline fallback."},{"version":"6.20.3","content":"Moved the Loadout Randomizer WFCD data credit to the page footer so it no longer competes with Back to Tools."},{"version":"6.20.2","content":"Steel Path Honors now uses the original Steel Essence artwork, with theme-matched tinting."},{"version":"6.20","content":"Added Steel Path Honors: Teshin’s eight-week weekly reward rotation, Steel Essence prices, upcoming dates and countdown in your chosen timezone, and a locally saved weekly purchased checkbox."},{"version":"6.19.2","content":"Corrected Sirius & Orion in the Loadout Randomizer, including the daily catalog updater and saved equipment names."},{"version":"6.19.1","content":"Moved the Loadout Randomizer’s surprise modifier reroll button into the Active Challenges box."},{"version":"6.19","content":"Loadout Randomizer: Surprise Modifiers now roll exactly one challenge, Incarnon challenges require an equipped compatible weapon, and equipment variants are grouped by family for rolls and exclusions. Updated the daily catalog refresh to use the same grouping."},{"version":"6.18","content":"Added Loadout Randomizer with independently rollable Warframes, weapons, companions and Archguns; saved equipment exclusions, optional challenge modifiers, and automatic daily equipment catalog updates."},{"version":"6.17","content":"Made the homepage timezone selector searchable by city or region, with keyboard navigation and saved selections."},{"version":"6.16","content":"Added the searchable Galvanized Gunco Chart from Rainy’s 38.0.12 sheet, a global timezone selector with automatic detection, and a single homepage language selector. Corrected theme dropdown positioning and displayed reset times in the selected timezone."},{"version":"6.15","content":"Browser Back and Forward buttons now navigate between the homepage and calculators without leaving Codex Calcs."},{"version":"6.1","content":"Clarified how Weakpoint Damage affects headshot multipliers. Added red 1.5× adjusted Riven ranges for headshot weakpoints and a detailed explanation of weakpoint bonuses and exceptions."},{"version":"6.0","content":"Added the Riven Roll Cost Calculator with flexible target stats, Kuva budget and locking/splicing comparisons. Expanded Melee Duplicate with live normal/heavy critical chance comparisons and an Auto Optimize mod-combination finder."},{"version":"5.5.9","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.9","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
+<script type="application/json" id="patchNotesData">[{"version":"6.21.1","content":"Corrected Drop Database source names and enemy drop calculations across DE categories, kept table chances and conditional odds separate, repaired filter layout, and hardened the daily parser and WFCD fallback."},{"version":"6.21","content":"Added Drop Database with searchable official DE drop tables, mission rotations, bounty stages, relic refinements, enemy drop details, daily GitHub Actions refresh and browser/offline fallback."},{"version":"6.20.3","content":"Moved the Loadout Randomizer WFCD data credit to the page footer so it no longer competes with Back to Tools."},{"version":"6.20.2","content":"Steel Path Honors now uses the original Steel Essence artwork, with theme-matched tinting."},{"version":"6.20","content":"Added Steel Path Honors: Teshin’s eight-week weekly reward rotation, Steel Essence prices, upcoming dates and countdown in your chosen timezone, and a locally saved weekly purchased checkbox."},{"version":"6.19.2","content":"Corrected Sirius & Orion in the Loadout Randomizer, including the daily catalog updater and saved equipment names."},{"version":"6.19.1","content":"Moved the Loadout Randomizer’s surprise modifier reroll button into the Active Challenges box."},{"version":"6.19","content":"Loadout Randomizer: Surprise Modifiers now roll exactly one challenge, Incarnon challenges require an equipped compatible weapon, and equipment variants are grouped by family for rolls and exclusions. Updated the daily catalog refresh to use the same grouping."},{"version":"6.18","content":"Added Loadout Randomizer with independently rollable Warframes, weapons, companions and Archguns; saved equipment exclusions, optional challenge modifiers, and automatic daily equipment catalog updates."},{"version":"6.17","content":"Made the homepage timezone selector searchable by city or region, with keyboard navigation and saved selections."},{"version":"6.16","content":"Added the searchable Galvanized Gunco Chart from Rainy’s 38.0.12 sheet, a global timezone selector with automatic detection, and a single homepage language selector. Corrected theme dropdown positioning and displayed reset times in the selected timezone."},{"version":"6.15","content":"Browser Back and Forward buttons now navigate between the homepage and calculators without leaving Codex Calcs."},{"version":"6.1","content":"Clarified how Weakpoint Damage affects headshot multipliers. Added red 1.5× adjusted Riven ranges for headshot weakpoints and a detailed explanation of weakpoint bonuses and exceptions."},{"version":"6.0","content":"Added the Riven Roll Cost Calculator with flexible target stats, Kuva budget and locking/splicing comparisons. Expanded Melee Duplicate with live normal/heavy critical chance comparisons and an Auto Optimize mod-combination finder."},{"version":"5.5.9","content":"Updated the Coin Toss homepage icon to match the Lotus coin face."},{"version":"5.5.9","content":"Security and privacy review: restricted referrer information on outbound requests and hardened tool-label rendering."},{"version":"5.5.5","content":"Completed homepage tool-card translations across all 11 languages and added translation coverage checks for new tools."},{"version":"5.5.4","content":"Nightwave Rank ETA now defaults to target Rank 30."},{"version":"5.5.3","content":"Fixed Relic Probability displaying 100% for non-guaranteed drops, including at high run counts. Improved numerical stability for extremely small failure chances."},{"version":"5.5","content":"Added the Nightwave Rank ETA calculator with themed interface and multilingual support."},{"version":"5.4.7","content":"Numbered Steel Path Circuit rotation weeks 1–9 instead of I and A–H."},{"version":"5.4.5","content":"Updated the first-visit welcome on the homepage with a direct feedback link."},{"version":"5.4.4","content":"Added hideable and reorderable homepage tools with saved layout preferences."},{"version":"5.4.1","content":"Improved homepage Submit Feedback button contrast and readability across themes."},{"version":"5.4","content":"Added homepage feedback with a 10-minute cooldown, server-side rate limiting and bot verification."},{"version":"5.3.3","content":"Improved Coin Toss face rotation and landing consistency across browsers. Replaced the homepage globe with a Lotus coin icon."},{"version":"5.3","content":"Added Coin Toss with the Lotus/Natah coin, animated single flips, Flip ×10 results and Quick Mode. Removed decorative tool eyebrow labels."},{"version":"5.2.5","content":"Isolated patch-note data and rendering from calculator initialization. Added malformed-note fallback and release validation."},{"version":"5.2.4","content":"Fixed Riven Calculator initialization after the patch-note cleanup. Added the Unified Codex favicon and refreshed Rivens, Melee Duplicate, and Relic Probability icons."},{"version":"5.2","content":"Added the Circuit Rotation Calendar as a new Warframe Tool. Switch between Normal Circuit and Steel Path Circuit, check future rotations, search for a reward’s next appearance, and keep a saved wishlist."},{"version":"5.1","content":"Localization overhaul. Cross-checked public Warframe text where available, corrected Riven stat terminology and weekly resource names, and expanded translation coverage across the toolset."},{"version":"5.0","content":"Codex Calcs became a multi-tool Warframe site. Added the shared homepage hub, homepage downloads/support links, per-tool default-page selection, and mobile-friendly theme handling for Rivens, Melee Duplicate, Weekly Tracker, and Relic Probability."},{"version":"4.9","content":"Added Relic Probability. Calculate rare drop odds, compare Radshares with Relic Staggering, and use the streamlined result cards and updated site links."},{"version":"4.8","content":"Added Weekly Tracker. Track weeklies, vendors, shared Search Pulses, hidden entries, and later checklist/data refinements including resource audits and Cryokey cleanup."},{"version":"4.7","content":"Added Show Grade Ranges to Riven results, then refined the tables with S-to-F ordering and roll-range-capped F/S endpoints."},{"version":"4.6","content":"Merged Melee Duplicate into the site and introduced the first tool-selection homepage."},{"version":"4.5","content":"Added the first-time share prompt, renamed the counter to Total Visits, and refined the patch-notes header tools."},{"version":"4.4","content":"Moved the site-view counter into Patch Notes and cleaned up the patch-note header layout."},{"version":"4.3","content":"Expanded localization across the calculator, including dynamic UI, formula explanations, spliced stats, and translated result text."},{"version":"4.2","content":"Added browser-language detection plus a manual Language selector with saved preferences."},{"version":"4.1","content":"Redesigned Patch Notes with tiered release grouping, nested history, version/keyword search, and later update-check refinements."},{"version":"4.0","content":"Introduced the Riven code system, replacing long shared URLs with short identity tags that also work offline."},{"version":"3.6","content":"Added offline/PWA support, versioned HTML downloads, home-screen installation, themed Copy Stats cards, and update/visit-counter improvements."},{"version":"3.5","content":"<span class=\"void-whisper\"><em>The V̸o̴i̵d̶...... it <span class=\"void-redact\">█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴█̵█̶█̸█̴</span>......and then it laughed</em></span><br>Wallys Domain Theme added, use at your own risk"},{"version":"3.3","content":"Overhauled sharing and Copy Stats. Added the Riven-style copied card, improved shared-link/import validation, fixed melee and bow display edge cases, and refined Wally’s Domain styling."},{"version":"3.2","content":"Added Save/Load, shareable setup links, Import Riven URL, and forced refresh handling for imported builds."},{"version":"3.1","content":"Improved mobile layout and added the original Scroll/Compact mobile viewing options."},{"version":"3.0","content":"Launched the calculator as a website with automatic updates, top-bar actions, and a faster way to share the tool."}]</script>
 <script id="patchNotesRenderer">
 (function(){
   try {
@@ -5263,55 +5288,75 @@ const app=document.getElementById('dropsApp');if(!app)return;
 const $=id=>document.getElementById(id);
 const RAW='https://raw.githubusercontent.com/WFCD/warframe-drop-data/main/data/all.json';
 const INFO='https://raw.githubusercontent.com/WFCD/warframe-drop-data/main/data/info.json';
-const CHECK='codex-drops-last-check-v1', CACHE='codex-drop-database-v1';
-const CACHE_URL=new URL('./data/browser-drop-cache.json',location.href).href, LOCAL='./data/drops.json';
+const CHECK='codex-drops-last-check-v2', CACHE='codex-drop-database-v2';
+const CACHE_URL=new URL('./data/browser-drop-cache-v2.json',location.href).href,LOCAL='./data/drops.json';
 const categories=['All','Missions','Relics','Bounties','Enemy Drops','Dynamic Rewards','Keys','Sorties'];
 let catalog=null,rows=[],matches=[],limit=50,selected='All',active=false,started=false,busy=false,searchTimer=0;
 const clean=value=>String(value??'').trim().replace(/\s+/g,' ');
 const el=(tag,klass,value)=>{const x=document.createElement(tag);if(klass)x.className=klass;if(value!==undefined)x.textContent=value;return x;};
 const num=x=>typeof x==='number'&&Number.isFinite(x)?x:typeof x==='string'&&/^\d+(?:\.\d+)?$/.test(x)?Number(x):null;
 const fmt=n=>n.toLocaleString('en-US',{maximumFractionDigits:2});
-const percent=n=>n.toFixed(2)+'%';
-const okay=(data,min=15)=>data?.schema===1&&Array.isArray(data.rows)&&data.rows.length>=min&&data.rows.every(row=>Array.isArray(row)&&row.length>=7&&typeof row[0]==='string'&&typeof row[1]==='string'&&typeof row[3]==='string'&&Number.isFinite(row[4])&&row[4]>0&&row[4]<=100);
+function percent(value){if(value>0&&value<.005)return '<0.01%';if(value<100&&value>99.99)return '99.99%';return value.toFixed(2)+'%';}
+const overall=row=>Number.isFinite(row[6])?row[4]*row[6]/100:row[4];
+const okay=(data,min=15)=>data?.schema===2&&Array.isArray(data.rows)&&data.rows.length>=min&&data.rows.every(row=>Array.isArray(row)&&row.length>=8&&typeof row[0]==='string'&&typeof row[1]==='string'&&row[1].trim()!==''&&!/^(enemy|unknown|source)$/i.test(row[1].trim())&&typeof row[3]==='string'&&Number.isFinite(row[4])&&row[4]>0&&row[4]<=100&&(row[6]===null||(Number.isFinite(row[6])&&row[6]>0&&row[6]<=100)));
 function setStatus(msg){$('ddStatus').textContent=msg;}
+function priority(data){return data?.sample?1:data?.partial?2:3;}
 function display(data,label){
  if(!okay(data))return false;
- // Never replace the working full dataset with a tiny embedded fallback.
- if(catalog&&catalog.rows.length>data.rows.length&&(!data.source_hash||data.source_hash===catalog.source_hash))return false;
+ // A partial mirror must never replace the complete validated DE catalog, even
+ // when the mirror happens to contain more rows.
+ if(catalog&&priority(data)<priority(catalog))return false;
+ if(catalog&&priority(data)===priority(catalog)&&catalog.source_hash===data.source_hash)return false;
  catalog=data;rows=data.rows;
  $('ddRows').textContent=fmt(rows.length);$('ddSources').textContent=fmt(new Set(rows.map(r=>r[1])).size);
  $('ddUpdated').textContent=data.source_date||'Not listed';
- $('ddDetails').textContent='Source update: '+(data.source_date||'not specified')+'. '+(data.sample?'The bundled sample is incomplete. Connect once to load the full tables. ':'')+'DE updates are not guaranteed for every hotfix.';
- setStatus(label+' · '+fmt(rows.length)+' entries');search();return true;
+ const coverage=data.sample?'Bundled preview only; this is NOT the full database. ':data.partial?'WFCD mirror: partial category coverage. Run the GitHub DE refresh workflow for the complete official tables, including enemy resource tables. ':'Complete parsed DE table. ';
+ $('ddDetails').textContent='Source update: '+(data.source_date||'not specified')+'. '+coverage+'DE notes that its tables may not include every game system or hotfix.';
+ setStatus(label+' · '+fmt(rows.length)+' entries'+(data.partial||data.sample?' · incomplete':''));search();return true;
 }
 function search(){if(!catalog)return;
  const q=clean($('ddSearch').value).toLowerCase(),scope=$('ddScope').value,min=Number($('ddMinimum').value)||0,sort=$('ddSort').value;
  const scored=[];
  for(const row of rows){
-  if(selected!=='All'&&row[0]!==selected||row[4]<min)continue;
-  const item=row[3].toLowerCase(),src=row[1].toLowerCase(),context=(row[2]||'').toLowerCase();
-  if(q&&!(scope==='item'?item.includes(q):scope==='source'?(src.includes(q)||context.includes(q)):(item.includes(q)||src.includes(q)||context.includes(q))))continue;
-  const score=q?(item===q?5:item.startsWith(q)?4:src===q?3:item.includes(q)?2:1):0;
+  if((selected!=='All'&&row[0]!==selected)||overall(row)<min)continue;
+  const item=row[3].toLowerCase(),src=row[1].toLowerCase(),context=(row[2]||'').toLowerCase(),kind=(row[7]||'').toLowerCase();
+  if(q&&!(scope==='item'?item.includes(q):scope==='source'?(src.includes(q)||context.includes(q)||kind.includes(q)):(item.includes(q)||src.includes(q)||context.includes(q)||kind.includes(q))))continue;
+  const score=q?(item===q?6:item.startsWith(q)?5:src===q?4:item.includes(q)?3:src.startsWith(q)?2:1):0;
   scored.push([row,score]);
  }
- if(sort==='high')scored.sort((a,b)=>b[0][4]-a[0][4]);
- else if(sort==='low')scored.sort((a,b)=>a[0][4]-b[0][4]);
+ if(sort==='high')scored.sort((a,b)=>overall(b[0])-overall(a[0]));
+ else if(sort==='low')scored.sort((a,b)=>overall(a[0])-overall(b[0]));
  else if(sort==='name')scored.sort((a,b)=>a[0][3].localeCompare(b[0][3]));
- else if(q)scored.sort((a,b)=>b[1]-a[1]||b[0][4]-a[0][4]);
+ else if(q)scored.sort((a,b)=>b[1]-a[1]||overall(b[0])-overall(a[0]));
  matches=scored.map(x=>x[0]);limit=50;paint();
 }
 function paint(){const out=$('ddResults');out.replaceChildren();
- if(!matches.length){out.append(el('div','dd-empty','No matching results. Try another search or category.'));$('ddMore').hidden=true;$('ddResultCount').textContent='No matches';return;}
+ if(!matches.length){out.append(el('div','dd-empty',catalog?.partial?'No matches in the partial mirror. For full enemy/resource coverage, run the daily DE refresh workflow.':'No matching results. Try another search or category.'));$('ddMore').hidden=true;$('ddResultCount').textContent='No matches';return;}
  const frag=document.createDocumentFragment();
  for(const row of matches.slice(0,limit)){
-   const [category,source,context,item,rate,rarity,tableChance]=row;
-   const card=el('article','dd-entry'),body=el('div',''),meta=el('div','dd-meta'),right=el('div','dd-rate');
-   body.append(el('h3','',item));meta.append(el('span','dd-source',source));
-   if(context)meta.append(el('span','',context));meta.append(el('span','dd-group',category));
-   if(Number.isFinite(tableChance))meta.append(el('span','','Table roll: '+percent(tableChance)));
-   body.append(meta);right.append(el('strong','',percent(rate)),el('span','',rarity));
-   const bar=el('div','dd-bar'),fill=el('i');fill.style.width=Math.min(100,Math.max(0,rate))+'%';bar.append(fill);right.append(bar);
-   card.append(body,right);frag.append(card);
+  const [category,source,context,item,conditional,rarity,tableChance,kind]=row;
+  const actual=overall(row),enemy=category==='Enemy Drops',combined=enemy&&Number.isFinite(tableChance);
+  const card=el('article','dd-entry'),body=el('div','dd-entry-body'),top=el('div','dd-entry-tags'),meta=el('div','dd-meta'),right=el('div','dd-rate');
+  top.append(el('span','dd-group',category));if(kind)top.append(el('span','dd-kind',kind));
+  body.append(top,el('h3','',item));
+  const sourceLine=el('div','dd-entry-source');sourceLine.append(el('span','dd-source-prefix',enemy?'Enemy / source: ':'Source: '),el('strong','',source));body.append(sourceLine);
+  if(context)meta.append(el('span','dd-context',context));
+  if(combined){
+   const breakdown=el('div','dd-breakdown');
+   breakdown.append(el('span','',''+(kind||'Drop')+' table: '+percent(tableChance)));
+   breakdown.append(el('span','dd-times','×'));
+   breakdown.append(el('span','',item+' in table: '+percent(conditional)));
+   body.append(breakdown);
+  }else if(enemy){
+   meta.append(el('span','','Within-table chance: '+percent(conditional)));
+   meta.append(el('span','dd-unknown','Table-roll chance not provided; overall odds unknown'));
+  }
+  if(rarity)meta.append(el('span','dd-rarity','DE rarity: '+rarity));
+  if(meta.childNodes.length)body.append(meta);
+  right.append(el('strong','',percent(actual)),el('span','',combined?'Overall per enemy':enemy?'Conditional only':'Per reward roll'));
+  if(enemy&&!combined)right.classList.add('dd-rate-conditional');
+  const bar=el('div','dd-bar'),fill=el('i');fill.style.width=Math.min(100,Math.max(0,actual))+'%';bar.append(fill);right.append(bar);
+  card.append(body,right);frag.append(card);
  }
  out.append(frag);$('ddMore').hidden=limit>=matches.length;
  $('ddResultCount').textContent='Showing '+fmt(Math.min(limit,matches.length))+' of '+fmt(matches.length)+' results';
@@ -5328,62 +5373,78 @@ async function storageRead(){try{if(!('caches' in window))return null;const cach
 async function storageWrite(data){try{if(!okay(data,1500)||!('caches' in window))return;const cache=await caches.open(CACHE);await cache.put(CACHE_URL,new Response(JSON.stringify(data),{headers:{'Content-Type':'application/json'}}));}catch{}}
 async function getJSON(url){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),20000);try{const r=await fetch(url,{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('HTTP '+r.status);return await r.json();}finally{clearTimeout(timer);}}
 function convertMirror(all,meta){
- const items=[],seen=new Set();
- function add(group,source,context,item,p,rarity,table){
+ const items=[],seen=new Set(),counts={};
+ function add(group,source,context,item,p,rarity,table,kind=''){
   const n=num(p),t=num(table);source=clean(source);item=clean(item);
-  if(!item||!source||n===null||n<=0||n>100)return;
-  const row=[group,source,clean(context),item,n,clean(rarity)||'Unspecified',t];
-  const key=JSON.stringify(row);if(!seen.has(key)){seen.add(key);items.push(row);}
+  if(!item||!source||/^(enemy|unknown|source)$/i.test(source)||n===null||n<=0||n>100)return;
+  const row=[group,source,clean(context),item,n,clean(rarity)||'Unspecified',t,kind];
+  const key=JSON.stringify(row);if(!seen.has(key)){seen.add(key);items.push(row);counts[group]=(counts[group]||0)+1;}
  }
- function walk(group,source,context,entries,table){
+ function walk(group,source,context,entries,table,kind=''){
   if(Array.isArray(entries)){for(const v of entries){
-    if(!v||typeof v!=='object')continue;
-    if(v.itemName||v.modName||v.item)add(group,source,[context,v.stage||''].filter(Boolean).join(' · '),v.itemName||v.modName||v.item,v.chance,v.rarity,table);
-    else if(v.rewards)walk(group,source,context,v.rewards,table);
-  }}else if(entries&&typeof entries==='object')for(const [key,value] of Object.entries(entries))walk(group,source,[context,key.length===1?'Rotation '+key:key].filter(Boolean).join(' · '),value,table);
+   if(!v||typeof v!=='object')continue;
+   if(v.itemName||v.modName||v.item)add(group,source,[context,v.stage||''].filter(Boolean).join(' · '),v.itemName||v.modName||v.item,v.chance,v.rarity,table,kind);
+   else if(v.rewards)walk(group,source,context,v.rewards,table,kind);
+  }}else if(entries&&typeof entries==='object')for(const [key,value] of Object.entries(entries))walk(group,source,[context,key.length===1?'Rotation '+key:key].filter(Boolean).join(' · '),value,table,kind);
  }
- for(const [planet,places] of Object.entries(all.missionRewards||{}))for(const [name,entry] of Object.entries(places||{})){
-  if(entry?.rewards)walk('Missions',planet+'/'+name+(entry.gameMode?' ('+entry.gameMode+')':''),'',entry.rewards,null);
- }
+ for(const [planet,places] of Object.entries(all.missionRewards||{}))for(const [name,entry] of Object.entries(places||{}))if(entry?.rewards)walk('Missions',planet+'/'+name+(entry.gameMode?' ('+entry.gameMode+')':''),'',entry.rewards,null);
  for(const r of all.relics||[])if(r?.tier&&r?.relicName)walk('Relics',r.tier+' '+r.relicName+' Relic ('+(r.state||'Intact')+')','',r.rewards,null);
- for(const r of all.transientRewards||[])walk('Dynamic Rewards',r.objectiveName||r.name||'Dynamic rewards','',r.rewards,null);
+ for(const r of all.transientRewards||[])walk('Dynamic Rewards',r.objectiveName||r.name,'',r.rewards,null);
  walk('Sorties','Sorties','',all.sortieRewards||[],null);
- for(const x of all.enemyModTables||[])walk('Enemy Drops',x.enemyName,'',x.mods,x.enemyModDropChance);
- for(const x of all.enemyBlueprintTables||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance);
- for(const x of all.miscItems||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance);
+ for(const x of all.enemyModTables||[])walk('Enemy Drops',x.enemyName,'',x.mods,x.enemyModDropChance,'Mod');
+ for(const x of all.enemyBlueprintTables||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance,'Blueprint/Item');
+ for(const x of all.miscItems||[])walk('Enemy Drops',x.enemyName,'',x.items,x.enemyItemDropChance,'Additional Item');
  for(const [key,location] of Object.entries({cetusBountyRewards:'Cetus',solarisBountyRewards:'Orb Vallis',deimosRewards:'Cambion Drift',zarimanRewards:'Zariman',entratiLabRewards:'Albrecht’s Laboratories',hexRewards:'1999'})){
   for(const bounty of all[key]||[])walk('Bounties',location+' · '+(bounty.bountyLevel||bounty.name||'Bounty'),'',bounty.rewards,null);
  }
- for(const key of all.keyRewards||[])walk('Keys',key.objectiveName||key.name||'Key rewards','',key.rewards,null);
- for(const key of ['resourceByAvatar','sigilByAvatar','additionalItemByAvatar','relicByAvatar'])for(const x of all[key]||[])walk('Enemy Drops',x.enemyName||x.avatarName||x.name||'Enemy','',x.items||x.resources||x.rewards||[],x.dropChance||x.enemyItemDropChance);
- if(items.length<1500)throw Error('Insufficient upstream drop records: '+items.length);
- const source_date=meta?.modified?new Date(Number(meta.modified)).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'}):'';
- return {schema:1,source:'Digital Extremes (WFCD normalization)',source_date,source_hash:'wfcd-'+(meta?.hash||items.length),checked_at:new Date().toISOString(),rows:items};
+ for(const entry of all.keyRewards||[])walk('Keys',entry.objectiveName||entry.name||'Key rewards','',entry.rewards,null);
+ // Some mirrors store the resource/sigil records by item instead of by enemy.
+ // In that case the source MUST come from each nested enemy object. We never
+ // substitute the meaningless source label 'Enemy'.
+ for(const [key,kind] of Object.entries({resourceByAvatar:'Resource',sigilByAvatar:'Sigil',additionalItemByAvatar:'Additional Item',relicByAvatar:'Relic'})){
+  for(const record of all[key]||[]){
+   const reward=record.itemName||record.resourceName||record.sigilName||record.relicName||record.item||record.name;
+   if(Array.isArray(record.enemies)&&reward){
+    for(const enemy of record.enemies){
+     const src=enemy.enemyName||enemy.avatarName||enemy.sourceName;
+     const table=enemy.enemyResourceDropChance??enemy.resourceDropChance??enemy.enemyItemDropChance??enemy.dropChance;
+     add('Enemy Drops',src,'',reward,enemy.chance,enemy.rarity,table,kind);
+    }
+   }else{
+    const src=record.enemyName||record.avatarName||record.sourceName;
+    const table=record.enemyResourceDropChance??record.resourceDropChance??record.enemyItemDropChance??record.dropChance;
+    if(src)walk('Enemy Drops',src,'',record.items||record.resources||record.rewards||[],table,kind);
+   }
+  }
+ }
+ if(items.length<1500)throw Error('Insufficient WFCD mirror records: '+items.length);
+ const modified=num(meta?.modified);const source_date=modified?new Date(modified).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric',timeZone:'UTC'}):'';
+ return {schema:2,partial:true,source:'Digital Extremes (WFCD mirror with partial category coverage)',source_date,source_hash:'wfcd-'+(meta?.hash||items.length),checked_at:new Date().toISOString(),coverage:counts,rows:items};
 }
 async function refresh(manual=false){
  if(busy||!active&&!manual)return;
  if(!manual&&catalog?.rows.length>=1500&&getCheck()&&Date.now()-getCheck()<86400000)return;
- busy=true;$('ddRefresh').disabled=true;setStatus('Checking for updates…');
+ busy=true;$('ddRefresh').disabled=true;setStatus('Checking DE data…');
  try{
   let local=null;try{local=await getJSON(LOCAL);}catch{}
-  if(okay(local,1500)){
-    if(display(local,'Official DE catalog'))await storageWrite(local);
-    setCheck();return;
+  if(okay(local,10000)&&!local.partial&&!local.sample){
+   display(local,'Official DE catalog');await storageWrite(local);setCheck();return;
   }
-  // WFCD is a browser fallback until the supplied GitHub Action publishes the
-  // complete official-page parse. The original DE page remains the source of truth.
+  // The mirror is incomplete, most notably around resources. Mark it as such
+  // and never let it overwrite an official catalog already in the browser.
+  if(catalog&&!catalog.partial&&!catalog.sample){setCheck();return;}
   const [all,meta]=await Promise.all([getJSON(RAW),getJSON(INFO).catch(()=>null)]);
   const normalized=convertMirror(all,meta);
-  if(display(normalized,'DE data via WFCD'))await storageWrite(normalized);
+  if(display(normalized,'DE data via WFCD (partial)'))await storageWrite(normalized);
   setCheck();
- }catch(error){setStatus(catalog?'Offline or source unavailable · showing saved data':'Unable to load full data · try again online');}
+ }catch(error){setStatus(catalog?'Data source unavailable · showing last saved copy':'Unable to load full data · try again online');}
  finally{busy=false;$('ddRefresh').disabled=false;}
 }
 async function start(){if(started)return;started=true;
- const saved=await storageRead();if(okay(saved))display(saved,'Cached offline copy');
- try{const fallback=await getJSON(LOCAL);if(okay(fallback))display(fallback,fallback.sample?'Bundled preview · loading full catalog':'Official DE catalog');}catch{}
- if(!catalog)$('ddResults').replaceChildren(el('div','dd-empty','Loading the drop database. Connect once to cache the complete tables.'));
- if(!catalog||catalog.rows.length<1500||Date.now()-getCheck()>=86400000)refresh();
+ const saved=await storageRead();if(okay(saved))display(saved,saved.partial?'WFCD mirror (partial)':'Cached official DE data');
+ try{const bundled=await getJSON(LOCAL);if(okay(bundled))display(bundled,bundled.sample?'Bundled preview':'Official DE catalog');}catch{}
+ if(!catalog)$('ddResults').replaceChildren(el('div','dd-empty','Loading drop data. Connect once to cache the available tables.'));
+ if(!catalog||catalog.sample||Date.now()-getCheck()>=86400000)refresh();
 }
 document.addEventListener('calculator-view-change',event=>{active=event.detail?.view==='drops';if(active)start();});
 active=document.documentElement.getAttribute('data-calculator-view')==='drops';if(active)start();
