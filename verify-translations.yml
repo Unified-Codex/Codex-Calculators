@@ -1,0 +1,56 @@
+name: Verify translations and tool registration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - index.html
+      - .github/workflows/verify-translations.yml
+  pull_request:
+    paths:
+      - index.html
+      - .github/workflows/verify-translations.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify every registered tool and supported language
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, re
+          from pathlib import Path
+          html=Path('index.html').read_text(encoding='utf-8')
+          locales={'es','pt','fr','ru','de','it','pl','zh','ja','ar'}
+          known={'calculatorHome','rivenApp','duplicateApp','weeklyApp','relicApp','nightwaveApp','circuitApp','coinApp','guncoApp','loadoutApp','teshinApp','dropsApp'}
+          mains=set(re.findall(r'<main\s+id="([^"]+)"',html))
+          unknown=mains-known
+          if unknown:
+              raise SystemExit(f'New tools require a full 11-language translation review before deployment: {sorted(unknown)}')
+          if missing:=known-mains:
+              raise SystemExit(f'Existing tool views missing: {sorted(missing)}')
+          for name in ('CODEX_NEW_TOOL_I18N','CODEX_CHALLENGE_TRANSLATIONS'):
+              match=re.search(r'const '+name+r'=(\{.*?\});\s*for\(',html,re.S)
+              if not match: raise SystemExit(f'Localization dictionary missing: {name}')
+              data=json.loads(match.group(1))
+              if set(data)!=locales:raise SystemExit(f'{name}: missing/extra locales {sorted(set(data)^locales)}')
+              keys=set(next(iter(data.values())))
+              if not keys:raise SystemExit(f'{name}: no keys')
+              for lang,phrases in data.items():
+                  if set(phrases)!=keys or any(not isinstance(v,str) or not v.strip() for v in phrases.values()):
+                      raise SystemExit(f'{name}: missing or empty translations in {lang}')
+              print(f'{name}: {len(keys)} keys × {len(locales)} languages')
+          # Independent tool resolvers must use the same homepage language preference.
+          if html.count('navigator.language')>2:
+              raise SystemExit('Independent navigator.language resolver detected: use window.codexResolvedLanguage')
+          for name in ('Tombfinger','Catchmoon','Gaze','Rattleguts','Sporelacer','Vermisplicer'):
+              for typ in ('primary','secondary'):
+                  if f'"{name} ({typ})"' not in html:raise SystemExit(f'Missing Kitgun variant: {name} ({typ})')
+          print('Translation coverage, registration, and Kitgun sanity checks passed')
+          PY
